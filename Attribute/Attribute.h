@@ -13,7 +13,6 @@ public:
     virtual int continuousAttributeSize() = 0;
     virtual vector<double> continuousAttributes() = 0;
     virtual string to_string() = 0;
-    virtual ~Attribute() = 0;
 };
 
 

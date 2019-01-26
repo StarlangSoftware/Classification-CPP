@@ -13,12 +13,12 @@ class DiscreteAttribute : public Attribute{
 private:
     string value = "NULL";
 public:
-    DiscreteAttribute(string value);
-    DiscreteAttribute(bool value);
-    int continuousAttributeSize();
-    vector<double> continuousAttributes();
+    explicit DiscreteAttribute(string value);
+    explicit DiscreteAttribute(bool value);
+    int continuousAttributeSize() override;
+    vector<double> continuousAttributes() override;
     string getValue();
-    string to_string();
+    string to_string() override;
 };
 
 

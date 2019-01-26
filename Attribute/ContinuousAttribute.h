@@ -13,12 +13,12 @@ class ContinuousAttribute : public Attribute{
 private:
     double value;
 public:
-    ContinuousAttribute(double value);
+    explicit ContinuousAttribute(double value);
     double getValue();
-    int continuousAttributeSize();
-    vector<double> continuousAttributes();
+    int continuousAttributeSize() override;
+    vector<double> continuousAttributes() override;
     void setValue(double value);
-    string to_string();
+    string to_string() override;
 };
 
 

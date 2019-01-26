@@ -8,7 +8,7 @@
 
 class BinaryAttribute : public DiscreteAttribute{
 public:
-    BinaryAttribute(bool value);
+    explicit BinaryAttribute(bool value);
 };
 
 
