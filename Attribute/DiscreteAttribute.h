@@ -15,6 +15,8 @@ private:
 public:
     DiscreteAttribute(string value);
     DiscreteAttribute(bool value);
+    int continuousAttributeSize();
+    vector<double> continuousAttributes();
     string getValue();
     string to_string();
 };

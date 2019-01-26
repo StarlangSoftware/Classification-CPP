@@ -18,10 +18,23 @@ private:
 public:
     Instance(string classLabel, vector<Attribute*> attributes);
     Instance(string classLabel);
+    ~Instance();
     void addAttribute(string value);
     void addAttribute(double value);
     void addAttribute(Attribute* attribute);
     void addVectorAttribute(Vector vector);
+    void removeAttribute(int index);
+    void removeAllAttributes();
+    Attribute* getAttribute(int index);
+    int attributeSize();
+    int continuousAttributeSize();
+    vector<double> continuousAttributes();
+    string getClassLabel();
+    string to_string();
+    Vector toVector();
+    bool operator<(const Instance &anotherInstance) const{
+        return (classLabel < anotherInstance.classLabel);
+    }
 };
 
 

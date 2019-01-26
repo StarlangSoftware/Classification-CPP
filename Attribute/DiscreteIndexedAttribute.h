@@ -14,6 +14,8 @@ public:
     DiscreteIndexedAttribute(string value, int index, int maxIndex);
     int getIndex();
     int getMaxIndex();
+    int continuousAttributeSize();
+    vector<double> continuousAttributes();
 };
 
 

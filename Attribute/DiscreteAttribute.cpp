@@ -42,3 +42,11 @@ DiscreteAttribute::DiscreteAttribute(bool value) {
         value = "false";
     }
 }
+
+int DiscreteAttribute::continuousAttributeSize() {
+    return 0;
+}
+
+vector<double> DiscreteAttribute::continuousAttributes() {
+    return vector<double>();
+}

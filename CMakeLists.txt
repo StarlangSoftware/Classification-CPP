@@ -6,5 +6,7 @@ set(CMAKE_CXX_STANDARD 17)
 include_directories(include)
 link_directories(library)
 
-add_library(Classification Attribute/AttributeType.h Attribute/Attribute.h Attribute/BinaryAttribute.cpp Attribute/BinaryAttribute.h Attribute/DiscreteAttribute.cpp Attribute/DiscreteAttribute.h Attribute/DiscreteIndexedAttribute.cpp Attribute/DiscreteIndexedAttribute.h Attribute/ContinuousAttribute.cpp Attribute/ContinuousAttribute.h Instance/Instance.cpp Instance/Instance.h)
+add_library(Classification Attribute/AttributeType.h Attribute/Attribute.h Attribute/BinaryAttribute.cpp Attribute/BinaryAttribute.h Attribute/DiscreteAttribute.cpp Attribute/DiscreteAttribute.h Attribute/DiscreteIndexedAttribute.cpp Attribute/DiscreteIndexedAttribute.h Attribute/ContinuousAttribute.cpp Attribute/ContinuousAttribute.h Instance/Instance.cpp Instance/Instance.h Instance/CompositeInstance.cpp Instance/CompositeInstance.h)
 target_link_libraries(Classification Math)
+add_executable(TestClassification Attribute/AttributeType.h Attribute/Attribute.h Attribute/BinaryAttribute.cpp Attribute/BinaryAttribute.h Attribute/DiscreteAttribute.cpp Attribute/DiscreteAttribute.h Attribute/DiscreteIndexedAttribute.cpp Attribute/DiscreteIndexedAttribute.h Attribute/ContinuousAttribute.cpp Attribute/ContinuousAttribute.h Instance/Instance.cpp Instance/Instance.h TestClassification.cpp)
+target_link_libraries(TestClassification Math)

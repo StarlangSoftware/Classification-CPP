@@ -15,6 +15,8 @@ private:
 public:
     ContinuousAttribute(double value);
     double getValue();
+    int continuousAttributeSize();
+    vector<double> continuousAttributes();
     void setValue(double value);
     string to_string();
 };

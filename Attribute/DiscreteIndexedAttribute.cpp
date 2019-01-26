@@ -35,3 +35,19 @@ int DiscreteIndexedAttribute::getIndex() {
 int DiscreteIndexedAttribute::getMaxIndex() {
     return maxIndex;
 }
+
+int DiscreteIndexedAttribute::continuousAttributeSize() {
+    return maxIndex;
+}
+
+vector<double> DiscreteIndexedAttribute::continuousAttributes() {
+    vector<double> result;
+    for (int i = 0; i < maxIndex; i++) {
+        if (i != index) {
+            result.push_back(0.0);
+        } else {
+            result.push_back(1.0);
+        }
+    }
+    return result;
+}

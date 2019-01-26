@@ -39,3 +39,13 @@ void ContinuousAttribute::setValue(double value) {
 string ContinuousAttribute::to_string() {
     return std::to_string(value);
 }
+
+int ContinuousAttribute::continuousAttributeSize() {
+    return 1;
+}
+
+vector<double> ContinuousAttribute::continuousAttributes() {
+    vector<double> result;
+    result.push_back(value);
+    return result;
+}
