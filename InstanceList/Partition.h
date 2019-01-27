@@ -4,9 +4,17 @@
 
 #ifndef CLASSIFICATION_PARTITION_H
 #define CLASSIFICATION_PARTITION_H
-
+#include "InstanceList.h"
 
 class Partition {
+private:
+    vector<InstanceList> multiList;
+public:
+    Partition();
+    void add(InstanceList list);
+    int size();
+    InstanceList get(int index);
+    vector<Instance*>* getLists();
 };
 
 

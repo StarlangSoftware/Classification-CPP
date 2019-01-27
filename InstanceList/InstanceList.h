@@ -4,6 +4,8 @@
 
 #ifndef CLASSIFICATION_INSTANCELIST_H
 #define CLASSIFICATION_INSTANCELIST_H
+
+#include <Bootstrap.h>
 #include "../Instance/Instance.h"
 #include "../DataSet/DataDefinition.h"
 
@@ -17,6 +19,13 @@ public:
     void add(Instance* instance);
     void addAll(vector<Instance*> instanceList);
     int size();
+    Instance* get(int index);
+    void sort(int attributeIndex);
+    void sort();
+    void shuffle(int seed);
+    Bootstrap<Instance*> bootstrap(int seed);
+    vector<string> getClassLabels();
+    vector<Instance*> getInstances();
 };
 
 

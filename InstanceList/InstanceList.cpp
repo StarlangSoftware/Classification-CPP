@@ -5,11 +5,13 @@
 //
 
 #include <fstream>
+#include <random>
 #include "InstanceList.h"
 #include "../Attribute/DiscreteAttribute.h"
 #include "../Attribute/BinaryAttribute.h"
 #include "../Attribute/ContinuousAttribute.h"
 
+using namespace std;
 /**
  * Empty constructor for an instance list. Initializes the instance list with zero instances.
  */
@@ -62,6 +64,8 @@ InstanceList::InstanceList(DataDefinition definition, string separator, string f
                     case AttributeType::CONTINUOUS:
                         current->addAttribute(new ContinuousAttribute(stod(attributeList[i])));
                         break;
+                    case AttributeType::DISCRETE_INDEXED:
+                        break;
                 }
             }
             list.push_back(current);
@@ -104,4 +108,114 @@ void InstanceList::addAll(vector<Instance *> instanceList) {
  */
 int InstanceList::size() {
     return list.size();
+}
+
+/**
+ * Accessor for a single instance with the given index.
+ *
+ * @param index Index of the instance.
+ * @return Instance with index 'index'.
+ */
+Instance *InstanceList::get(int index) {
+    return list.at(index);
+}
+
+struct InstanceComparator{
+    int attributeIndex;
+    /**
+     * Constructor for instance comparator.
+     *
+     * @param attributeIndex Index of the attribute of which two instances will be compared.
+     */
+    InstanceComparator(int attributeIndex) {
+        this->attributeIndex = attributeIndex;
+    }
+    /**
+    * Compares two instance on the values of the attribute with index attributeIndex.
+    *
+    * @param instance1 First instance to be compared
+    * @param instance2 Second instance to be compared
+    * @return -1 if the attribute value of the first instance is less than the attribute value of the second instance.
+    * 1 if the attribute value of the first instance is greater than the attribute value of the second instance.
+    * 0 if the attribute value of the first instance is equal to the attribute value of the second instance.
+    */
+    bool operator() (Instance* instance1, Instance* instance2){
+        return dynamic_cast<ContinuousAttribute*>(instance1->getAttribute(attributeIndex))->getValue() < dynamic_cast<ContinuousAttribute*>(instance2->getAttribute(attributeIndex))->getValue();
+    }
+};
+
+/**
+ * Sorts attribute list according to the attribute with index 'attributeIndex'.
+ *
+ * @param attributeIndex index of the attribute.
+ */
+void InstanceList::sort(int attributeIndex) {
+    stable_sort(list.begin(), list.end(), InstanceComparator(attributeIndex));
+}
+
+/**
+ * Compares two {@link Instance} inputs and returns a positive value if the first input's class label is greater
+ * than the second's class label input lexicographically.
+ *
+ * @param o1 First {@link Instance} to be compared.
+ * @param o2 Second {@link Instance} to be compared.
+ * @return Negative value if the class label of the first instance is less than the class label of the second instance.
+ * Positive value if the class label of the first instance is greater than the class label of the second instance.
+ * 0 if the class label of the first instance is equal to the class label of the second instance.
+ */
+struct InstanceClassComparator{
+    InstanceClassComparator() {
+    }
+    bool operator() (Instance* instance1, Instance* instance2){
+        string label1 = instance1->getClassLabel();
+        string label2 = instance2->getClassLabel();
+        return label1.compare(label2) < 0;
+    }
+};
+
+/**
+ * Sorts attributes list.
+ */
+void InstanceList::sort() {
+    stable_sort(list.begin(), list.end(), InstanceClassComparator());
+}
+
+/**
+ * Shuffles the instance list.
+ * @param seed Seed is used for random number generation.
+ */
+void InstanceList::shuffle(int seed) {
+    std::shuffle(list.begin(), list.end(), default_random_engine(seed));
+}
+
+/**
+ * Creates a bootstrap sample from the current instance list.
+ *
+ * @param seed To create a different bootstrap sample, we need a new seed for each sample.
+ * @return Bootstrap sample.
+ */
+Bootstrap <Instance*> InstanceList::bootstrap(int seed) {
+    return Bootstrap<Instance*>(list, seed);
+}
+
+/**
+ * Extracts the class labels of each instance in the instance list and returns them in an array of {@link String}.
+ *
+ * @return An array list of class labels.
+ */
+vector<string> InstanceList::getClassLabels() {
+    vector<string> classLabels;
+    for (Instance* instance : list) {
+        classLabels.push_back(instance->getClassLabel());
+    }
+    return classLabels;
+}
+
+/**
+ * Accessor for the instances.
+ *
+ * @return Instances.
+ */
+vector<Instance *> InstanceList::getInstances() {
+    return list;
 }
