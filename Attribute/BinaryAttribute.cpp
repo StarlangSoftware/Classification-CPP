@@ -11,3 +11,6 @@
  */
 BinaryAttribute::BinaryAttribute(bool value) : DiscreteAttribute(value) {
 }
+
+BinaryAttribute::BinaryAttribute(string value) : DiscreteAttribute(move(value)) {
+}
