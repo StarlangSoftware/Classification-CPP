@@ -8,6 +8,7 @@
 #include <random>
 #include "InstanceList.h"
 #include "../Attribute/DiscreteAttribute.h"
+#include "../Attribute/DiscreteIndexedAttribute.h"
 #include "../Attribute/BinaryAttribute.h"
 #include "../Attribute/ContinuousAttribute.h"
 
@@ -295,4 +296,279 @@ Attribute *InstanceList::attributeAverage(int index) {
             return nullptr;
         }
     }
+}
+
+/**
+ * Calculates the mean of a single attribute for this instance list (m_i).
+ *
+ * @param index Index of the attribute.
+ * @return The mean value of the instances as an attribute.
+ */
+vector<double> InstanceList::continuousAttributeAverage(int index) {
+    if (DiscreteIndexedAttribute* v = dynamic_cast<DiscreteIndexedAttribute*>(list.at(0)->getAttribute(index))) {
+        int maxIndexSize = dynamic_cast<DiscreteIndexedAttribute*>(list.at(0)->getAttribute(index))->getMaxIndex();
+        vector<double> values;
+        for (int i = 0; i < maxIndexSize; i++) {
+            values.push_back(0.0);
+        }
+        for (Instance* instance : list) {
+            int valueIndex = dynamic_cast<DiscreteIndexedAttribute*>(instance->getAttribute(index))->getIndex();
+            values[valueIndex]++;
+        }
+        for (double &value : values) {
+            value /= list.size();
+        }
+        return values;
+    } else {
+        if (ContinuousAttribute* v = dynamic_cast<ContinuousAttribute*>(list.at(0)->getAttribute(index))) {
+            double sum = 0.0;
+            for (Instance* instance : list) {
+                sum += dynamic_cast<ContinuousAttribute*>(instance->getAttribute(index))->getValue();
+            }
+            vector<double> values;
+            values.push_back(sum / list.size());
+            return values;
+        }
+    }
+}
+
+/**
+ * Calculates the standard deviation of a single attribute for this instance list (m_i). If the attribute is discrete,
+ * null returned. If the attribute is continuous, the standard deviation  of the values all instances are returned.
+ *
+ * @param index Index of the attribute.
+ * @return The standard deviation of the instances as an attribute.
+ */
+Attribute *InstanceList::attributeStandardDeviation(int index) {
+    if (ContinuousAttribute* v = dynamic_cast<ContinuousAttribute*>(list.at(0)->getAttribute(index))) {
+        double average, sum = 0.0;
+        for (Instance* instance : list) {
+            sum += dynamic_cast<ContinuousAttribute*>(instance->getAttribute(index))->getValue();
+        }
+        average = sum / list.size();
+        sum = 0.0;
+        for (Instance* instance : list) {
+            sum += pow(dynamic_cast<ContinuousAttribute*>(instance->getAttribute(index))->getValue() - average, 2);
+        }
+        return new ContinuousAttribute(sqrt(sum / (list.size() - 1)));
+    } else {
+        return nullptr;
+    }
+}
+
+/**
+ * Calculates the standard deviation of a single continuous attribute for this instance list (m_i).
+ *
+ * @param index Index of the attribute.
+ * @return The standard deviation of the instances as an attribute.
+ */
+vector<double> InstanceList::continuousAttributeStandardDeviation(int index) {
+    if (DiscreteIndexedAttribute* v = dynamic_cast<DiscreteIndexedAttribute*>(list.at(0)->getAttribute(index))) {
+        int maxIndexSize = dynamic_cast<DiscreteIndexedAttribute*>(list.at(0)->getAttribute(index))->getMaxIndex();
+        vector<double> averages;
+        for (int i = 0; i < maxIndexSize; i++) {
+            averages.push_back(0.0);
+        }
+        for (Instance* instance : list) {
+            int valueIndex = dynamic_cast<DiscreteIndexedAttribute*>(instance->getAttribute(index))->getIndex();
+            averages[valueIndex]++;
+        }
+        for (double &average : averages) {
+            average /= list.size();
+        }
+        vector<double> values;
+        for (int i = 0; i < maxIndexSize; i++) {
+            values.push_back(0.0);
+        }
+        for (Instance* instance : list) {
+            int valueIndex = dynamic_cast<DiscreteIndexedAttribute*>(instance->getAttribute(index))->getIndex();
+            for (int i = 0; i < maxIndexSize; i++) {
+                if (i == valueIndex) {
+                    values[i] += pow(1 - averages.at(i), 2);
+                } else {
+                    values[i] += pow(averages.at(i), 2);
+                }
+            }
+        }
+        for (double &value : values) {
+            value = sqrt(value / (list.size() - 1));
+        }
+        return values;
+    } else {
+        if (ContinuousAttribute* v = dynamic_cast<ContinuousAttribute*>(list.at(0)->getAttribute(index))) {
+            double average, sum = 0.0;
+            for (Instance* instance : list) {
+                sum += dynamic_cast<ContinuousAttribute*>(instance->getAttribute(index))->getValue();
+            }
+            average = sum / list.size();
+            sum = 0.0;
+            for (Instance* instance : list) {
+                sum += pow(dynamic_cast<ContinuousAttribute*>(instance->getAttribute(index))->getValue() - average, 2);
+            }
+            vector<double> result;
+            result.push_back(sqrt(sum / (list.size() - 1)));
+            return result;
+        }
+    }
+}
+
+/**
+ * The attributeDistribution method takes an index as an input and if the attribute of the instance at given index is
+ * discrete, it returns the distribution of the attributes of that instance.
+ *
+ * @param index Index of the attribute.
+ * @return Distribution of the attribute.
+ */
+DiscreteDistribution InstanceList::attributeDistribution(int index) {
+    DiscreteDistribution distribution = DiscreteDistribution();
+    if (DiscreteAttribute* v = dynamic_cast<DiscreteAttribute*>(list.at(0)->getAttribute(index))) {
+        for (Instance* instance : list) {
+            distribution.addItem(dynamic_cast<DiscreteAttribute*>(instance->getAttribute(index))->getValue());
+        }
+    }
+    return distribution;
+}
+
+/**
+ * The attributeClassDistribution method takes an attribute index as an input. It loops through the instances, gets
+ * the corresponding value of given attribute index and adds the class label of that instance to the discrete distributions list.
+ *
+ * @param attributeIndex Index of the attribute.
+ * @return Distribution of the class labels.
+ */
+vector<DiscreteDistribution> InstanceList::attributeClassDistribution(int attributeIndex) {
+    vector<DiscreteDistribution> distributions;
+    vector<string> valueList = getAttributeValueList(attributeIndex);
+    for (string ignored : valueList) {
+        distributions.push_back(DiscreteDistribution());
+    }
+    for (Instance* instance : list) {
+        string value = dynamic_cast<DiscreteAttribute*>(instance->getAttribute(attributeIndex))->getValue();
+        distributions[find(valueList.begin(), valueList.end(), value) - valueList.begin()].addItem(instance->getClassLabel());
+    }
+    return distributions;
+}
+
+/**
+ * The discreteIndexedAttributeClassDistribution method takes an attribute index and an attribute value as inputs.
+ * It loops through the instances, gets the corresponding value of given attribute index and given attribute value.
+ * Then, adds the class label of that instance to the discrete indexed distributions list.
+ *
+ * @param attributeIndex Index of the attribute.
+ * @param attributeValue Value of the attribute.
+ * @return Distribution of the class labels.
+ */
+DiscreteDistribution InstanceList::discreteIndexedAttributeClassDistribution(int attributeIndex, int attributeValue) {
+    DiscreteDistribution distribution;
+    for (Instance* instance : list) {
+        if (dynamic_cast<DiscreteIndexedAttribute*>(instance->getAttribute(attributeIndex))->getIndex() == attributeValue) {
+            distribution.addItem(instance->getClassLabel());
+        }
+    }
+    return distribution;
+}
+
+/**
+ * The classDistribution method returns the distribution of all the class labels of instances.
+ *
+ * @return Distribution of the class labels.
+ */
+DiscreteDistribution InstanceList::classDistribution() {
+    DiscreteDistribution distribution;
+    for (Instance* instance : list) {
+        distribution.addItem(instance->getClassLabel());
+    }
+    return distribution;
+}
+
+/**
+ * The allAttributesDistribution method returns the distributions of all the attributes of instances.
+ *
+ * @return Distributions of all the attributes of instances.
+ */
+vector<DiscreteDistribution> InstanceList::allAttributesDistribution() {
+    vector<DiscreteDistribution> distributions;
+    for (int i = 0; i < list.at(0)->attributeSize(); i++) {
+        distributions.push_back(attributeDistribution(i));
+    }
+    return distributions;
+}
+
+/**
+ * Returns the mean of all the attributes for instances in the list.
+ *
+ * @return Mean of all the attributes for instances in the list.
+ */
+Instance *InstanceList::average() {
+    Instance* result = new Instance(list.at(0)->getClassLabel());
+    for (int i = 0; i < list.at(0)->attributeSize(); i++) {
+        result->addAttribute(attributeAverage(i));
+    }
+    return result;
+}
+
+/**
+ * Calculates mean of the attributes of instances.
+ *
+ * @return Mean of the attributes of instances.
+ */
+vector<double> InstanceList::continuousAttributeAverage() {
+    vector<double> result;
+    for (int i = 0; i < list.at(0)->attributeSize(); i++) {
+        vector<double> added = continuousAttributeAverage(i);
+        result.insert(result.end(), added.begin(), added.end());
+    }
+    return result;
+}
+
+/**
+ * Returns the standard deviation of attributes for instances.
+ *
+ * @return Standard deviation of attributes for instances.
+ */
+Instance *InstanceList::standardDeviation() {
+    Instance* result = new Instance(list.at(0)->getClassLabel());
+    for (int i = 0; i < list.at(0)->attributeSize(); i++) {
+        result->addAttribute(attributeStandardDeviation(i));
+    }
+    return result;
+}
+
+/**
+ * Returns the standard deviation of continuous attributes for instances.
+ *
+ * @return Standard deviation of continuous attributes for instances.
+ */
+vector<double> InstanceList::continuousAttributeStandardDeviation() {
+    vector<double> result;
+    for (int i = 0; i < list.at(0)->attributeSize(); i++) {
+        vector<double> added = continuousAttributeStandardDeviation(i);
+        result.insert(result.end(), added.begin(), added.end());
+    }
+    return result;
+}
+
+/**
+ * Calculates a covariance {@link Matrix} by using an average {@link Vector}.
+ *
+ * @param average Vector input.
+ * @return Covariance {@link Matrix}.
+ */
+Matrix InstanceList::covariance(Vector average) {
+    double mi, mj, xi, xj;
+    Matrix result = Matrix(list.at(0)->continuousAttributeSize(), list.at(0)->continuousAttributeSize());
+    for (Instance* instance : list) {
+        vector<double> continuousAttributes = instance->continuousAttributes();
+        for (int i = 0; i < instance->continuousAttributeSize(); i++) {
+            xi = continuousAttributes.at(i);
+            mi = average.getValue(i);
+            for (int j = 0; j < instance->continuousAttributeSize(); j++) {
+                xj = continuousAttributes.at(j);
+                mj = average.getValue(j);
+                result.addValue(i, j, (xi - mi) * (xj - mj));
+            }
+        }
+    }
+    result.divideByConstant(list.size() - 1);
+    return result;
 }

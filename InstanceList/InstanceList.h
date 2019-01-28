@@ -6,10 +6,17 @@
 #define CLASSIFICATION_INSTANCELIST_H
 
 #include <Bootstrap.h>
+#include <DiscreteDistribution.h>
+#include <Matrix.h>
 #include "../Instance/Instance.h"
 #include "../DataSet/DataDefinition.h"
 
 class InstanceList {
+private:
+    Attribute* attributeAverage(int index);
+    Attribute* attributeStandardDeviation(int index);
+    vector<double> continuousAttributeAverage(int index);
+    vector<double> continuousAttributeStandardDeviation(int index);
 protected:
     vector<Instance*> list;
 public:
@@ -28,7 +35,16 @@ public:
     vector<string> getDistinctClassLabels();
     vector<string> getUnionOfPossibleClassLabels();
     vector<string> getAttributeValueList(int attributeIndex);
-    Attribute* attributeAverage(int index);
+    DiscreteDistribution attributeDistribution(int index);
+    DiscreteDistribution discreteIndexedAttributeClassDistribution(int attributeIndex, int attributeValue);
+    DiscreteDistribution classDistribution();
+    vector<DiscreteDistribution> attributeClassDistribution(int attributeIndex);
+    vector<DiscreteDistribution> allAttributesDistribution();
+    Instance* average();
+    Instance* standardDeviation();
+    vector<double> continuousAttributeAverage();
+    vector<double> continuousAttributeStandardDeviation();
+    Matrix covariance(Vector average);
     vector<Instance*> getInstances();
 };
 
