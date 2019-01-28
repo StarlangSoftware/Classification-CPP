@@ -27,6 +27,8 @@ public:
     vector<string> getClassLabels();
     vector<string> getDistinctClassLabels();
     vector<string> getUnionOfPossibleClassLabels();
+    vector<string> getAttributeValueList(int attributeIndex);
+    Attribute* attributeAverage(int index);
     vector<Instance*> getInstances();
 };
 

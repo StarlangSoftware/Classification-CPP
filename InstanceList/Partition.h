@@ -11,6 +11,11 @@ private:
     vector<InstanceList*> multiList;
 public:
     Partition();
+    Partition(InstanceList& list);
+    Partition(InstanceList& list, double ratio, int seed, bool stratified);
+    Partition(InstanceList& list, int attributeIndex);
+    Partition(InstanceList& list, int attributeIndex, int attributeValue);
+    Partition(InstanceList& list, int attributeIndex, double splitValue);
     void add(InstanceList* list);
     int size();
     InstanceList* get(int index);

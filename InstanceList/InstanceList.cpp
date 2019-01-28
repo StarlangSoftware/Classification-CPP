@@ -251,3 +251,48 @@ vector<string> InstanceList::getUnionOfPossibleClassLabels() {
     }
     return possibleClassLabels;
 }
+
+/**
+ * Extracts distinct discrete values of a given attribute as an array of strings.
+ *
+ * @param attributeIndex Index of the discrete attribute.
+ * @return An array of distinct values of a discrete attribute.
+ */
+vector<string> InstanceList::getAttributeValueList(int attributeIndex) {
+    vector<string> valueList;
+    for (Instance* instance : list) {
+        string attributeValue = dynamic_cast<DiscreteAttribute*>(instance->getAttribute(attributeIndex))->getValue();
+        if (find(valueList.begin(), valueList.end(), attributeValue) == valueList.end()) {
+            valueList.push_back(attributeValue);
+        }
+    }
+    return valueList;
+}
+
+/**
+ * Calculates the mean of a single attribute for this instance list (m_i). If the attribute is discrete, the maximum
+ * occurring value for that attribute is returned. If the attribute is continuous, the mean value of the values of
+ * all instances are returned.
+ *
+ * @param index Index of the attribute.
+ * @return The mean value of the instances as an attribute.
+ */
+Attribute *InstanceList::attributeAverage(int index) {
+    if (DiscreteAttribute* v = dynamic_cast<DiscreteAttribute*>(list.at(0)->getAttribute(index))) {
+        vector<string> values;
+        for (Instance* instance : list) {
+            values.push_back((dynamic_cast<DiscreteAttribute*>(instance->getAttribute(index))->getValue()));
+        }
+        return new DiscreteAttribute(Classifier.getMaximum(values));
+    } else {
+        if (ContinuousAttribute* v = dynamic_cast<ContinuousAttribute*>(list.at(0)->getAttribute(index))) {
+            double sum = 0.0;
+            for (Instance* instance : list) {
+                sum += dynamic_cast<ContinuousAttribute*>(instance->getAttribute(index))->getValue();
+            }
+            return new ContinuousAttribute(sum / list.size());
+        } else {
+            return nullptr;
+        }
+    }
+}
