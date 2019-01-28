@@ -201,12 +201,27 @@ Bootstrap <Instance*> InstanceList::bootstrap(int seed) {
 /**
  * Extracts the class labels of each instance in the instance list and returns them in an array of {@link String}.
  *
- * @return An array list of class labels.
+ * @return A {@link vector} of class labels.
  */
 vector<string> InstanceList::getClassLabels() {
     vector<string> classLabels;
     for (Instance* instance : list) {
         classLabels.push_back(instance->getClassLabel());
+    }
+    return classLabels;
+}
+
+/**
+ * Extracts the class labels of each instance in the instance list and returns them as a set.
+ *
+ * @return A {@link vector} of distinct class labels.
+ */
+vector<string> InstanceList::getDistinctClassLabels() {
+    vector<string> classLabels;
+    for (Instance* instance : list) {
+        if (find(classLabels.begin(), classLabels.end(), instance->getClassLabel()) == classLabels.end()) {
+            classLabels.push_back(instance->getClassLabel());
+        }
     }
     return classLabels;
 }
@@ -218,4 +233,21 @@ vector<string> InstanceList::getClassLabels() {
  */
 vector<Instance *> InstanceList::getInstances() {
     return list;
+}
+
+/**
+ * Extracts the possible class labels of each instance in the instance list and returns them as a set.
+ *
+ * @return An {@link vector} of distinct class labels.
+ */
+vector<string> InstanceList::getUnionOfPossibleClassLabels() {
+    vector<string> possibleClassLabels;
+    for (Instance* instance : list) {
+        for (string possibleClassLabel : instance->getPossibleClassLabels()){
+            if (find(possibleClassLabels.begin(), possibleClassLabels.end(), possibleClassLabel) == possibleClassLabels.end()) {
+                possibleClassLabels.push_back(possibleClassLabel);
+            }
+        }
+    }
+    return possibleClassLabels;
 }

@@ -15,7 +15,7 @@ Partition::Partition() {
  *
  * @param list Instance list to add.
  */
-void Partition::add(InstanceList list) {
+void Partition::add(InstanceList* list) {
     multiList.push_back(list);
 }
 
@@ -34,7 +34,7 @@ int Partition::size() {
  * @param index Index of the instance list.
  * @return Instance list at given index of list of instance lists.
  */
-InstanceList Partition::get(int index) {
+InstanceList* Partition::get(int index) {
     return multiList.at(index);
 }
 
@@ -46,7 +46,7 @@ InstanceList Partition::get(int index) {
 vector<Instance *> *Partition::getLists() {
     vector<Instance*>* result = new vector<Instance*>[multiList.size()];
     for (int i = 0; i < multiList.size(); i++) {
-        result[i] = multiList.at(i).getInstances();
+        result[i] = multiList.at(i)->getInstances();
     }
     return result;
 }

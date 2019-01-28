@@ -138,6 +138,12 @@ string Instance::getClassLabel() {
     return classLabel;
 }
 
+vector<string> Instance::getPossibleClassLabels() {
+    vector<string> classLabels;
+    classLabels.push_back(classLabel);
+    return classLabels;
+}
+
 /**
  * Converts instance to a {@link String}.
  *

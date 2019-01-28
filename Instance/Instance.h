@@ -30,6 +30,7 @@ public:
     int continuousAttributeSize();
     vector<double> continuousAttributes();
     string getClassLabel();
+    vector<string> getPossibleClassLabels();
     string to_string();
     Vector toVector();
     bool operator<(const Instance &anotherInstance) const{

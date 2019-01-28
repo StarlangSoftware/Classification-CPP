@@ -25,6 +25,8 @@ public:
     void shuffle(int seed);
     Bootstrap<Instance*> bootstrap(int seed);
     vector<string> getClassLabels();
+    vector<string> getDistinctClassLabels();
+    vector<string> getUnionOfPossibleClassLabels();
     vector<Instance*> getInstances();
 };
 

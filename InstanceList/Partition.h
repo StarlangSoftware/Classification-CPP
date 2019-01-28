@@ -8,12 +8,12 @@
 
 class Partition {
 private:
-    vector<InstanceList> multiList;
+    vector<InstanceList*> multiList;
 public:
     Partition();
-    void add(InstanceList list);
+    void add(InstanceList* list);
     int size();
-    InstanceList get(int index);
+    InstanceList* get(int index);
     vector<Instance*>* getLists();
 };
 
