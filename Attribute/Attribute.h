@@ -13,6 +13,10 @@ public:
     virtual int continuousAttributeSize() = 0;
     virtual vector<double> continuousAttributes() = 0;
     virtual string to_string() = 0;
+    virtual bool isDiscrete() = 0;
+    virtual bool isContinuous() = 0;
+    virtual bool isDiscreteIndexed() = 0;
+    virtual bool isBinary() = 0;
 };
 
 

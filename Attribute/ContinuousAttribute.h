@@ -19,6 +19,10 @@ public:
     vector<double> continuousAttributes() override;
     void setValue(double value);
     string to_string() override;
+    bool isDiscrete() override {return false;}
+    bool isContinuous() override {return true;};
+    bool isDiscreteIndexed() override {return false;};
+    bool isBinary() override {return false;};
 };
 
 

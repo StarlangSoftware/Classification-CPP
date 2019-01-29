@@ -16,6 +16,10 @@ public:
     int getMaxIndex();
     int continuousAttributeSize() override;
     vector<double> continuousAttributes() override;
+    bool isDiscrete() override {return false;}
+    bool isContinuous() override {return false;};
+    bool isDiscreteIndexed() override {return true;};
+    bool isBinary() override {return false;};
 };
 
 

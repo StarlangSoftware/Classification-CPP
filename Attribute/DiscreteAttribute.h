@@ -17,6 +17,10 @@ public:
     explicit DiscreteAttribute(bool value);
     int continuousAttributeSize() override;
     vector<double> continuousAttributes() override;
+    bool isDiscrete() override {return true;}
+    bool isContinuous() override {return false;};
+    bool isDiscreteIndexed() override {return false;};
+    bool isBinary() override {return false;};
     string getValue();
     string to_string() override;
 };

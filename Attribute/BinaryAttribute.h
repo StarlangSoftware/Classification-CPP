@@ -10,6 +10,10 @@ class BinaryAttribute : public DiscreteAttribute{
 public:
     explicit BinaryAttribute(bool value);
     explicit BinaryAttribute(string value);
+    bool isDiscrete() override {return false;}
+    bool isContinuous() override {return false;};
+    bool isDiscreteIndexed() override {return false;};
+    bool isBinary() override {return true;};
 };
 
 

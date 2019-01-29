@@ -110,19 +110,19 @@ DataSet::DataSet(DataDefinition definition, string separator, string fileName) {
  */
 bool DataSet::checkDefinition(Instance *instance) {
     for (int i = 0; i < instance->attributeSize(); i++) {
-        if (BinaryAttribute* v = dynamic_cast<BinaryAttribute*>(instance->getAttribute(i))) {
+        if (instance->getAttribute(i)->isBinary()) {
             if (definition.getAttributeType(i) != AttributeType::BINARY)
                 return false;
         } else {
-            if (DiscreteIndexedAttribute* v = dynamic_cast<DiscreteIndexedAttribute*>(instance->getAttribute(i))) {
+            if (instance->getAttribute(i)->isDiscreteIndexed()) {
                 if (definition.getAttributeType(i) != AttributeType::DISCRETE_INDEXED)
                     return false;
             } else {
-                if (DiscreteAttribute* v = dynamic_cast<DiscreteAttribute*>(instance->getAttribute(i))) {
+                if (instance->getAttribute(i)->isDiscrete()) {
                     if (definition.getAttributeType(i) != AttributeType::DISCRETE)
                         return false;
                 } else {
-                    if (ContinuousAttribute* v = dynamic_cast<ContinuousAttribute*>(instance->getAttribute(i))) {
+                    if (instance->getAttribute(i)->isContinuous()) {
                         if (definition.getAttributeType(i) != AttributeType::CONTINUOUS)
                             return false;
                     }
@@ -142,16 +142,16 @@ bool DataSet::checkDefinition(Instance *instance) {
 void DataSet::setDefinition(Instance *instance) {
     vector<AttributeType> attributeTypes;
     for (int i = 0; i < instance->attributeSize(); i++) {
-        if (BinaryAttribute* v = dynamic_cast<BinaryAttribute*>(instance->getAttribute(i))) {
+        if (instance->getAttribute(i)->isBinary()) {
             attributeTypes.push_back(AttributeType::BINARY);
         } else {
-            if (DiscreteIndexedAttribute* v = dynamic_cast<DiscreteIndexedAttribute*>(instance->getAttribute(i))) {
+            if (instance->getAttribute(i)->isDiscreteIndexed()) {
                 attributeTypes.push_back(AttributeType::DISCRETE_INDEXED);
             } else {
-                if (DiscreteAttribute* v = dynamic_cast<DiscreteAttribute*>(instance->getAttribute(i))) {
+                if (instance->getAttribute(i)->isDiscrete()) {
                     attributeTypes.push_back(AttributeType::DISCRETE);
                 } else {
-                    if (ContinuousAttribute* v = dynamic_cast<ContinuousAttribute*>(instance->getAttribute(i))) {
+                    if (instance->getAttribute(i)->isContinuous()) {
                         attributeTypes.push_back(AttributeType::CONTINUOUS);
                     }
                 }
