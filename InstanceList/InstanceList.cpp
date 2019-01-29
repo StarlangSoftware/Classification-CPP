@@ -7,6 +7,8 @@
 #include <fstream>
 #include <random>
 #include "InstanceList.h"
+#include "Word.h"
+#include "../Classifier/Classifier.h"
 #include "../Attribute/DiscreteAttribute.h"
 #include "../Attribute/DiscreteIndexedAttribute.h"
 #include "../Attribute/BinaryAttribute.h"
@@ -43,15 +45,7 @@ InstanceList::InstanceList(DataDefinition definition, string separator, string f
     inputFile.open(fileName, ifstream :: in);
     getline(inputFile, line);
     while (inputFile.good()) {
-        size_t currentPos, previousPos = 0;
-        vector<string> attributeList;
-        currentPos = line.find_first_of(separator);
-        while (currentPos != string::npos) {
-            attributeList.push_back(line.substr(previousPos, currentPos - previousPos));
-            previousPos = currentPos + 1;
-            currentPos = line.find_first_of(separator, previousPos);
-        }
-        attributeList.push_back(line.substr(previousPos, currentPos - previousPos));
+        vector<string> attributeList = Word::split(line, separator);
         if (attributeList.size() == definition.attributeCount() + 1) {
             current = new Instance(attributeList[attributeList.size() - 1]);
             for (int i = 0; i < attributeList.size() - 1; i++) {
@@ -284,7 +278,7 @@ Attribute *InstanceList::attributeAverage(int index) {
         for (Instance* instance : list) {
             values.push_back((dynamic_cast<DiscreteAttribute*>(instance->getAttribute(index))->getValue()));
         }
-        return new DiscreteAttribute(Classifier.getMaximum(values));
+        return new DiscreteAttribute(Classifier::getMaximum(values));
     } else {
         if (ContinuousAttribute* v = dynamic_cast<ContinuousAttribute*>(list.at(0)->getAttribute(index))) {
             double sum = 0.0;
