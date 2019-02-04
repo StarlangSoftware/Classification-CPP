@@ -19,6 +19,7 @@ public:
     double getSum();
     bool containsItem(string item);
     int getCount(string item);
+    int getIndex(string item);
     string getMaxItem();
     string getMaxItem(vector<string> includeTheseOnly);
     double getProbability(string item);
