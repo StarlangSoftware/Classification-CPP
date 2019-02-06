@@ -18,7 +18,7 @@ private:
 public:
     Pca(DataSet dataSet, double covarianceExplained);
     Pca(DataSet dataSet, int numberOfDimensions);
-    Pca(DataSet dataSet);
+    explicit Pca(DataSet dataSet);
     void train() override;
 protected:
     void convertInstance(Instance* instance) override;

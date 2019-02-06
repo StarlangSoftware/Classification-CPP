@@ -50,15 +50,15 @@ void Pca::removeUnnecessaryEigenvectors(vector<Eigenvector> eigenvectors) {
     for (Eigenvector eigenvector : eigenvectors) {
         sum += eigenvector.getEigenValue();
     }
-    vector<Eigenvector> toBeRemoved;
-    for (Eigenvector eigenvector : eigenvectors) {
+    vector<Eigenvector>::iterator item;
+    while (item != eigenvectors.end()) {
         if (currentSum / sum < covarianceExplained) {
-            currentSum += eigenvector.getEigenValue();
+            currentSum += item->getEigenValue();
         } else {
-            toBeRemoved.push_back(eigenvector);
+            break;
         }
     }
-    eigenvectors.removeAll(toBeRemoved);
+    eigenvectors.erase(item, eigenvectors.end());
 }
 
 /**
@@ -68,15 +68,7 @@ void Pca::removeUnnecessaryEigenvectors(vector<Eigenvector> eigenvectors) {
  * @param eigenvectors {@link vector} of {@link Eigenvector}s whose unnecessary K items will be removed.
  */
 void Pca::removeAllEigenvectorsExceptTheMostImportantK(vector<Eigenvector> eigenvectors) {
-    vector<Eigenvector> toBeRemoved;
-    int i = 0;
-    for (Eigenvector eigenvector : eigenvectors) {
-        if (i >= numberOfDimensions) {
-            toBeRemoved.push_back(eigenvector);
-        }
-        i++;
-    }
-    eigenvectors.removeAll(toBeRemoved);
+    eigenvectors.erase(eigenvectors.begin() + numberOfDimensions, eigenvectors.end());
 }
 
 /**
