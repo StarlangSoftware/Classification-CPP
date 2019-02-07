@@ -9,7 +9,7 @@
 #include "MxKFoldRun.h"
 #include "KFoldRunSeparateTest.h"
 
-class MxKFoldRunSeparateTest : public MxKFoldRun, KFoldRunSeparateTest {
+class MxKFoldRunSeparateTest : public MxKFoldRun, public KFoldRunSeparateTest {
 public:
     MxKFoldRunSeparateTest(int M, int K);
     ExperimentPerformance* execute(Experiment experiment);

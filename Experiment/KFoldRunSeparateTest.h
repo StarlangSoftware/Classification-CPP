@@ -8,12 +8,12 @@
 #include "CrossValidation.h"
 #include "KFoldRun.h"
 
-class KFoldRunSeparateTest : public KFoldRun {
+class KFoldRunSeparateTest : virtual public KFoldRun {
 public:
     explicit KFoldRunSeparateTest(int K);
+    ExperimentPerformance* execute(Experiment experiment) override;
 protected:
     void runExperiment(Classifier* classifier, Parameter* parameter, ExperimentPerformance* experimentPerformance, CrossValidation<Instance*>* crossValidation, InstanceList testSet);
-    ExperimentPerformance* execute(Experiment experiment) override;
 };
 
 

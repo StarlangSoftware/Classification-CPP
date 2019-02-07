@@ -12,7 +12,7 @@
  * @param M number of cross-validation times.
  * @param K K of the K-fold cross-validation.
  */
-MxKFoldRunSeparateTest::MxKFoldRunSeparateTest(int M, int K) : MxKFoldRun(M, K), KFoldRunSeparateTest(K) {
+MxKFoldRunSeparateTest::MxKFoldRunSeparateTest(int M, int K) : MxKFoldRun(M, K), KFoldRunSeparateTest(K), KFoldRun(K) {
 }
 
 /**

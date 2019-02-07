@@ -6,7 +6,7 @@
 #define CLASSIFICATION_MXKFOLDRUN_H
 #include "KFoldRun.h"
 
-class MxKFoldRun : KFoldRun {
+class MxKFoldRun : virtual KFoldRun {
 protected:
     int M;
 public:

@@ -8,7 +8,7 @@
 #include "KFoldRun.h"
 #include "MultipleRun.h"
 
-class StratifiedKFoldRun : public KFoldRun {
+class StratifiedKFoldRun : virtual public KFoldRun {
 public:
     explicit StratifiedKFoldRun(int K);
     ExperimentPerformance* execute(Experiment experiment) override;

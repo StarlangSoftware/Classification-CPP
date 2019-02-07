@@ -15,13 +15,13 @@ private:
     vector<T>* instanceLists;
     int size;
 public:
-    StratifiedKFoldCrossValidation(const vector<T>* instanceLists, int size, int K, unsigned int seed);
+    StratifiedKFoldCrossValidation(vector<T>* instanceLists, int size, int K, unsigned int seed);
     virtual ~StratifiedKFoldCrossValidation();
     vector<T> getTrainFold(int k);
     vector<T> getTestFold(int k);
 };
 
-template<class T> StratifiedKFoldCrossValidation<T>::StratifiedKFoldCrossValidation(const vector<T> instanceLists[], int size, int K, unsigned int seed){
+template<class T> StratifiedKFoldCrossValidation<T>::StratifiedKFoldCrossValidation(vector<T>* instanceLists, int size, int K, unsigned int seed){
     this->instanceLists = instanceLists;
     N = new unsigned long[size];
     for (int i = 0; i < size; i++){
