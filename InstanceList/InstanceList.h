@@ -32,6 +32,7 @@ public:
     void shuffle(int seed);
     Bootstrap<Instance*> bootstrap(int seed);
     vector<string> getClassLabels();
+    virtual string getClassLabel() {return "";};
     vector<string> getDistinctClassLabels();
     vector<string> getUnionOfPossibleClassLabels();
     vector<string> getAttributeValueList(int attributeIndex);

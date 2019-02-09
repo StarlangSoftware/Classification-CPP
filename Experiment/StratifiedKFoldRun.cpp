@@ -4,6 +4,7 @@
 
 #include "StratifiedKFoldCrossValidation.h"
 #include "StratifiedKFoldRun.h"
+#include "../InstanceList/Partition.h"
 
 /**
  * Constructor for KFoldRun class. Basically sets K parameter of the K-fold cross-validation.
@@ -20,7 +21,8 @@ StratifiedKFoldRun::StratifiedKFoldRun(int K) : KFoldRun(K) {
  */
 ExperimentPerformance *StratifiedKFoldRun::execute(Experiment experiment) {
     ExperimentPerformance* result = new ExperimentPerformance();
-    StratifiedKFoldCrossValidation<Instance*>* crossValidation = new StratifiedKFoldCrossValidation<Instance*>(experiment.getDataSet().getClassInstances(), K, K, experiment.getParameter()->getSeed());
+    Partition partition = experiment.getDataSet().getClassInstances();
+    StratifiedKFoldCrossValidation<Instance*>* crossValidation = new StratifiedKFoldCrossValidation<Instance*>(partition.getLists(), partition.size(), K, experiment.getParameter()->getSeed());
     runExperiment(experiment.getClassifier(), experiment.getParameter(), result, crossValidation);
     return result;
 }

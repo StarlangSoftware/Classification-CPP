@@ -13,28 +13,28 @@ template <class T> class StratifiedKFoldCrossValidation : public CrossValidation
 private:
     unsigned long* N;
     vector<T>* instanceLists;
-    int size;
+    int numberOfClasses;
 public:
-    StratifiedKFoldCrossValidation(vector<T>* instanceLists, int size, int K, unsigned int seed);
+    StratifiedKFoldCrossValidation(vector<T>* instanceLists, int numberOfClasses, int K, unsigned int seed);
     virtual ~StratifiedKFoldCrossValidation();
     vector<T> getTrainFold(int k);
     vector<T> getTestFold(int k);
 };
 
-template<class T> StratifiedKFoldCrossValidation<T>::StratifiedKFoldCrossValidation(vector<T>* instanceLists, int size, int K, unsigned int seed){
+template<class T> StratifiedKFoldCrossValidation<T>::StratifiedKFoldCrossValidation(vector<T>* instanceLists, int numberOfClasses, int K, unsigned int seed){
     this->instanceLists = instanceLists;
-    N = new unsigned long[size];
-    for (int i = 0; i < size; i++){
+    N = new unsigned long[numberOfClasses];
+    for (int i = 0; i < numberOfClasses; i++){
         shuffle(this->instanceLists[i].begin(), this->instanceLists[i].end(), default_random_engine(seed));
         N[i] = instanceLists[i].capacity();
     }
     this->K = K;
-    this->size = size;
+    this->numberOfClasses = numberOfClasses;
 }
 
 template<class T> vector<T> StratifiedKFoldCrossValidation<T>::getTrainFold(int k){
     vector<T> trainFold;
-    for (int i = 0; i < size; i++){
+    for (int i = 0; i < numberOfClasses; i++){
         for (int j = 0; j < (k * N[i]) / this->K; j++){
             trainFold.push_back(instanceLists[i].at(j));
         }
@@ -47,7 +47,7 @@ template<class T> vector<T> StratifiedKFoldCrossValidation<T>::getTrainFold(int 
 
 template<class T> vector<T> StratifiedKFoldCrossValidation<T>::getTestFold(int k){
     vector<T> testFold;
-    for (int i = 0; i < size; i++){
+    for (int i = 0; i < numberOfClasses; i++){
         for (unsigned long j = (k * N[i]) / this->K; j < ((k + 1) * N[i]) / this->K; j++){
             testFold.push_back(instanceLists[i].at(j));
         }

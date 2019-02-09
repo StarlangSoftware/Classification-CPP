@@ -7,6 +7,7 @@
 
 
 #include "../InstanceList/InstanceList.h"
+#include "../InstanceList/Partition.h"
 
 class DataSet {
 private:
@@ -30,7 +31,7 @@ public:
     void addInstance(Instance* current);
     void addInstanceList(vector<Instance*> instanceList);
     vector<Instance*> getInstances();
-    vector<Instance*>* getClassInstances();
+    Partition getClassInstances();
     InstanceList getInstanceList();
     DataDefinition getDataDefinition();
     void writeToFile(string outFileName);

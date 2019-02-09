@@ -290,9 +290,8 @@ vector<Instance *> DataSet::getInstances() {
  *
  * @return Instances of the items at the list of instance lists from the partitions.
  */
-vector<Instance*>* DataSet::getClassInstances() {
-    Partition partition = Partition(instances);
-    return partition.getLists();
+Partition DataSet::getClassInstances() {
+    return Partition(instances);
 }
 
 /**

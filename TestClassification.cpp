@@ -11,6 +11,13 @@
 #include "Parameter/MultiLayerPerceptronParameter.h"
 #include "Parameter/DeepNetworkParameter.h"
 #include "DataSet/DataSet.h"
+#include "Classifier/Classifier.h"
+#include "Classifier/Dummy.h"
+#include "Experiment/StratifiedKFoldRun.h"
+#include "Classifier/RandomClassifier.h"
+#include "Classifier/Lda.h"
+#include "Classifier/Qda.h"
+#include "Classifier/NaiveBayes.h"
 
 Parameter* defaultParameter() { return new Parameter(1);}
 
@@ -66,7 +73,7 @@ DataSet readRingnorm(){
         attributeTypes.push_back(AttributeType::CONTINUOUS);
     }
     DataDefinition dataDefinition = DataDefinition(attributeTypes);
-    return DataSet(dataDefinition, "\\s+", "ringnorm.data");
+    return DataSet(dataDefinition, ",", "ringnorm.data");
 }
 
 DataSet readTwonorm(){
@@ -76,7 +83,7 @@ DataSet readTwonorm(){
         attributeTypes.push_back(AttributeType::CONTINUOUS);
     }
     DataDefinition dataDefinition = DataDefinition(attributeTypes);
-    return DataSet(dataDefinition, "\\s+", "twonorm.data");
+    return DataSet(dataDefinition, ",", "twonorm.data");
 }
 
 DataSet readCar(){
@@ -133,11 +140,14 @@ DataSet readChess(){
 }
 
 int main(){
-    /*Instance instance("true");
-    Attribute* attribute1 = new ContinuousAttribute(3.0);
-    instance.addAttribute(attribute1);
-    Attribute* attribute2 = new DiscreteIndexedAttribute("true", 0, 4);
-    instance.addAttribute(attribute2);
-    cout << instance.continuousAttributeSize();*/
-    DataSet dataSet = readConnect4();
+    DataSet dataSet = readIris();
+    //DataSet dataSet = readCar();
+    //DataSet dataSet = readDermatology();
+    Classifier* classifier = new NaiveBayes();
+    Parameter* parameter = defaultParameter();
+    StratifiedKFoldRun* run = new StratifiedKFoldRun(10);
+    ExperimentPerformance* result;
+    Experiment experiment = Experiment(classifier, parameter, dataSet);
+    result = run->execute(experiment);
+    cout << result->meanClassificationPerformance()->getErrorRate();
 }

@@ -23,7 +23,8 @@ StratifiedMxKFoldRun::StratifiedMxKFoldRun(int M, int K) : MxKFoldRun(M, K), Str
 ExperimentPerformance *StratifiedMxKFoldRun::execute(Experiment experiment) {
     ExperimentPerformance* result = new ExperimentPerformance();
     for (int j = 0; j < M; j++) {
-        StratifiedKFoldCrossValidation<Instance*>* crossValidation = new StratifiedKFoldCrossValidation<Instance*>(experiment.getDataSet().getClassInstances(), StratifiedKFoldRun::K, StratifiedKFoldRun::K, experiment.getParameter()->getSeed());
+        Partition partition = experiment.getDataSet().getClassInstances();
+        StratifiedKFoldCrossValidation<Instance*>* crossValidation = new StratifiedKFoldCrossValidation<Instance*>(partition.getLists(), partition.size(), StratifiedKFoldRun::K, experiment.getParameter()->getSeed());
         KFoldRun::runExperiment(experiment.getClassifier(), experiment.getParameter(), result, crossValidation);
     }
     return result;

@@ -18,6 +18,7 @@ public:
     CompositeInstance(string classLabel, vector<Attribute*> attributes, vector<string> possibleClassLabels);
     vector<string> getPossibleClassLabels();
     void setPossibleClassLabels(vector<string> possibleClassLabels);
+    bool isComposite(){return true;};
     string to_string();
 };
 

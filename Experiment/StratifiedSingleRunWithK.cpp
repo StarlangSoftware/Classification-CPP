@@ -21,7 +21,8 @@ StratifiedSingleRunWithK::StratifiedSingleRunWithK(int K) : SingleRunWithK(K) {
  * @throws DiscreteFeaturesNotAllowed Exception for discrete features.
  */
 Performance *StratifiedSingleRunWithK::execute(Experiment experiment) {
-    StratifiedKFoldCrossValidation<Instance*>* crossValidation = new StratifiedKFoldCrossValidation<Instance*>(experiment.getDataSet().getClassInstances(), SingleRunWithK::K, SingleRunWithK::K, experiment.getParameter()->getSeed());
+    Partition partition = experiment.getDataSet().getClassInstances();
+    StratifiedKFoldCrossValidation<Instance*>* crossValidation = new StratifiedKFoldCrossValidation<Instance*>(partition.getLists(), partition.size(), SingleRunWithK::K, experiment.getParameter()->getSeed());
     InstanceList trainSet = InstanceList(crossValidation->getTrainFold(0));
     InstanceList testSet = InstanceList(crossValidation->getTestFold(0));
     return experiment.getClassifier()->singleRun(experiment.getParameter(), trainSet, testSet);

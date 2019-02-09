@@ -33,6 +33,7 @@ public:
     vector<string> getPossibleClassLabels();
     string to_string();
     Vector toVector();
+    virtual bool isComposite(){return false;};
     bool operator<(const Instance &anotherInstance) const{
         return (classLabel < anotherInstance.classLabel);
     }

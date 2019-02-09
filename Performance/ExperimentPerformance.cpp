@@ -41,6 +41,7 @@ ExperimentPerformance::ExperimentPerformance(string fileName) {
 void ExperimentPerformance::add(Performance *performance) {
     containsDetails = performance->containsDetails();
     classification = performance->isClassification();
+    results.push_back(performance);
 }
 
 /**
