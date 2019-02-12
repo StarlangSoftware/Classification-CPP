@@ -36,7 +36,7 @@ double NaiveBayesModel::logLikelihoodContinuous(string classLabel, Instance *ins
     double xi, mi, si;
     double logLikelihood = log(priorDistribution.getProbability(classLabel));
     for (int i = 0; i < instance->attributeSize(); i++) {
-        xi = dynamic_cast<ContinuousAttribute*>(instance->getAttribute(i))->getValue();
+        xi = ((ContinuousAttribute*)(instance->getAttribute(i)))->getValue();
         mi = classMeans.find(classLabel)->second.getValue(i);
         si = classDeviations.find(classLabel)->second.getValue(i);
         logLikelihood += -0.5 * pow((xi - mi) / si, 2);
@@ -59,7 +59,7 @@ double NaiveBayesModel::logLikelihoodDiscrete(string classLabel, Instance *insta
     double logLikelihood = log(priorDistribution.getProbability(classLabel));
     vector<DiscreteDistribution> attributeDistributions = classAttributeDistributions.find(classLabel)->second;
     for (int i = 0; i < instance->attributeSize(); i++) {
-        xi = dynamic_cast<DiscreteAttribute*>(instance->getAttribute(i))->getValue();
+        xi = ((DiscreteAttribute*)(instance->getAttribute(i)))->getValue();
         logLikelihood += log(attributeDistributions.at(i).getProbabilityLaplaceSmoothing(xi));
     }
     return logLikelihood;

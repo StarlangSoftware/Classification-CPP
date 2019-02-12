@@ -20,6 +20,7 @@ public:
     Matrix(int row, int col);
     Matrix(int row, int col, double min, double max);
     Matrix(int size);
+    Matrix(Vector v1, Vector v2);
     Matrix clone();
     void printToFile(string fileName);
     double getValue(int rowNo, int colNo);

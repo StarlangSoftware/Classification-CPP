@@ -19,12 +19,12 @@ double EuclidianDistance::distance(Instance *instance1, Instance *instance2) {
     double result = 0;
     for (int i = 0; i < instance1->attributeSize(); i++) {
         if (instance1->getAttribute(i)->isDiscrete() && instance2->getAttribute(i)->isDiscrete()) {
-            if (dynamic_cast<DiscreteAttribute*>(instance1->getAttribute(i))->getValue() != dynamic_cast<DiscreteAttribute*>(instance2->getAttribute(i))->getValue()) {
+            if (((DiscreteAttribute*)(instance1->getAttribute(i)))->getValue() != ((DiscreteAttribute*)(instance2->getAttribute(i)))->getValue()) {
                 result += 1;
             }
         } else {
             if (instance1->getAttribute(i)->isContinuous() && instance2->getAttribute(i)->isContinuous()) {
-                result += pow(dynamic_cast<ContinuousAttribute*>(instance1->getAttribute(i))->getValue() - dynamic_cast<ContinuousAttribute*>(instance2->getAttribute(i))->getValue(), 2);
+                result += pow(((ContinuousAttribute*)(instance1->getAttribute(i)))->getValue() - ((ContinuousAttribute*)(instance2->getAttribute(i)))->getValue(), 2);
             }
         }
     }

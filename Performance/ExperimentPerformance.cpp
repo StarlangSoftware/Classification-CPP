@@ -71,7 +71,7 @@ double ExperimentPerformance::getErrorRate(int index) {
  */
 double ExperimentPerformance::getAccuracy(int index) {
     if (results.at(index)->isClassification()) {
-        return dynamic_cast<ClassificationPerformance*>(results.at(index))->getAccuracy();
+        return ((ClassificationPerformance*)(results.at(index)))->getAccuracy();
     } else {
         throw ClassificationAlgorithmExpectedException();
     }
@@ -103,7 +103,7 @@ ClassificationPerformance *ExperimentPerformance::meanClassificationPerformance(
     }
     double sumAccuracy = 0;
     for (Performance* performance : results) {
-        ClassificationPerformance* classificationPerformance = dynamic_cast<ClassificationPerformance*>(performance);
+        ClassificationPerformance* classificationPerformance = (ClassificationPerformance*)(performance);
         sumAccuracy += classificationPerformance->getAccuracy();
     }
     return new ClassificationPerformance(sumAccuracy / results.size());
@@ -120,9 +120,9 @@ DetailedClassificationPerformance *ExperimentPerformance::meanDetailedPerformanc
     if (results.empty() || !containsDetails) {
         return nullptr;
     }
-    ConfusionMatrix sum = dynamic_cast<DetailedClassificationPerformance*>(results.at(0))->getConfusionMatrix();
+    ConfusionMatrix sum = ((DetailedClassificationPerformance*)(results.at(0)))->getConfusionMatrix();
     for (int i = 1; i < results.size(); i++) {
-        sum.addConfusionMatrix( dynamic_cast<DetailedClassificationPerformance*>(results.at(i))->getConfusionMatrix());
+        sum.addConfusionMatrix(((DetailedClassificationPerformance*)(results.at(i)))->getConfusionMatrix());
     }
     return new DetailedClassificationPerformance(sum);
 }
@@ -157,7 +157,7 @@ ClassificationPerformance *ExperimentPerformance::standardDeviationClassificatio
     ClassificationPerformance* averageClassificationPerformance;
     averageClassificationPerformance = meanClassificationPerformance();
     for (Performance* performance : results) {
-        ClassificationPerformance* classificationPerformance = dynamic_cast<ClassificationPerformance*>(performance);
+        ClassificationPerformance* classificationPerformance = (ClassificationPerformance*)(performance);
         sumAccuracy += pow(classificationPerformance->getAccuracy() - averageClassificationPerformance->getAccuracy(), 2);
         sumErrorRate += pow(classificationPerformance->getErrorRate() - averageClassificationPerformance->getErrorRate(), 2);
     }

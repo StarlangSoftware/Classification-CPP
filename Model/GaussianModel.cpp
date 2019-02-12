@@ -21,8 +21,8 @@ string GaussianModel::predict(Instance *instance) {
     double maxMetric = -DBL_MAX;
     int size;
     if (instance->isComposite()) {
-        predictedClass = dynamic_cast<CompositeInstance*>(instance)->getPossibleClassLabels().at(0);
-        size = dynamic_cast<CompositeInstance*>(instance)->getPossibleClassLabels().size();
+        predictedClass = instance->getPossibleClassLabels().at(0);
+        size = instance->getPossibleClassLabels().size();
     } else {
         predictedClass = priorDistribution.getMaxItem();
         size = priorDistribution.size();
@@ -30,7 +30,7 @@ string GaussianModel::predict(Instance *instance) {
     }
     for (int i = 0; i < size; i++) {
         if (instance->isComposite()) {
-            Ci = dynamic_cast<CompositeInstance*>(instance)->getPossibleClassLabels().at(i);
+            Ci = instance->getPossibleClassLabels().at(i);
         } else {
             Ci = possibleLabels.at(i);
         }

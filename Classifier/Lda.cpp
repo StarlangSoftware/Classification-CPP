@@ -43,7 +43,7 @@ void Lda::train(InstanceList &trainSet, Parameter *parameters) {
         cout << determinantZero.what();
     }
     for (int i = 0; i < classLists.size(); i++) {
-        Ci = dynamic_cast<InstanceListOfSameClass*>(classLists.get(i))->getClassLabel();
+        Ci = ((InstanceListOfSameClass*)(classLists.get(i)))->getClassLabel();
         Vector averageVector = Vector(classLists.get(i)->continuousAttributeAverage());
         try {
             Vector wi = covariance.multiplyWithVectorFromRight(averageVector);

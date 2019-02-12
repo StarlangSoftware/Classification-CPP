@@ -135,7 +135,7 @@ struct InstanceComparator{
     * 0 if the attribute value of the first instance is equal to the attribute value of the second instance.
     */
     bool operator() (Instance* instance1, Instance* instance2){
-        return dynamic_cast<ContinuousAttribute*>(instance1->getAttribute(attributeIndex))->getValue() < dynamic_cast<ContinuousAttribute*>(instance2->getAttribute(attributeIndex))->getValue();
+        return ((ContinuousAttribute*)instance1->getAttribute(attributeIndex))->getValue() < ((ContinuousAttribute*)(instance2->getAttribute(attributeIndex)))->getValue();
     }
 };
 
@@ -256,7 +256,7 @@ vector<string> InstanceList::getUnionOfPossibleClassLabels() {
 vector<string> InstanceList::getAttributeValueList(int attributeIndex) {
     vector<string> valueList;
     for (Instance* instance : list) {
-        string attributeValue = dynamic_cast<DiscreteAttribute*>(instance->getAttribute(attributeIndex))->getValue();
+        string attributeValue = ((DiscreteAttribute*)(instance->getAttribute(attributeIndex)))->getValue();
         if (find(valueList.begin(), valueList.end(), attributeValue) == valueList.end()) {
             valueList.push_back(attributeValue);
         }
@@ -276,14 +276,14 @@ Attribute *InstanceList::attributeAverage(int index) {
     if (list.at(0)->getAttribute(index)->isDiscrete()) {
         vector<string> values;
         for (Instance* instance : list) {
-            values.push_back((dynamic_cast<DiscreteAttribute*>(instance->getAttribute(index))->getValue()));
+            values.push_back(((DiscreteAttribute*)(instance->getAttribute(index)))->getValue());
         }
         return new DiscreteAttribute(Classifier::getMaximum(values));
     } else {
         if (list.at(0)->getAttribute(index)->isContinuous()) {
             double sum = 0.0;
             for (Instance* instance : list) {
-                sum += dynamic_cast<ContinuousAttribute*>(instance->getAttribute(index))->getValue();
+                sum += ((ContinuousAttribute*)(instance->getAttribute(index)))->getValue();
             }
             return new ContinuousAttribute(sum / list.size());
         } else {
@@ -300,13 +300,13 @@ Attribute *InstanceList::attributeAverage(int index) {
  */
 vector<double> InstanceList::continuousAttributeAverage(int index) {
     if (list.at(0)->getAttribute(index)->isDiscreteIndexed()) {
-        int maxIndexSize = dynamic_cast<DiscreteIndexedAttribute*>(list.at(0)->getAttribute(index))->getMaxIndex();
+        int maxIndexSize = ((DiscreteIndexedAttribute*)(list.at(0)->getAttribute(index)))->getMaxIndex();
         vector<double> values;
         for (int i = 0; i < maxIndexSize; i++) {
             values.push_back(0.0);
         }
         for (Instance* instance : list) {
-            int valueIndex = dynamic_cast<DiscreteIndexedAttribute*>(instance->getAttribute(index))->getIndex();
+            int valueIndex = ((DiscreteIndexedAttribute*)(instance->getAttribute(index)))->getIndex();
             values[valueIndex]++;
         }
         for (double &value : values) {
@@ -317,7 +317,7 @@ vector<double> InstanceList::continuousAttributeAverage(int index) {
         if (list.at(0)->getAttribute(index)->isContinuous()) {
             double sum = 0.0;
             for (Instance* instance : list) {
-                sum += dynamic_cast<ContinuousAttribute*>(instance->getAttribute(index))->getValue();
+                sum += ((ContinuousAttribute*)(instance->getAttribute(index)))->getValue();
             }
             vector<double> values;
             values.push_back(sum / list.size());
@@ -337,12 +337,12 @@ Attribute *InstanceList::attributeStandardDeviation(int index) {
     if (list.at(0)->getAttribute(index)->isContinuous()) {
         double average, sum = 0.0;
         for (Instance* instance : list) {
-            sum += dynamic_cast<ContinuousAttribute*>(instance->getAttribute(index))->getValue();
+            sum += ((ContinuousAttribute*)(instance->getAttribute(index)))->getValue();
         }
         average = sum / list.size();
         sum = 0.0;
         for (Instance* instance : list) {
-            sum += pow(dynamic_cast<ContinuousAttribute*>(instance->getAttribute(index))->getValue() - average, 2);
+            sum += pow(((ContinuousAttribute*)(instance->getAttribute(index)))->getValue() - average, 2);
         }
         return new ContinuousAttribute(sqrt(sum / (list.size() - 1)));
     } else {
@@ -358,13 +358,13 @@ Attribute *InstanceList::attributeStandardDeviation(int index) {
  */
 vector<double> InstanceList::continuousAttributeStandardDeviation(int index) {
     if (list.at(0)->getAttribute(index)->isDiscreteIndexed()) {
-        int maxIndexSize = dynamic_cast<DiscreteIndexedAttribute*>(list.at(0)->getAttribute(index))->getMaxIndex();
+        int maxIndexSize = ((DiscreteIndexedAttribute*)(list.at(0)->getAttribute(index)))->getMaxIndex();
         vector<double> averages;
         for (int i = 0; i < maxIndexSize; i++) {
             averages.push_back(0.0);
         }
         for (Instance* instance : list) {
-            int valueIndex = dynamic_cast<DiscreteIndexedAttribute*>(instance->getAttribute(index))->getIndex();
+            int valueIndex = ((DiscreteIndexedAttribute*)(instance->getAttribute(index)))->getIndex();
             averages[valueIndex]++;
         }
         for (double &average : averages) {
@@ -375,7 +375,7 @@ vector<double> InstanceList::continuousAttributeStandardDeviation(int index) {
             values.push_back(0.0);
         }
         for (Instance* instance : list) {
-            int valueIndex = dynamic_cast<DiscreteIndexedAttribute*>(instance->getAttribute(index))->getIndex();
+            int valueIndex = ((DiscreteIndexedAttribute*)(instance->getAttribute(index)))->getIndex();
             for (int i = 0; i < maxIndexSize; i++) {
                 if (i == valueIndex) {
                     values[i] += pow(1 - averages.at(i), 2);
@@ -392,12 +392,12 @@ vector<double> InstanceList::continuousAttributeStandardDeviation(int index) {
         if (list.at(0)->getAttribute(index)->isContinuous()) {
             double average, sum = 0.0;
             for (Instance* instance : list) {
-                sum += dynamic_cast<ContinuousAttribute*>(instance->getAttribute(index))->getValue();
+                sum += ((ContinuousAttribute*)(instance->getAttribute(index)))->getValue();
             }
             average = sum / list.size();
             sum = 0.0;
             for (Instance* instance : list) {
-                sum += pow(dynamic_cast<ContinuousAttribute*>(instance->getAttribute(index))->getValue() - average, 2);
+                sum += pow(((ContinuousAttribute*)(instance->getAttribute(index)))->getValue() - average, 2);
             }
             vector<double> result;
             result.push_back(sqrt(sum / (list.size() - 1)));
@@ -417,7 +417,7 @@ DiscreteDistribution InstanceList::attributeDistribution(int index) {
     DiscreteDistribution distribution = DiscreteDistribution();
     if (list.at(0)->getAttribute(index)->isDiscrete()) {
         for (Instance* instance : list) {
-            distribution.addItem(dynamic_cast<DiscreteAttribute*>(instance->getAttribute(index))->getValue());
+            distribution.addItem(((DiscreteAttribute*)(instance->getAttribute(index)))->getValue());
         }
     }
     return distribution;
@@ -437,7 +437,7 @@ vector<DiscreteDistribution> InstanceList::attributeClassDistribution(int attrib
         distributions.push_back(DiscreteDistribution());
     }
     for (Instance* instance : list) {
-        string value = dynamic_cast<DiscreteAttribute*>(instance->getAttribute(attributeIndex))->getValue();
+        string value = ((DiscreteAttribute*)(instance->getAttribute(attributeIndex)))->getValue();
         distributions[find(valueList.begin(), valueList.end(), value) - valueList.begin()].addItem(instance->getClassLabel());
     }
     return distributions;
@@ -455,7 +455,7 @@ vector<DiscreteDistribution> InstanceList::attributeClassDistribution(int attrib
 DiscreteDistribution InstanceList::discreteIndexedAttributeClassDistribution(int attributeIndex, int attributeValue) {
     DiscreteDistribution distribution;
     for (Instance* instance : list) {
-        if (dynamic_cast<DiscreteIndexedAttribute*>(instance->getAttribute(attributeIndex))->getIndex() == attributeValue) {
+        if (((DiscreteIndexedAttribute*)(instance->getAttribute(attributeIndex)))->getIndex() == attributeValue) {
             distribution.addItem(instance->getClassLabel());
         }
     }

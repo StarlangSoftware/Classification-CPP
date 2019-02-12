@@ -23,7 +23,7 @@ RandomModel::RandomModel(vector<string> classLabels) {
  */
 string RandomModel::predict(Instance *instance) {
     if (instance->isComposite()) {
-        vector<string> possibleClassLabels = dynamic_cast<CompositeInstance*>(instance)->getPossibleClassLabels();
+        vector<string> possibleClassLabels = instance->getPossibleClassLabels();
         int size = possibleClassLabels.size();
         int index = random() % size;
         return possibleClassLabels.at(index);

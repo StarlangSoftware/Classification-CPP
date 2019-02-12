@@ -18,6 +18,10 @@
 #include "Classifier/Lda.h"
 #include "Classifier/Qda.h"
 #include "Classifier/NaiveBayes.h"
+#include "Classifier/KMeans.h"
+#include "Parameter/KMeansParameter.h"
+#include "Classifier/Knn.h"
+#include "Parameter/KnnParameter.h"
 
 Parameter* defaultParameter() { return new Parameter(1);}
 
@@ -143,11 +147,11 @@ int main(){
     DataSet dataSet = readIris();
     //DataSet dataSet = readCar();
     //DataSet dataSet = readDermatology();
-    Classifier* classifier = new NaiveBayes();
-    Parameter* parameter = defaultParameter();
+    Classifier* classifier = new Knn();
+    Parameter* parameter = new KnnParameter(1, 1);
     StratifiedKFoldRun* run = new StratifiedKFoldRun(10);
     ExperimentPerformance* result;
     Experiment experiment = Experiment(classifier, parameter, dataSet);
     result = run->execute(experiment);
-    cout << result->meanClassificationPerformance()->getErrorRate();
+    cout << 100 * (result->meanClassificationPerformance()->getErrorRate());
 }

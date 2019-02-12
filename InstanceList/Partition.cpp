@@ -135,7 +135,7 @@ Partition::Partition(InstanceList &list, int attributeIndex) {
         add(new InstanceList());
     }
     for (Instance* instance : list.getInstances()) {
-        string attributeValue = dynamic_cast<DiscreteAttribute*>(instance->getAttribute(attributeIndex))->getValue();
+        string attributeValue = ((DiscreteAttribute*)(instance->getAttribute(attributeIndex)))->getValue();
         get(find(valueList.begin(), valueList.end(), attributeValue) - valueList.begin())->add(instance);
     }
 }
@@ -152,7 +152,7 @@ Partition::Partition(InstanceList &list, int attributeIndex, int attributeValue)
     add(new InstanceList());
     add(new InstanceList());
     for (Instance* instance : list.getInstances()) {
-        int currentAttributeValue = dynamic_cast<DiscreteIndexedAttribute*>(instance->getAttribute(attributeIndex))->getIndex();
+        int currentAttributeValue = ((DiscreteIndexedAttribute*)(instance->getAttribute(attributeIndex)))->getIndex();
         if (currentAttributeValue == attributeValue) {
             get(0)->add(instance);
         } else {
@@ -173,7 +173,7 @@ Partition::Partition(InstanceList &list, int attributeIndex, double splitValue) 
     add(new InstanceList());
     add(new InstanceList());
     for (Instance* instance : list.getInstances()) {
-        double attributeValue = dynamic_cast<ContinuousAttribute*>(instance->getAttribute(attributeIndex))->getValue();
+        double attributeValue = ((ContinuousAttribute*)(instance->getAttribute(attributeIndex)))->getValue();
         if (attributeValue <= splitValue) {
             get(0)->add(instance);
         } else {

@@ -22,7 +22,7 @@ DummyModel::DummyModel(InstanceList& trainSet) {
  */
 string DummyModel::predict(Instance *instance) {
     if (instance->isComposite()) {
-        vector<string> possibleClassLabels = dynamic_cast<CompositeInstance*>(instance)->getPossibleClassLabels();
+        vector<string> possibleClassLabels = instance->getPossibleClassLabels();
         return distribution.getMaxItem(possibleClassLabels);
     } else {
         return distribution.getMaxItem();

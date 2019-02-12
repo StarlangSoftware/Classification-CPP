@@ -17,7 +17,7 @@ void NaiveBayes::trainContinuousVersion(DiscreteDistribution priorDistribution, 
     map<string, Vector> classMeans;
     map<string, Vector> classDeviations;
     for (int i = 0; i < classLists.size(); i++){
-        classLabel = dynamic_cast<InstanceListOfSameClass*>(classLists.get(i))->getClassLabel();
+        classLabel = ((InstanceListOfSameClass*)(classLists.get(i)))->getClassLabel();
         Vector averageVector = classLists.get(i)->average()->toVector();
         classMeans.emplace(classLabel, averageVector);
         Vector standardDeviationVector = classLists.get(i)->standardDeviation()->toVector();
@@ -34,7 +34,7 @@ void NaiveBayes::trainContinuousVersion(DiscreteDistribution priorDistribution, 
 void NaiveBayes::trainDiscreteVersion(DiscreteDistribution priorDistribution, Partition classLists) {
     map<string, vector<DiscreteDistribution>> classAttributeDistributions;
     for (int i = 0; i < classLists.size(); i++){
-        classAttributeDistributions.emplace(dynamic_cast<InstanceListOfSameClass*>(classLists.get(i))->getClassLabel(), classLists.get(i)->allAttributesDistribution());
+        classAttributeDistributions.emplace(((InstanceListOfSameClass*)(classLists.get(i)))->getClassLabel(), classLists.get(i)->allAttributesDistribution());
     }
     model = new NaiveBayesModel(move(priorDistribution), classAttributeDistributions);
 }

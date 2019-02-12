@@ -10,7 +10,8 @@ class Parameter {
 private:
     int seed;
 public:
-    Parameter(int seed);
+    explicit Parameter(int seed);
+    virtual ~Parameter(){};
     int getSeed();
 };
 

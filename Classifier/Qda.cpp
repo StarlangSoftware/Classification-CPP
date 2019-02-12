@@ -27,7 +27,7 @@ void Qda::train(InstanceList& trainSet, Parameter *parameters) {
     Partition classLists = Partition(trainSet);
     DiscreteDistribution priorDistribution = trainSet.classDistribution();
     for (int i = 0; i < classLists.size(); i++) {
-        Ci = dynamic_cast<InstanceListOfSameClass*>(classLists.get(i))->getClassLabel();
+        Ci = ((InstanceListOfSameClass*)(classLists.get(i)))->getClassLabel();
         Vector averageVector = Vector(classLists.get(i)->continuousAttributeAverage());
         Matrix classCovariance = classLists.get(i)->covariance(averageVector);
         determinant = classCovariance.determinant();

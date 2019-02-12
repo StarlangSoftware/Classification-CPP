@@ -11,8 +11,8 @@ class MahalanobisDistance : DistanceMetric {
 private:
     Matrix covarianceInverse = Matrix(0, 0);
 public:
-    MahalanobisDistance(Matrix covarianceInverse);
-    double distance(Instance* instance1, Instance* instance2);
+    explicit MahalanobisDistance(Matrix covarianceInverse);
+    double distance(Instance* instance1, Instance* instance2) override;
 };
 
 
