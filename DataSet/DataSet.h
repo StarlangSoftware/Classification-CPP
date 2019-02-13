@@ -8,6 +8,7 @@
 
 #include "../InstanceList/InstanceList.h"
 #include "../InstanceList/Partition.h"
+#include "../FeatureSelection/FeatureSubSet.h"
 
 class DataSet {
 private:
@@ -18,6 +19,7 @@ public:
     DataSet(DataDefinition& definition);
     DataSet(ifstream file);
     DataSet(DataDefinition definition, string separator, string fileName);
+    DataSet getSubSetOfFeatures(FeatureSubSet featureSubSet);
     bool checkDefinition(Instance* instance);
     void setDefinition(Instance* instance);
     int sampleSize();

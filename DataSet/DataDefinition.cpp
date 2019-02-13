@@ -93,3 +93,17 @@ void DataDefinition::removeAttribute(int index) {
 void DataDefinition::removeAllAttributes() {
     attributeTypes.clear();
 }
+
+/**
+ * Generates new subset of attribute types by using given feature subset.
+ *
+ * @param featureSubSet {@link FeatureSubSet} input.
+ * @return DataDefinition with new subset of attribute types.
+ */
+DataDefinition DataDefinition::getSubSetOfFeatures(FeatureSubSet featureSubSet) {
+    vector<AttributeType> newAttributeTypes;
+    for (int i = 0; i < featureSubSet.size(); i++) {
+        newAttributeTypes.push_back(attributeTypes.at(featureSubSet.get(i)));
+    }
+    return DataDefinition(newAttributeTypes);
+}

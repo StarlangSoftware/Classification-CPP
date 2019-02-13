@@ -177,3 +177,18 @@ Instance::~Instance() {
         delete attribute;
     }
 }
+
+/**
+ * The getSubSetOfFeatures method takes a {@link FeatureSubSet} as an input. First it creates a result {@link Instance}
+ * with the class label, and adds the attributes of the given featureSubSet to it.
+ *
+ * @param featureSubSet {@link FeatureSubSet} an {@link vector} of indices.
+ * @return result Instance.
+ */
+Instance *Instance::getSubSetOfFeatures(FeatureSubSet featureSubSet) {
+    Instance* result = new Instance(classLabel);
+    for (int i = 0; i < featureSubSet.size(); i++) {
+        result->addAttribute(attributes.at(featureSubSet.get(i)));
+    }
+    return result;
+}

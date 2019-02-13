@@ -171,9 +171,9 @@ ClassificationPerformance *ExperimentPerformance::standardDeviationClassificatio
  * @param experimentPerformance {@link ExperimentPerformance} input.
  * @return True if the result of compareTo method is positive and false otherwise.
  */
-bool ExperimentPerformance::isBetter(ExperimentPerformance experimentPerformance) {
+bool ExperimentPerformance::isBetter(ExperimentPerformance* experimentPerformance) {
     double accuracy1, accuracy2;
     accuracy1 = meanClassificationPerformance()->getAccuracy();
-    accuracy2 = experimentPerformance.meanClassificationPerformance()->getAccuracy();
+    accuracy2 = experimentPerformance->meanClassificationPerformance()->getAccuracy();
     return accuracy1 > accuracy2;
 }

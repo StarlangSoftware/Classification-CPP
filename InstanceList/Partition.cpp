@@ -92,13 +92,13 @@ Partition::Partition(InstanceList &list, double ratio, int seed, bool stratified
         add(new InstanceList());
         distribution = list.classDistribution();
         vector<int> randomArray;
-        for (int i = 0; i < size(); i++){
+        for (int i = 0; i < list.size(); i++){
             randomArray.push_back(i);
         }
         std::shuffle(randomArray.begin(), randomArray.end(), default_random_engine(seed));
-        for (int i = 0; i < size(); i++) {
+        for (int i = 0; i < list.size(); i++) {
             Instance* instance = list.get(randomArray.at(i));
-            if (counts.count(instance->getClassLabel()) < size() * ratio * distribution.getProbability(instance->getClassLabel())) {
+            if (counts.count(instance->getClassLabel()) < list.size() * ratio * distribution.getProbability(instance->getClassLabel())) {
                 get(0)->add(instance);
             } else {
                 get(1)->add(instance);
@@ -109,9 +109,9 @@ Partition::Partition(InstanceList &list, double ratio, int seed, bool stratified
         add(new InstanceList());
         add(new InstanceList());
         list.shuffle(seed);
-        for (int i = 0; i < size(); i++) {
+        for (int i = 0; i < list.size(); i++) {
             Instance* instance = list.get(i);
-            if (i < size() * ratio) {
+            if (i < list.size() * ratio) {
                 get(0)->add(instance);
             } else {
                 get(1)->add(instance);

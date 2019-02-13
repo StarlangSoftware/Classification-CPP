@@ -325,3 +325,18 @@ void DataSet::writeToFile(string outFileName) {
     }
     outfile.close();
 }
+
+/**
+ * Return a subset generated via the given {@link FeatureSubSet}.
+ *
+ * @param featureSubSet {@link FeatureSubSet} input.
+ * @return Subset generated via the given {@link FeatureSubSet}.
+ */
+DataSet DataSet::getSubSetOfFeatures(FeatureSubSet featureSubSet) {
+    DataDefinition dataDefinition = definition.getSubSetOfFeatures(featureSubSet);
+    DataSet result = DataSet(dataDefinition);
+    for (int i = 0; i < instances.size(); i++) {
+        result.addInstance(instances.get(i)->getSubSetOfFeatures(featureSubSet));
+    }
+    return result;
+}

@@ -9,6 +9,7 @@
 #include "../Classifier/Classifier.h"
 #include "../Parameter/Parameter.h"
 #include "../DataSet/DataSet.h"
+#include "../FeatureSelection/FeatureSubSet.h"
 
 class Experiment {
 private:
@@ -20,6 +21,7 @@ public:
     Classifier* getClassifier();
     Parameter* getParameter();
     DataSet getDataSet();
+    Experiment featureSelectedExperiment(FeatureSubSet featureSubSet);
 };
 
 

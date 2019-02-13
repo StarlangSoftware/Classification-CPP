@@ -22,6 +22,7 @@
 #include "Parameter/KMeansParameter.h"
 #include "Classifier/Knn.h"
 #include "Parameter/KnnParameter.h"
+#include "Classifier/LinearPerceptron.h"
 
 Parameter* defaultParameter() { return new Parameter(1);}
 
@@ -144,11 +145,12 @@ DataSet readChess(){
 }
 
 int main(){
-    DataSet dataSet = readIris();
+    //DataSet dataSet = readIris();
     //DataSet dataSet = readCar();
     //DataSet dataSet = readDermatology();
-    Classifier* classifier = new Knn();
-    Parameter* parameter = new KnnParameter(1, 1);
+    DataSet dataSet = readTwonorm();
+    Classifier* classifier = new LinearPerceptron();
+    Parameter* parameter = new LinearPerceptronParameter(1, 0.1, 0.99, 0.2, 10);
     StratifiedKFoldRun* run = new StratifiedKFoldRun(10);
     ExperimentPerformance* result;
     Experiment experiment = Experiment(classifier, parameter, dataSet);

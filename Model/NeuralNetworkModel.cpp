@@ -37,7 +37,7 @@ Matrix NeuralNetworkModel::allocateLayerWeights(int row, int column) {
  */
 Vector NeuralNetworkModel::normalizeOutput(Vector o) {
     double sum = 0.0;
-    vector<double> values;
+    vector<double> values(o.getSize());
     for (int i = 0; i < o.getSize(); i++)
         sum += exp(o.getValue(i));
     for (int i = 0; i < o.getSize(); i++)

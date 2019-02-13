@@ -21,3 +21,8 @@ Parameter *Experiment::getParameter() {
 DataSet Experiment::getDataSet() {
     return dataSet;
 }
+
+Experiment Experiment::featureSelectedExperiment(FeatureSubSet featureSubSet) {
+    DataSet newDataSet = dataSet.getSubSetOfFeatures(featureSubSet);
+    return Experiment(classifier, parameter, newDataSet);
+}

@@ -8,6 +8,7 @@
 #include <vector>
 #include <Vector.h>
 #include "../Attribute/Attribute.h"
+#include "../FeatureSelection/FeatureSubSet.h"
 
 using namespace std;
 
@@ -33,6 +34,7 @@ public:
     vector<string> getPossibleClassLabels();
     string to_string();
     Vector toVector();
+    Instance* getSubSetOfFeatures(FeatureSubSet featureSubSet);
     virtual bool isComposite(){return false;};
     bool operator<(const Instance &anotherInstance) const{
         return (classLabel < anotherInstance.classLabel);

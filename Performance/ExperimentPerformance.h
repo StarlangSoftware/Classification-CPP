@@ -29,7 +29,7 @@ public:
     DetailedClassificationPerformance* meanDetailedPerformance();
     Performance* standardDeviationPerformance();
     ClassificationPerformance* standardDeviationClassificationPerformance();
-    bool isBetter(ExperimentPerformance experimentPerformance);
+    bool isBetter(ExperimentPerformance* experimentPerformance);
 };
 
 

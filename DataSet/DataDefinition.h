@@ -7,6 +7,8 @@
 
 #include <vector>
 #include "../Attribute/AttributeType.h"
+#include "../FeatureSelection/FeatureSubSet.h"
+
 using namespace std;
 
 class DataDefinition {
@@ -15,6 +17,7 @@ private:
 public:
     DataDefinition();
     DataDefinition(vector<AttributeType> attributeTypes);
+    DataDefinition getSubSetOfFeatures(FeatureSubSet featureSubSet);
     int attributeCount();
     int discreteAttributeCount();
     int continuousAttributeCount();

@@ -16,6 +16,6 @@
  * @param parameters Parameters of the linear perceptron.
  */
 void LinearPerceptron::train(InstanceList& trainSet, Parameter *parameters) {
-    Partition partition = Partition(trainSet, (((LinearPerceptronParameter*) parameters)->getCrossValidationRatio(), parameters->getSeed()));
+    Partition partition = Partition(trainSet, ((LinearPerceptronParameter*) parameters)->getCrossValidationRatio(), parameters->getSeed(), true);
     model = new LinearPerceptronModel(*(partition.get(1)), *(partition.get(0)), (LinearPerceptronParameter*) parameters);
 }
