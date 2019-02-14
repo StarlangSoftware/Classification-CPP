@@ -21,10 +21,9 @@ public:
     bool contains(int featureNo);
     void add(int featureNo);
     void remove(int index);
-    bool operator==(const FeatureSubSet &anotherFeatureSubSet) const{
+    bool operator==(const FeatureSubSet &anotherFeatureSubSet){
         return indexList == anotherFeatureSubSet.indexList;
     }
-
 };
 
 

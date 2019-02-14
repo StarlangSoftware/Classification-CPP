@@ -18,6 +18,8 @@ protected:
     void backward(vector<FeatureSubSet> currentSubSetList, FeatureSubSet& current);
 public:
     explicit SubSetSelection(FeatureSubSet& initialSubSet);
+    explicit SubSetSelection(int numberOfFeatures);
+    SubSetSelection();
     FeatureSubSet execute(MultipleRun* multipleRun, Experiment experiment);
 };
 

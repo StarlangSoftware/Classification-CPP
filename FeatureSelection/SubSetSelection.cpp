@@ -53,9 +53,9 @@ void SubSetSelection::backward(vector<FeatureSubSet> currentSubSetList, FeatureS
  * @return FeatureSubSet that gives best performance.
  */
 FeatureSubSet SubSetSelection::execute(MultipleRun *multipleRun, Experiment experiment) {
-    unordered_set<FeatureSubSet> processed;
+    vector<FeatureSubSet> processed;
     FeatureSubSet best = initialSubSet;
-    processed.emplace(best);
+    processed.push_back(best);
     bool betterFound = true;
     ExperimentPerformance* bestPerformance = nullptr;
     ExperimentPerformance* currentPerformance;
@@ -66,7 +66,14 @@ FeatureSubSet SubSetSelection::execute(MultipleRun *multipleRun, Experiment expe
         betterFound = false;
         vector<FeatureSubSet> candidateList = operatorToModify(best, experiment.getDataSet().getDataDefinition().attributeCount());
         for (FeatureSubSet candidateSubSet : candidateList) {
-            if (processed.find(candidateSubSet) != processed.end()) {
+            bool found = false;
+            for (int i = 0; i < processed.size(); i++){
+                if (processed[i] == candidateSubSet){
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
                 if (candidateSubSet.size() > 0){
                     currentPerformance = multipleRun->execute(experiment.featureSelectedExperiment(candidateSubSet));
                     if (bestPerformance == nullptr || currentPerformance->isBetter(bestPerformance)) {
@@ -75,9 +82,17 @@ FeatureSubSet SubSetSelection::execute(MultipleRun *multipleRun, Experiment expe
                         betterFound = true;
                     }
                 }
-                processed.emplace(candidateSubSet);
+                processed.push_back(candidateSubSet);
             }
         }
     }
     return best;
+}
+
+SubSetSelection::SubSetSelection(int numberOfFeatures) {
+    initialSubSet = FeatureSubSet(numberOfFeatures);
+}
+
+SubSetSelection::SubSetSelection() {
+    initialSubSet = FeatureSubSet();
 }
