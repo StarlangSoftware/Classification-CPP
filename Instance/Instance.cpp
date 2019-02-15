@@ -192,3 +192,12 @@ Instance *Instance::getSubSetOfFeatures(FeatureSubSet featureSubSet) {
     }
     return result;
 }
+
+/**
+ * Returns a new {@link NodeList} with the {@link ArrayList} that has continuous and discrete indexed attributes.
+ *
+ * @return {@link NodeList} that has continuous and discrete indexed attributes.
+ */
+NodeList Instance::toNodeList() {
+    return NodeList(continuousAttributes());
+}

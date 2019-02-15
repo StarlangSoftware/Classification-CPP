@@ -9,6 +9,7 @@
 #include <Vector.h>
 #include "../Attribute/Attribute.h"
 #include "../FeatureSelection/FeatureSubSet.h"
+#include "../Model/Svm/NodeList.h"
 
 using namespace std;
 
@@ -34,6 +35,7 @@ public:
     vector<string> getPossibleClassLabels();
     string to_string();
     Vector toVector();
+    NodeList toNodeList();
     Instance* getSubSetOfFeatures(FeatureSubSet featureSubSet);
     virtual bool isComposite(){return false;};
     bool operator<(const Instance &anotherInstance) const{

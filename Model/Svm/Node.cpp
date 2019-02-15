@@ -1,0 +1,43 @@
+//
+// Created by Olcay Taner Yıldız on 15.02.2019.
+//
+
+#include "Node.h"
+
+/**
+ * Constructor that sets the value of index and value.
+ *
+ * @param index Index of the node.
+ * @param value Value of the node.
+ */
+Node::Node(int index, double value) {
+    this->index = index;
+    this->value = value;
+}
+
+/**
+ * The clone method creates a new Node as a clone.
+ *
+ * @return New {@link Node}.
+ */
+Node Node::clone() {
+    return Node(index, value);
+}
+
+/**
+ * The getIndex method returns the index of a Node.
+ *
+ * @return The index of a Node.
+ */
+int Node::getIndex() {
+    return index;
+}
+
+/**
+ * The getValue method returns the value of a Node.
+ *
+ * @return The value of a Node.
+ */
+double Node::getValue() {
+    return value;
+}
