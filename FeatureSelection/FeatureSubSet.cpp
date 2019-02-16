@@ -37,10 +37,7 @@ FeatureSubSet::FeatureSubSet() {
  * @return A new vector with the elements of indexList and returns it as a new FeatureSubSet.
  */
 FeatureSubSet FeatureSubSet::clone() {
-    vector<int> newIndexList;
-    for (int index : indexList) {
-        newIndexList.push_back(index);
-    }
+    vector<int> newIndexList(indexList);
     return FeatureSubSet(newIndexList);
 }
 

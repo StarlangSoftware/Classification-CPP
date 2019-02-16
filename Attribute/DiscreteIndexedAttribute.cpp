@@ -42,11 +42,12 @@ int DiscreteIndexedAttribute::continuousAttributeSize() {
 
 vector<double> DiscreteIndexedAttribute::continuousAttributes() {
     vector<double> result;
+    result.reserve(maxIndex);
     for (int i = 0; i < maxIndex; i++) {
         if (i != index) {
-            result.push_back(0.0);
+            result[i] = 0.0;
         } else {
-            result.push_back(1.0);
+            result[i] = 1.0;
         }
     }
     return result;

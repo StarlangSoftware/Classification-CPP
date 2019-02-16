@@ -200,8 +200,11 @@ Bootstrap <Instance*> InstanceList::bootstrap(int seed) {
  */
 vector<string> InstanceList::getClassLabels() {
     vector<string> classLabels;
+    int i = 0;
+    classLabels.reserve(list.size());
     for (Instance* instance : list) {
-        classLabels.push_back(instance->getClassLabel());
+        classLabels[i] = instance->getClassLabel();
+        i++;
     }
     return classLabels;
 }
@@ -275,8 +278,11 @@ vector<string> InstanceList::getAttributeValueList(int attributeIndex) {
 Attribute *InstanceList::attributeAverage(int index) {
     if (list.at(0)->getAttribute(index)->isDiscrete()) {
         vector<string> values;
+        values.reserve(list.size());
+        int i = 0;
         for (Instance* instance : list) {
-            values.push_back(((DiscreteAttribute*)(instance->getAttribute(index)))->getValue());
+            values[i] = ((DiscreteAttribute*)(instance->getAttribute(index)))->getValue();
+            i++;
         }
         return new DiscreteAttribute(Classifier::getMaximum(values));
     } else {
@@ -302,8 +308,9 @@ vector<double> InstanceList::continuousAttributeAverage(int index) {
     if (list.at(0)->getAttribute(index)->isDiscreteIndexed()) {
         int maxIndexSize = ((DiscreteIndexedAttribute*)(list.at(0)->getAttribute(index)))->getMaxIndex();
         vector<double> values;
+        values.reserve(maxIndexSize);
         for (int i = 0; i < maxIndexSize; i++) {
-            values.push_back(0.0);
+            values[i] = 0.0;
         }
         for (Instance* instance : list) {
             int valueIndex = ((DiscreteIndexedAttribute*)(instance->getAttribute(index)))->getIndex();
@@ -360,8 +367,9 @@ vector<double> InstanceList::continuousAttributeStandardDeviation(int index) {
     if (list.at(0)->getAttribute(index)->isDiscreteIndexed()) {
         int maxIndexSize = ((DiscreteIndexedAttribute*)(list.at(0)->getAttribute(index)))->getMaxIndex();
         vector<double> averages;
+        averages.reserve(maxIndexSize);
         for (int i = 0; i < maxIndexSize; i++) {
-            averages.push_back(0.0);
+            averages[i]= 0.0;
         }
         for (Instance* instance : list) {
             int valueIndex = ((DiscreteIndexedAttribute*)(instance->getAttribute(index)))->getIndex();
@@ -371,8 +379,9 @@ vector<double> InstanceList::continuousAttributeStandardDeviation(int index) {
             average /= list.size();
         }
         vector<double> values;
+        values.reserve(maxIndexSize);
         for (int i = 0; i < maxIndexSize; i++) {
-            values.push_back(0.0);
+            values[i] = 0.0;
         }
         for (Instance* instance : list) {
             int valueIndex = ((DiscreteIndexedAttribute*)(instance->getAttribute(index)))->getIndex();
@@ -433,8 +442,9 @@ DiscreteDistribution InstanceList::attributeDistribution(int index) {
 vector<DiscreteDistribution> InstanceList::attributeClassDistribution(int attributeIndex) {
     vector<DiscreteDistribution> distributions;
     vector<string> valueList = getAttributeValueList(attributeIndex);
-    for (string ignored : valueList) {
-        distributions.push_back(DiscreteDistribution());
+    distributions.reserve(valueList.size());
+    for (int i = 0; i < valueList.size(); i++) {
+        distributions[i] = DiscreteDistribution();
     }
     for (Instance* instance : list) {
         string value = ((DiscreteAttribute*)(instance->getAttribute(attributeIndex)))->getValue();
@@ -482,8 +492,9 @@ DiscreteDistribution InstanceList::classDistribution() {
  */
 vector<DiscreteDistribution> InstanceList::allAttributesDistribution() {
     vector<DiscreteDistribution> distributions;
+    distributions.reserve(list.at(0)->attributeSize());
     for (int i = 0; i < list.at(0)->attributeSize(); i++) {
-        distributions.push_back(attributeDistribution(i));
+        distributions[i] = attributeDistribution(i);
     }
     return distributions;
 }

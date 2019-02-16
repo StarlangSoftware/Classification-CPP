@@ -15,9 +15,10 @@ public:
 template<class T> Bootstrap<T>::Bootstrap(const vector<T> &instanceList, unsigned int seed) {
     unsigned long N;
     srand(seed);
-    N = instanceList.capacity();
+    N = instanceList.size();
+    this->instanceList.reserve(N);
     for (int i = 0; i < N; i++){
-        this->instanceList.push_back(instanceList.at(random() % N));
+        this->instanceList[i] = instanceList.at(random() % N);
     }
 }
 

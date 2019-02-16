@@ -141,18 +141,19 @@ bool DataSet::checkDefinition(Instance *instance) {
  */
 void DataSet::setDefinition(Instance *instance) {
     vector<AttributeType> attributeTypes;
+    attributeTypes.reserve(instance->attributeSize());
     for (int i = 0; i < instance->attributeSize(); i++) {
         if (instance->getAttribute(i)->isBinary()) {
-            attributeTypes.push_back(AttributeType::BINARY);
+            attributeTypes[i] = AttributeType::BINARY;
         } else {
             if (instance->getAttribute(i)->isDiscreteIndexed()) {
-                attributeTypes.push_back(AttributeType::DISCRETE_INDEXED);
+                attributeTypes[i] = AttributeType::DISCRETE_INDEXED;
             } else {
                 if (instance->getAttribute(i)->isDiscrete()) {
-                    attributeTypes.push_back(AttributeType::DISCRETE);
+                    attributeTypes[i]= AttributeType::DISCRETE;
                 } else {
                     if (instance->getAttribute(i)->isContinuous()) {
-                        attributeTypes.push_back(AttributeType::CONTINUOUS);
+                        attributeTypes[i] = AttributeType::CONTINUOUS;
                     }
                 }
             }

@@ -92,8 +92,9 @@ Partition::Partition(InstanceList &list, double ratio, int seed, bool stratified
         add(new InstanceList());
         distribution = list.classDistribution();
         vector<int> randomArray;
+        randomArray.reserve(list.size());
         for (int i = 0; i < list.size(); i++){
-            randomArray.push_back(i);
+            randomArray[i] = i;
         }
         std::shuffle(randomArray.begin(), randomArray.end(), default_random_engine(seed));
         for (int i = 0; i < list.size(); i++) {

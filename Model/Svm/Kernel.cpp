@@ -19,12 +19,14 @@ Kernel::Kernel(int l, vector<NodeList> x, KernelType kernelType, int degree, dou
     this->degree = degree;
     this->gamma = gamma;
     this->coefficient0 = coefficient0;
+    this->x.reserve(l);
     for (int i = 0; i < l; i++) {
-        this->x.push_back(x[i].clone());
+        this->x[i] = x[i].clone();
     }
     if (kernelType == KernelType::RBF) {
+        this->xSquare.reserve(l);
         for (int i = 0; i < l; i++) {
-            xSquare.push_back(x[i].dot(x[i]));
+            xSquare[i] = x[i].dot(x[i]);
         }
     }
 }
