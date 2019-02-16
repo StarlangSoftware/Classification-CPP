@@ -24,6 +24,9 @@
 #include "Parameter/KnnParameter.h"
 #include "Classifier/LinearPerceptron.h"
 #include "Classifier/MultiLayerPerceptron.h"
+#include "Classifier/DeepNetwork.h"
+#include "Classifier/Svm.h"
+#include "Parameter/SvmParameter.h"
 
 Parameter* defaultParameter() { return new Parameter(1);}
 
@@ -150,8 +153,10 @@ int main(){
     //DataSet dataSet = readCar();
     //DataSet dataSet = readDermatology();
     //DataSet dataSet = readTwonorm();
-    Classifier* classifier = new MultiLayerPerceptron();
-    Parameter* parameter = new MultiLayerPerceptronParameter(1, 0.1, 0.99, 0.2, 10, 8);
+    Classifier* classifier = new Svm();
+    //vector<int> hiddenLayers;
+    //hiddenLayers.push_back(10);
+    Parameter* parameter = new SvmParameter(1, KernelType::LINEAR, 1, 1.0, 0.0, 1);
     StratifiedKFoldRun* run = new StratifiedKFoldRun(10);
     ExperimentPerformance* result;
     Experiment experiment = Experiment(classifier, parameter, dataSet);

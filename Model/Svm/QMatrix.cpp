@@ -15,7 +15,7 @@ QMatrix::QMatrix(Problem problem, SvmParameter *parameter, vector<double> y) {
     kernel = Kernel(problem.getL(), problem.getX(), parameter->getKernelType(), parameter->getDegree(), parameter->getGamma(), parameter->getCoefficient0());
     this->y.reserve(problem.getL());
     for (int i = 0; i < problem.getL(); i++) {
-        this->y[i] = y[i];
+        this->y.push_back(y[i]);
     }
 }
 
@@ -30,7 +30,7 @@ vector<double> QMatrix::getQ(int i, int length) {
     vector<double> data;
     data.reserve(length);
     for (int j = 0; j < length; j++) {
-        data[j] = y[i] * y[j] * kernel.function(i, j);
+        data.push_back(y[i] * y[j] * kernel.function(i, j));
     }
     return data;
 }

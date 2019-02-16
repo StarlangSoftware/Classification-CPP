@@ -24,22 +24,23 @@ SolutionInfo Solver::solve() {
     bool upperBoundI, upperBoundJ;
     alpha.reserve(l);
     for (i = 0; i < l; i++){
-        alpha[i] = 0.0;
+        alpha.push_back(0.0);
     }
     alphaStatus.reserve(l);
     for (i = 0; i < l; i++){
+        alphaStatus.push_back(AlphaStatusType::FREE);
         updateAlphaStatus(i);
     }
     activeSet.reserve(l);
     for (i = 0; i < l; i++){
-        activeSet[i] = i;
+        activeSet.push_back(i);
     }
     activeSize = l;
     G.reserve(l);
     GBar.reserve(l);
     for (i = 0; i < l; i++){
-        G[i] = b[i];
-        GBar[i] = 0;
+        G.push_back(b[i]);
+        GBar.push_back(0);
     }
     for (i = 0; i < l; i++){
         if (!isLowerBound(i)){

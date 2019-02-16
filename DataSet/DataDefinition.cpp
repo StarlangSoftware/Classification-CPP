@@ -104,7 +104,7 @@ DataDefinition DataDefinition::getSubSetOfFeatures(FeatureSubSet featureSubSet) 
     vector<AttributeType> newAttributeTypes;
     newAttributeTypes.reserve(featureSubSet.size());
     for (int i = 0; i < featureSubSet.size(); i++) {
-        newAttributeTypes[i] = attributeTypes.at(featureSubSet.get(i));
+        newAttributeTypes.push_back(attributeTypes.at(featureSubSet.get(i)));
     }
     return DataDefinition(newAttributeTypes);
 }

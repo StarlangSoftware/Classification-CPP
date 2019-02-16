@@ -144,16 +144,16 @@ void DataSet::setDefinition(Instance *instance) {
     attributeTypes.reserve(instance->attributeSize());
     for (int i = 0; i < instance->attributeSize(); i++) {
         if (instance->getAttribute(i)->isBinary()) {
-            attributeTypes[i] = AttributeType::BINARY;
+            attributeTypes.push_back(AttributeType::BINARY);
         } else {
             if (instance->getAttribute(i)->isDiscreteIndexed()) {
-                attributeTypes[i] = AttributeType::DISCRETE_INDEXED;
+                attributeTypes.push_back(AttributeType::DISCRETE_INDEXED);
             } else {
                 if (instance->getAttribute(i)->isDiscrete()) {
-                    attributeTypes[i]= AttributeType::DISCRETE;
+                    attributeTypes.push_back(AttributeType::DISCRETE);
                 } else {
                     if (instance->getAttribute(i)->isContinuous()) {
-                        attributeTypes[i] = AttributeType::CONTINUOUS;
+                        attributeTypes.push_back(AttributeType::CONTINUOUS);
                     }
                 }
             }

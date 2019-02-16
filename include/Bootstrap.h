@@ -18,7 +18,7 @@ template<class T> Bootstrap<T>::Bootstrap(const vector<T> &instanceList, unsigne
     N = instanceList.size();
     this->instanceList.reserve(N);
     for (int i = 0; i < N; i++){
-        this->instanceList[i] = instanceList.at(random() % N);
+        this->instanceList.push_back(instanceList.at(random() % N));
     }
 }
 

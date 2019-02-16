@@ -26,7 +26,7 @@ Problem::Problem(InstanceList &instanceList) {
     l = instanceList.size();
     for (int i = 0; i < instanceList.size(); i++) {
         instance = instanceList.get(i);
-        x[i] = instance->toNodeList();
+        x.push_back(instance->toNodeList());
     }
 }
 

@@ -29,8 +29,8 @@ SvmModel::SvmModel(InstanceList &trainSet, SvmParameter *parameter) {
     x.reserve(l);
     nonZero.reserve(l);
     for (int i = 0; i < l; i++){
-        x[i] = problem.getX()[i];
-        nonZero[i] = false;
+        x.push_back(problem.getX()[i]);
+        nonZero.push_back(false);
     }
     p = 0;
     numberOfProblems = (numberOfClasses * (numberOfClasses - 1)) / 2;
@@ -41,8 +41,8 @@ SvmModel::SvmModel(InstanceList &trainSet, SvmParameter *parameter) {
             sj = start[j];
             ci = classDistribution.getCount(classes[i]);
             cj = classDistribution.getCount(classes[j]);
-            subProblemX.reserve(ci + cj);
-            subProblemY.reserve(ci + cj);
+            subProblemX.resize(ci + cj);
+            subProblemY.resize(ci + cj);
             for (int k = 0; k < ci; k++){
                 subProblemX[k] = x[si + k];
                 subProblemY[k] = +1;
@@ -51,7 +51,7 @@ SvmModel::SvmModel(InstanceList &trainSet, SvmParameter *parameter) {
                 subProblemX[ci + k] = x[sj + k];
                 subProblemY[ci + k] = -1;
             }
-            weights[p] = solveSingle(Problem(subProblemX, subProblemY));
+            weights.push_back(solveSingle(Problem(subProblemX, subProblemY)));
             for (int k = 0; k < ci; k++){
                 if (!nonZero[si + k] && fabs(weights[p].getAlpha(k)) > 0){
                     nonZero[si + k] = true;
@@ -67,7 +67,7 @@ SvmModel::SvmModel(InstanceList &trainSet, SvmParameter *parameter) {
     }
     rho.reserve(numberOfProblems);
     for (int i = 0; i < numberOfProblems; i++){
-        rho[i] = weights[i].getRho();
+        rho.push_back(weights[i].getRho());
     }
     totalSupportVectors = 0;
     nonZeroCount.reserve(numberOfClasses);
@@ -80,25 +80,25 @@ SvmModel::SvmModel(InstanceList &trainSet, SvmParameter *parameter) {
                 totalSupportVectors++;
             }
         }
-        numberOfSupportVectors[i] = nSV;
-        nonZeroCount[i] = nSV;
+        numberOfSupportVectors.push_back(nSV);
+        nonZeroCount.push_back(nSV);
     }
     supportVectors.reserve(totalSupportVectors);
     p = 0;
     for (int i = 0; i < l; i++){
         if (nonZero[i]){
-            supportVectors[p] = x[i];
+            supportVectors.push_back(x[i]);
             p++;
         }
     }
     nonZeroStart.reserve(numberOfClasses);
-    nonZeroStart[0] = 0;
+    nonZeroStart.push_back(0);
     for (int i = 1; i < numberOfClasses; i++){
-        nonZeroStart[i] = nonZeroStart[i - 1] + nonZeroCount[i - 1];
+        nonZeroStart.push_back(nonZeroStart[i - 1] + nonZeroCount[i - 1]);
     }
-    supportVectorCoefficients.reserve(numberOfClasses - 1);
+    supportVectorCoefficients.resize(numberOfClasses - 1);
     for (int i = 0; i < numberOfClasses - 1; i++){
-        supportVectorCoefficients[i].reserve(totalSupportVectors);
+        supportVectorCoefficients[i].resize(totalSupportVectors);
     }
     p = 0;
     for (int i = 0; i < numberOfClasses; i++){
@@ -130,24 +130,22 @@ vector<int> SvmModel::groupClasses() {
     vector<int> start;
     vector<string> classes = classDistribution.getItems();
     start.reserve(numberOfClasses);
-    start[0] = 0;
+    start.push_back(0);
     for (int i = 1; i < numberOfClasses; i++){
-        start[i] = start[i - 1] + classDistribution.getCount(classes[i - 1]);
+        start.push_back(start[i - 1] + classDistribution.getCount(classes[i - 1]));
     }
     return start;
 }
 
 SolutionInfo SvmModel::solveSingle(Problem problem) {
-    vector<double> minusOnes;
+    vector<double> minusOnes(problem.getL(), -1.0);
     vector<double> y;
-    minusOnes.reserve(problem.getL());
     y.reserve(problem.getL());
     for (int i = 0; i < problem.getL(); i++){
-        minusOnes[i] = -1;
         if (problem.getY()[i] > 0){
-            y[i] = 1;
+            y.push_back(1);
         } else {
-            y[i] = -1;
+            y.push_back(-1);
         }
     }
     Solver solver = Solver(problem.getL(), minusOnes, y, parameter, problem);
@@ -168,12 +166,12 @@ vector<double> SvmModel::predictValues(NodeList x) {
     kernelValues.reserve(l);
     vector<double> result;
     for (int i = 0; i < l; i++){
-        kernelValues[i] = Kernel::function(x, supportVectors[i], parameter);
+        kernelValues.push_back(Kernel::function(x, supportVectors[i], parameter));
     }
     start.reserve(numberOfClasses);
-    start[0] = 0;
+    start.push_back(0);
     for (int i = 1; i < numberOfClasses; i++){
-        start[i] = start[i - 1] + numberOfSupportVectors[i - 1];
+        start.push_back(start[i - 1] + numberOfSupportVectors[i - 1]);
     }
     result.reserve(numberOfProblems);
     p = 0;
@@ -193,7 +191,7 @@ vector<double> SvmModel::predictValues(NodeList x) {
                 sum += coefficients2[sj + k] * kernelValues[sj + k];
             }
             sum -= rho[p];
-            result[p] = sum;
+            result.push_back(sum);
             p++;
         }
     }
@@ -202,13 +200,9 @@ vector<double> SvmModel::predictValues(NodeList x) {
 
 string SvmModel::predict(Instance *instance) {
     int pos, maxIndex, maxVotes;
-    vector<int> numberOfVotes;
-    numberOfVotes.reserve(numberOfClasses);
+    vector<int> numberOfVotes(numberOfClasses, 0);
     NodeList x = instance->toNodeList();
     vector<double> predictedValues = predictValues(x);
-    for (int i = 0; i < numberOfClasses; i++){
-        numberOfVotes[i] = 0;
-    }
     pos = 0;
     for (int i = 0; i < numberOfClasses; i++){
         for (int j = i + 1; j < numberOfClasses; j++){

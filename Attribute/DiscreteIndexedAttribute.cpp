@@ -45,9 +45,9 @@ vector<double> DiscreteIndexedAttribute::continuousAttributes() {
     result.reserve(maxIndex);
     for (int i = 0; i < maxIndex; i++) {
         if (i != index) {
-            result[i] = 0.0;
+            result.push_back(0.0);
         } else {
-            result[i] = 1.0;
+            result.push_back(1.0);
         }
     }
     return result;
