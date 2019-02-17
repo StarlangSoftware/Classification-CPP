@@ -20,9 +20,9 @@ StratifiedKFoldRun::StratifiedKFoldRun(int K) : KFoldRun(K) {
  * @return An array of performances: result. result[i] is the performance of the classifier on the i'th fold.
  */
 ExperimentPerformance *StratifiedKFoldRun::execute(Experiment experiment) {
-    ExperimentPerformance* result = new ExperimentPerformance();
+    auto* result = new ExperimentPerformance();
     Partition partition = experiment.getDataSet().getClassInstances();
-    StratifiedKFoldCrossValidation<Instance*>* crossValidation = new StratifiedKFoldCrossValidation<Instance*>(partition.getLists(), partition.size(), K, experiment.getParameter()->getSeed());
+    auto* crossValidation = new StratifiedKFoldCrossValidation<Instance*>(partition.getLists(), partition.size(), K, experiment.getParameter()->getSeed());
     runExperiment(experiment.getClassifier(), experiment.getParameter(), result, crossValidation);
     return result;
 }

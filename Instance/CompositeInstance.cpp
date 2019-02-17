@@ -1,9 +1,5 @@
 #include <utility>
 
-#include <utility>
-
-#include <utility>
-
 //
 // Created by Olcay Taner Yıldız on 26.01.2019.
 //
@@ -48,7 +44,7 @@ CompositeInstance::CompositeInstance(vector<string> possibleLabels) : Instance(p
  * @param possibleClassLabels Possible labels of the composite instance.
  */
 CompositeInstance::CompositeInstance(string classLabel, vector<Attribute *> attributes,
-                                     vector<string> possibleClassLabels) : Instance(classLabel, attributes) {
+                                     vector<string> possibleClassLabels) : Instance(move(classLabel), move(attributes)) {
     this->possibleClassLabels.insert(this->possibleClassLabels.end(), possibleClassLabels.begin(), possibleClassLabels.end());
 }
 

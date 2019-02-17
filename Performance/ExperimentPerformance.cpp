@@ -12,9 +12,7 @@
 /**
  * A constructor which creates a new {@link ArrayList} of {@link Performance} as results.
  */
-ExperimentPerformance::ExperimentPerformance() {
-
-}
+ExperimentPerformance::ExperimentPerformance() = default;
 
 /**
  * A constructor that takes a file name as an input and takes the inputs from that file assigns these inputs to the errorRate
@@ -103,7 +101,7 @@ ClassificationPerformance *ExperimentPerformance::meanClassificationPerformance(
     }
     double sumAccuracy = 0;
     for (Performance* performance : results) {
-        ClassificationPerformance* classificationPerformance = (ClassificationPerformance*)(performance);
+        auto* classificationPerformance = (ClassificationPerformance*)(performance);
         sumAccuracy += classificationPerformance->getAccuracy();
     }
     return new ClassificationPerformance(sumAccuracy / results.size());
@@ -157,7 +155,7 @@ ClassificationPerformance *ExperimentPerformance::standardDeviationClassificatio
     ClassificationPerformance* averageClassificationPerformance;
     averageClassificationPerformance = meanClassificationPerformance();
     for (Performance* performance : results) {
-        ClassificationPerformance* classificationPerformance = (ClassificationPerformance*)(performance);
+        auto* classificationPerformance = (ClassificationPerformance*)(performance);
         sumAccuracy += pow(classificationPerformance->getAccuracy() - averageClassificationPerformance->getAccuracy(), 2);
         sumErrorRate += pow(classificationPerformance->getErrorRate() - averageClassificationPerformance->getErrorRate(), 2);
     }

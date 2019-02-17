@@ -47,7 +47,7 @@ DeepNetworkModel::DeepNetworkModel(InstanceList &trainSet, InstanceList &validat
     vector<Vector> hiddenBiased;
     allocateWeights(parameters);
     bestWeights = setBestWeights();
-    ClassificationPerformance* bestClassificationPerformance = new ClassificationPerformance(0.0);
+    auto* bestClassificationPerformance = new ClassificationPerformance(0.0);
     epoch = parameters->getEpoch();
     learningRate = parameters->getLearningRate();
     for (int i = 0; i < epoch; i++) {
@@ -96,7 +96,7 @@ DeepNetworkModel::DeepNetworkModel(InstanceList &trainSet, InstanceList &validat
         learningRate *= parameters->getEtaDecrease();
     }
     weights.clear();
-    for (Matrix m : bestWeights) {
+    for (const Matrix &m : bestWeights) {
         weights.push_back(m);
     }
 }

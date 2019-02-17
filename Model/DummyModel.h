@@ -13,8 +13,8 @@ class DummyModel : public Model {
 private:
     DiscreteDistribution distribution;
 public:
-    DummyModel(InstanceList& trainSet);
-    string predict(Instance* instance);
+    explicit DummyModel(InstanceList& trainSet);
+    string predict(Instance* instance) override;
 };
 
 

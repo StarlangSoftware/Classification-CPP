@@ -10,8 +10,8 @@
 
 class StratifiedSingleRunWithK : public SingleRunWithK {
 public:
-    StratifiedSingleRunWithK(int K);
-    Performance* execute(Experiment experiment);
+    explicit StratifiedSingleRunWithK(int K);
+    Performance* execute(Experiment experiment) override;
 };
 
 

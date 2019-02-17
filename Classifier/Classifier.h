@@ -15,12 +15,12 @@ using namespace std;
 
 class Classifier {
 protected:
-    Model* model;
+    Model* model = nullptr;
 public:
     static string getMaximum(vector<string> classLabels);
     virtual void train(InstanceList& trainSet, Parameter* parameters) = 0;
     bool discreteCheck(Instance* instance);
-    Performance* test(InstanceList testSet);
+    virtual Performance* test(InstanceList testSet);
     Performance* singleRun(Parameter* parameter, InstanceList& trainSet, InstanceList& testSet);
     Model* getModel();
 };

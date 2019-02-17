@@ -21,10 +21,10 @@ StratifiedMxKFoldRun::StratifiedMxKFoldRun(int M, int K) : MxKFoldRun(M, K), Str
  * @return An array of performances: result. result[i] is the performance of the classifier on the i'th bootstrap run.
  */
 ExperimentPerformance *StratifiedMxKFoldRun::execute(Experiment experiment) {
-    ExperimentPerformance* result = new ExperimentPerformance();
+    auto* result = new ExperimentPerformance();
     for (int j = 0; j < M; j++) {
         Partition partition = experiment.getDataSet().getClassInstances();
-        StratifiedKFoldCrossValidation<Instance*>* crossValidation = new StratifiedKFoldCrossValidation<Instance*>(partition.getLists(), partition.size(), StratifiedKFoldRun::K, experiment.getParameter()->getSeed());
+        auto* crossValidation = new StratifiedKFoldCrossValidation<Instance*>(partition.getLists(), partition.size(), StratifiedKFoldRun::K, experiment.getParameter()->getSeed());
         KFoldRun::runExperiment(experiment.getClassifier(), experiment.getParameter(), result, crossValidation);
     }
     return result;

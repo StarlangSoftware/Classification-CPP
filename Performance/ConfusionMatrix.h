@@ -18,7 +18,7 @@ private:
     double columnSum(string predictedClass);
 public:
     ConfusionMatrix();
-    ConfusionMatrix(vector<string> classLabels);
+    explicit ConfusionMatrix(vector<string> classLabels);
     void classify(string actualClass, string predictedClass);
     void addConfusionMatrix(ConfusionMatrix confusionMatrix);
     double getAccuracy();

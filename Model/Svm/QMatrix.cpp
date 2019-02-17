@@ -48,5 +48,4 @@ void QMatrix::swapIndex(int i, int j) {
     y[j] = tmp;
 }
 
-QMatrix::QMatrix() {
-}
+QMatrix::QMatrix() = default;

@@ -12,7 +12,7 @@ private:
     void trainContinuousVersion(DiscreteDistribution priorDistribution, Partition classLists);
     void trainDiscreteVersion(DiscreteDistribution priorDistribution, Partition classLists);
 public:
-    void train(InstanceList& trainSet, Parameter* parameters);
+    void train(InstanceList& trainSet, Parameter* parameters) override;
 };
 
 

@@ -35,6 +35,6 @@ double LdaModel::calculateMetric(Instance *instance, string Ci) {
  */
 LdaModel::LdaModel(DiscreteDistribution priorDistribution, map<string, Vector> w, map<string, double> w0) {
     this->priorDistribution = move(priorDistribution);
-    this->w = w;
-    this->w0 = w0;
+    this->w = move(w);
+    this->w0 = move(w0);
 }

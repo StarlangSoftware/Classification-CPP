@@ -9,7 +9,7 @@
 
 class Qda : public Classifier {
 public:
-    void train(InstanceList& trainSet, Parameter* parameters);
+    void train(InstanceList& trainSet, Parameter* parameters) override;
 };
 
 

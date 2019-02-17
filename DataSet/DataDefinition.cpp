@@ -7,9 +7,7 @@
 /**
  * Constructor for creating a new {@link DataDefinition}.
  */
-DataDefinition::DataDefinition() {
-
-}
+DataDefinition::DataDefinition() = default;
 
 /**
  * Constructor for creating a new {@link DataDefinition} with given attribute types.
@@ -17,7 +15,7 @@ DataDefinition::DataDefinition() {
  * @param attributeTypes Attribute types of the data definition.
  */
 DataDefinition::DataDefinition(vector<AttributeType> attributeTypes) {
-    this->attributeTypes = attributeTypes;
+    this->attributeTypes = move(attributeTypes);
 }
 
 /**

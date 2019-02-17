@@ -13,9 +13,9 @@ class DetailedClassificationPerformance : public ClassificationPerformance {
 private:
     ConfusionMatrix confusionMatrix = ConfusionMatrix();
 public:
-    DetailedClassificationPerformance(ConfusionMatrix confusionMatrix);
+    explicit DetailedClassificationPerformance(ConfusionMatrix confusionMatrix);
     ConfusionMatrix getConfusionMatrix();
-    bool containsDetails();
+    bool containsDetails() override;
 };
 
 

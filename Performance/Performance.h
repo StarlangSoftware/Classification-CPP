@@ -10,7 +10,7 @@ class Performance {
 protected:
     double errorRate;
 public:
-    Performance(double errorRate);
+    explicit Performance(double errorRate);
     double getErrorRate();
     virtual bool containsDetails();
     virtual bool isClassification();

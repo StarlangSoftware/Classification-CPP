@@ -26,7 +26,7 @@ MultiLayerPerceptronModel::MultiLayerPerceptronModel(InstanceList &trainSet, Ins
     allocateWeights(parameters->getHiddenNodes());
     bestW = W.clone();
     bestV = V.clone();
-    ClassificationPerformance* bestClassificationPerformance = new ClassificationPerformance(0.0);
+    auto* bestClassificationPerformance = new ClassificationPerformance(0.0);
     epoch = parameters->getEpoch();
     learningRate = parameters->getLearningRate();
     for (int i = 0; i < epoch; i++) {

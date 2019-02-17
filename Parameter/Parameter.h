@@ -11,7 +11,7 @@ private:
     int seed;
 public:
     explicit Parameter(int seed);
-    virtual ~Parameter(){};
+    virtual ~Parameter() = default;
     int getSeed();
 };
 

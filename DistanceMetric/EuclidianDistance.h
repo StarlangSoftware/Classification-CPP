@@ -10,7 +10,7 @@
 
 class EuclidianDistance : public DistanceMetric {
 public:
-    double distance(Instance* instance1, Instance* instance2);
+    double distance(Instance* instance1, Instance* instance2) override;
 };
 
 

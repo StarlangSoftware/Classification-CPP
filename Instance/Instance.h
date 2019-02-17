@@ -32,8 +32,8 @@ public:
     int continuousAttributeSize();
     vector<double> continuousAttributes();
     string getClassLabel();
-    vector<string> getPossibleClassLabels();
-    string to_string();
+    virtual vector<string> getPossibleClassLabels();
+    virtual string to_string();
     Vector toVector();
     NodeList toNodeList();
     Instance* getSubSetOfFeatures(FeatureSubSet featureSubSet);

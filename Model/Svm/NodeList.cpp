@@ -20,8 +20,7 @@ NodeList::NodeList(vector<double> values) {
 /**
  * An empty constructor.
  */
-NodeList::NodeList() {
-}
+NodeList::NodeList() = default;
 
 /**
  * The clone method creates a new {@link NodeList} and as the clone of the initial {@link NodeList}.

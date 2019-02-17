@@ -10,11 +10,11 @@ class ClassificationPerformance : public Performance {
 private:
     double accuracy;
 public:
-    ClassificationPerformance(double accuracy);
+    explicit ClassificationPerformance(double accuracy);
     ClassificationPerformance(double accuracy, double errorRate);
     double getAccuracy();
-    bool containsDetails();
-    bool isClassification();
+    bool containsDetails() override;
+    bool isClassification() override;
 };
 
 

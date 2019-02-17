@@ -12,14 +12,14 @@ class CompositeInstance : public Instance {
 private:
     vector<string> possibleClassLabels;
 public:
-    CompositeInstance(string classLabel);
+    explicit CompositeInstance(string classLabel);
     CompositeInstance(string classLabel, vector<Attribute*> attributes);
-    CompositeInstance(vector<string> possibleLabels);
+    explicit CompositeInstance(vector<string> possibleLabels);
     CompositeInstance(string classLabel, vector<Attribute*> attributes, vector<string> possibleClassLabels);
-    vector<string> getPossibleClassLabels();
+    vector<string> getPossibleClassLabels() override;
     void setPossibleClassLabels(vector<string> possibleClassLabels);
-    bool isComposite(){return true;};
-    string to_string();
+    bool isComposite() override{return true;};
+    string to_string() override;
 };
 
 

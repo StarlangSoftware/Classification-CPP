@@ -22,7 +22,7 @@ StratifiedSingleRunWithK::StratifiedSingleRunWithK(int K) : SingleRunWithK(K) {
  */
 Performance *StratifiedSingleRunWithK::execute(Experiment experiment) {
     Partition partition = experiment.getDataSet().getClassInstances();
-    StratifiedKFoldCrossValidation<Instance*>* crossValidation = new StratifiedKFoldCrossValidation<Instance*>(partition.getLists(), partition.size(), SingleRunWithK::K, experiment.getParameter()->getSeed());
+    auto * crossValidation = new StratifiedKFoldCrossValidation<Instance*>(partition.getLists(), partition.size(), SingleRunWithK::K, experiment.getParameter()->getSeed());
     InstanceList trainSet = InstanceList(crossValidation->getTrainFold(0));
     InstanceList testSet = InstanceList(crossValidation->getTestFold(0));
     return experiment.getClassifier()->singleRun(experiment.getParameter(), trainSet, testSet);

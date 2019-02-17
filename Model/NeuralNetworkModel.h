@@ -24,7 +24,7 @@ protected:
     string predictWithCompositeInstance(vector<string> possibleClassLabels);
 public:
     explicit NeuralNetworkModel(InstanceList& trainSet);
-    string predict(Instance* instance);
+    string predict(Instance* instance) override;
 };
 
 

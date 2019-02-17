@@ -1,3 +1,5 @@
+#include <utility>
+
 //
 // Created by Olcay Taner Yıldız on 29.01.2019.
 //
@@ -12,7 +14,7 @@
  * @param covarianceInverse Inverse of the covariance matrix.
  */
 MahalanobisDistance::MahalanobisDistance(Matrix covarianceInverse) {
-    this->covarianceInverse = covarianceInverse;
+    this->covarianceInverse = move(covarianceInverse);
 }
 
 /**

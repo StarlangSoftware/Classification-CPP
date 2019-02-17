@@ -10,8 +10,8 @@
 
 class StratifiedKFoldRunSeparateTest : public StratifiedKFoldRun, public KFoldRunSeparateTest {
 public:
-    StratifiedKFoldRunSeparateTest(int K);
-    ExperimentPerformance* execute(Experiment experiment);
+    explicit StratifiedKFoldRunSeparateTest(int K);
+    ExperimentPerformance* execute(Experiment experiment) override;
 };
 
 

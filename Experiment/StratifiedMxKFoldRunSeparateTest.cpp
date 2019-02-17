@@ -22,7 +22,7 @@ StratifiedMxKFoldRunSeparateTest::StratifiedMxKFoldRunSeparateTest(int M, int K)
  * @return An array of performances: result. result[i] is the performance of the classifier on the i'th bootstrap run.
  */
 ExperimentPerformance *StratifiedMxKFoldRunSeparateTest::execute(Experiment experiment) {
-    ExperimentPerformance* result = new ExperimentPerformance();
+    auto * result = new ExperimentPerformance();
     for (int j = 0; j < M; j++) {
         InstanceList instanceList = experiment.getDataSet().getInstanceList();
         Partition partition = Partition(instanceList, 0.25, experiment.getParameter()->getSeed(), true);

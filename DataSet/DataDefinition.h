@@ -16,7 +16,7 @@ private:
     vector<AttributeType> attributeTypes;
 public:
     DataDefinition();
-    DataDefinition(vector<AttributeType> attributeTypes);
+    explicit DataDefinition(vector<AttributeType> attributeTypes);
     DataDefinition getSubSetOfFeatures(FeatureSubSet featureSubSet);
     int attributeCount();
     int discreteAttributeCount();

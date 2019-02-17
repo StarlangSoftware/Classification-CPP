@@ -12,7 +12,7 @@ private:
     vector<DecisionTree> forest;
 public:
     string predict(Instance* instance) override;
-    TreeEnsembleModel(vector<DecisionTree> forest);
+    explicit TreeEnsembleModel(vector<DecisionTree> forest);
 };
 
 

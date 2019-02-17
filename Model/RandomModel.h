@@ -11,7 +11,7 @@ private:
     vector<string> classLabels;
 public:
     explicit RandomModel(vector<string> classLabels);
-    string predict(Instance* instance);
+    string predict(Instance* instance) override;
 };
 
 

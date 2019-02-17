@@ -22,7 +22,7 @@ protected:
 public:
     InstanceList();
     InstanceList(DataDefinition definition, string separator, string fileName);
-    InstanceList(vector<Instance*> list);
+    explicit InstanceList(vector<Instance*> list);
     void add(Instance* instance);
     void addAll(vector<Instance*> instanceList);
     int size();

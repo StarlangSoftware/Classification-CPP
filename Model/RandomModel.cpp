@@ -11,7 +11,7 @@
  * @param classLabels An ArrayList of class labels.
  */
 RandomModel::RandomModel(vector<string> classLabels) {
-    this->classLabels = classLabels;
+    this->classLabels = move(classLabels);
 }
 
 /**

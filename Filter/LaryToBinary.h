@@ -13,7 +13,7 @@ protected:
     void convertInstance(Instance* instance) override;
     void convertDataDefinition() override;
 public:
-    LaryToBinary(DataSet& dataSet);
+    explicit LaryToBinary(DataSet& dataSet);
 };
 
 

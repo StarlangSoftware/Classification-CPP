@@ -22,7 +22,7 @@ StratifiedKFoldRunSeparateTest::StratifiedKFoldRunSeparateTest(int K) : Stratifi
  * @throws DiscreteFeaturesNotAllowed Exception for discrete features.
  */
 ExperimentPerformance *StratifiedKFoldRunSeparateTest::execute(Experiment experiment) {
-    ExperimentPerformance* result = new ExperimentPerformance();
+    auto* result = new ExperimentPerformance();
     InstanceList instanceList = experiment.getDataSet().getInstanceList();
     Partition partition = Partition(instanceList, 0.25, experiment.getParameter()->getSeed(), true);
     StratifiedKFoldCrossValidation<Instance*>* crossValidation = new StratifiedKFoldCrossValidation<Instance*>(Partition(*(partition.get(1))).getLists(), StratifiedKFoldRun::K, StratifiedKFoldRun::K, experiment.getParameter()->getSeed());

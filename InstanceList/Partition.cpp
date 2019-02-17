@@ -14,8 +14,7 @@ using namespace std;
 /**
  * Constructor for generating a partition.
  */
-Partition::Partition() {
-}
+Partition::Partition() = default;
 
 /**
  * Adds given instance list to the list of instance lists.
@@ -51,7 +50,7 @@ InstanceList* Partition::get(int index) {
  * @return Instances of the items at the list of instance lists.
  */
 vector<Instance *> *Partition::getLists() {
-    vector<Instance*>* result = new vector<Instance*>[multiList.size()];
+    auto* result = new vector<Instance*>[multiList.size()];
     for (int i = 0; i < multiList.size(); i++) {
         result[i] = multiList.at(i)->getInstances();
     }
@@ -66,7 +65,7 @@ vector<Instance *> *Partition::getLists() {
  */
 Partition::Partition(InstanceList &list) {
     vector<string> classLabels = list.getDistinctClassLabels();
-    for (string classLabel : classLabels)
+    for (const string &classLabel : classLabels)
         add(new InstanceListOfSameClass(classLabel));
     for (Instance* instance : list.getInstances()) {
         get(find(classLabels.begin(), classLabels.end(), instance->getClassLabel()) - classLabels.begin())->add(instance);

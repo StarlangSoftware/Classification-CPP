@@ -16,8 +16,8 @@ private:
     DataDefinition definition;
 public:
     DataSet();
-    DataSet(DataDefinition& definition);
-    DataSet(ifstream file);
+    explicit DataSet(DataDefinition& definition);
+    explicit DataSet(ifstream file);
     DataSet(DataDefinition definition, string separator, string fileName);
     DataSet getSubSetOfFeatures(FeatureSubSet featureSubSet);
     bool checkDefinition(Instance* instance);

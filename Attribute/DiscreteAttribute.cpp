@@ -37,9 +37,9 @@ string DiscreteAttribute::to_string() {
 
 DiscreteAttribute::DiscreteAttribute(bool value) {
     if (value){
-        value = "true";
+        this->value = "true";
     } else {
-        value = "false";
+        this->value = "false";
     }
 }
 

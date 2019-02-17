@@ -24,9 +24,9 @@ Normalize::Normalize(DataSet &dataSet) : FeatureFilter(dataSet) {
 void Normalize::convertInstance(Instance *instance) {
     for (int i = 0; i < instance->attributeSize(); i++) {
         if (instance->getAttribute(i)->isContinuous()) {
-            ContinuousAttribute* xi = (ContinuousAttribute*)(instance->getAttribute(i));
-            ContinuousAttribute* mi = (ContinuousAttribute*)(averageInstance->getAttribute(i));
-            ContinuousAttribute* si = (ContinuousAttribute*)(standardDeviationInstance->getAttribute(i));
+            auto* xi = (ContinuousAttribute*)(instance->getAttribute(i));
+            auto* mi = (ContinuousAttribute*)(averageInstance->getAttribute(i));
+            auto* si = (ContinuousAttribute*)(standardDeviationInstance->getAttribute(i));
             xi->setValue((xi->getValue() - mi->getValue()) / si->getValue());
         }
     }

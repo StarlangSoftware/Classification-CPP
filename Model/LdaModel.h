@@ -12,7 +12,7 @@ class LdaModel : public GaussianModel {
 protected:
     map<string, double> w0;
     map<string, Vector> w;
-    double calculateMetric(Instance* instance, string Ci);
+    double calculateMetric(Instance* instance, string Ci) override;
 public:
     LdaModel(DiscreteDistribution priorDistribution, map<string, Vector> w, map<string, double> w0);
 };

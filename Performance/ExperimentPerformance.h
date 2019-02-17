@@ -19,7 +19,7 @@ private:
     bool classification = true;
 public:
     ExperimentPerformance();
-    ExperimentPerformance(string fileName);
+    explicit ExperimentPerformance(string fileName);
     void add(Performance* performance);
     int numberOfExperiments();
     double getErrorRate(int index);

@@ -12,7 +12,7 @@ class Combined5x2t : public PairedTest{
 private:
     double testStatistic(ExperimentPerformance classifier1, ExperimentPerformance classifier2);
 public:
-    StatisticalTestResult compare(ExperimentPerformance classifier1, ExperimentPerformance classifier2);
+    StatisticalTestResult compare(ExperimentPerformance classifier1, ExperimentPerformance classifier2) override;
 };
 
 
