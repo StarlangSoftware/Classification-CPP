@@ -6,6 +6,7 @@
 #include "../InstanceList/Partition.h"
 #include "../Parameter/DeepNetworkParameter.h"
 #include "../Model/DeepNetworkModel.h"
+#include "DiscreteFeaturesNotAllowed.h"
 
 /**
  * Training algorithm for deep network classifier.
@@ -15,6 +16,9 @@
  * @throws DiscreteFeaturesNotAllowed Exception for discrete features.
  */
 void DeepNetwork::train(InstanceList &trainSet, Parameter *parameters) {
+    if (!discreteCheck(trainSet.get(0))){
+        throw DiscreteFeaturesNotAllowed();
+    }
     Partition partition = Partition(trainSet, ((DeepNetworkParameter*) parameters)->getCrossValidationRatio(), parameters->getSeed(), true);
     model = new DeepNetworkModel(*(partition.get(1)), *(partition.get(0)), (DeepNetworkParameter*) parameters);
 }

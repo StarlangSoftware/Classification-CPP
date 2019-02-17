@@ -4,6 +4,7 @@
 
 #include "Svm.h"
 #include "../Model/Svm/SvmModel.h"
+#include "DiscreteFeaturesNotAllowed.h"
 
 /**
  * Training algorithm for Support Vector Machine classifier.
@@ -12,5 +13,8 @@
  * @param parameters Parameters of the SVM classifier algorithm.
  */
 void Svm::train(InstanceList &trainSet, Parameter *parameters) {
+    if (!discreteCheck(trainSet.get(0))){
+        throw DiscreteFeaturesNotAllowed();
+    }
     model = new SvmModel(trainSet, (SvmParameter*) parameters);
 }

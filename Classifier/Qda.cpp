@@ -11,6 +11,7 @@
 #include "../InstanceList/Partition.h"
 #include "../InstanceList/InstanceListOfSameClass.h"
 #include "../Model/QdaModel.h"
+#include "DiscreteFeaturesNotAllowed.h"
 
 /**
  * Training algorithm for the quadratic discriminant analysis classifier (Introduction to Machine Learning, Alpaydin, 2015).
@@ -19,6 +20,9 @@
  * @param parameters -
  */
 void Qda::train(InstanceList& trainSet, Parameter *parameters) {
+    if (!discreteCheck(trainSet.get(0))){
+        throw DiscreteFeaturesNotAllowed();
+    }
     string Ci;
     double determinant, w0i;
     map<string, double> w0;

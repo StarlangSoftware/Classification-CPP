@@ -27,6 +27,8 @@
 #include "Classifier/DeepNetwork.h"
 #include "Classifier/Svm.h"
 #include "Parameter/SvmParameter.h"
+#include "Classifier/C45.h"
+#include "Parameter/C45Parameter.h"
 
 Parameter* defaultParameter() { return new Parameter(1);}
 
@@ -153,10 +155,10 @@ int main(){
     //DataSet dataSet = readCar();
     //DataSet dataSet = readDermatology();
     //DataSet dataSet = readTwonorm();
-    Classifier* classifier = new Svm();
+    Classifier* classifier = new C45();
     //vector<int> hiddenLayers;
     //hiddenLayers.push_back(10);
-    Parameter* parameter = new SvmParameter(1, KernelType::LINEAR, 1, 1.0, 0.0, 1);
+    Parameter* parameter = new C45Parameter(1, true, 0.2);
     StratifiedKFoldRun* run = new StratifiedKFoldRun(10);
     ExperimentPerformance* result;
     Experiment experiment = Experiment(classifier, parameter, dataSet);

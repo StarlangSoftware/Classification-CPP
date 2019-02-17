@@ -5,6 +5,7 @@
 #include "AutoEncoder.h"
 #include "../InstanceList/Partition.h"
 #include "../Model/AutoEncoderModel.h"
+#include "DiscreteFeaturesNotAllowed.h"
 
 /**
  * Training algorithm for auto encoders. An auto encoder is a neural network which attempts to replicate its input at its output.
@@ -14,6 +15,9 @@
  * @throws DiscreteFeaturesNotAllowed Exception for discrete features.
  */
 void AutoEncoder::train(InstanceList &trainSet, Parameter *parameters) {
+    if (!discreteCheck(trainSet.get(0))){
+        throw DiscreteFeaturesNotAllowed();
+    }
     Partition partition = Partition(trainSet, 0.2, parameters->getSeed(), true);
     model = new AutoEncoderModel(*(partition.get(1)), *(partition.get(0)), (MultiLayerPerceptronParameter*) parameters);
 }
