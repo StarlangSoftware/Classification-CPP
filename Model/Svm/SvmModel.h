@@ -24,6 +24,7 @@ private:
 public:
     SvmModel(InstanceList& trainSet, SvmParameter* parameter);
     string predict(Instance* instance) override;
+    virtual void serialize(ostream &outputFile) override;
 };
 
 

@@ -17,6 +17,7 @@ private:
     vector<Matrix> setBestWeights();
 public:
     DeepNetworkModel(InstanceList& trainSet, InstanceList& validationSet, DeepNetworkParameter* parameters);
+    void serialize(ostream &outputFile) override;
 protected:
     void calculateOutput() override;
 };

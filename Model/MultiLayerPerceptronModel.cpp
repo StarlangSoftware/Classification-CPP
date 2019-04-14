@@ -74,3 +74,6 @@ void MultiLayerPerceptronModel::calculateOutput() {
     } catch (MatrixColumnMismatch& matrixColumnMismatch) {
     }
 }
+
+void MultiLayerPerceptronModel::serialize(ostream &outputFile) {
+}

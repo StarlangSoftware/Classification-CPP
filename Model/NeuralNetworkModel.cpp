@@ -148,3 +148,6 @@ string NeuralNetworkModel::predict(Instance *instance) {
         return classLabels.at(y.maxIndex());
     }
 }
+
+void NeuralNetworkModel::serialize(ostream &outputFile) {
+}

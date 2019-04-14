@@ -120,3 +120,7 @@ void DeepNetworkModel::calculateOutput() {
     } catch (MatrixColumnMismatch& matrixColumnMismatch) {
     }
 }
+
+void DeepNetworkModel::serialize(ostream &outputFile) {
+
+}

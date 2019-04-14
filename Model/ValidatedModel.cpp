@@ -20,3 +20,6 @@ ClassificationPerformance *ValidatedModel::testClassifier(InstanceList data) {
     }
     return new ClassificationPerformance(count / total);
 }
+
+void ValidatedModel::serialize(ostream &outputFile) {
+}

@@ -12,6 +12,7 @@ private:
     double sum = 0;
 public:
     DiscreteDistribution();
+    explicit DiscreteDistribution(ifstream& inputFile);
     void addItem(string item);
     void removeItem(string item);
     void addDistribution(DiscreteDistribution distribution);
@@ -26,6 +27,7 @@ public:
     double getProbability(string item);
     double getProbabilityLaplaceSmoothing(string item);
     double entropy();
+    void serialize(ostream& outputFile);
 };
 
 

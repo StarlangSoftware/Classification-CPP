@@ -3,6 +3,7 @@
 //
 
 #include <iostream>
+#include <fstream>
 #include "Instance/Instance.h"
 #include "Attribute/ContinuousAttribute.h"
 #include "Attribute/DiscreteIndexedAttribute.h"
@@ -29,6 +30,8 @@
 #include "Parameter/SvmParameter.h"
 #include "Classifier/C45.h"
 #include "Parameter/C45Parameter.h"
+#include "Model/DummyModel.h"
+#include "Model/KMeansModel.h"
 
 Parameter* defaultParameter() { return new Parameter(1);}
 
@@ -155,13 +158,22 @@ int main(){
     //DataSet dataSet = readCar();
     //DataSet dataSet = readDermatology();
     //DataSet dataSet = readTwonorm();
-    Classifier* classifier = new C45();
+    Classifier* classifier = new KMeans();
     //vector<int> hiddenLayers;
     //hiddenLayers.push_back(10);
-    Parameter* parameter = new C45Parameter(1, true, 0.2);
-    StratifiedKFoldRun* run = new StratifiedKFoldRun(10);
-    ExperimentPerformance* result;
-    Experiment experiment = Experiment(classifier, parameter, dataSet);
-    result = run->execute(experiment);
-    cout << 100 * (result->meanClassificationPerformance()->getErrorRate());
+    InstanceList instanceList = dataSet.getInstanceList();
+    classifier->train(instanceList, new KMeansParameter(1));
+    ofstream outputFile;
+    outputFile.open("model.txt", ostream::out);
+    classifier->getModel()->serialize(outputFile);
+    outputFile.close();
+    ifstream inputFile;
+    inputFile.open("model.txt", ifstream::in);
+    auto* model = new KMeansModel(inputFile);
+    //Parameter* parameter = new C45Parameter(1, true, 0.2);
+    //auto* run = new StratifiedKFoldRun(10);
+    //ExperimentPerformance* result;
+    //Experiment experiment = Experiment(classifier, parameter, dataSet);
+    //result = run->execute(experiment);
+    //cout << 100 * (result->meanClassificationPerformance()->getErrorRate());
 }

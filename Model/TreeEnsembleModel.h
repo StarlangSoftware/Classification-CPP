@@ -13,6 +13,7 @@ private:
 public:
     string predict(Instance* instance) override;
     explicit TreeEnsembleModel(vector<DecisionTree> forest);
+    void serialize(ostream &outputFile) override;
 };
 
 

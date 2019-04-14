@@ -21,6 +21,7 @@ public:
     KnnModel(InstanceList& data, int k, DistanceMetric* distanceMetric);
     string predict(Instance* instance) override;
     InstanceList nearestNeighbors(Instance* instance);
+    void serialize(ostream &outputFile) override;
 };
 
 #endif //CLASSIFICATION_KNNMODEL_H

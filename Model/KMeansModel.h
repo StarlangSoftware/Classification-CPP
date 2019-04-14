@@ -14,7 +14,9 @@ private:
     InstanceList classMeans;
     DistanceMetric* distanceMetric;
 public:
+    explicit KMeansModel(ifstream& inputFile);
     KMeansModel(DiscreteDistribution priorDistribution, InstanceList& classMeans, DistanceMetric* distanceMetric);
+    void serialize(ostream &outputFile) override;
 protected:
     double calculateMetric(Instance* instance, string Ci) override;
 };

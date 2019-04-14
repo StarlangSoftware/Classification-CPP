@@ -19,6 +19,7 @@ private:
 public:
     AutoEncoderModel(InstanceList& trainSet, InstanceList& validationSet, MultiLayerPerceptronParameter* parameters);
     Performance* testAutoEncoder(InstanceList& data);
+    void serialize(ostream &outputFile) override;
 };
 
 

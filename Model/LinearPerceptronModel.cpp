@@ -66,3 +66,7 @@ void LinearPerceptronModel::calculateOutput() {
     } catch (MatrixColumnMismatch& matrixColumnMismatch) {
     }
 }
+
+void LinearPerceptronModel::serialize(ostream &outputFile) {
+
+}

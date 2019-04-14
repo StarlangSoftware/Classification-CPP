@@ -59,3 +59,7 @@ void DecisionTree::pruneNode(DecisionNode decisionNode, InstanceList pruneSet) {
         }
     }
 }
+
+void DecisionTree::serialize(ostream &outputFile) {
+
+}

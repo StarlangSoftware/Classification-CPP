@@ -125,3 +125,7 @@ void AutoEncoderModel::calculateOutput() {
     } catch (MatrixColumnMismatch& matrixColumnMismatch) {
     }
 }
+
+void AutoEncoderModel::serialize(ostream &outputFile) {
+
+}

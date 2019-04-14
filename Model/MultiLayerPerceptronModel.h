@@ -16,6 +16,7 @@ private:
     void allocateWeights(int H);
 public:
     MultiLayerPerceptronModel(InstanceList& trainSet, InstanceList& validationSet, MultiLayerPerceptronParameter* parameters);
+    void serialize(ostream &outputFile) override;
 };
 
 

@@ -20,6 +20,7 @@ protected:
 public:
     NaiveBayesModel(DiscreteDistribution priorDistribution, map<string, Vector> classMeans, map<string, Vector> classDeviations);
     NaiveBayesModel(DiscreteDistribution priorDistribution, map<string, vector<DiscreteDistribution>> classAttributeDistributions);
+    void serialize(ostream &outputFile) override;
 };
 
 

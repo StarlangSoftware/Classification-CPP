@@ -12,6 +12,7 @@ private:
 public:
     explicit RandomModel(vector<string> classLabels);
     string predict(Instance* instance) override;
+    void serialize(ostream &outputFile) override;
 };
 
 

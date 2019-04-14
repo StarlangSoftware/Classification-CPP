@@ -15,6 +15,7 @@ public:
     string predict(Instance* instance) override;
     explicit DecisionTree(DecisionNode root);
     void prune(InstanceList pruneSet);
+    virtual void serialize(ostream &outputFile) override;
 };
 
 

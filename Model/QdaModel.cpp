@@ -42,3 +42,6 @@ QdaModel::QdaModel(DiscreteDistribution priorDistribution, map<string, Matrix> W
                    map<string, double> w0) : LdaModel(move(priorDistribution), move(w), move(w0)) {
     this->W = move(W);
 }
+
+void QdaModel::serialize(ostream &outputFile) {
+}

@@ -28,3 +28,11 @@ string DummyModel::predict(Instance *instance) {
         return distribution.getMaxItem();
     }
 }
+
+void DummyModel::serialize(ostream &outputFile) {
+    distribution.serialize(outputFile);
+}
+
+DummyModel::DummyModel(ifstream &inputFile) {
+    distribution = DiscreteDistribution(inputFile);
+}

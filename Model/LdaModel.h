@@ -15,6 +15,7 @@ protected:
     double calculateMetric(Instance* instance, string Ci) override;
 public:
     LdaModel(DiscreteDistribution priorDistribution, map<string, Vector> w, map<string, double> w0);
+    void serialize(ostream &outputFile) override;
 };
 
 

@@ -19,7 +19,7 @@ private:
     vector<Attribute*> attributes;
 public:
     Instance(string classLabel, vector<Attribute*> attributes);
-    Instance(string classLabel);
+    explicit Instance(string classLabel);
     ~Instance();
     void addAttribute(string value);
     void addAttribute(double value);
@@ -37,6 +37,7 @@ public:
     Vector toVector();
     NodeList toNodeList();
     Instance* getSubSetOfFeatures(FeatureSubSet featureSubSet);
+    void serialize(ostream &outputFile);
     virtual bool isComposite(){return false;};
     bool operator<(const Instance &anotherInstance) const{
         return (classLabel < anotherInstance.classLabel);

@@ -36,3 +36,12 @@ double KMeansModel::calculateMetric(Instance *instance, string Ci) {
     }
     return -DBL_MAX;
 }
+
+void KMeansModel::serialize(ostream &outputFile) {
+    GaussianModel::serialize(outputFile);
+    classMeans.serialize(outputFile);
+}
+
+KMeansModel::KMeansModel(ifstream &inputFile) : GaussianModel(inputFile) {
+    classMeans = InstanceList(inputFile);
+}

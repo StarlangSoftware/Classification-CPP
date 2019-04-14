@@ -13,6 +13,7 @@
 class ValidatedModel : public Model {
 public:
     ClassificationPerformance* testClassifier(InstanceList data);
+    void serialize(ostream &outputFile) override;
 };
 
 

@@ -90,3 +90,7 @@ NaiveBayesModel::NaiveBayesModel(DiscreteDistribution priorDistribution,
     this->priorDistribution = move(priorDistribution);
     this->classAttributeDistributions = move(classAttributeDistributions);
 }
+
+void NaiveBayesModel::serialize(ostream &outputFile) {
+
+}

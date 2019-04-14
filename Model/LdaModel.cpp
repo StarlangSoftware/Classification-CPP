@@ -38,3 +38,6 @@ LdaModel::LdaModel(DiscreteDistribution priorDistribution, map<string, Vector> w
     this->w = move(w);
     this->w0 = move(w0);
 }
+
+void LdaModel::serialize(ostream &outputFile) {
+}

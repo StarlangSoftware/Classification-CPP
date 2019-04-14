@@ -16,8 +16,7 @@ using namespace std;
 /**
  * Empty constructor for an instance list. Initializes the instance list with zero instances.
  */
-InstanceList::InstanceList() {
-}
+InstanceList::InstanceList() = default;
 
 /**
  * Constructor for an instance list with a given data definition, data file and a separator character. Each instance
@@ -73,7 +72,7 @@ InstanceList::InstanceList(DataDefinition definition, string separator, string f
  * @param list New list for the list variable.
  */
 InstanceList::InstanceList(vector<Instance *> list) {
-    this->list = list;
+    this->list = move(list);
 }
 
 /**
@@ -120,7 +119,7 @@ struct InstanceComparator{
      *
      * @param attributeIndex Index of the attribute of which two instances will be compared.
      */
-    InstanceComparator(int attributeIndex) {
+    explicit InstanceComparator(int attributeIndex) {
         this->attributeIndex = attributeIndex;
     }
     /**
@@ -157,8 +156,8 @@ void InstanceList::sort(int attributeIndex) {
  * 0 if the class label of the first instance is equal to the class label of the second instance.
  */
 struct InstanceClassComparator{
-    InstanceClassComparator() {
-    }
+    InstanceClassComparator() = default;
+
     bool operator() (Instance* instance1, Instance* instance2){
         string label1 = instance1->getClassLabel();
         string label2 = instance2->getClassLabel();
@@ -237,7 +236,7 @@ vector<Instance *> InstanceList::getInstances() {
 vector<string> InstanceList::getUnionOfPossibleClassLabels() {
     vector<string> possibleClassLabels;
     for (Instance* instance : list) {
-        for (string possibleClassLabel : instance->getPossibleClassLabels()){
+        for (const string& possibleClassLabel : instance->getPossibleClassLabels()){
             if (find(possibleClassLabels.begin(), possibleClassLabels.end(), possibleClassLabel) == possibleClassLabels.end()) {
                 possibleClassLabels.push_back(possibleClassLabel);
             }
@@ -554,4 +553,63 @@ Matrix InstanceList::covariance(Vector average) {
     }
     result.divideByConstant(list.size() - 1);
     return result;
+}
+
+void InstanceList::serialize(ostream &outputFile) {
+    Instance* firstInstance = list.at(0);
+    outputFile << firstInstance->attributeSize() << "\n";
+    for (int i = 0; i < firstInstance->attributeSize(); i++){
+        if (firstInstance->getAttribute(i)->isDiscrete()){
+            outputFile << "Discrete ";
+        } else {
+            if (firstInstance->getAttribute(i)->isContinuous()){
+                outputFile << "Continuous ";
+            } else {
+                if (firstInstance->getAttribute(i)->isBinary()){
+                    outputFile << "Binary ";
+                }
+            }
+        }
+    }
+    outputFile << "\n";
+    outputFile << list.size() << "\n";
+    for (Instance* instance : list){
+        instance->serialize(outputFile);
+    }
+}
+
+InstanceList::InstanceList(ifstream &inputFile) {
+    int size, attributeSize;
+    double continuousAttribute;
+    string line, attributeType, discreteAttribute, binaryAttribute, classLabel;
+    vector<string> attributeTypes;
+    Instance* current;
+    inputFile >> attributeSize;
+    for (int i = 0; i < attributeSize; i++){
+        inputFile >> attributeType;
+        attributeTypes.push_back(attributeType);
+    }
+    inputFile >> size;
+    for (int i = 0; i < size; i++){
+        vector<Attribute*> attributeList;
+        for (int i = 0; i < attributeSize; i++) {
+            if (attributeTypes.at(i) == "Discrete"){
+                inputFile >> discreteAttribute;
+                attributeList.push_back(new DiscreteAttribute(discreteAttribute));
+            } else {
+                if (attributeTypes.at(i) == "Continuous"){
+                    inputFile >> continuousAttribute;
+                    attributeList.push_back(new ContinuousAttribute(continuousAttribute));
+                } else {
+                    if (attributeTypes.at(i) == "Binary"){
+                        inputFile >> discreteAttribute;
+                        attributeList.push_back(new BinaryAttribute(discreteAttribute));
+                    }
+                }
+            }
+        }
+        inputFile >> classLabel;
+        current = new Instance(classLabel, attributeList);
+        list.push_back(current);
+    }
 }

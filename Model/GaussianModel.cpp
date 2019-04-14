@@ -44,3 +44,11 @@ string GaussianModel::predict(Instance *instance) {
     }
     return predictedClass;
 }
+
+void GaussianModel::serialize(ostream &outputFile) {
+    priorDistribution.serialize(outputFile);
+}
+
+GaussianModel::GaussianModel(ifstream &inputFile) {
+    priorDistribution = DiscreteDistribution(inputFile);
+}

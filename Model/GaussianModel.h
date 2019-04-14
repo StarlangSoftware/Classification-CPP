@@ -20,7 +20,10 @@ protected:
     */
     virtual double calculateMetric(Instance* instance, string Ci) = 0;
 public:
-    string predict(Instance* instance);
+    GaussianModel() = default;
+    explicit GaussianModel(ifstream& inputFile);
+    string predict(Instance* instance) override;
+    void serialize(ostream &outputFile) override;
 };
 
 

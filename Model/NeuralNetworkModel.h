@@ -25,6 +25,7 @@ protected:
 public:
     explicit NeuralNetworkModel(InstanceList& trainSet);
     string predict(Instance* instance) override;
+    void serialize(ostream &outputFile) override;
 };
 
 

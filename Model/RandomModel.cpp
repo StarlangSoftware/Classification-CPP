@@ -2,6 +2,7 @@
 // Created by Olcay Taner Yıldız on 9.02.2019.
 //
 
+#include <random>
 #include "RandomModel.h"
 #include "../Instance/CompositeInstance.h"
 
@@ -32,4 +33,7 @@ string RandomModel::predict(Instance *instance) {
         int index = random() % size;
         return classLabels.at(index);
     }
+}
+
+void RandomModel::serialize(ostream &outputFile) {
 }

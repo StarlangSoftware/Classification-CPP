@@ -66,3 +66,7 @@ InstanceList KnnModel::nearestNeighbors(Instance *instance) {
     }
     return result;
 }
+
+void KnnModel::serialize(ostream &outputFile) {
+
+}

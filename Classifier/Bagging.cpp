@@ -22,8 +22,8 @@ void Bagging::train(InstanceList &trainSet, Parameter *parameters) {
     int forestSize = ((BaggingParameter*) parameters)->getEnsembleSize();
     vector<DecisionTree> forest;
     for (int i = 0; i < forestSize; i++) {
-        Bootstrap bootstrapTrain = partition.get(1)->bootstrap(i);
-        Bootstrap bootstrapPrune = partition.get(0)->bootstrap(i);
+        Bootstrap<Instance*> bootstrapTrain = partition.get(1)->bootstrap(i);
+        Bootstrap<Instance*> bootstrapPrune = partition.get(0)->bootstrap(i);
         DecisionTree tree = DecisionTree(DecisionNode(InstanceList(bootstrapTrain.getSample()), DecisionCondition(), nullptr, false));
         tree.prune(InstanceList(bootstrapPrune.getSample()));
         forest.emplace_back(tree);

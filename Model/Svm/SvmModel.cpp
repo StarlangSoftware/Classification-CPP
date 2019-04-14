@@ -225,3 +225,7 @@ string SvmModel::predict(Instance *instance) {
     vector<string> classes = classDistribution.getItems();
     return classes[maxIndex];
 }
+
+void SvmModel::serialize(ostream &outputFile) {
+
+}

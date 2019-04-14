@@ -2,6 +2,7 @@
 // Created by Olcay Taner Yıldız on 25.01.2019.
 //
 
+#include <ostream>
 #include "Instance.h"
 #include "../Attribute/DiscreteAttribute.h"
 #include "../Attribute/ContinuousAttribute.h"
@@ -200,4 +201,11 @@ Instance *Instance::getSubSetOfFeatures(FeatureSubSet featureSubSet) {
  */
 NodeList Instance::toNodeList() {
     return NodeList(continuousAttributes());
+}
+
+void Instance::serialize(ostream &outputFile) {
+    for (Attribute* attribute : attributes){
+        outputFile << attribute->to_string() << " ";
+    }
+    outputFile << classLabel << "\n";
 }

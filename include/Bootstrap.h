@@ -2,6 +2,8 @@
 #define SAMPLING_BOOTSTRAP_H
 
 #include <vector>
+#include <random>
+
 using namespace std;
 
 template <class T> class Bootstrap {

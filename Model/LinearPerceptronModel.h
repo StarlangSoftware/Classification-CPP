@@ -14,6 +14,7 @@ protected:
 public:
     explicit LinearPerceptronModel(InstanceList& trainSet);
     LinearPerceptronModel(InstanceList& trainSet, InstanceList& validationSet, LinearPerceptronParameter* parameters);
+    void serialize(ostream &outputFile) override;
 };
 
 

@@ -27,3 +27,7 @@ string TreeEnsembleModel::predict(Instance *instance) {
 TreeEnsembleModel::TreeEnsembleModel(vector<DecisionTree> forest) {
     this->forest = move(forest);
 }
+
+void TreeEnsembleModel::serialize(ostream &outputFile) {
+
+}

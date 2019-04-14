@@ -22,6 +22,7 @@ protected:
 public:
     InstanceList();
     InstanceList(DataDefinition definition, string separator, string fileName);
+    explicit InstanceList(ifstream& inputFile);
     explicit InstanceList(vector<Instance*> list);
     void add(Instance* instance);
     void addAll(vector<Instance*> instanceList);
@@ -47,6 +48,7 @@ public:
     vector<double> continuousAttributeStandardDeviation();
     Matrix covariance(Vector average);
     vector<Instance*> getInstances();
+    void serialize(ostream &outputFile);
 };
 
 

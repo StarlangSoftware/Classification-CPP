@@ -3,6 +3,7 @@
 //
 
 #include "BootstrapRun.h"
+#include "Bootstrap.h"
 
 /**
  * Constructor for BootstrapRun class. Basically sets the number of bootstrap runs.
@@ -20,9 +21,9 @@ BootstrapRun::BootstrapRun(int numberOfBootstraps) {
  * @return An array of performances: result. result[i] is the performance of the classifier on the i'th bootstrap run.
  */
 ExperimentPerformance* BootstrapRun::execute(Experiment experiment) {
-    ExperimentPerformance* result = new ExperimentPerformance();
+    auto* result = new ExperimentPerformance();
     for (int i = 0; i < numberOfBootstraps; i++) {
-        Bootstrap bootstrap = Bootstrap(experiment.getDataSet().getInstances(), i + experiment.getParameter()->getSeed());
+        Bootstrap<Instance*> bootstrap = Bootstrap<Instance*>(experiment.getDataSet().getInstances(), i + experiment.getParameter()->getSeed());
         InstanceList bootstrapSample = InstanceList(bootstrap.getSample());
         experiment.getClassifier()->train(bootstrapSample, experiment.getParameter());
         result->add(experiment.getClassifier()->test(experiment.getDataSet().getInstanceList()));
