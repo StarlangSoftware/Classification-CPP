@@ -3,9 +3,11 @@
 //
 
 #include <cmath>
+#include <fstream>
 #include "KnnModel.h"
 #include "../Instance/CompositeInstance.h"
 #include "../Classifier/Classifier.h"
+#include "../DistanceMetric/EuclidianDistance.h"
 
 /**
  * Constructor that sets the data {@link InstanceList}, k value and the {@link DistanceMetric}.
@@ -68,5 +70,12 @@ InstanceList KnnModel::nearestNeighbors(Instance *instance) {
 }
 
 void KnnModel::serialize(ostream &outputFile) {
+    outputFile << k << "\n";
+    data.serialize(outputFile);
+}
 
+KnnModel::KnnModel(ifstream &inputFile) {
+    inputFile >> k;
+    data = InstanceList(inputFile);
+    distanceMetric = new EuclidianDistance();
 }

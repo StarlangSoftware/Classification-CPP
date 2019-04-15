@@ -14,10 +14,12 @@ private:
     Attribute* value;
 public:
     DecisionCondition();
+    explicit DecisionCondition(ifstream& inputFile);
     DecisionCondition(int attributeIndex, Attribute* value);
     DecisionCondition(int attributeIndex, char comparison, Attribute* value);
     bool satisfy(Instance* instance);
     int getAttributeIndex();
+    void serialize(ostream &outputFile);
 };
 
 

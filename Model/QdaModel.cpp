@@ -3,6 +3,7 @@
 //
 
 #include <cfloat>
+#include <fstream>
 #include <VectorSizeMismatch.h>
 #include <MatrixRowMismatch.h>
 #include "QdaModel.h"
@@ -44,4 +45,21 @@ QdaModel::QdaModel(DiscreteDistribution priorDistribution, map<string, Matrix> W
 }
 
 void QdaModel::serialize(ostream &outputFile) {
+    LdaModel::serialize(outputFile);
+    outputFile << W.size() << "\n";
+    for (auto& iterator : W){
+        outputFile << iterator.first << "\n";
+        iterator.second.serialize(outputFile);
+    }
+}
+
+QdaModel::QdaModel(ifstream &inputFile) : LdaModel(inputFile) {
+    int size;
+    string classLabel;
+    inputFile >> size;
+    for (int i = 0; i < size; i++){
+        inputFile >> classLabel;
+        Matrix matrix = Matrix(inputFile);
+        W.emplace(classLabel, matrix);
+    }
 }

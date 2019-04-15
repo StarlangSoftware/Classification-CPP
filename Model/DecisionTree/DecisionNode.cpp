@@ -3,6 +3,7 @@
 //
 
 #include <cfloat>
+#include <fstream>
 #include <random>
 #include "DecisionNode.h"
 #include "../../InstanceList/Partition.h"
@@ -123,6 +124,7 @@ DecisionNode::DecisionNode(InstanceList data, DecisionCondition condition, Rando
         return;
     }
     vector<int> indexList;
+    indexList.reserve(data.get(0)->attributeSize());
     for (int i = 0; i < data.get(0)->attributeSize(); i++) {
         indexList.push_back(i);
     }
@@ -220,7 +222,7 @@ string DecisionNode::predict(Instance *instance) {
             for (DecisionNode node : children) {
                 if (node.condition.satisfy(instance)) {
                     string childPrediction = node.predict(instance);
-                    if (childPrediction != "") {
+                    if (!childPrediction.empty()) {
                         return childPrediction;
                     } else {
                         return predictedClass;
@@ -243,9 +245,7 @@ string DecisionNode::predict(Instance *instance) {
     }
 }
 
-DecisionNode::DecisionNode() {
-
-}
+DecisionNode::DecisionNode() = default;
 
 bool DecisionNode::isLeaf() {
     return leaf;
@@ -257,4 +257,28 @@ void DecisionNode::setLeaf(bool leaf) {
 
 vector<DecisionNode> DecisionNode::getChildren() {
     return children;
+}
+
+void DecisionNode::serialize(ostream &outputFile) {
+    outputFile << classLabel << "\n";
+    outputFile << leaf << "\n";
+    data.serialize(outputFile);
+    condition.serialize(outputFile);
+    outputFile << children.size() << "\n";
+    for (DecisionNode decisionNode : children){
+        decisionNode.serialize(outputFile);
+    }
+}
+
+DecisionNode::DecisionNode(ifstream &inputFile) {
+    int size;
+    inputFile >> classLabel;
+    inputFile >> leaf;
+    data = InstanceList(inputFile);
+    condition = DecisionCondition(inputFile);
+    inputFile >> size;
+    for (int i = 0; i < size; i++){
+        DecisionNode decisionNode = DecisionNode(inputFile);
+        children.push_back(decisionNode);
+    }
 }

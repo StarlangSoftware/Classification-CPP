@@ -18,6 +18,7 @@ private:
     int k;
     DistanceMetric* distanceMetric;
 public:
+    explicit KnnModel(ifstream& inputFile);
     KnnModel(InstanceList& data, int k, DistanceMetric* distanceMetric);
     string predict(Instance* instance) override;
     InstanceList nearestNeighbors(Instance* instance);

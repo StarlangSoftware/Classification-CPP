@@ -16,11 +16,12 @@ private:
     int col;
     vector<Vector> values;
 public:
-    Matrix(string filename);
+    explicit Matrix(string filename);
     Matrix(int row, int col);
     Matrix(int row, int col, double min, double max);
-    Matrix(int size);
+    explicit Matrix(int size);
     Matrix(Vector v1, Vector v2);
+    explicit Matrix(ifstream& inputFile);
     Matrix clone();
     void printToFile(string fileName);
     double getValue(int rowNo, int colNo);
@@ -53,6 +54,7 @@ public:
     void inverse();
     Matrix choleskyDecomposition();
     vector<Eigenvector> characteristics();
+    void serialize(ostream& outputFile);
 private:
     void rotate(double s, double tau, int i, int j, int k, int l);
 };

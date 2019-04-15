@@ -2,6 +2,7 @@
 // Created by Olcay Taner Yıldız on 16.02.2019.
 //
 #include <cmath>
+#include <fstream>
 #include "SvmModel.h"
 #include "SolutionInfo.h"
 #include "Problem.h"
@@ -227,5 +228,59 @@ string SvmModel::predict(Instance *instance) {
 }
 
 void SvmModel::serialize(ostream &outputFile) {
+    outputFile << numberOfClasses << "\n";
+    outputFile << numberOfProblems << "\n";
+    classDistribution.serialize(outputFile);
+    outputFile << rho.size() << "\n";
+    for (double r : rho){
+        outputFile << r << "\n";
+    }
+    outputFile << numberOfSupportVectors.size() << "\n";
+    for (int s : numberOfSupportVectors){
+        outputFile << s << "\n";
+    }
+    outputFile << supportVectors.size() << "\n";
+    for (NodeList nodeList : supportVectors){
+        nodeList.serialize(outputFile);
+    }
+    outputFile << supportVectorCoefficients.size() << "\n";
+    for (const vector<double> &svc : supportVectorCoefficients){
+        outputFile << svc.size() << "\n";
+        for (double value : svc){
+            outputFile << value << "\n";
+        }
+    }
+}
 
+SvmModel::SvmModel(ifstream &inputFile) {
+    int size, s, size2;
+    double r, value;
+    inputFile >> numberOfClasses;
+    inputFile >> numberOfProblems;
+    classDistribution = DiscreteDistribution(inputFile);
+    inputFile >> size;
+    for (int i = 0; i < size; i++){
+        inputFile >> r;
+        rho.push_back(r);
+    }
+    inputFile >> size;
+    for (int i = 0; i < size; i++){
+        inputFile >> s;
+        numberOfSupportVectors.push_back(s);
+    }
+    inputFile >> size;
+    for (int i = 0; i < size; i++){
+        NodeList nodeList = NodeList(inputFile);
+        supportVectors.push_back(nodeList);
+    }
+    inputFile >> size;
+    for (int i = 0; i < size; i++){
+        inputFile >> size2;
+        vector<double> svc;
+        for (int j = 0; j < size2; j++){
+            inputFile >> value;
+            svc.push_back(value);
+        }
+        supportVectorCoefficients.push_back(svc);
+    }
 }

@@ -27,6 +27,7 @@ public:
     void add(Instance* instance);
     void addAll(vector<Instance*> instanceList);
     int size();
+    void clear();
     Instance* get(int index);
     void sort(int attributeIndex);
     void sort();

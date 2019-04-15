@@ -2,6 +2,7 @@
 // Created by Olcay Taner Yıldız on 15.02.2019.
 //
 
+#include <fstream>
 #include "Node.h"
 
 /**
@@ -40,4 +41,14 @@ int Node::getIndex() {
  */
 double Node::getValue() {
     return value;
+}
+
+void Node::serialize(ostream &outputFile) {
+    outputFile << index << "\n";
+    outputFile << value << "\n";
+}
+
+Node::Node(ifstream &inputFile) {
+    inputFile >> index;
+    inputFile >> value;
 }

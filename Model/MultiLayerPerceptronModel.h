@@ -15,6 +15,7 @@ private:
     Matrix V = Matrix(0);
     void allocateWeights(int H);
 public:
+    explicit MultiLayerPerceptronModel(ifstream& inputFile);
     MultiLayerPerceptronModel(InstanceList& trainSet, InstanceList& validationSet, MultiLayerPerceptronParameter* parameters);
     void serialize(ostream &outputFile) override;
 };

@@ -17,6 +17,7 @@ public:
     Vector(unsigned long size, int index, double x);
     Vector(double* values, unsigned long size);
     Vector biased();
+    explicit Vector(ifstream& inputFile);
     void add(double x);
     void insert(int pos, double x);
     void remove(int pos);
@@ -42,6 +43,7 @@ public:
     void addValue(unsigned long index, double value);
     double sum();
     void swap(int index1, int index2);
+    void serialize(ostream& outputFile);
 };
 
 

@@ -4,6 +4,7 @@
 
 #include <VectorSizeMismatch.h>
 #include <cfloat>
+#include <fstream>
 #include "LdaModel.h"
 
 /**
@@ -40,4 +41,31 @@ LdaModel::LdaModel(DiscreteDistribution priorDistribution, map<string, Vector> w
 }
 
 void LdaModel::serialize(ostream &outputFile) {
+    GaussianModel::serialize(outputFile);
+    outputFile << w0.size() << "\n";
+    for (auto& iterator : w0){
+        outputFile << iterator.first << "\n";
+        outputFile << iterator.second << "\n";
+    }
+    for (auto& iterator : w){
+        outputFile << iterator.first << "\n";
+        iterator.second.serialize(outputFile);
+    }
+}
+
+LdaModel::LdaModel(ifstream &inputFile) : GaussianModel(inputFile) {
+    int size;
+    double weight;
+    string classLabel;
+    inputFile >> size;
+    for (int i = 0; i < size; i++){
+        inputFile >> classLabel;
+        inputFile >> weight;
+        w0.emplace(classLabel, weight);
+    }
+    for (int i = 0; i < size; i++){
+        inputFile >> classLabel;
+        Vector vector = Vector(inputFile);
+        w.emplace(classLabel, vector);
+    }
 }

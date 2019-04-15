@@ -10,6 +10,7 @@ class RandomModel : public Model{
 private:
     vector<string> classLabels;
 public:
+    explicit RandomModel(ifstream& inputFile);
     explicit RandomModel(vector<string> classLabels);
     string predict(Instance* instance) override;
     void serialize(ostream &outputFile) override;

@@ -68,5 +68,10 @@ void LinearPerceptronModel::calculateOutput() {
 }
 
 void LinearPerceptronModel::serialize(ostream &outputFile) {
+    NeuralNetworkModel::serialize(outputFile);
+    W.serialize(outputFile);
+}
 
+LinearPerceptronModel::LinearPerceptronModel(ifstream &inputFile) : NeuralNetworkModel(inputFile) {
+    W = Matrix(inputFile);
 }

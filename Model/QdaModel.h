@@ -13,6 +13,7 @@ private:
     map<string, Matrix> W;
 public:
     double calculateMetric(Instance* instance, string Ci) override;
+    explicit QdaModel(ifstream& inputFile);
     QdaModel(DiscreteDistribution priorDistribution, map<string, Matrix> W, map<string, Vector> w, map<string, double> w0);
     void serialize(ostream &outputFile) override;
 };

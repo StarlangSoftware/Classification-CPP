@@ -2,6 +2,7 @@
 // Created by Olcay Taner Yıldız on 16.02.2019.
 //
 
+#include <fstream>
 #include "TreeEnsembleModel.h"
 
 /**
@@ -29,5 +30,17 @@ TreeEnsembleModel::TreeEnsembleModel(vector<DecisionTree> forest) {
 }
 
 void TreeEnsembleModel::serialize(ostream &outputFile) {
+    outputFile << forest.size() << "\n";
+    for (DecisionTree tree : forest){
+        tree.serialize(outputFile);
+    }
+}
 
+TreeEnsembleModel::TreeEnsembleModel(ifstream &inputFile) {
+    int size;
+    inputFile >> size;
+    for (int i = 0; i < size; i++){
+        DecisionTree tree = DecisionTree(inputFile);
+        forest.push_back(tree);
+    }
 }

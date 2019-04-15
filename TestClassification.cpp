@@ -32,6 +32,14 @@
 #include "Parameter/C45Parameter.h"
 #include "Model/DummyModel.h"
 #include "Model/KMeansModel.h"
+#include "Model/LdaModel.h"
+#include "Model/QdaModel.h"
+#include "Model/NaiveBayesModel.h"
+#include "Model/KnnModel.h"
+#include "Model/RandomModel.h"
+#include "Model/DecisionTree/DecisionTree.h"
+#include "Classifier/RandomForest.h"
+#include "Model/TreeEnsembleModel.h"
 
 Parameter* defaultParameter() { return new Parameter(1);}
 
@@ -158,18 +166,19 @@ int main(){
     //DataSet dataSet = readCar();
     //DataSet dataSet = readDermatology();
     //DataSet dataSet = readTwonorm();
-    Classifier* classifier = new KMeans();
+    Classifier* classifier = new RandomForest();
     //vector<int> hiddenLayers;
     //hiddenLayers.push_back(10);
     InstanceList instanceList = dataSet.getInstanceList();
-    classifier->train(instanceList, new KMeansParameter(1));
+    classifier->train(instanceList, new RandomForestParameter(1, 10, 2));
     ofstream outputFile;
     outputFile.open("model.txt", ostream::out);
     classifier->getModel()->serialize(outputFile);
     outputFile.close();
     ifstream inputFile;
     inputFile.open("model.txt", ifstream::in);
-    auto* model = new KMeansModel(inputFile);
+    auto* model = new TreeEnsembleModel(inputFile);
+    model->predict(instanceList.get(0));
     //Parameter* parameter = new C45Parameter(1, true, 0.2);
     //auto* run = new StratifiedKFoldRun(10);
     //ExperimentPerformance* result;

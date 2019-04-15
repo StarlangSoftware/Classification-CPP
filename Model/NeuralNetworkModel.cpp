@@ -2,6 +2,7 @@
 // Created by olcay on 12.02.2019.
 //
 #include <cmath>
+#include <fstream>
 #include <cfloat>
 #include "../Instance/CompositeInstance.h"
 #include "NeuralNetworkModel.h"
@@ -150,4 +151,19 @@ string NeuralNetworkModel::predict(Instance *instance) {
 }
 
 void NeuralNetworkModel::serialize(ostream &outputFile) {
+    outputFile << K << "\n";
+    outputFile << d << "\n";
+    for (const string& classLabel : classLabels){
+        outputFile << classLabel << "\n";
+    }
+}
+
+NeuralNetworkModel::NeuralNetworkModel(ifstream &inputFile) {
+    string classLabel;
+    inputFile >> K;
+    inputFile >> d;
+    for (int i = 0; i < K; i++){
+        inputFile >> classLabel;
+        classLabels.push_back(classLabel);
+    }
 }

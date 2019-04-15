@@ -613,3 +613,7 @@ InstanceList::InstanceList(ifstream &inputFile) {
         list.push_back(current);
     }
 }
+
+void InstanceList::clear() {
+    list.clear();
+}

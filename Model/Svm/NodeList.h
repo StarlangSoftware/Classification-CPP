@@ -13,12 +13,14 @@ class NodeList {
 private:
     vector<Node> nodes;
 public:
+    explicit NodeList(ifstream& inputFile);
     explicit NodeList(vector<double> values);
     NodeList();
     NodeList clone();
     double dot(NodeList nodeList);
     Node get(int index);
     int size();
+    void serialize(ostream &outputFile);
 };
 
 

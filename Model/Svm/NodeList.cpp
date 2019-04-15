@@ -2,6 +2,7 @@
 // Created by Olcay Taner Yıldız on 15.02.2019.
 //
 
+#include <fstream>
 #include "NodeList.h"
 
 /**
@@ -78,4 +79,20 @@ Node NodeList::get(int index) {
  */
 int NodeList::size() {
     return nodes.size();
+}
+
+void NodeList::serialize(ostream &outputFile) {
+    outputFile << nodes.size() << "\n";
+    for (Node node : nodes){
+        node.serialize(outputFile);
+    }
+}
+
+NodeList::NodeList(ifstream &inputFile) {
+    int size;
+    inputFile >> size;
+    for (int i = 0; i < size; i++){
+        Node node = Node(inputFile);
+        nodes.push_back(node);
+    }
 }

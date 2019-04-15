@@ -2,6 +2,8 @@
 // Created by Olcay Taner Yıldız on 16.02.2019.
 //
 
+#include <ostream>
+#include <fstream>
 #include "DecisionCondition.h"
 #include "../../Attribute/DiscreteIndexedAttribute.h"
 #include "../../Attribute/ContinuousAttribute.h"
@@ -76,5 +78,40 @@ int DecisionCondition::getAttributeIndex() {
     return attributeIndex;
 }
 
-DecisionCondition::DecisionCondition() {
+DecisionCondition::DecisionCondition() = default;
+
+void DecisionCondition::serialize(ostream &outputFile) {
+    outputFile << attributeIndex << "\n";
+    if (attributeIndex != -1){
+        outputFile << comparison << "\n";
+        if (value->isDiscrete()){
+            outputFile << "Discrete\n";
+        } else {
+            if (value->isContinuous()){
+                outputFile << "Continuous\n";
+            }
+        }
+        outputFile << value->to_string() << "\n";
+    }
+}
+
+DecisionCondition::DecisionCondition(ifstream &inputFile) {
+    string type, discreteAttribute;
+    double continuousAttribute;
+    inputFile >> attributeIndex;
+    if (attributeIndex != -1){
+        inputFile >> comparison;
+        inputFile >> type;
+        if (type == "Discrete"){
+            inputFile >> discreteAttribute;
+            value = new DiscreteAttribute(discreteAttribute);
+        } else {
+            if (type == "Continuous"){
+                inputFile >> continuousAttribute;
+                value = new ContinuousAttribute(continuousAttribute);
+            }
+        }
+    } else {
+
+    }
 }

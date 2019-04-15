@@ -23,11 +23,13 @@ private:
     void createChildrenForContinuous(int attributeIndex, double splitValue, RandomForestParameter* parameter, bool isStump);
 public:
     DecisionNode();
+    explicit DecisionNode(ifstream& inputFile);
     DecisionNode(InstanceList data, DecisionCondition condition, RandomForestParameter* parameter, bool isStump);
     string predict(Instance* instance);
     bool isLeaf();
     void setLeaf(bool leaf);
     vector<DecisionNode> getChildren();
+    void serialize(ostream &outputFile);
 };
 
 

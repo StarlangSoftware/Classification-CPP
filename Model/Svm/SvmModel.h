@@ -22,9 +22,10 @@ private:
     SolutionInfo solveSingle(Problem problem);
     vector<double> predictValues(NodeList x);
 public:
+    explicit SvmModel(ifstream& inputFile);
     SvmModel(InstanceList& trainSet, SvmParameter* parameter);
     string predict(Instance* instance) override;
-    virtual void serialize(ostream &outputFile) override;
+    void serialize(ostream &outputFile) override;
 };
 
 

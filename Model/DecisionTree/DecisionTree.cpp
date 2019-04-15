@@ -61,5 +61,9 @@ void DecisionTree::pruneNode(DecisionNode decisionNode, InstanceList pruneSet) {
 }
 
 void DecisionTree::serialize(ostream &outputFile) {
+    root.serialize(outputFile);
+}
 
+DecisionTree::DecisionTree(ifstream &inputFile) {
+    root = DecisionNode(inputFile);
 }

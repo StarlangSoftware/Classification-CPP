@@ -3,6 +3,7 @@
 //
 
 #include <random>
+#include <fstream>
 #include "RandomModel.h"
 #include "../Instance/CompositeInstance.h"
 
@@ -25,15 +26,29 @@ RandomModel::RandomModel(vector<string> classLabels) {
 string RandomModel::predict(Instance *instance) {
     if (instance->isComposite()) {
         vector<string> possibleClassLabels = instance->getPossibleClassLabels();
-        int size = possibleClassLabels.size();
-        int index = random() % size;
+        unsigned long size = possibleClassLabels.size();
+        unsigned long index = random() % size;
         return possibleClassLabels.at(index);
     } else {
-        int size = classLabels.size();
-        int index = random() % size;
+        unsigned long size = classLabels.size();
+        unsigned long index = random() % size;
         return classLabels.at(index);
     }
 }
 
 void RandomModel::serialize(ostream &outputFile) {
+    outputFile << classLabels.size() << "\n";
+    for (const string& classLabel : classLabels){
+        outputFile << classLabel << "\n";
+    }
+}
+
+RandomModel::RandomModel(ifstream &inputFile) {
+    int size;
+    string classLabel;
+    inputFile >> size;
+    for (int i = 0; i < size; i++){
+        inputFile >> classLabel;
+        classLabels.push_back(classLabel);
+    }
 }

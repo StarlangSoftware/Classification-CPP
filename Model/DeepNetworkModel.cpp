@@ -2,6 +2,8 @@
 // Created by Olcay Taner Yıldız on 14.02.2019.
 //
 
+#include <ostream>
+#include <fstream>
 #include <MatrixColumnMismatch.h>
 #include <VectorSizeMismatch.h>
 #include <MatrixDimensionMismatch.h>
@@ -122,5 +124,17 @@ void DeepNetworkModel::calculateOutput() {
 }
 
 void DeepNetworkModel::serialize(ostream &outputFile) {
+    NeuralNetworkModel::serialize(outputFile);
+    outputFile << hiddenLayerSize << "\n";
+    for (Matrix matrix : weights){
+        matrix.serialize(outputFile);
+    }
+}
 
+DeepNetworkModel::DeepNetworkModel(ifstream &inputFile) : NeuralNetworkModel(inputFile) {
+    inputFile >> hiddenLayerSize;
+    for (int i = 0; i < hiddenLayerSize + 1; i++){
+        Matrix matrix = Matrix(inputFile);
+        weights.push_back(matrix);
+    }
 }

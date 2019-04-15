@@ -3,6 +3,7 @@
 //
 
 #include <cmath>
+#include <fstream>
 #include "NaiveBayesModel.h"
 #include "../Attribute/ContinuousAttribute.h"
 #include "../Attribute/DiscreteAttribute.h"
@@ -92,5 +93,30 @@ NaiveBayesModel::NaiveBayesModel(DiscreteDistribution priorDistribution,
 }
 
 void NaiveBayesModel::serialize(ostream &outputFile) {
+    GaussianModel::serialize(outputFile);
+    outputFile << classMeans.size() << "\n";
+    for (auto& iterator : classMeans){
+        outputFile << iterator.first << "\n";
+        iterator.second.serialize(outputFile);
+    }
+    for (auto& iterator : classDeviations){
+        outputFile << iterator.first << "\n";
+        iterator.second.serialize(outputFile);
+    }
+}
 
+NaiveBayesModel::NaiveBayesModel(ifstream &inputFile) : GaussianModel(inputFile) {
+    int size;
+    string classLabel;
+    inputFile >> size;
+    for (int i = 0; i < size; i++){
+        inputFile >> classLabel;
+        Vector vector = Vector(inputFile);
+        classMeans.emplace(classLabel, vector);
+    }
+    for (int i = 0; i < size; i++){
+        inputFile >> classLabel;
+        Vector vector = Vector(inputFile);
+        classDeviations.emplace(classLabel, vector);
+    }
 }

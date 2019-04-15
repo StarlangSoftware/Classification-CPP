@@ -76,4 +76,10 @@ void MultiLayerPerceptronModel::calculateOutput() {
 }
 
 void MultiLayerPerceptronModel::serialize(ostream &outputFile) {
+    LinearPerceptronModel::serialize(outputFile);
+    V.serialize(outputFile);
+}
+
+MultiLayerPerceptronModel::MultiLayerPerceptronModel(ifstream &inputFile) : LinearPerceptronModel(inputFile) {
+    V = Matrix(inputFile);
 }

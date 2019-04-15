@@ -23,6 +23,7 @@ protected:
     Vector calculateRMinusY(Instance* instance, Vector input, Matrix weights);
     string predictWithCompositeInstance(vector<string> possibleClassLabels);
 public:
+    explicit NeuralNetworkModel(ifstream& inputFile);
     explicit NeuralNetworkModel(InstanceList& trainSet);
     string predict(Instance* instance) override;
     void serialize(ostream &outputFile) override;
