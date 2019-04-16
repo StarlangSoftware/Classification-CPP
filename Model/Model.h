@@ -10,6 +10,8 @@
 
 class Model {
 public:
+    Model() = default;
+    explicit Model(ifstream& inputFile) {};
     virtual string predict(Instance* instance) = 0;
     virtual void serialize(ostream &outputFile) = 0;
 };
