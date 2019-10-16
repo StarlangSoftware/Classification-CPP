@@ -42,10 +42,8 @@ Pca::Pca(DataSet dataSet) : TrainedFeatureFilter(dataSet) {
  * The removeUnnecessaryEigenvectors methods takes an ArrayList of Eigenvectors. It first calculates the summation
  * of eigenValues. Then it finds the eigenvectors which have lesser summation than covarianceExplained and removes these
  * eigenvectors.
- *
- * @param eigenvectors {@link vector} of {@link Eigenvector}s whose unnecessary items will be removed.
  */
-void Pca::removeUnnecessaryEigenvectors(vector<Eigenvector> eigenvectors) {
+void Pca::removeUnnecessaryEigenvectors() {
     double sum = 0.0, currentSum = 0.0;
     for (Eigenvector eigenvector : eigenvectors) {
         sum += eigenvector.getEigenValue();
@@ -64,10 +62,8 @@ void Pca::removeUnnecessaryEigenvectors(vector<Eigenvector> eigenvectors) {
 /**
  * The removeAllEigenvectorsExceptTheMostImportantK method takes an {@link ArrayList} of {@link Eigenvector}s and removes the
  * surplus eigenvectors when the number of eigenvectors is greater than the dimension.
- *
- * @param eigenvectors {@link vector} of {@link Eigenvector}s whose unnecessary K items will be removed.
  */
-void Pca::removeAllEigenvectorsExceptTheMostImportantK(vector<Eigenvector> eigenvectors) {
+void Pca::removeAllEigenvectorsExceptTheMostImportantK() {
     eigenvectors.erase(eigenvectors.begin() + numberOfDimensions, eigenvectors.end());
 }
 
@@ -81,9 +77,9 @@ void Pca::train() {
     try {
         eigenvectors = covariance.characteristics();
         if (numberOfDimensions != -1) {
-            removeAllEigenvectorsExceptTheMostImportantK(eigenvectors);
+            removeAllEigenvectorsExceptTheMostImportantK();
         } else {
-            removeUnnecessaryEigenvectors(eigenvectors);
+            removeUnnecessaryEigenvectors();
         }
     } catch (MatrixNotSymmetric& matrixNotSymmetric) {
     }

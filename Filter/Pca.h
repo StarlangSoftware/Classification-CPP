@@ -13,8 +13,8 @@ private:
     double covarianceExplained = 0.99;
     vector<Eigenvector> eigenvectors;
     int numberOfDimensions = -1;
-    void removeUnnecessaryEigenvectors(vector<Eigenvector> eigenvectors);
-    void removeAllEigenvectorsExceptTheMostImportantK(vector<Eigenvector> eigenvectors);
+    void removeUnnecessaryEigenvectors();
+    void removeAllEigenvectorsExceptTheMostImportantK();
 public:
     Pca(DataSet dataSet, double covarianceExplained);
     Pca(DataSet dataSet, int numberOfDimensions);
