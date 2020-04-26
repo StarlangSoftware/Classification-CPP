@@ -13,8 +13,7 @@
 
 For Developers
 ============
-You can also see either [Python](https://github.com/olcaytaner/Classification-Py) 
-or [Java](https://github.com/olcaytaner/Classification) repository.
+You can also see [Java](https://github.com/olcaytaner/Classification), [Python](https://github.com/olcaytaner/Classification-Py), or [C#](https://github.com/olcaytaner/Classification-CS) repository.
 
 ## Requirements
 
