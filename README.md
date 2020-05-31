@@ -39,7 +39,7 @@ Use Git for cloning the code to your local or below line for Ubuntu:
 
 A directory called Classification-CPP will be created. Or you can use below link for exploring the code:
 
-	git clone https://github.com/olcaytaner/Classification-CPP.git
+	git clone https://github.com/starlangsoftware/Classification-CPP.git
 
 ## Open project with CLion IDE
 
@@ -58,7 +58,7 @@ Result: The imported project is listed in the Project Explorer view and files ar
 
 **From IDE**
 
-After being done with the downloading and opening project, select **Build Project** option from **Build** menu. After compilation process, user can run TestClassification.cpp .
+After being done with the downloading and opening project, select **Build Project** option from **Build** menu. After compilation process, user can run TestClassification.cpp.
 
 Detailed Description
 ============
