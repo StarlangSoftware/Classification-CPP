@@ -22,6 +22,7 @@ public:
     void insert(int pos, double x);
     void remove(int pos);
     void clear();
+    double sumOfElements();
     unsigned long maxIndex();
     void sigmoid();
     Vector skipVector(unsigned long mod, unsigned long value);

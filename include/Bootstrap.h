@@ -14,6 +14,13 @@ public:
     vector<T> getSample();
 };
 
+/**
+ * A constructor of {@link Bootstrap} class which takes a sample an array of instances and a seed number, then creates a bootstrap
+ * sample using this seed as random number.
+ *
+ * @param instanceList  Original sample
+ * @param seed Random number to create boostrap sample
+ */
 template<class T> Bootstrap<T>::Bootstrap(const vector<T> &instanceList, unsigned int seed) {
     unsigned long N;
     srand(seed);
@@ -24,6 +31,11 @@ template<class T> Bootstrap<T>::Bootstrap(const vector<T> &instanceList, unsigne
     }
 }
 
+/**
+ * getSample returns the produced bootstrap sample.
+ *
+ * @return Produced bootstrap sample
+ */
 template<class T> vector<T> Bootstrap<T>::getSample(){
     return instanceList;
 }

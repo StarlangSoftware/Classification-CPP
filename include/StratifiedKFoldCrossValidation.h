@@ -21,17 +21,31 @@ public:
     vector<T> getTestFold(int k);
 };
 
+/**
+ * A constructor of {@link StratifiedKFoldCrossValidation} class which takes as set of class samples as an array of array of instances, a K (K in K-fold cross-validation) and a seed number,
+ * then shuffles each class sample using the seed number.
+ *
+ * @param instanceLists Original class samples. Each element of the this array is a sample only from one class.
+ * @param K K in K-fold cross-validation
+ * @param seed Random number to create K-fold sample(s)
+ */
 template<class T> StratifiedKFoldCrossValidation<T>::StratifiedKFoldCrossValidation(vector<T>* instanceLists, int numberOfClasses, int K, unsigned int seed){
     this->instanceLists = instanceLists;
     N = new unsigned long[numberOfClasses];
     for (int i = 0; i < numberOfClasses; i++){
         shuffle(this->instanceLists[i].begin(), this->instanceLists[i].end(), default_random_engine(seed));
-        N[i] = instanceLists[i].capacity();
+        N[i] = instanceLists[i].size();
     }
     this->K = K;
     this->numberOfClasses = numberOfClasses;
 }
 
+/**
+ * getTrainFold returns the k'th train fold in K-fold stratified cross-validation.
+ *
+ * @param k index for the k'th train fold of the K-fold stratified cross-validation
+ * @return Produced training sample
+ */
 template<class T> vector<T> StratifiedKFoldCrossValidation<T>::getTrainFold(int k){
     vector<T> trainFold;
     for (int i = 0; i < numberOfClasses; i++){
@@ -45,6 +59,12 @@ template<class T> vector<T> StratifiedKFoldCrossValidation<T>::getTrainFold(int 
     return trainFold;
 }
 
+/**
+ * getTestFold returns the k'th test fold in K-fold stratified cross-validation.
+ *
+ * @param k index for the k'th test fold of the K-fold stratified cross-validation
+ * @return Produced testing sample
+ */
 template<class T> vector<T> StratifiedKFoldCrossValidation<T>::getTestFold(int k){
     vector<T> testFold;
     for (int i = 0; i < numberOfClasses; i++){

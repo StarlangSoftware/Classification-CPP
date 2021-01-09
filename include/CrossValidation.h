@@ -11,8 +11,8 @@ template <class T> class CrossValidation {
 protected:
     int K;
 public:
-    virtual std::vector<T> getTrainFold(int k) = 0;
-    virtual std::vector<T> getTestFold(int k) = 0;
+    virtual vector<T> getTrainFold(int k) = 0;
+    virtual vector<T> getTestFold(int k) = 0;
 };
 
 #endif //SAMPLING_CROSSVALIDATION_H
