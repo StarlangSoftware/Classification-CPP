@@ -18,15 +18,11 @@
  * @param parameters Parameters of the bagging trees algorithm. ensembleSize returns the number of trees in the bagged forest.
  */
 void Bagging::train(InstanceList &trainSet, Parameter *parameters) {
-    Partition partition = Partition(trainSet, 0.2, parameters->getSeed(), true);
     int forestSize = ((BaggingParameter*) parameters)->getEnsembleSize();
     vector<DecisionTree> forest;
-    for (int i = 0; i < forestSize; i++) {
-        Bootstrap<Instance*> bootstrapTrain = partition.get(1)->bootstrap(i);
-        Bootstrap<Instance*> bootstrapPrune = partition.get(0)->bootstrap(i);
-        DecisionTree tree = DecisionTree(DecisionNode(InstanceList(bootstrapTrain.getSample()), DecisionCondition(), nullptr, false));
-        tree.prune(InstanceList(bootstrapPrune.getSample()));
-        forest.emplace_back(tree);
+    for (int i = 0; i < forestSize; i++){
+        Bootstrap<Instance*> bootstrap = trainSet.bootstrap(i);
+        forest.emplace_back(DecisionTree(DecisionNode(InstanceList(bootstrap.getSample()), DecisionCondition(), nullptr, false)));
     }
     model = new TreeEnsembleModel(forest);
 }

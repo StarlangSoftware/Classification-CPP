@@ -28,9 +28,9 @@ LinearPerceptronModel::LinearPerceptronModel(InstanceList &trainSet, InstanceLis
                                              LinearPerceptronParameter *parameters) : NeuralNetworkModel(trainSet){
     int epoch;
     double learningRate;
-    W = allocateLayerWeights(K, d + 1);
+    W = allocateLayerWeights(K, d + 1, default_random_engine(parameters->getSeed()));
     Matrix bestW = W.clone();
-    ClassificationPerformance* bestClassificationPerformance = new ClassificationPerformance(0.0);
+    auto* bestClassificationPerformance = new ClassificationPerformance(0.0);
     epoch = parameters->getEpoch();
     learningRate = parameters->getLearningRate();
     for (int i = 0; i < epoch; i++) {

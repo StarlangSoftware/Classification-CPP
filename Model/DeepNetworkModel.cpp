@@ -17,11 +17,11 @@
  * @param parameters {@link DeepNetworkParameter} input.
  */
 void DeepNetworkModel::allocateWeights(DeepNetworkParameter *parameters) {
-    weights.push_back(allocateLayerWeights(parameters->getHiddenNodes(0), d + 1));
+    weights.push_back(allocateLayerWeights(parameters->getHiddenNodes(0), d + 1, default_random_engine(parameters->getSeed())));
     for (int i = 0; i < parameters->layerSize() - 1; i++) {
-        weights.push_back(allocateLayerWeights(parameters->getHiddenNodes(i + 1), parameters->getHiddenNodes(i) + 1));
+        weights.push_back(allocateLayerWeights(parameters->getHiddenNodes(i + 1), parameters->getHiddenNodes(i) + 1, default_random_engine(parameters->getSeed())));
     }
-    weights.push_back(allocateLayerWeights(K, parameters->getHiddenNodes(parameters->layerSize() - 1) + 1));
+    weights.push_back(allocateLayerWeights(K, parameters->getHiddenNodes(parameters->layerSize() - 1) + 1, default_random_engine(parameters->getSeed())));
     hiddenLayerSize = parameters->layerSize();
 }
 

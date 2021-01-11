@@ -14,9 +14,9 @@
  *
  * @param H Integer input.
  */
-void AutoEncoderModel::allocateWeights(int H) {
-    W = allocateLayerWeights(H, d + 1);
-    V = allocateLayerWeights(K, H + 1);
+void AutoEncoderModel::allocateWeights(int H, default_random_engine randomEngine) {
+    W = allocateLayerWeights(H, d + 1, randomEngine);
+    V = allocateLayerWeights(K, H + 1, randomEngine);
 }
 
 /**
@@ -36,7 +36,7 @@ AutoEncoderModel::AutoEncoderModel(InstanceList &trainSet, InstanceList &validat
     int epoch;
     double learningRate;
     K = trainSet.get(0)->continuousAttributeSize();
-    allocateWeights(parameters->getHiddenNodes());
+    allocateWeights(parameters->getHiddenNodes(), default_random_engine(parameters->getSeed()));
     bestW = W.clone();
     bestV = V.clone();
     auto* bestPerformance = new Performance(DBL_MAX);

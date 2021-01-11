@@ -14,7 +14,7 @@ protected:
     int K, d;
     Vector x = Vector(0, 0.0), y = Vector(0, 0.0), r = Vector(0, 0.0);
     virtual void calculateOutput() = 0;
-    Matrix allocateLayerWeights(int row, int column);
+    Matrix allocateLayerWeights(int row, int column, default_random_engine randomEngine);
     Vector normalizeOutput(Vector o);
     void createInputVector(Instance* instance);
     Vector calculateHidden(Vector& input, Matrix weights);

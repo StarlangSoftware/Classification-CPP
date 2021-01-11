@@ -13,9 +13,9 @@
  *
  * @param H Integer value for weights.
  */
-void MultiLayerPerceptronModel::allocateWeights(int H) {
-    W = allocateLayerWeights(H, d + 1);
-    V = allocateLayerWeights(K, H + 1);
+void MultiLayerPerceptronModel::allocateWeights(int H, default_random_engine randomEngine) {
+    W = allocateLayerWeights(H, d + 1, randomEngine);
+    V = allocateLayerWeights(K, H + 1, randomEngine);
 }
 
 MultiLayerPerceptronModel::MultiLayerPerceptronModel(InstanceList &trainSet, InstanceList &validationSet,
@@ -23,7 +23,7 @@ MultiLayerPerceptronModel::MultiLayerPerceptronModel(InstanceList &trainSet, Ins
     int epoch;
     double learningRate;
     Matrix bestW = Matrix(0), bestV = Matrix(0);
-    allocateWeights(parameters->getHiddenNodes());
+    allocateWeights(parameters->getHiddenNodes(), default_random_engine(parameters->getSeed()));
     bestW = W.clone();
     bestV = V.clone();
     auto* bestClassificationPerformance = new ClassificationPerformance(0.0);

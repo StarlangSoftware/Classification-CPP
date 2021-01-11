@@ -13,7 +13,7 @@ protected:
     void calculateOutput() override;
 private:
     Matrix V = Matrix(0);
-    void allocateWeights(int H);
+    void allocateWeights(int H, default_random_engine randomEngine);
 public:
     explicit MultiLayerPerceptronModel(ifstream& inputFile);
     MultiLayerPerceptronModel(InstanceList& trainSet, InstanceList& validationSet, MultiLayerPerceptronParameter* parameters);

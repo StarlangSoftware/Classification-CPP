@@ -25,8 +25,8 @@ NeuralNetworkModel::NeuralNetworkModel(InstanceList& trainSet) {
  * @param column Number of columns.
  * @return Matrix with random weights.
  */
-Matrix NeuralNetworkModel::allocateLayerWeights(int row, int column) {
-    return Matrix(row, column, -0.01, +0.01);
+Matrix NeuralNetworkModel::allocateLayerWeights(int row, int column, default_random_engine randomEngine) {
+    return Matrix(row, column, -0.01, +0.01, randomEngine);
 }
 
 /**
