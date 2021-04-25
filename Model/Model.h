@@ -7,14 +7,16 @@
 
 
 #include "../Instance/Instance.h"
+#include <map>
+using namespace std;
 
 class Model {
 public:
     Model() = default;
     explicit Model(ifstream& inputFile) {};
     virtual string predict(Instance* instance) {return "";};
+    virtual map<string, double> predictProbability(Instance* instance) {return map<string, double>();};
     virtual void serialize(ostream &outputFile) {};
 };
-
 
 #endif //CLASSIFICATION_MODEL_H

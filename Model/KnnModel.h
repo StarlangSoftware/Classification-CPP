@@ -21,6 +21,7 @@ public:
     explicit KnnModel(ifstream& inputFile);
     KnnModel(InstanceList& data, int k, DistanceMetric* distanceMetric);
     string predict(Instance* instance) override;
+    map<string, double> predictProbability(Instance* instance) override;
     InstanceList nearestNeighbors(Instance* instance);
     void serialize(ostream &outputFile) override;
 };

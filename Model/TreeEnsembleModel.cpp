@@ -44,3 +44,11 @@ TreeEnsembleModel::TreeEnsembleModel(ifstream &inputFile) {
         forest.push_back(tree);
     }
 }
+
+map<string, double> TreeEnsembleModel::predictProbability(Instance *instance) {
+    DiscreteDistribution distribution = DiscreteDistribution();
+    for (DecisionTree tree : forest) {
+        distribution.addItem(tree.predict(instance));
+    }
+    return distribution.getProbabilityDistribution();
+}

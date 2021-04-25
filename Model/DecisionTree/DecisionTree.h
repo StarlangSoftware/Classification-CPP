@@ -13,6 +13,7 @@ private:
     void pruneNode(DecisionNode decisionNode, InstanceList pruneSet);
 public:
     string predict(Instance* instance) override;
+    map<string, double> predictProbability(Instance* instance) override;
     explicit DecisionTree(ifstream& inputFile);
     explicit DecisionTree(DecisionNode root);
     void prune(InstanceList pruneSet);

@@ -25,6 +25,7 @@ public:
     string getMaxItem();
     string getMaxItem(vector<string> includeTheseOnly);
     double getProbability(string item);
+    map<string, double> getProbabilityDistribution();
     double getProbabilityLaplaceSmoothing(string item);
     double entropy();
     void serialize(ostream& outputFile);

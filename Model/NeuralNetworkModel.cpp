@@ -167,3 +167,13 @@ NeuralNetworkModel::NeuralNetworkModel(ifstream &inputFile) {
         classLabels.push_back(classLabel);
     }
 }
+
+map<string, double> NeuralNetworkModel::predictProbability(Instance *instance) {
+    createInputVector(instance);
+    calculateOutput();
+    map<string, double> result;
+    for (int i = 0; i < classLabels.size(); i++){
+        result.insert_or_assign(classLabels[i], y.getValue(i));
+    }
+    return result;
+}

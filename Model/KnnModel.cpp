@@ -79,3 +79,8 @@ KnnModel::KnnModel(ifstream &inputFile) {
     data = InstanceList(inputFile);
     distanceMetric = new EuclidianDistance();
 }
+
+map<string, double> KnnModel::predictProbability(Instance *instance) {
+    InstanceList neighbors = nearestNeighbors(instance);
+    return neighbors.classDistribution().getProbabilityDistribution();
+}

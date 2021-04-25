@@ -36,3 +36,7 @@ void DummyModel::serialize(ostream &outputFile) {
 DummyModel::DummyModel(ifstream &inputFile) {
     distribution = DiscreteDistribution(inputFile);
 }
+
+map<string, double> DummyModel::predictProbability(Instance *instance) {
+    return distribution.getProbabilityDistribution();
+}

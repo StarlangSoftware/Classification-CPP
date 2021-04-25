@@ -52,3 +52,11 @@ RandomModel::RandomModel(ifstream &inputFile) {
         classLabels.push_back(classLabel);
     }
 }
+
+map<string, double> RandomModel::predictProbability(Instance *instance) {
+    map<string, double> result;
+    for (const string& classLabel : classLabels){
+        result.insert_or_assign(classLabel, 1.0 / classLabels.size());
+    }
+    return result;
+}

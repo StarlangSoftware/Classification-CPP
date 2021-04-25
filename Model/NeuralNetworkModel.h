@@ -26,6 +26,7 @@ public:
     explicit NeuralNetworkModel(ifstream& inputFile);
     explicit NeuralNetworkModel(InstanceList& trainSet);
     string predict(Instance* instance) override;
+    map<string, double> predictProbability(Instance* instance) override;
     void serialize(ostream &outputFile) override;
 };
 

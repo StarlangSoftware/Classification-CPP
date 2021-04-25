@@ -16,6 +16,7 @@ public:
     explicit DummyModel(ifstream& inputFile);
     explicit DummyModel(InstanceList& trainSet);
     string predict(Instance* instance) override;
+    map<string, double> predictProbability(Instance* instance) override;
     void serialize(ostream &outputFile) override;
 };
 

@@ -13,6 +13,7 @@ public:
     explicit RandomModel(ifstream& inputFile);
     explicit RandomModel(vector<string> classLabels);
     string predict(Instance* instance) override;
+    map<string, double> predictProbability(Instance* instance) override;
     void serialize(ostream &outputFile) override;
 };
 

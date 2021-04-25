@@ -67,3 +67,7 @@ void DecisionTree::serialize(ostream &outputFile) {
 DecisionTree::DecisionTree(ifstream &inputFile) {
     root = DecisionNode(inputFile);
 }
+
+map<string, double> DecisionTree::predictProbability(Instance *instance) {
+    return root.predictProbabilityDistribution(instance);
+}

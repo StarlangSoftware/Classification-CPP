@@ -282,3 +282,16 @@ DecisionNode::DecisionNode(ifstream &inputFile) {
         children.push_back(decisionNode);
     }
 }
+
+map<string, double> DecisionNode::predictProbabilityDistribution(Instance *instance) {
+    if (leaf) {
+        return data.classDistribution().getProbabilityDistribution();
+    } else {
+        for (DecisionNode node : children) {
+            if (node.condition.satisfy(instance)) {
+                return node.predictProbabilityDistribution(instance);
+            }
+        }
+        return data.classDistribution().getProbabilityDistribution();
+    }
+}
