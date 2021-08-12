@@ -25,6 +25,9 @@ public:
     double sumOfElements();
     unsigned long maxIndex();
     void sigmoid();
+    void tanh();
+    void relu();
+    void reluDerivative();
     Vector skipVector(unsigned long mod, unsigned long value);
     void add(Vector v);
     void subtract(Vector v);

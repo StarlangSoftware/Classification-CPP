@@ -7,6 +7,7 @@
 
 
 #include "ValidatedModel.h"
+#include "../Parameter/ActivationFunction.h"
 
 class NeuralNetworkModel : public ValidatedModel{
 protected:
@@ -17,9 +18,9 @@ protected:
     Matrix allocateLayerWeights(int row, int column, default_random_engine randomEngine);
     Vector normalizeOutput(Vector o);
     void createInputVector(Instance* instance);
-    Vector calculateHidden(Vector& input, Matrix weights);
+    Vector calculateHidden(Vector& input, Matrix weights, ActivationFunction activationFunction);
     Vector calculateOneMinusHidden(Vector hidden);
-    void calculateForwardSingleHiddenLayer(Matrix W, Matrix V);
+    void calculateForwardSingleHiddenLayer(Matrix W, Matrix V, ActivationFunction activationFunction);
     Vector calculateRMinusY(Instance* instance, Vector input, Matrix weights);
     string predictWithCompositeInstance(vector<string> possibleClassLabels);
 public:

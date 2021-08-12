@@ -13,10 +13,13 @@
  * @param crossValidationRatio Double value for cross validation ratio of the algorithm.
  * @param epoch                Integer value for epoch number of the algorithm.
  * @param hiddenLayers         An integer {@link vector} for hidden layers of the algorithm.
+ * @param activationFunction   Activation function
  */
 DeepNetworkParameter::DeepNetworkParameter(int seed, double learningRate, double etaDecrease,
-                                           double crossValidationRatio, int epoch, vector<int> hiddenLayers) : LinearPerceptronParameter(seed, learningRate, etaDecrease, crossValidationRatio, epoch) {
+                                           double crossValidationRatio, int epoch, vector<int> hiddenLayers,
+                                           ActivationFunction activationFunction) : LinearPerceptronParameter(seed, learningRate, etaDecrease, crossValidationRatio, epoch) {
     this->hiddenLayers = move(hiddenLayers);
+    this->activationFunction = activationFunction;
 }
 
 /**
@@ -37,4 +40,13 @@ int DeepNetworkParameter::layerSize() {
  */
 int DeepNetworkParameter::getHiddenNodes(int layerIndex) {
     return hiddenLayers.at(layerIndex);
+}
+
+/**
+ * Accessor for the activation function.
+ *
+ * @return The activation function.
+ */
+ActivationFunction DeepNetworkParameter::getActivationFunction() {
+    return activationFunction;
 }

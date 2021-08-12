@@ -13,6 +13,7 @@ class DeepNetworkModel : public NeuralNetworkModel {
 private:
     vector<Matrix> weights;
     int hiddenLayerSize;
+    ActivationFunction activationFunction;
     void allocateWeights(DeepNetworkParameter* parameters);
     vector<Matrix> setBestWeights();
 public:

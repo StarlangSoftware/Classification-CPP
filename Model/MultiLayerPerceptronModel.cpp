@@ -23,6 +23,8 @@ MultiLayerPerceptronModel::MultiLayerPerceptronModel(InstanceList &trainSet, Ins
     int epoch;
     double learningRate;
     Matrix bestW = Matrix(0), bestV = Matrix(0);
+    Vector activationDerivative = Vector(0, 0.0), oneMinusHidden = Vector(0, 0.0), one = Vector(0, 0.0);
+    activationFunction = parameters->getActivationFunction();
     allocateWeights(parameters->getHiddenNodes(), default_random_engine(parameters->getSeed()));
     bestW = W.clone();
     bestV = V.clone();
@@ -34,14 +36,28 @@ MultiLayerPerceptronModel::MultiLayerPerceptronModel(InstanceList &trainSet, Ins
         for (int j = 0; j < trainSet.size(); j++) {
             createInputVector(trainSet.get(j));
             try {
-                Vector hidden = calculateHidden(x, W);
+                Vector hidden = calculateHidden(x, W, activationFunction);
                 Vector hiddenBiased = hidden.biased();
                 Vector rMinusY = calculateRMinusY(trainSet.get(j), hiddenBiased, V);
                 Matrix deltaV = Matrix(rMinusY, hiddenBiased);
-                Vector oneMinusHidden = calculateOneMinusHidden(hidden);
                 Vector tmph = V.multiplyWithVectorFromLeft(rMinusY);
                 tmph.remove(0);
-                Vector tmpHidden = oneMinusHidden.elementProduct(hidden.elementProduct(tmph));
+                switch (activationFunction){
+                    case ActivationFunction::SIGMOID:
+                        oneMinusHidden = calculateOneMinusHidden(hidden);
+                        activationDerivative = oneMinusHidden.elementProduct(hidden);
+                        break;
+                    case ActivationFunction::TANH:
+                        one = Vector(hidden.getSize(), 1.0);
+                        hidden.tanh();
+                        activationDerivative = one.difference(hidden.elementProduct(hidden));
+                        break;
+                    case ActivationFunction::RELU:
+                        hidden.reluDerivative();
+                        activationDerivative = hidden;
+                        break;
+                }
+                Vector tmpHidden = tmph.elementProduct(activationDerivative);
                 Matrix deltaW = Matrix(tmpHidden, x);
                 deltaV.multiplyWithConstant(learningRate);
                 V.add(deltaV);
@@ -70,7 +86,7 @@ MultiLayerPerceptronModel::MultiLayerPerceptronModel(InstanceList &trainSet, Ins
  */
 void MultiLayerPerceptronModel::calculateOutput() {
     try {
-        calculateForwardSingleHiddenLayer(W, V);
+        calculateForwardSingleHiddenLayer(W, V, activationFunction);
     } catch (MatrixColumnMismatch& matrixColumnMismatch) {
     }
 }

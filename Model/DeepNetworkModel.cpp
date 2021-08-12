@@ -47,6 +47,9 @@ DeepNetworkModel::DeepNetworkModel(InstanceList &trainSet, InstanceList &validat
     vector<Matrix> deltaWeights;
     vector<Vector> hidden;
     vector<Vector> hiddenBiased;
+    Vector tmph = Vector(0, 0.0), tmpHidden = Vector(0, 0.0);
+    Vector activationDerivative = Vector(0, 0.0), oneMinusHidden = Vector(0, 0.0), one = Vector(0, 0.0);
+    activationFunction = parameters->getActivationFunction();
     allocateWeights(parameters);
     bestWeights = setBestWeights();
     auto* bestClassificationPerformance = new ClassificationPerformance(0.0);
@@ -62,19 +65,37 @@ DeepNetworkModel::DeepNetworkModel(InstanceList &trainSet, InstanceList &validat
                 deltaWeights.clear();
                 for (int k = 0; k < hiddenLayerSize; k++) {
                     if (k == 0) {
-                        hidden.push_back(calculateHidden(x, weights.at(k)));
+                        hidden.push_back(calculateHidden(x, weights.at(k), activationFunction));
                     } else {
-                        hidden.push_back(calculateHidden(hiddenBiased.at(k - 1), weights.at(k)));
+                        hidden.push_back(calculateHidden(hiddenBiased.at(k - 1), weights.at(k), activationFunction));
                     }
                     hiddenBiased.push_back(hidden.at(k).biased());
                 }
                 Vector rMinusY = calculateRMinusY(trainSet.get(j), hiddenBiased.at(hiddenLayerSize - 1), weights.at(weights.size() - 1));
                 deltaWeights.insert(deltaWeights.begin(), Matrix(rMinusY, hiddenBiased.at(hiddenLayerSize - 1)));
                 for (int k = weights.size() - 2; k >= 0; k--) {
-                    Vector oneMinusHidden = calculateOneMinusHidden(hidden.at(k));
-                    Vector tmph = deltaWeights.at(0).elementProduct(weights.at(k + 1)).sumOfRows();
+                    if (k == weights.size() - 2){
+                        tmph = weights.at(k + 1).multiplyWithVectorFromLeft(rMinusY);
+                    } else {
+                        tmph = weights.at(k + 1).multiplyWithVectorFromLeft(tmpHidden);
+                    }
                     tmph.remove(0);
-                    Vector tmpHidden = oneMinusHidden.elementProduct(tmph);
+                    switch (activationFunction){
+                        case ActivationFunction::SIGMOID:
+                            oneMinusHidden = calculateOneMinusHidden(hidden.at(k));
+                            activationDerivative = oneMinusHidden.elementProduct(hidden.at(k));
+                            break;
+                        case ActivationFunction::TANH:
+                            one = Vector(hidden.size(), 1.0);
+                            hidden.at(k).tanh();
+                            activationDerivative = one.difference(hidden.at(k).elementProduct(hidden.at(k)));
+                            break;
+                        case ActivationFunction::RELU:
+                            hidden.at(k).reluDerivative();
+                            activationDerivative = hidden.at(k);
+                            break;
+                    }
+                    tmpHidden = tmph.elementProduct(activationDerivative);
                     if (k == 0) {
                         deltaWeights.insert(deltaWeights.begin(), Matrix(tmpHidden, x));
                     } else {
@@ -112,9 +133,9 @@ void DeepNetworkModel::calculateOutput() {
     try {
         for (int i = 0; i < weights.size() - 1; i++) {
             if (i == 0) {
-                hidden = calculateHidden(x, weights.at(i));
+                hidden = calculateHidden(x, weights.at(i), activationFunction);
             } else {
-                hidden = calculateHidden(hiddenBiased, weights.at(i));
+                hidden = calculateHidden(hiddenBiased, weights.at(i), activationFunction);
             }
             hiddenBiased = hidden.biased();
         }

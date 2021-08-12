@@ -6,6 +6,7 @@
 #include <cfloat>
 #include "../Instance/CompositeInstance.h"
 #include "NeuralNetworkModel.h"
+#include "../Parameter/ActivationFunction.h"
 
 /**
  * Constructor that sets the class labels, their sizes as K and the size of the continuous attributes as d.
@@ -65,9 +66,19 @@ void NeuralNetworkModel::createInputVector(Instance* instance) {
  * @param weights Matrix is multiplied with input Vector.
  * @return Result of sigmoid function.
  */
-Vector NeuralNetworkModel::calculateHidden(Vector& input, Matrix weights) {
+Vector NeuralNetworkModel::calculateHidden(Vector& input, Matrix weights, ActivationFunction activationFunction) {
     Vector z = weights.multiplyWithVectorFromRight(input);
-    z.sigmoid();
+    switch (activationFunction) {
+        case ActivationFunction::SIGMOID:
+            z.sigmoid();
+            break;
+        case ActivationFunction::TANH:
+            z.tanh();
+            break;
+        case ActivationFunction::RELU:
+            z.relu();
+            break;
+    }
     return z;
 }
 
@@ -90,9 +101,10 @@ Vector NeuralNetworkModel::calculateOneMinusHidden(Vector hidden) {
  *
  * @param W Matrix to multiply with x.
  * @param V Matrix to multiply.
+ * @param activationFunction Activation function.
  */
-void NeuralNetworkModel::calculateForwardSingleHiddenLayer(Matrix W, Matrix V) {
-    Vector hidden = calculateHidden(x, W);
+void NeuralNetworkModel::calculateForwardSingleHiddenLayer(Matrix W, Matrix V, ActivationFunction activationFunction) {
+    Vector hidden = calculateHidden(x, W, activationFunction);
     Vector hiddenBiased = hidden.biased();
     y = V.multiplyWithVectorFromRight(hiddenBiased);
 }

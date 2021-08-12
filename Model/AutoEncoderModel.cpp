@@ -48,7 +48,7 @@ AutoEncoderModel::AutoEncoderModel(InstanceList &trainSet, InstanceList &validat
             createInputVector(trainSet.get(j));
             r = trainSet.get(j)->toVector();
             try {
-                Vector hidden = calculateHidden(x, W);
+                Vector hidden = calculateHidden(x, W, ActivationFunction::SIGMOID);
                 Vector hiddenBiased = hidden.biased();
                 y = V.multiplyWithVectorFromRight(hiddenBiased);
                 Vector rMinusY = r.difference(y);
@@ -110,7 +110,7 @@ Performance *AutoEncoderModel::testAutoEncoder(InstanceList &data) {
 Vector AutoEncoderModel::predictInput(Instance *instance) {
     createInputVector(instance);
     try {
-        calculateForwardSingleHiddenLayer(W, V);
+        calculateForwardSingleHiddenLayer(W, V, ActivationFunction::SIGMOID);
         return y;
     } catch (MatrixColumnMismatch& matrixColumnMismatch) {
     }
@@ -121,7 +121,7 @@ Vector AutoEncoderModel::predictInput(Instance *instance) {
  */
 void AutoEncoderModel::calculateOutput() {
     try {
-        calculateForwardSingleHiddenLayer(W, V);
+        calculateForwardSingleHiddenLayer(W, V, ActivationFunction::SIGMOID);
     } catch (MatrixColumnMismatch& matrixColumnMismatch) {
     }
 }

@@ -7,13 +7,16 @@
 
 
 #include "LinearPerceptronParameter.h"
+#include "ActivationFunction.h"
 
 class MultiLayerPerceptronParameter : public LinearPerceptronParameter{
 private:
     int hiddenNodes;
+    ActivationFunction activationFunction;
 public:
-    MultiLayerPerceptronParameter(int seed, double learningRate, double etaDecrease, double crossValidationRatio, int epoch, int hiddenNodes);
+    MultiLayerPerceptronParameter(int seed, double learningRate, double etaDecrease, double crossValidationRatio, int epoch, int hiddenNodes, ActivationFunction activationFunction);
     int getHiddenNodes();
+    ActivationFunction getActivationFunction();
 };
 
 
