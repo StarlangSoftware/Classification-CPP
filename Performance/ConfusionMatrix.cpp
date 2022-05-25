@@ -29,7 +29,7 @@ ConfusionMatrix::ConfusionMatrix(vector<string> classLabels) {
  */
 void ConfusionMatrix::classify(string actualClass, string predictedClass) {
     CounterHashMap<string> counterHashMap;
-    if (matrix.find(actualClass) != matrix.end()) {
+    if (matrix.contains(actualClass)) {
         counterHashMap = matrix.find(actualClass)->second;
     }
     counterHashMap.put(move(predictedClass));
@@ -45,7 +45,7 @@ void ConfusionMatrix::classify(string actualClass, string predictedClass) {
 void ConfusionMatrix::addConfusionMatrix(ConfusionMatrix confusionMatrix) {
     for (auto &it : confusionMatrix.matrix) {
         CounterHashMap<string> rowToBeAdded = it.second;
-        if (matrix.find(it.first) != matrix.end()) {
+        if (matrix.contains(it.first)) {
             CounterHashMap<string> currentRow = matrix.find(it.first)->second;
             currentRow.add(rowToBeAdded);
             matrix.insert_or_assign(it.first, currentRow);
@@ -120,7 +120,7 @@ double *ConfusionMatrix::precision() {
     double* result = new double[classLabels.size()];
     for (int i = 0; i < classLabels.size(); i++) {
         string actualClass = classLabels.at(i);
-        if (matrix.find(actualClass) != matrix.end()) {
+        if (matrix.contains(actualClass)) {
             result[i] = matrix.find(actualClass)->second.count(actualClass) / columnSum(actualClass);
         }
     }
@@ -136,7 +136,7 @@ double *ConfusionMatrix::recall() {
     double* result = new double[classLabels.size()];
     for (int i = 0; i < classLabels.size(); i++) {
         string actualClass = classLabels.at(i);
-        if (matrix.find(actualClass) != matrix.end()) {
+        if (matrix.contains(actualClass)) {
             result[i] = (matrix.find(actualClass)->second.count(actualClass) + 0.0) / matrix.find(actualClass)->second.sumOfCounts();
         }
     }
