@@ -5,7 +5,7 @@
 #include <fstream>
 #include <random>
 #include "InstanceList.h"
-#include "Word.h"
+#include "Dictionary/Word.h"
 #include "../Classifier/Classifier.h"
 #include "../Attribute/DiscreteAttribute.h"
 #include "../Attribute/DiscreteIndexedAttribute.h"

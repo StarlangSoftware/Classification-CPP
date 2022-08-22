@@ -4,7 +4,7 @@
 
 #include <fstream>
 #include "DataSet.h"
-#include "Word.h"
+#include "Dictionary/Word.h"
 #include "../InstanceList/Partition.h"
 #include "../Instance/CompositeInstance.h"
 #include "../Attribute/ContinuousAttribute.h"

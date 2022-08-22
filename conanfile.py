@@ -26,7 +26,7 @@ class ClassificationConan(ConanFile):
         cmake.build()
 
     def package(self):
-        self.copy("*.h", dst="include", keep_path=False)
+        self.copy("*.h", src="src", dst="include")
         self.copy("*Classification.lib", dst="lib", keep_path=False)
         self.copy("*.dll", dst="bin", keep_path=False)
         self.copy("*.so", dst="lib", keep_path=False)
