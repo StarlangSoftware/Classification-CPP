@@ -3,9 +3,9 @@
 //
 
 #include "catch.hpp"
-#include "../DataSet/DataSet.h"
-#include "../Classifier/Bagging.h"
-#include "../Parameter/BaggingParameter.h"
+#include "../src/DataSet/DataSet.h"
+#include "../src/Classifier/Bagging.h"
+#include "../src/Parameter/BaggingParameter.h"
 
 TEST_CASE("BaggingTest-testTrain") {
     DataSet iris, car, bupa, tictactoe, dermatology, nursery;

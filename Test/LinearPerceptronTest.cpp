@@ -3,9 +3,9 @@
 //
 
 #include "catch.hpp"
-#include "../DataSet/DataSet.h"
-#include "../Classifier/LinearPerceptron.h"
-#include "../Parameter/LinearPerceptronParameter.h"
+#include "../src/DataSet/DataSet.h"
+#include "../src/Classifier/LinearPerceptron.h"
+#include "../src/Parameter/LinearPerceptronParameter.h"
 
 TEST_CASE("LinearPerceptronTest-testTrain") {
     DataSet iris, bupa, dermatology;

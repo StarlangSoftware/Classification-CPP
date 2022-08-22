@@ -3,8 +3,8 @@
 //
 
 #include "catch.hpp"
-#include "../DataSet/DataSet.h"
-#include "../Classifier/NaiveBayes.h"
+#include "../src/DataSet/DataSet.h"
+#include "../src/Classifier/NaiveBayes.h"
 
 TEST_CASE("NaiveBayesTest-testTrain") {
     DataSet iris, car, bupa, tictactoe, dermatology, nursery;

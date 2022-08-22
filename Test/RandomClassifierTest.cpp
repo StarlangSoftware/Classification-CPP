@@ -3,8 +3,8 @@
 //
 
 #include "catch.hpp"
-#include "../DataSet/DataSet.h"
-#include "../Classifier/RandomClassifier.h"
+#include "../src/DataSet/DataSet.h"
+#include "../src/Classifier/RandomClassifier.h"
 
 TEST_CASE("RandomClassifierTest-testTrain") {
     DataSet iris, car, chess, bupa, tictactoe, dermatology, nursery;

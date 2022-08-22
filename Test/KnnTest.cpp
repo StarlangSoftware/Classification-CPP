@@ -3,10 +3,10 @@
 //
 
 #include "catch.hpp"
-#include "../DataSet/DataSet.h"
-#include "../Classifier/Knn.h"
-#include "../Parameter/KnnParameter.h"
-#include "../DistanceMetric/EuclidianDistance.h"
+#include "../src/DataSet/DataSet.h"
+#include "../src/Classifier/Knn.h"
+#include "../src/Parameter/KnnParameter.h"
+#include "../src/DistanceMetric/EuclidianDistance.h"
 
 TEST_CASE("KnnTest-testTrain") {
     DataSet iris, car, bupa, tictactoe, dermatology, nursery;

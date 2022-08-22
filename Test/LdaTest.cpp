@@ -3,8 +3,8 @@
 //
 
 #include "catch.hpp"
-#include "../DataSet/DataSet.h"
-#include "../Classifier/Lda.h"
+#include "../src/DataSet/DataSet.h"
+#include "../src/Classifier/Lda.h"
 
 TEST_CASE("LdaTest-testTrain") {
     DataSet iris, bupa, dermatology;

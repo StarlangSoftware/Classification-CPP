@@ -3,9 +3,9 @@
 //
 
 #include "catch.hpp"
-#include "../DataSet/DataSet.h"
-#include "../Classifier/RandomForest.h"
-#include "../Parameter/RandomForestParameter.h"
+#include "../src/DataSet/DataSet.h"
+#include "../src/Classifier/RandomForest.h"
+#include "../src/Parameter/RandomForestParameter.h"
 
 TEST_CASE("RandomForestTest-testTrain") {
     DataSet iris, car, bupa, tictactoe, dermatology, nursery;

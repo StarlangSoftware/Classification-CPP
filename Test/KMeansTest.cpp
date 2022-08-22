@@ -3,9 +3,9 @@
 //
 
 #include "catch.hpp"
-#include "../DataSet/DataSet.h"
-#include "../Classifier/KMeans.h"
-#include "../Parameter/KMeansParameter.h"
+#include "../src/DataSet/DataSet.h"
+#include "../src/Classifier/KMeans.h"
+#include "../src/Parameter/KMeansParameter.h"
 
 TEST_CASE("KMeansTest-testTrain") {
     DataSet iris, car, chess, bupa, tictactoe, dermatology, nursery;

@@ -3,9 +3,9 @@
 //
 
 #include "catch.hpp"
-#include "../DataSet/DataSet.h"
-#include "../Classifier/C45.h"
-#include "../Parameter/C45Parameter.h"
+#include "../src/DataSet/DataSet.h"
+#include "../src/Classifier/C45.h"
+#include "../src/Parameter/C45Parameter.h"
 
 TEST_CASE("C45Test-testTrain") {
     DataSet iris, car, chess, bupa, tictactoe, dermatology, nursery;

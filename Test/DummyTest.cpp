@@ -3,8 +3,8 @@
 //
 
 #include "catch.hpp"
-#include "../DataSet/DataSet.h"
-#include "../Classifier/Dummy.h"
+#include "../src/DataSet/DataSet.h"
+#include "../src/Classifier/Dummy.h"
 
 TEST_CASE("DummyTest-testTrain") {
     DataSet iris, car, chess, bupa, tictactoe, dermatology, nursery;

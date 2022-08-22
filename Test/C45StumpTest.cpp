@@ -3,8 +3,8 @@
 //
 
 #include "catch.hpp"
-#include "../DataSet/DataSet.h"
-#include "../Classifier/C45Stump.h"
+#include "../src/DataSet/DataSet.h"
+#include "../src/Classifier/C45Stump.h"
 
 TEST_CASE("C45StumpTest-testTrain") {
     DataSet iris, car, chess, bupa, tictactoe, dermatology, nursery;

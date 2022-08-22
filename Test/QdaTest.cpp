@@ -3,8 +3,8 @@
 //
 
 #include "catch.hpp"
-#include "../DataSet/DataSet.h"
-#include "../Classifier/Qda.h"
+#include "../src/DataSet/DataSet.h"
+#include "../src/Classifier/Qda.h"
 
 TEST_CASE("QdaTest-testTrain") {
     DataSet iris, bupa;

@@ -4,7 +4,7 @@
 
 #define CATCH_CONFIG_MAIN  // This tells Catch to provide a main() - only do this in one cpp file
 #include "catch.hpp"
-#include "../DataSet/DataSet.h"
+#include "../src/DataSet/DataSet.h"
 
 TEST_CASE("DataSetTest-testSampleSize") {
     DataSet iris, car, chess, bupa, tictactoe, dermatology, nursery;

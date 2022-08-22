@@ -3,9 +3,9 @@
 //
 
 #include "catch.hpp"
-#include "../DataSet/DataSet.h"
-#include "../Classifier/DeepNetwork.h"
-#include "../Parameter/DeepNetworkParameter.h"
+#include "../src/DataSet/DataSet.h"
+#include "../src/Classifier/DeepNetwork.h"
+#include "../src/Parameter/DeepNetworkParameter.h"
 
 TEST_CASE("DeepNetworkTest-testTrain") {
     DataSet iris, bupa, dermatology;

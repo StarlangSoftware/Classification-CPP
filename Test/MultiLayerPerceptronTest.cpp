@@ -3,9 +3,9 @@
 //
 
 #include "catch.hpp"
-#include "../DataSet/DataSet.h"
-#include "../Classifier/MultiLayerPerceptron.h"
-#include "../Parameter/MultiLayerPerceptronParameter.h"
+#include "../src/DataSet/DataSet.h"
+#include "../src/Classifier/MultiLayerPerceptron.h"
+#include "../src/Parameter/MultiLayerPerceptronParameter.h"
 
 TEST_CASE("MultiLayerPerceptronTest-testTrain") {
     DataSet iris, bupa, dermatology;
