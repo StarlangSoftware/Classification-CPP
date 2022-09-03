@@ -5,12 +5,9 @@
 #include <fstream>
 #include "DataSet.h"
 #include "Dictionary/Word.h"
-#include "../InstanceList/Partition.h"
 #include "../Instance/CompositeInstance.h"
 #include "../Attribute/ContinuousAttribute.h"
 #include "../Attribute/DiscreteAttribute.h"
-#include "../Attribute/BinaryAttribute.h"
-#include "../Attribute/DiscreteIndexedAttribute.h"
 
 /**
  * Constructor for generating a new {@link DataSet}.

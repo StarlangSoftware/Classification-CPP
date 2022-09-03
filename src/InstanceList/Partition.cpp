@@ -9,6 +9,7 @@
 #include "../Attribute/DiscreteAttribute.h"
 #include "../Attribute/DiscreteIndexedAttribute.h"
 #include "../Attribute/ContinuousAttribute.h"
+#include "RandomArray.h"
 
 using namespace std;
 /**
@@ -90,12 +91,7 @@ Partition::Partition(InstanceList &list, double ratio, int seed, bool stratified
         add(new InstanceList());
         add(new InstanceList());
         distribution = list.classDistribution();
-        vector<int> randomArray;
-        randomArray.reserve(list.size());
-        for (int i = 0; i < list.size(); i++){
-            randomArray.push_back(i);
-        }
-        std::shuffle(randomArray.begin(), randomArray.end(), default_random_engine(seed));
+        vector<int> randomArray = RandomArray::indexArray(list.size(), seed);
         for (int i = 0; i < list.size(); i++) {
             Instance* instance = list.get(randomArray.at(i));
             if (counts.count(instance->getClassLabel()) < list.size() * ratio * distribution.getProbability(instance->getClassLabel())) {

@@ -34,7 +34,7 @@ string GaussianModel::predict(Instance *instance) {
         } else {
             Ci = possibleLabels.at(i);
         }
-        if (priorDistribution.containsItem(Ci)) {
+        if (priorDistribution.contains(Ci)) {
             metric = calculateMetric(instance, Ci);
             if (metric > maxMetric) {
                 maxMetric = metric;

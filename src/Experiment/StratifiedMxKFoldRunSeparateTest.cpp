@@ -4,7 +4,6 @@
 
 #include <StratifiedKFoldCrossValidation.h>
 #include "StratifiedMxKFoldRunSeparateTest.h"
-#include "../InstanceList/Partition.h"
 
 /**
  * Constructor for StratifiedMxKFoldRunSeparateTest class. Basically sets K parameter of the K-fold cross-validation and M for the number of times.

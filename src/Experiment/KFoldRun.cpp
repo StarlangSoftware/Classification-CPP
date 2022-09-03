@@ -31,8 +31,8 @@ void KFoldRun::runExperiment(Classifier *classifier, Parameter *parameter, Exper
  * @return An array of performances: result. result[i] is the performance of the classifier on the i'th fold.
  */
 ExperimentPerformance *KFoldRun::execute(Experiment experiment) {
-    ExperimentPerformance* result = new ExperimentPerformance();
-    KFoldCrossValidation<Instance*>* crossValidation = new KFoldCrossValidation<Instance*>(experiment.getDataSet().getInstances(), K, experiment.getParameter()->getSeed());
+    auto* result = new ExperimentPerformance();
+    auto* crossValidation = new KFoldCrossValidation<Instance*>(experiment.getDataSet().getInstances(), K, experiment.getParameter()->getSeed());
     runExperiment(experiment.getClassifier(), experiment.getParameter(), result, crossValidation);
     return result;
 }

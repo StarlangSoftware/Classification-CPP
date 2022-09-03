@@ -39,12 +39,6 @@ TEST_CASE("RandomForestTest-testTrain") {
     }
     dataDefinition = DataDefinition(attributeTypes);
     tictactoe = DataSet(dataDefinition, ",", "tictactoe.data");
-    attributeTypes.clear();
-    for (int i = 0; i < 8; i++) {
-        attributeTypes.emplace_back(AttributeType::DISCRETE);
-    }
-    dataDefinition = DataDefinition(attributeTypes);
-    nursery = DataSet(dataDefinition, ",", "nursery.data");
     RandomForest randomForest = RandomForest();
     auto* randomForestParameter = new RandomForestParameter(1, 100, 35);
     InstanceList instanceList = iris.getInstanceList();
@@ -62,7 +56,4 @@ TEST_CASE("RandomForestTest-testTrain") {
     instanceList = tictactoe.getInstanceList();
     randomForest.train(instanceList, randomForestParameter);
     REQUIRE_THAT(0.0, Catch::Matchers::WithinAbs(100 * randomForest.test(tictactoe.getInstanceList())->getErrorRate(), 0.01));
-    instanceList = nursery.getInstanceList();
-    randomForest.train(instanceList, randomForestParameter);
-    REQUIRE_THAT(0.0, Catch::Matchers::WithinAbs(100 * randomForest.test(nursery.getInstanceList())->getErrorRate(), 0.01));
 }

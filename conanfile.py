@@ -4,7 +4,7 @@ from conans import ConanFile, CMake, tools
 class ClassificationConan(ConanFile):
     name = "Classification"
     version = "1.0.0"
-    requires = ["Dictionary/1.0.0", "Sampling/1.0.0", "DataStructure/1.0.0"]
+    requires = ["Dictionary/1.0.0", "Sampling/1.0.0", "DataStructure/1.0.0", "Util/1.0.0"]
     license = "GPL License"
     author = "Olcay Taner Yildiz olcay.yildiz@ozyegin.edu.tr"
     url = "https://github.com/StarlangSoftware/Classification-CPP"

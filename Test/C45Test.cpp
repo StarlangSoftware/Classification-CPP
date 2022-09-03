@@ -39,22 +39,6 @@ TEST_CASE("C45Test-testTrain") {
     }
     dataDefinition = DataDefinition(attributeTypes);
     tictactoe = DataSet(dataDefinition, ",", "tictactoe.data");
-    attributeTypes.clear();
-    for (int i = 0; i < 8; i++) {
-        attributeTypes.emplace_back(AttributeType::DISCRETE);
-    }
-    dataDefinition = DataDefinition(attributeTypes);
-    nursery = DataSet(dataDefinition, ",", "nursery.data");
-    attributeTypes.clear();
-    for (int i = 0; i < 6; i++) {
-        if (i % 2 == 0) {
-            attributeTypes.emplace_back(AttributeType::DISCRETE);
-        } else {
-            attributeTypes.emplace_back(AttributeType::CONTINUOUS);
-        }
-    }
-    dataDefinition = DataDefinition(attributeTypes);
-    chess = DataSet(dataDefinition, ",", "chess.data");
     C45 c45 = C45();
     C45Parameter* c45Parameter = new C45Parameter(1, true, 0.2);
     InstanceList instanceList = iris.getInstanceList();
@@ -72,10 +56,4 @@ TEST_CASE("C45Test-testTrain") {
     instanceList = tictactoe.getInstanceList();
     c45.train(instanceList, c45Parameter);
     REQUIRE_THAT(3.24, Catch::Matchers::WithinAbs(100 * c45.test(tictactoe.getInstanceList())->getErrorRate(), 0.01));
-    instanceList = nursery.getInstanceList();
-    c45.train(instanceList, c45Parameter);
-    REQUIRE_THAT(0.31, Catch::Matchers::WithinAbs(100 * c45.test(nursery.getInstanceList())->getErrorRate(), 0.01));
-    instanceList = chess.getInstanceList();
-    c45.train(instanceList, c45Parameter);
-    REQUIRE_THAT(47.59, Catch::Matchers::WithinAbs(100 * c45.test(chess.getInstanceList())->getErrorRate(), 0.01));
 }

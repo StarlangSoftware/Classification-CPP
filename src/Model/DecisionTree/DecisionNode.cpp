@@ -11,6 +11,7 @@
 #include "../../Attribute/ContinuousAttribute.h"
 #include "../../Classifier/Classifier.h"
 #include "../../Instance/CompositeInstance.h"
+#include "RandomArray.h"
 
 /**
  * The entropyForDiscreteAttribute method takes an attributeIndex and creates an ArrayList of DiscreteDistribution.
@@ -124,14 +125,14 @@ DecisionNode::DecisionNode(InstanceList data, DecisionCondition condition, Rando
         return;
     }
     vector<int> indexList;
-    indexList.reserve(data.get(0)->attributeSize());
-    for (int i = 0; i < data.get(0)->attributeSize(); i++) {
-        indexList.push_back(i);
-    }
     if (parameter != nullptr && parameter->getAttributeSubsetSize() < data.get(0)->attributeSize()) {
-        std::shuffle(indexList.begin(), indexList.end(), default_random_engine(parameter->getSeed()));
+        indexList = RandomArray::indexArray(data.get(0)->attributeSize(), parameter->getSeed());
         size = parameter->getAttributeSubsetSize();
     } else {
+        indexList.reserve(data.get(0)->attributeSize());
+        for (int i = 0; i < data.get(0)->attributeSize(); i++) {
+            indexList.push_back(i);
+        }
         size = data.get(0)->attributeSize();
     }
     classDistribution = data.classDistribution();
