@@ -21,7 +21,7 @@ Node::Node(int index, double value) {
  *
  * @return New {@link Node}.
  */
-Node Node::clone() {
+Node Node::clone() const{
     return Node(index, value);
 }
 
@@ -30,7 +30,7 @@ Node Node::clone() {
  *
  * @return The index of a Node.
  */
-int Node::getIndex() {
+int Node::getIndex() const{
     return index;
 }
 
@@ -39,7 +39,7 @@ int Node::getIndex() {
  *
  * @return The value of a Node.
  */
-double Node::getValue() {
+double Node::getValue() const{
     return value;
 }
 

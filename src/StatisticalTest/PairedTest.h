@@ -10,8 +10,8 @@
 
 class PairedTest {
 public:
-    virtual StatisticalTestResult compare(ExperimentPerformance classifier1, ExperimentPerformance classifier2) = 0;
-    int compare(ExperimentPerformance classifier1, ExperimentPerformance classifier2, double alpha);
+    virtual StatisticalTestResult compare(const ExperimentPerformance& classifier1, const ExperimentPerformance& classifier2) const = 0;
+    int compare(const ExperimentPerformance& classifier1, const ExperimentPerformance& classifier2, double alpha) const;
 };
 
 

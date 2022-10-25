@@ -13,7 +13,7 @@ private:
     int numberOfBootstraps;
 public:
     BootstrapRun(int numberOfBootstraps);
-    ExperimentPerformance* execute(Experiment experiment) override;
+    ExperimentPerformance* execute(const Experiment& experiment) override;
 };
 
 

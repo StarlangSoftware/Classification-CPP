@@ -6,7 +6,7 @@
 #include "Pairedt.h"
 #include "StatisticalTestNotApplicable.h"
 
-double Pairedt::testStatistic(ExperimentPerformance classifier1, ExperimentPerformance classifier2) {
+double Pairedt::testStatistic(const ExperimentPerformance& classifier1, const ExperimentPerformance& classifier2) const{
     if (classifier1.numberOfExperiments() != classifier2.numberOfExperiments()){
         throw StatisticalTestNotApplicable("Paired test", "In order to apply a paired test, you need to have the same number of experiments in both algorithms.");
     }
@@ -30,7 +30,7 @@ double Pairedt::testStatistic(ExperimentPerformance classifier1, ExperimentPerfo
     return sqrt(classifier1.numberOfExperiments()) * mean / standardDeviation;
 }
 
-StatisticalTestResult Pairedt::compare(ExperimentPerformance classifier1, ExperimentPerformance classifier2) {
+StatisticalTestResult Pairedt::compare(const ExperimentPerformance& classifier1, const ExperimentPerformance& classifier2) const{
     double statistic = testStatistic(classifier1, classifier2);
     int degreeOfFreedom = classifier1.numberOfExperiments() - 1;
     return StatisticalTestResult(Distribution::tDistribution(statistic, degreeOfFreedom), false);

@@ -11,7 +11,7 @@
 class StratifiedSingleRunWithK : public SingleRunWithK {
 public:
     explicit StratifiedSingleRunWithK(int K);
-    Performance* execute(Experiment experiment) override;
+    Performance* execute(const Experiment& experiment) override;
 };
 
 

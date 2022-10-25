@@ -11,7 +11,7 @@
 
 class MultipleRun {
 public:
-    virtual ExperimentPerformance* execute(Experiment experiment) = 0;
+    virtual ExperimentPerformance* execute(const Experiment& experiment) = 0;
 };
 
 

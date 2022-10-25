@@ -9,7 +9,7 @@
 class AutoEncoder : public Classifier{
 public:
     void train(InstanceList& trainSet, Parameter* parameters) override;
-    Performance* test(InstanceList testSet) override;
+    Performance* test(const InstanceList& testSet) const override;
 };
 
 

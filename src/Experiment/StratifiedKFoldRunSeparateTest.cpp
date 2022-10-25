@@ -21,11 +21,11 @@ StratifiedKFoldRunSeparateTest::StratifiedKFoldRunSeparateTest(int K) : Stratifi
  * @return An array of performances: result. result[i] is the performance of the classifier on the i'th fold.
  * @throws DiscreteFeaturesNotAllowed Exception for discrete features.
  */
-ExperimentPerformance *StratifiedKFoldRunSeparateTest::execute(Experiment experiment) {
+ExperimentPerformance *StratifiedKFoldRunSeparateTest::execute(const Experiment& experiment) {
     auto* result = new ExperimentPerformance();
     InstanceList instanceList = experiment.getDataSet().getInstanceList();
     Partition partition = Partition(instanceList, 0.25, experiment.getParameter()->getSeed(), true);
-    StratifiedKFoldCrossValidation<Instance*>* crossValidation = new StratifiedKFoldCrossValidation<Instance*>(Partition(*(partition.get(1))).getLists(), StratifiedKFoldRun::K, StratifiedKFoldRun::K, experiment.getParameter()->getSeed());
+    auto* crossValidation = new StratifiedKFoldCrossValidation<Instance*>(Partition(*(partition.get(1))).getLists(), StratifiedKFoldRun::K, StratifiedKFoldRun::K, experiment.getParameter()->getSeed());
     KFoldRunSeparateTest::runExperiment(experiment.getClassifier(), experiment.getParameter(), result, crossValidation, *(partition.get(0)));
     return result;
 }

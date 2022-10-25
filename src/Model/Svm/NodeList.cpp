@@ -10,7 +10,7 @@
  *
  * @param values An ArrayList of values of nodes.
  */
-NodeList::NodeList(vector<double> values) {
+NodeList::NodeList(const vector<double>& values) {
     for (int i = 0; i < values.size(); i++) {
         if (values.at(i) != 0) {
             nodes.emplace_back(Node(i, values.at(i)));
@@ -28,7 +28,7 @@ NodeList::NodeList() = default;
  *
  * @return A clone of the {@link NodeList}.
  */
-NodeList NodeList::clone() {
+NodeList NodeList::clone() const {
     NodeList result = NodeList();
     for (auto &node : nodes) {
         result.nodes.emplace_back(node.clone());
@@ -43,7 +43,7 @@ NodeList NodeList::clone() {
  * @param nodeList NodeList to find the dot product.
  * @return Dot product.
  */
-double NodeList::dot(NodeList nodeList) {
+double NodeList::dot(const NodeList& nodeList) const {
     double sum = 0;
     int px = 0, py = 0;
     while (px < nodes.size() && py < nodeList.nodes.size()) {
@@ -68,7 +68,7 @@ double NodeList::dot(NodeList nodeList) {
  * @param index Index to find a Node of the NodeList.
  * @return The Node at given index.
  */
-Node NodeList::get(int index) {
+Node NodeList::get(int index) const{
     return nodes.at(index);
 }
 
@@ -77,7 +77,7 @@ Node NodeList::get(int index) {
  *
  * @return The size of the NodeList.
  */
-int NodeList::size() {
+int NodeList::size() const{
     return nodes.size();
 }
 

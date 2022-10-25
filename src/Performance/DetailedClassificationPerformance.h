@@ -14,8 +14,8 @@ private:
     ConfusionMatrix confusionMatrix = ConfusionMatrix();
 public:
     explicit DetailedClassificationPerformance(ConfusionMatrix confusionMatrix);
-    ConfusionMatrix getConfusionMatrix();
-    bool containsDetails() override;
+    ConfusionMatrix getConfusionMatrix() const;
+    bool containsDetails() const override;
 };
 
 

@@ -18,6 +18,6 @@ Parameter::Parameter(int seed) {
  *
  * @return The seed.
  */
-int Parameter::getSeed() {
+int Parameter::getSeed() const{
     return seed;
 }

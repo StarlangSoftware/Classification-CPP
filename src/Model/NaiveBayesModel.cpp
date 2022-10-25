@@ -16,7 +16,7 @@
  * @param Ci       String input.
  * @return The log likelihood of inputs.
  */
-double NaiveBayesModel::calculateMetric(Instance *instance, string Ci) {
+double NaiveBayesModel::calculateMetric(Instance *instance, const string& Ci) const{
     if (classAttributeDistributions.empty()) {
         return logLikelihoodContinuous(Ci, instance);
     } else {
@@ -33,7 +33,7 @@ double NaiveBayesModel::calculateMetric(Instance *instance, string Ci) {
  * @param instance   {@link Instance} input.
  * @return The log likelihood of given class label and {@link Instance}.
  */
-double NaiveBayesModel::logLikelihoodContinuous(string classLabel, Instance *instance) {
+double NaiveBayesModel::logLikelihoodContinuous(const string& classLabel, Instance *instance) const{
     double xi, mi, si;
     double logLikelihood = log(priorDistribution.getProbability(classLabel));
     for (int i = 0; i < instance->attributeSize(); i++) {
@@ -55,7 +55,7 @@ double NaiveBayesModel::logLikelihoodContinuous(string classLabel, Instance *ins
  * @param instance   {@link Instance} input.
  * @return The log likelihood of given class label and {@link Instance}.
  */
-double NaiveBayesModel::logLikelihoodDiscrete(string classLabel, Instance *instance) {
+double NaiveBayesModel::logLikelihoodDiscrete(const string& classLabel, Instance *instance) const{
     string xi;
     double logLikelihood = log(priorDistribution.getProbability(classLabel));
     vector<DiscreteDistribution> attributeDistributions = classAttributeDistributions.find(classLabel)->second;
@@ -73,11 +73,11 @@ double NaiveBayesModel::logLikelihoodDiscrete(string classLabel, Instance *insta
  * @param classMeans        A {@link HashMap} of String and {@link Vector}.
  * @param classDeviations   A {@link HashMap} of String and {@link Vector}.
  */
-NaiveBayesModel::NaiveBayesModel(DiscreteDistribution priorDistribution, map<string, Vector> classMeans,
-                                 map<string, Vector> classDeviations) {
-    this->priorDistribution = move(priorDistribution);
-    this->classMeans = move(classMeans);
-    this->classDeviations = move(classDeviations);
+NaiveBayesModel::NaiveBayesModel(const DiscreteDistribution& priorDistribution, const map<string, Vector>& classMeans,
+                                 const map<string, Vector>& classDeviations) {
+    this->priorDistribution = priorDistribution;
+    this->classMeans = classMeans;
+    this->classDeviations = classDeviations;
 }
 
 /**
@@ -86,10 +86,10 @@ NaiveBayesModel::NaiveBayesModel(DiscreteDistribution priorDistribution, map<str
  * @param priorDistribution           {@link DiscreteDistribution} input.
  * @param classAttributeDistributions {@link HashMap} of String and {@link ArrayList} of {@link DiscreteDistribution}s.
  */
-NaiveBayesModel::NaiveBayesModel(DiscreteDistribution priorDistribution,
-                                 map<string, vector<DiscreteDistribution>> classAttributeDistributions) {
-    this->priorDistribution = move(priorDistribution);
-    this->classAttributeDistributions = move(classAttributeDistributions);
+NaiveBayesModel::NaiveBayesModel(const DiscreteDistribution& priorDistribution,
+                                 const map<string, vector<DiscreteDistribution>>& classAttributeDistributions) {
+    this->priorDistribution = priorDistribution;
+    this->classAttributeDistributions = classAttributeDistributions;
 }
 
 void NaiveBayesModel::serialize(ostream &outputFile) {

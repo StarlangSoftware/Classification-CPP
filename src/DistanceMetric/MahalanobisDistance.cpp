@@ -13,8 +13,8 @@
  *
  * @param covarianceInverse Inverse of the covariance matrix.
  */
-MahalanobisDistance::MahalanobisDistance(Matrix covarianceInverse) {
-    this->covarianceInverse = move(covarianceInverse);
+MahalanobisDistance::MahalanobisDistance(const Matrix& covarianceInverse) {
+    this->covarianceInverse = covarianceInverse;
 }
 
 /**

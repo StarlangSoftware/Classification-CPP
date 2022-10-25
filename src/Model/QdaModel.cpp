@@ -16,7 +16,7 @@
  * @param Ci       String input.
  * @return The result of Wi.multiplyWithVectorFromLeft(xi).dotProduct(xi) + wi.dotProduct(xi) + w0i.
  */
-double QdaModel::calculateMetric(Instance *instance, string Ci) {
+double QdaModel::calculateMetric(Instance *instance, const string& Ci) const{
     double w0i;
     Vector xi = instance->toVector();
     Matrix Wi = W.find(Ci)->second;
@@ -39,9 +39,9 @@ double QdaModel::calculateMetric(Instance *instance, string Ci) {
  * @param w                 {@link HashMap} of String and Vectors.
  * @param w0                {@link HashMap} of String and Double.
  */
-QdaModel::QdaModel(DiscreteDistribution priorDistribution, map<string, Matrix> W, map<string, Vector> w,
-                   map<string, double> w0) : LdaModel(move(priorDistribution), move(w), move(w0)) {
-    this->W = move(W);
+QdaModel::QdaModel(const DiscreteDistribution& priorDistribution, const map<string, Matrix>& W, const map<string, Vector>& w,
+                   const map<string, double>& w0) : LdaModel(priorDistribution, w, w0) {
+    this->W = W;
 }
 
 void QdaModel::serialize(ostream &outputFile) {

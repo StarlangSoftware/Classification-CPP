@@ -9,7 +9,7 @@
  *
  * @param dataSet DataSet that will bu used.
  */
-LaryFilter::LaryFilter(DataSet &dataSet) : FeatureFilter(dataSet) {
+LaryFilter::LaryFilter(const DataSet &dataSet) : FeatureFilter(dataSet) {
     attributeDistributions = dataSet.getInstanceList().allAttributesDistribution();
 }
 

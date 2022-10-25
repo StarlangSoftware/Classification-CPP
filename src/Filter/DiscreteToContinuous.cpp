@@ -11,7 +11,7 @@
  * @param dataSet The dataSet whose instances whose discrete attributes will be converted to continuous attributes using
  *                1-of-L encoding.
  */
-DiscreteToContinuous::DiscreteToContinuous(DataSet& dataSet) : LaryFilter(dataSet) {
+DiscreteToContinuous::DiscreteToContinuous(const DataSet& dataSet) : LaryFilter(dataSet) {
 }
 
 /**

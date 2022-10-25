@@ -18,17 +18,17 @@ ContinuousAttribute::ContinuousAttribute(double value) {
  *
  * @return value
  */
-double ContinuousAttribute::getValue() {
+double ContinuousAttribute::getValue() const {
     return value;
 }
 
 /**
- * Mutator method for value
+ * Mutator method for _value
  *
- * @param value New value of value.
+ * @param _value New _value of _value.
  */
-void ContinuousAttribute::setValue(double value) {
-    this->value = value;
+void ContinuousAttribute::setValue(double _value) {
+    this->value = _value;
 }
 
 /**
@@ -36,15 +36,15 @@ void ContinuousAttribute::setValue(double value) {
  *
  * @return String representation of value.
  */
-string ContinuousAttribute::to_string() {
+string ContinuousAttribute::to_string() const{
     return std::to_string(value);
 }
 
-int ContinuousAttribute::continuousAttributeSize() {
+int ContinuousAttribute::continuousAttributeSize() const{
     return 1;
 }
 
-vector<double> ContinuousAttribute::continuousAttributes() {
+vector<double> ContinuousAttribute::continuousAttributes() const{
     vector<double> result;
     result.push_back(value);
     return result;

@@ -6,7 +6,7 @@
 #include "StatisticalTestNotApplicable.h"
 #include "Paired5x2t.h"
 
-double Paired5x2t::testStatistic(ExperimentPerformance classifier1, ExperimentPerformance classifier2) {
+double Paired5x2t::testStatistic(const ExperimentPerformance& classifier1, const ExperimentPerformance& classifier2) const{
     if (classifier1.numberOfExperiments() != classifier2.numberOfExperiments()){
         throw StatisticalTestNotApplicable("5x2 t test", "In order to apply a paired test, you need to have the same number of experiments in both algorithms.");
     }
@@ -24,15 +24,16 @@ double Paired5x2t::testStatistic(ExperimentPerformance classifier1, ExperimentPe
         double variance = (difference[2 * i] - mean) * (difference[2 * i] - mean) + (difference[2 * i + 1] - mean) * (difference[2 * i + 1] - mean);
         denominator += variance;
     }
-    delete difference;
     denominator = sqrt(denominator / 5);
     if (denominator == 0){
         throw StatisticalTestNotApplicable("5x2 t test", "Variance is 0.");
     }
-    return difference[0] / denominator;
+    double result = difference[0] / denominator;
+    delete difference;
+    return result;
 }
 
-StatisticalTestResult Paired5x2t::compare(ExperimentPerformance classifier1, ExperimentPerformance classifier2) {
+StatisticalTestResult Paired5x2t::compare(const ExperimentPerformance& classifier1, const ExperimentPerformance& classifier2) const{
     double statistic = testStatistic(classifier1, classifier2);
     int degreeOfFreedom = classifier1.numberOfExperiments() / 2;
     return StatisticalTestResult(Distribution::tDistribution(statistic, degreeOfFreedom), false);

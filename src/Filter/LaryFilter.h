@@ -14,7 +14,7 @@ protected:
     void removeDiscreteAttributes(Instance* instance, int size);
     void removeDiscreteAttributes(int size);
 public:
-    explicit LaryFilter(DataSet& dataSet);
+    explicit LaryFilter(const DataSet& dataSet);
 };
 
 

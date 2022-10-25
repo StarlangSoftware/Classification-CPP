@@ -16,7 +16,7 @@
  * @param k              K value.
  * @param distanceMetric {@link DistanceMetric} input.
  */
-KnnModel::KnnModel(InstanceList &data, int k, DistanceMetric *distanceMetric) {
+KnnModel::KnnModel(const InstanceList &data, int k, DistanceMetric *distanceMetric) {
     this->data = data;
     this->k = k;
     this->distanceMetric = distanceMetric;
@@ -29,7 +29,7 @@ KnnModel::KnnModel(InstanceList &data, int k, DistanceMetric *distanceMetric) {
  * @param instance {@link Instance} to make prediction.
  * @return The first possible class label as the predicted class.
  */
-string KnnModel::predict(Instance *instance) {
+string KnnModel::predict(Instance *instance){
     InstanceList neighbors = nearestNeighbors(instance);
     string predictedClass;
     if (instance->isComposite() && neighbors.size() == 0) {
@@ -50,7 +50,7 @@ bool knnInstanceComparator(KnnInstance instanceA, KnnInstance instanceB) { retur
  * @param instance {@link Instance} to find nearest neighbors/
  * @return The first k instances which are nearest to the given instance as an {@link InstanceList}.
  */
-InstanceList KnnModel::nearestNeighbors(Instance *instance) {
+InstanceList KnnModel::nearestNeighbors(Instance *instance) const{
     InstanceList result = InstanceList();
     vector<KnnInstance> instances;
     vector<string> possibleClassLabels;
@@ -80,7 +80,7 @@ KnnModel::KnnModel(ifstream &inputFile) {
     distanceMetric = new EuclidianDistance();
 }
 
-map<string, double> KnnModel::predictProbability(Instance *instance) {
+map<string, double> KnnModel::predictProbability(Instance *instance){
     InstanceList neighbors = nearestNeighbors(instance);
     return neighbors.classDistribution().getProbabilityDistribution();
 }

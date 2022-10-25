@@ -17,7 +17,7 @@ FloatingSelection::FloatingSelection() : SubSetSelection(){
  * @param numberOfFeatures Indicates the indices of indexList.
  * @return ArrayList of FeatureSubSet.
  */
-vector<FeatureSubSet> FloatingSelection::operatorToModify(FeatureSubSet &current, int numberOfFeatures) {
+vector<FeatureSubSet> FloatingSelection::operatorToModify(const FeatureSubSet &current, int numberOfFeatures) {
     vector<FeatureSubSet> result;
     forward(result, current, numberOfFeatures);
     backward(result, current);

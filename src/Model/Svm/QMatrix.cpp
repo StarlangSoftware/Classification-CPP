@@ -11,7 +11,7 @@
  * @param parameter {@link SvmParameter} input.
  * @param y         A double array input.
  */
-QMatrix::QMatrix(Problem problem, SvmParameter *parameter, vector<double> y) {
+QMatrix::QMatrix(const Problem& problem, SvmParameter *parameter, const vector<double>& y) {
     kernel = Kernel(problem.getL(), problem.getX(), parameter->getKernelType(), parameter->getDegree(), parameter->getGamma(), parameter->getCoefficient0());
     this->y.reserve(problem.getL());
     for (int i = 0; i < problem.getL(); i++) {
@@ -26,7 +26,7 @@ QMatrix::QMatrix(Problem problem, SvmParameter *parameter, vector<double> y) {
  * @param length Length of array.
  * @return A new array with new calculated values.
  */
-vector<double> QMatrix::getQ(int i, int length) {
+vector<double> QMatrix::getQ(int i, int length) const{
     vector<double> data;
     data.reserve(length);
     for (int j = 0; j < length; j++) {

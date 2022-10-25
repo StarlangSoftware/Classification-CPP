@@ -20,10 +20,10 @@
  * @param attributeIndex Index of the attribute.
  * @return Total entropy for the discrete attribute.
  */
-double DecisionNode::entropyForDiscreteAttribute(int attributeIndex) {
+double DecisionNode::entropyForDiscreteAttribute(int attributeIndex) const{
     double sum = 0.0;
     vector<DiscreteDistribution> distributions = data.attributeClassDistribution(attributeIndex);
-    for (DiscreteDistribution distribution : distributions) {
+    for (const DiscreteDistribution& distribution : distributions) {
         sum += (distribution.getSum() / data.size()) * distribution.entropy();
     }
     return sum;
@@ -105,7 +105,7 @@ void DecisionNode::createChildrenForContinuous(int attributeIndex, double splitV
  * @param parameter RandomForestParameter like seed, ensembleSize, attributeSubsetSize.
  * @param isStump   Refers to decision trees with only 1 splitting rule.
  */
-DecisionNode::DecisionNode(InstanceList data, DecisionCondition condition, RandomForestParameter *parameter,
+DecisionNode::DecisionNode(InstanceList data, const DecisionCondition& condition, RandomForestParameter *parameter,
                            bool isStump) {
     double bestEntropy, entropy;
     DiscreteDistribution leftDistribution, rightDistribution, classDistribution;
@@ -248,15 +248,15 @@ string DecisionNode::predict(Instance *instance) {
 
 DecisionNode::DecisionNode() = default;
 
-bool DecisionNode::isLeaf() {
+bool DecisionNode::isLeaf() const{
     return leaf;
 }
 
-void DecisionNode::setLeaf(bool leaf) {
-    this->leaf = leaf;
+void DecisionNode::setLeaf(bool _leaf) {
+    this->leaf = _leaf;
 }
 
-vector<DecisionNode> DecisionNode::getChildren() {
+vector<DecisionNode> DecisionNode::getChildren() const{
     return children;
 }
 

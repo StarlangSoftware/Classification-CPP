@@ -10,9 +10,9 @@
  * @param rho   Double input rho.
  * @param alpha Double array of alpha values.
  */
-SolutionInfo::SolutionInfo(double rho, vector<double> alpha) {
+SolutionInfo::SolutionInfo(double rho, const vector<double>& alpha) {
     this->rho = rho;
-    this->alpha = move(alpha);
+    this->alpha = alpha;
 }
 
 /**
@@ -20,7 +20,7 @@ SolutionInfo::SolutionInfo(double rho, vector<double> alpha) {
  *
  * @return Rho value.
  */
-double SolutionInfo::getRho() {
+double SolutionInfo::getRho() const{
     return rho;
 }
 
@@ -30,7 +30,7 @@ double SolutionInfo::getRho() {
  * @param index Index to retrieve alpha.
  * @return The alpha at given index.
  */
-double SolutionInfo::getAlpha(int index) {
+double SolutionInfo::getAlpha(int index) const{
     return alpha[index];
 }
 

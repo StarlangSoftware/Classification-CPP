@@ -12,9 +12,9 @@ private:
 public:
     explicit ClassificationPerformance(double accuracy);
     ClassificationPerformance(double accuracy, double errorRate);
-    double getAccuracy();
-    bool containsDetails() override;
-    bool isClassification() override;
+    double getAccuracy() const;
+    bool containsDetails() const override;
+    bool isClassification() const override;
 };
 
 

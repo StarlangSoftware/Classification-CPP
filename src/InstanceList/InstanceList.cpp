@@ -35,7 +35,7 @@ InstanceList::InstanceList() = default;
  * @param separator  Separator character which separates the attribute values in the data file.
  * @param fileName   Name of the data set file.
  */
-InstanceList::InstanceList(DataDefinition definition, string separator, string fileName) {
+InstanceList::InstanceList(const DataDefinition& definition, const string& separator, const string& fileName) {
     Instance* current;
     string line;
     ifstream inputFile;
@@ -71,8 +71,8 @@ InstanceList::InstanceList(DataDefinition definition, string separator, string f
  *
  * @param list New list for the list variable.
  */
-InstanceList::InstanceList(vector<Instance *> list) {
-    this->list = move(list);
+InstanceList::InstanceList(const vector<Instance *>& list) {
+    this->list = list;
 }
 
 /**
@@ -89,7 +89,7 @@ void InstanceList::add(Instance *instance) {
  *
  * @param instanceList List of instances to be added.
  */
-void InstanceList::addAll(vector<Instance *> instanceList) {
+void InstanceList::addAll(const vector<Instance *>& instanceList) {
     list.insert(list.end(), instanceList.begin(), instanceList.end());
 }
 
@@ -98,7 +98,7 @@ void InstanceList::addAll(vector<Instance *> instanceList) {
  *
  * @return Size of the instance list.
  */
-int InstanceList::size() {
+int InstanceList::size() const{
     return list.size();
 }
 
@@ -108,7 +108,7 @@ int InstanceList::size() {
  * @param index Index of the instance.
  * @return Instance with index 'index'.
  */
-Instance *InstanceList::get(int index) {
+Instance *InstanceList::get(int index) const{
     return list.at(index);
 }
 
@@ -186,7 +186,7 @@ void InstanceList::shuffle(int seed) {
  * @param seed To create a different bootstrap sample, we need a new seed for each sample.
  * @return Bootstrap sample.
  */
-Bootstrap <Instance*> InstanceList::bootstrap(int seed) {
+Bootstrap <Instance*> InstanceList::bootstrap(int seed) const{
     return Bootstrap<Instance*>(list, seed);
 }
 
@@ -195,7 +195,7 @@ Bootstrap <Instance*> InstanceList::bootstrap(int seed) {
  *
  * @return A {@link vector} of class labels.
  */
-vector<string> InstanceList::getClassLabels() {
+vector<string> InstanceList::getClassLabels() const{
     vector<string> classLabels;
     classLabels.reserve(list.size());
     for (Instance* instance : list) {
@@ -209,7 +209,7 @@ vector<string> InstanceList::getClassLabels() {
  *
  * @return A {@link vector} of distinct class labels.
  */
-vector<string> InstanceList::getDistinctClassLabels() {
+vector<string> InstanceList::getDistinctClassLabels() const{
     vector<string> classLabels;
     for (Instance* instance : list) {
         if (find(classLabels.begin(), classLabels.end(), instance->getClassLabel()) == classLabels.end()) {
@@ -224,7 +224,7 @@ vector<string> InstanceList::getDistinctClassLabels() {
  *
  * @return Instances.
  */
-vector<Instance *> InstanceList::getInstances() {
+vector<Instance *> InstanceList::getInstances() const{
     return list;
 }
 
@@ -233,7 +233,7 @@ vector<Instance *> InstanceList::getInstances() {
  *
  * @return An {@link vector} of distinct class labels.
  */
-vector<string> InstanceList::getUnionOfPossibleClassLabels() {
+vector<string> InstanceList::getUnionOfPossibleClassLabels() const{
     vector<string> possibleClassLabels;
     for (Instance* instance : list) {
         for (const string& possibleClassLabel : instance->getPossibleClassLabels()){
@@ -251,7 +251,7 @@ vector<string> InstanceList::getUnionOfPossibleClassLabels() {
  * @param attributeIndex Index of the discrete attribute.
  * @return An array of distinct values of a discrete attribute.
  */
-vector<string> InstanceList::getAttributeValueList(int attributeIndex) {
+vector<string> InstanceList::getAttributeValueList(int attributeIndex) const{
     vector<string> valueList;
     for (Instance* instance : list) {
         string attributeValue = ((DiscreteAttribute*)(instance->getAttribute(attributeIndex)))->getValue();
@@ -270,7 +270,7 @@ vector<string> InstanceList::getAttributeValueList(int attributeIndex) {
  * @param index Index of the attribute.
  * @return The mean value of the instances as an attribute.
  */
-Attribute *InstanceList::attributeAverage(int index) {
+Attribute *InstanceList::attributeAverage(int index) const{
     if (list.at(0)->getAttribute(index)->isDiscrete()) {
         vector<string> values;
         values.reserve(list.size());
@@ -297,7 +297,7 @@ Attribute *InstanceList::attributeAverage(int index) {
  * @param index Index of the attribute.
  * @return The mean value of the instances as an attribute.
  */
-vector<double> InstanceList::continuousAttributeAverage(int index) {
+vector<double> InstanceList::continuousAttributeAverage(int index) const{
     if (list.at(0)->getAttribute(index)->isDiscreteIndexed()) {
         int maxIndexSize = ((DiscreteIndexedAttribute*)(list.at(0)->getAttribute(index)))->getMaxIndex();
         vector<double> values(maxIndexSize, 0.0);
@@ -329,7 +329,7 @@ vector<double> InstanceList::continuousAttributeAverage(int index) {
  * @param index Index of the attribute.
  * @return The standard deviation of the instances as an attribute.
  */
-Attribute *InstanceList::attributeStandardDeviation(int index) {
+Attribute *InstanceList::attributeStandardDeviation(int index) const{
     if (list.at(0)->getAttribute(index)->isContinuous()) {
         double average, sum = 0.0;
         for (Instance* instance : list) {
@@ -352,7 +352,7 @@ Attribute *InstanceList::attributeStandardDeviation(int index) {
  * @param index Index of the attribute.
  * @return The standard deviation of the instances as an attribute.
  */
-vector<double> InstanceList::continuousAttributeStandardDeviation(int index) {
+vector<double> InstanceList::continuousAttributeStandardDeviation(int index) const{
     if (list.at(0)->getAttribute(index)->isDiscreteIndexed()) {
         int maxIndexSize = ((DiscreteIndexedAttribute*)(list.at(0)->getAttribute(index)))->getMaxIndex();
         vector<double> averages(maxIndexSize, 0.0);
@@ -403,7 +403,7 @@ vector<double> InstanceList::continuousAttributeStandardDeviation(int index) {
  * @param index Index of the attribute.
  * @return Distribution of the attribute.
  */
-DiscreteDistribution InstanceList::attributeDistribution(int index) {
+DiscreteDistribution InstanceList::attributeDistribution(int index) const{
     DiscreteDistribution distribution = DiscreteDistribution();
     if (list.at(0)->getAttribute(index)->isDiscrete()) {
         for (Instance* instance : list) {
@@ -420,7 +420,7 @@ DiscreteDistribution InstanceList::attributeDistribution(int index) {
  * @param attributeIndex Index of the attribute.
  * @return Distribution of the class labels.
  */
-vector<DiscreteDistribution> InstanceList::attributeClassDistribution(int attributeIndex) {
+vector<DiscreteDistribution> InstanceList::attributeClassDistribution(int attributeIndex) const{
     vector<string> valueList = getAttributeValueList(attributeIndex);
     vector<DiscreteDistribution> distributions(valueList.size(), DiscreteDistribution());
     for (Instance* instance : list) {
@@ -439,7 +439,7 @@ vector<DiscreteDistribution> InstanceList::attributeClassDistribution(int attrib
  * @param attributeValue Value of the attribute.
  * @return Distribution of the class labels.
  */
-DiscreteDistribution InstanceList::discreteIndexedAttributeClassDistribution(int attributeIndex, int attributeValue) {
+DiscreteDistribution InstanceList::discreteIndexedAttributeClassDistribution(int attributeIndex, int attributeValue) const{
     DiscreteDistribution distribution;
     for (Instance* instance : list) {
         if (((DiscreteIndexedAttribute*)(instance->getAttribute(attributeIndex)))->getIndex() == attributeValue) {
@@ -454,7 +454,7 @@ DiscreteDistribution InstanceList::discreteIndexedAttributeClassDistribution(int
  *
  * @return Distribution of the class labels.
  */
-DiscreteDistribution InstanceList::classDistribution() {
+DiscreteDistribution InstanceList::classDistribution() const{
     DiscreteDistribution distribution;
     for (Instance* instance : list) {
         distribution.addItem(instance->getClassLabel());
@@ -467,7 +467,7 @@ DiscreteDistribution InstanceList::classDistribution() {
  *
  * @return Distributions of all the attributes of instances.
  */
-vector<DiscreteDistribution> InstanceList::allAttributesDistribution() {
+vector<DiscreteDistribution> InstanceList::allAttributesDistribution() const{
     vector<DiscreteDistribution> distributions;
     distributions.reserve(list.at(0)->attributeSize());
     for (int i = 0; i < list.at(0)->attributeSize(); i++) {
@@ -481,8 +481,8 @@ vector<DiscreteDistribution> InstanceList::allAttributesDistribution() {
  *
  * @return Mean of all the attributes for instances in the list.
  */
-Instance *InstanceList::average() {
-    Instance* result = new Instance(list.at(0)->getClassLabel());
+Instance *InstanceList::average() const{
+    auto* result = new Instance(list.at(0)->getClassLabel());
     for (int i = 0; i < list.at(0)->attributeSize(); i++) {
         result->addAttribute(attributeAverage(i));
     }
@@ -494,7 +494,7 @@ Instance *InstanceList::average() {
  *
  * @return Mean of the attributes of instances.
  */
-vector<double> InstanceList::continuousAttributeAverage() {
+vector<double> InstanceList::continuousAttributeAverage() const{
     vector<double> result;
     for (int i = 0; i < list.at(0)->attributeSize(); i++) {
         vector<double> added = continuousAttributeAverage(i);
@@ -508,8 +508,8 @@ vector<double> InstanceList::continuousAttributeAverage() {
  *
  * @return Standard deviation of attributes for instances.
  */
-Instance *InstanceList::standardDeviation() {
-    Instance* result = new Instance(list.at(0)->getClassLabel());
+Instance *InstanceList::standardDeviation() const{
+    auto* result = new Instance(list.at(0)->getClassLabel());
     for (int i = 0; i < list.at(0)->attributeSize(); i++) {
         result->addAttribute(attributeStandardDeviation(i));
     }
@@ -521,7 +521,7 @@ Instance *InstanceList::standardDeviation() {
  *
  * @return Standard deviation of continuous attributes for instances.
  */
-vector<double> InstanceList::continuousAttributeStandardDeviation() {
+vector<double> InstanceList::continuousAttributeStandardDeviation() const{
     vector<double> result;
     for (int i = 0; i < list.at(0)->attributeSize(); i++) {
         vector<double> added = continuousAttributeStandardDeviation(i);
@@ -536,7 +536,7 @@ vector<double> InstanceList::continuousAttributeStandardDeviation() {
  * @param average Vector input.
  * @return Covariance {@link Matrix}.
  */
-Matrix InstanceList::covariance(Vector average) {
+Matrix InstanceList::covariance(const Vector& average) const{
     double mi, mj, xi, xj;
     Matrix result = Matrix(list.at(0)->continuousAttributeSize(), list.at(0)->continuousAttributeSize());
     for (Instance* instance : list) {
@@ -592,16 +592,16 @@ InstanceList::InstanceList(ifstream &inputFile) {
     inputFile >> size;
     for (int i = 0; i < size; i++){
         vector<Attribute*> attributeList;
-        for (int i = 0; i < attributeSize; i++) {
-            if (attributeTypes.at(i) == "Discrete"){
+        for (int j = 0; j < attributeSize; j++) {
+            if (attributeTypes.at(j) == "Discrete"){
                 inputFile >> discreteAttribute;
                 attributeList.push_back(new DiscreteAttribute(discreteAttribute));
             } else {
-                if (attributeTypes.at(i) == "Continuous"){
+                if (attributeTypes.at(j) == "Continuous"){
                     inputFile >> continuousAttribute;
                     attributeList.push_back(new ContinuousAttribute(continuousAttribute));
                 } else {
-                    if (attributeTypes.at(i) == "Binary"){
+                    if (attributeTypes.at(j) == "Binary"){
                         inputFile >> discreteAttribute;
                         attributeList.push_back(new BinaryAttribute(discreteAttribute));
                     }

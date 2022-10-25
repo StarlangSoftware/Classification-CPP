@@ -6,7 +6,7 @@
 #include "StatisticalTestNotApplicable.h"
 #include "Combined5x2t.h"
 
-double Combined5x2t::testStatistic(ExperimentPerformance classifier1, ExperimentPerformance classifier2) {
+double Combined5x2t::testStatistic(const ExperimentPerformance& classifier1, const ExperimentPerformance& classifier2) const{
     if (classifier1.numberOfExperiments() != classifier2.numberOfExperiments()){
         throw StatisticalTestNotApplicable("Combined 5x2 t test", "In order to apply a paired test, you need to have the same number of experiments in both algorithms.");
     }
@@ -35,7 +35,7 @@ double Combined5x2t::testStatistic(ExperimentPerformance classifier1, Experiment
     return numerator / denominator;
 }
 
-StatisticalTestResult Combined5x2t::compare(ExperimentPerformance classifier1, ExperimentPerformance classifier2) {
+StatisticalTestResult Combined5x2t::compare(const ExperimentPerformance& classifier1, const ExperimentPerformance& classifier2) const{
     double statistic = testStatistic(classifier1, classifier2);
     int degreeOfFreedom = classifier1.numberOfExperiments() / 2;
     return StatisticalTestResult(Distribution::tDistribution(statistic, degreeOfFreedom), false);

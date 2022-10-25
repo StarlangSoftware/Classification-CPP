@@ -12,9 +12,9 @@ private:
     Instance* instance;
 public:
     KnnInstance(Instance* instance, double distance);
-    string to_string();
-    double getDistance();
-    Instance* getInstance();
+    string to_string() const;
+    double getDistance() const;
+    Instance* getInstance() const;
 };
 
 

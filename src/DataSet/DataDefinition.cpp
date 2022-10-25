@@ -14,8 +14,8 @@ DataDefinition::DataDefinition() = default;
  *
  * @param attributeTypes Attribute types of the data definition.
  */
-DataDefinition::DataDefinition(vector<AttributeType> attributeTypes) {
-    this->attributeTypes = move(attributeTypes);
+DataDefinition::DataDefinition(const vector<AttributeType>& attributeTypes) {
+    this->attributeTypes = attributeTypes;
 }
 
 /**
@@ -23,7 +23,7 @@ DataDefinition::DataDefinition(vector<AttributeType> attributeTypes) {
  *
  * @return Number of attribute types.
  */
-int DataDefinition::attributeCount() {
+int DataDefinition::attributeCount() const{
     return attributeTypes.size();
 }
 
@@ -32,7 +32,7 @@ int DataDefinition::attributeCount() {
  *
  * @return Count of binary and discrete type attributes.
  */
-int DataDefinition::discreteAttributeCount() {
+int DataDefinition::discreteAttributeCount() const{
     int count = 0;
     for (AttributeType attributeType : attributeTypes) {
         if (attributeType == AttributeType::DISCRETE || attributeType == AttributeType::BINARY) {
@@ -47,7 +47,7 @@ int DataDefinition::discreteAttributeCount() {
  *
  * @return Count of of binary and continuous type attributes.
  */
-int DataDefinition::continuousAttributeCount() {
+int DataDefinition::continuousAttributeCount() const{
     int count = 0;
     for (AttributeType attributeType : attributeTypes) {
         if (attributeType == AttributeType::CONTINUOUS) {
@@ -63,7 +63,7 @@ int DataDefinition::continuousAttributeCount() {
  * @param index Index of the attribute type.
  * @return Attribute type of the corresponding item at given index.
  */
-AttributeType DataDefinition::getAttributeType(int index) {
+AttributeType DataDefinition::getAttributeType(int index) const{
     return attributeTypes.at(index);
 }
 
@@ -98,7 +98,7 @@ void DataDefinition::removeAllAttributes() {
  * @param featureSubSet {@link FeatureSubSet} input.
  * @return DataDefinition with new subset of attribute types.
  */
-DataDefinition DataDefinition::getSubSetOfFeatures(FeatureSubSet featureSubSet) {
+DataDefinition DataDefinition::getSubSetOfFeatures(const FeatureSubSet& featureSubSet) {
     vector<AttributeType> newAttributeTypes;
     newAttributeTypes.reserve(featureSubSet.size());
     for (int i = 0; i < featureSubSet.size(); i++) {

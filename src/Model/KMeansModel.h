@@ -15,10 +15,10 @@ private:
     DistanceMetric* distanceMetric;
 public:
     explicit KMeansModel(ifstream& inputFile);
-    KMeansModel(DiscreteDistribution priorDistribution, InstanceList& classMeans, DistanceMetric* distanceMetric);
+    KMeansModel(const DiscreteDistribution& priorDistribution, const InstanceList& classMeans, DistanceMetric* distanceMetric);
     void serialize(ostream &outputFile) override;
 protected:
-    double calculateMetric(Instance* instance, string Ci) override;
+    double calculateMetric(Instance* instance, const string& Ci) const override;
 };
 
 

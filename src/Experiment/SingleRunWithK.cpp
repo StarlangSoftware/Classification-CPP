@@ -27,7 +27,7 @@ Performance *SingleRunWithK::runExperiment(Classifier *classifier, Parameter *pa
  * @param experiment Experiment to be run.
  * @return An array of performances: result. result[i] is the performance of the classifier on the i'th fold.
  */
-Performance *SingleRunWithK::execute(Experiment experiment) {
-    KFoldCrossValidation<Instance*>* crossValidation = new KFoldCrossValidation<Instance*>(experiment.getDataSet().getInstances(), K, experiment.getParameter()->getSeed());
+Performance *SingleRunWithK::execute(const Experiment& experiment) {
+    auto* crossValidation = new KFoldCrossValidation<Instance*>(experiment.getDataSet().getInstances(), K, experiment.getParameter()->getSeed());
     return runExperiment(experiment.getClassifier(), experiment.getParameter(), crossValidation);
 }

@@ -14,7 +14,7 @@ public:
 protected:
     int K;
     Performance* runExperiment(Classifier* classifier, Parameter* parameter, CrossValidation<Instance*>* crossValidation);
-    Performance* execute(Experiment experiment);
+    Performance* execute(const Experiment& experiment);
 };
 
 

@@ -28,6 +28,6 @@ void AutoEncoder::train(InstanceList &trainSet, Parameter *parameters) {
  * @param testSet Test data (list of instances) to be tested.
  * @return Error rate.
  */
-Performance *AutoEncoder::test(InstanceList testSet) {
+Performance *AutoEncoder::test(const InstanceList& testSet) const{
     return ((AutoEncoderModel*) model)->testAutoEncoder(testSet);
 }

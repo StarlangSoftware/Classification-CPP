@@ -20,12 +20,12 @@ StratifiedMxKFoldRunSeparateTest::StratifiedMxKFoldRunSeparateTest(int M, int K)
  * @param experiment Experiment to be run.
  * @return An array of performances: result. result[i] is the performance of the classifier on the i'th bootstrap run.
  */
-ExperimentPerformance *StratifiedMxKFoldRunSeparateTest::execute(Experiment experiment) {
+ExperimentPerformance *StratifiedMxKFoldRunSeparateTest::execute(const Experiment& experiment) {
     auto * result = new ExperimentPerformance();
     for (int j = 0; j < M; j++) {
         InstanceList instanceList = experiment.getDataSet().getInstanceList();
         Partition partition = Partition(instanceList, 0.25, experiment.getParameter()->getSeed(), true);
-        StratifiedKFoldCrossValidation<Instance*>* crossValidation = new StratifiedKFoldCrossValidation<Instance*>(Partition(*(partition.get(1))).getLists(), StratifiedKFoldRunSeparateTest::K, StratifiedKFoldRunSeparateTest::K, experiment.getParameter()->getSeed());
+        auto* crossValidation = new StratifiedKFoldCrossValidation<Instance*>(Partition(*(partition.get(1))).getLists(), StratifiedKFoldRunSeparateTest::K, StratifiedKFoldRunSeparateTest::K, experiment.getParameter()->getSeed());
         runExperiment(experiment.getClassifier(), experiment.getParameter(), result, crossValidation, *(partition.get(0)));
     }
     return result;

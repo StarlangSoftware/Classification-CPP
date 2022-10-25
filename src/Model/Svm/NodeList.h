@@ -14,12 +14,12 @@ private:
     vector<Node> nodes;
 public:
     explicit NodeList(ifstream& inputFile);
-    explicit NodeList(vector<double> values);
+    explicit NodeList(const vector<double>& values);
     NodeList();
-    NodeList clone();
-    double dot(NodeList nodeList);
-    Node get(int index);
-    int size();
+    NodeList clone() const;
+    double dot(const NodeList& nodeList) const;
+    Node get(int index) const;
+    int size() const;
     void serialize(ostream &outputFile);
 };
 

@@ -19,17 +19,17 @@ private:
     bool classification = true;
 public:
     ExperimentPerformance();
-    explicit ExperimentPerformance(string fileName);
+    explicit ExperimentPerformance(const string& fileName);
     void add(Performance* performance);
-    int numberOfExperiments();
-    double getErrorRate(int index);
-    double getAccuracy(int index);
-    Performance* meanPerformance();
-    ClassificationPerformance* meanClassificationPerformance();
-    DetailedClassificationPerformance* meanDetailedPerformance();
-    Performance* standardDeviationPerformance();
-    ClassificationPerformance* standardDeviationClassificationPerformance();
-    bool isBetter(ExperimentPerformance* experimentPerformance);
+    int numberOfExperiments() const;
+    double getErrorRate(int index) const;
+    double getAccuracy(int index) const;
+    Performance* meanPerformance() const;
+    ClassificationPerformance* meanClassificationPerformance() const;
+    DetailedClassificationPerformance* meanDetailedPerformance() const;
+    Performance* standardDeviationPerformance() const;
+    ClassificationPerformance* standardDeviationClassificationPerformance() const;
+    bool isBetter(ExperimentPerformance* experimentPerformance) const;
 };
 
 

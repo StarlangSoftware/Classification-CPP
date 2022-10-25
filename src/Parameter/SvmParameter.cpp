@@ -28,7 +28,7 @@ SvmParameter::SvmParameter(int seed, KernelType kernelType, int degree, double g
  *
  * @return The kernelType.
  */
-KernelType SvmParameter::getKernelType() {
+KernelType SvmParameter::getKernelType() const{
     return kernelType;
 }
 
@@ -37,7 +37,7 @@ KernelType SvmParameter::getKernelType() {
  *
  * @return The degree.
  */
-int SvmParameter::getDegree() {
+int SvmParameter::getDegree() const{
     return degree;
 }
 
@@ -46,7 +46,7 @@ int SvmParameter::getDegree() {
  *
  * @return The gamma.
  */
-double SvmParameter::getGamma() {
+double SvmParameter::getGamma() const{
     return gamma;
 }
 
@@ -55,7 +55,7 @@ double SvmParameter::getGamma() {
  *
  * @return The coefficient0.
  */
-double SvmParameter::getCoefficient0() {
+double SvmParameter::getCoefficient0() const{
     return coefficient0;
 }
 
@@ -64,7 +64,7 @@ double SvmParameter::getCoefficient0() {
  *
  * @return The C.
  */
-double SvmParameter::getC() {
+double SvmParameter::getC() const{
     return C;
 }
 
@@ -73,6 +73,6 @@ double SvmParameter::getC() {
  *
  * @return The shrinking.
  */
-bool SvmParameter::isShrinking() {
+bool SvmParameter::isShrinking() const{
     return shrinking;
 }

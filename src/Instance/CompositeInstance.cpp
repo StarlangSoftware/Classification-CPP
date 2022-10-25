@@ -12,7 +12,7 @@
  *
  * @param classLabel Class label of the composite instance.
  */
-CompositeInstance::CompositeInstance(string classLabel) : Instance(std::move(classLabel)) {
+CompositeInstance::CompositeInstance(const string& classLabel) : Instance(classLabel) {
 }
 
 /**
@@ -22,7 +22,7 @@ CompositeInstance::CompositeInstance(string classLabel) : Instance(std::move(cla
  * @param classLabel Class label of the composite instance.
  * @param attributes Attributes of the composite instance.
  */
-CompositeInstance::CompositeInstance(string classLabel, vector<Attribute *> attributes) : Instance(move(classLabel), move(attributes)) {
+CompositeInstance::CompositeInstance(const string& classLabel, const vector<Attribute *>& attributes) : Instance(classLabel, attributes) {
 }
 
 /**
@@ -31,7 +31,7 @@ CompositeInstance::CompositeInstance(string classLabel, vector<Attribute *> attr
  *
  * @param possibleLabels Possible labels of the composite instance.
  */
-CompositeInstance::CompositeInstance(vector<string> possibleLabels) : Instance(possibleLabels.at(0)) {
+CompositeInstance::CompositeInstance(const vector<string>& possibleLabels) : Instance(possibleLabels.at(0)) {
     this->possibleClassLabels.insert(this->possibleClassLabels.end(), possibleLabels.begin() + 1, possibleLabels.end());
 }
 
@@ -43,8 +43,8 @@ CompositeInstance::CompositeInstance(vector<string> possibleLabels) : Instance(p
  * @param attributes          Attributes of the composite instance.
  * @param possibleClassLabels Possible labels of the composite instance.
  */
-CompositeInstance::CompositeInstance(string classLabel, vector<Attribute *> attributes,
-                                     vector<string> possibleClassLabels) : Instance(move(classLabel), move(attributes)) {
+CompositeInstance::CompositeInstance(const string& classLabel, const vector<Attribute *>& attributes,
+                                     const vector<string>& possibleClassLabels) : Instance(classLabel, attributes) {
     this->possibleClassLabels.insert(this->possibleClassLabels.end(), possibleClassLabels.begin(), possibleClassLabels.end());
 }
 
@@ -53,17 +53,17 @@ CompositeInstance::CompositeInstance(string classLabel, vector<Attribute *> attr
  *
  * @return Possible class labels of the composite instance.
  */
-vector<string> CompositeInstance::getPossibleClassLabels() {
+vector<string> CompositeInstance::getPossibleClassLabels() const{
     return possibleClassLabels;
 }
 
 /**
  * Mutator method for possible class labels.
  *
- * @param possibleClassLabels value of possible class labels.
+ * @param _possibleClassLabels value of possible class labels.
  */
-void CompositeInstance::setPossibleClassLabels(vector<string> possibleClassLabels) {
-    this->possibleClassLabels.insert(this->possibleClassLabels.end(), possibleClassLabels.begin(), possibleClassLabels.end());
+void CompositeInstance::setPossibleClassLabels(const vector<string>& _possibleClassLabels) {
+    this->possibleClassLabels.insert(this->possibleClassLabels.end(), _possibleClassLabels.begin(), _possibleClassLabels.end());
 }
 
 /**
@@ -71,7 +71,7 @@ void CompositeInstance::setPossibleClassLabels(vector<string> possibleClassLabel
  *
  * @return String representation of possible class labels.
  */
-string CompositeInstance::to_string() {
+string CompositeInstance::to_string() const{
     string result = Instance::to_string();
     for (const string &possibleClassLabel : possibleClassLabels) {
         result.append(";").append(possibleClassLabel);

@@ -10,8 +10,8 @@
  * @param x NodeList array.
  * @param y Double array.
  */
-Problem::Problem(vector<NodeList> x, vector<double> y) {
-    this->x = move(x);
+Problem::Problem(const vector<NodeList>& x, const vector<double>& y) {
+    this->x = x;
     this->y = y;
     this->l = y.size();
 }
@@ -21,7 +21,7 @@ Problem::Problem(vector<NodeList> x, vector<double> y) {
  *
  * @param instanceList InstanceList to use.
  */
-Problem::Problem(InstanceList &instanceList) {
+Problem::Problem(const InstanceList &instanceList) {
     Instance* instance;
     l = instanceList.size();
     for (int i = 0; i < instanceList.size(); i++) {
@@ -35,7 +35,7 @@ Problem::Problem(InstanceList &instanceList) {
  *
  * @return L.
  */
-int Problem::getL() {
+int Problem::getL() const{
     return l;
 }
 
@@ -44,7 +44,7 @@ int Problem::getL() {
  *
  * @return x.
  */
-vector<NodeList> Problem::getX() {
+vector<NodeList> Problem::getX() const{
     return x;
 }
 
@@ -53,6 +53,6 @@ vector<NodeList> Problem::getX() {
  *
  * @return y.
  */
-vector<double> Problem::getY() {
+vector<double> Problem::getY() const{
     return y;
 }

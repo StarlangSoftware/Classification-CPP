@@ -11,7 +11,7 @@
  *
  * @param dataSet Instances whose continuous attribute values will be normalized.
  */
-Normalize::Normalize(DataSet &dataSet) : FeatureFilter(dataSet) {
+Normalize::Normalize(const DataSet &dataSet) : FeatureFilter(dataSet) {
     averageInstance = dataSet.getInstanceList().average();
     standardDeviationInstance = dataSet.getInstanceList().standardDeviation();
 }

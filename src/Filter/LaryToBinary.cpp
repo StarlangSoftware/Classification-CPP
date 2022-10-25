@@ -10,7 +10,7 @@
  *
  * @param dataSet The instances whose L-ary discrete attributes will be converted to binary discrete attributes.
  */
-LaryToBinary::LaryToBinary(DataSet &dataSet) : LaryFilter(dataSet) {
+LaryToBinary::LaryToBinary(const DataSet &dataSet) : LaryFilter(dataSet) {
 }
 
 /**

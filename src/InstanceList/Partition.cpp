@@ -31,7 +31,7 @@ void Partition::add(InstanceList* list) {
  *
  * @return The size of the list of instance lists.
  */
-int Partition::size() {
+int Partition::size() const{
     return multiList.size();
 }
 
@@ -41,7 +41,7 @@ int Partition::size() {
  * @param index Index of the instance list.
  * @return Instance list at given index of list of instance lists.
  */
-InstanceList* Partition::get(int index) {
+InstanceList* Partition::get(int index) const{
     return multiList.at(index);
 }
 
@@ -50,7 +50,7 @@ InstanceList* Partition::get(int index) {
  *
  * @return Instances of the items at the list of instance lists.
  */
-vector<Instance *> *Partition::getLists() {
+vector<Instance *> *Partition::getLists() const{
     auto* result = new vector<Instance*>[multiList.size()];
     for (int i = 0; i < multiList.size(); i++) {
         result[i] = multiList.at(i)->getInstances();
@@ -64,7 +64,7 @@ vector<Instance *> *Partition::getLists() {
  *
  * @return Groups of instances according to their class labels.
  */
-Partition::Partition(InstanceList &list) {
+Partition::Partition(const InstanceList &list){
     vector<string> classLabels = list.getDistinctClassLabels();
     for (const string &classLabel : classLabels)
         add(new InstanceListOfSameClass(classLabel));
@@ -84,7 +84,7 @@ Partition::Partition(InstanceList &list) {
  * @param random random is used as a random number.
  * @return 2 group stratified partition of the instances in this instance list.
  */
-Partition::Partition(InstanceList &list, double ratio, int seed, bool stratified) {
+Partition::Partition(InstanceList& list, double ratio, int seed, bool stratified) {
     if (stratified){
         CounterHashMap<string> counts;
         DiscreteDistribution distribution;
@@ -125,7 +125,7 @@ Partition::Partition(InstanceList &list, double ratio, int seed, bool stratified
  * @return L groups of instances, where L is the number of distinct values of the discrete attribute with index
  * attributeIndex.
  */
-Partition::Partition(InstanceList &list, int attributeIndex) {
+Partition::Partition(const InstanceList &list, int attributeIndex) {
     vector<string> valueList = list.getAttributeValueList(attributeIndex);
     for (const string &value : valueList) {
         add(new InstanceList());
@@ -144,7 +144,7 @@ Partition::Partition(InstanceList &list, int attributeIndex) {
  * @return L groups of instances, where L is the number of distinct values of the discrete indexed attribute with index
  * attributeIndex and value attributeValue.
  */
-Partition::Partition(InstanceList &list, int attributeIndex, int attributeValue) {
+Partition::Partition(const InstanceList &list, int attributeIndex, int attributeValue) {
     add(new InstanceList());
     add(new InstanceList());
     for (Instance* instance : list.getInstances()) {
@@ -165,7 +165,7 @@ Partition::Partition(InstanceList &list, int attributeIndex, int attributeValue)
  * @param splitValue     Threshold to divide instances
  * @return Two groups of instances as a partition.
  */
-Partition::Partition(InstanceList &list, int attributeIndex, double splitValue) {
+Partition::Partition(const InstanceList &list, int attributeIndex, double splitValue) {
     add(new InstanceList());
     add(new InstanceList());
     for (Instance* instance : list.getInstances()) {

@@ -29,6 +29,6 @@ KMeansParameter::KMeansParameter(int seed, DistanceMetric* distanceMetric) : Par
  *
  * @return The distanceMetric.
  */
-DistanceMetric *KMeansParameter::getDistanceMetric() {
+DistanceMetric *KMeansParameter::getDistanceMetric() const{
     return distanceMetric;
 }

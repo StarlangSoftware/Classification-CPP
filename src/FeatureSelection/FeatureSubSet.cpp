@@ -9,8 +9,8 @@
  *
  * @param indexList A vector consists of integer indices.
  */
-FeatureSubSet::FeatureSubSet(vector<int> indexList) {
-    this->indexList = move(indexList);
+FeatureSubSet::FeatureSubSet(const vector<int>& indexList) {
+    this->indexList = indexList;
 }
 
 /**
@@ -27,16 +27,14 @@ FeatureSubSet::FeatureSubSet(int numberOfFeatures) {
 /**
  * A constructor that creates a new vector for indexList.
  */
-FeatureSubSet::FeatureSubSet() {
-
-}
+FeatureSubSet::FeatureSubSet() = default;
 
 /**
  * The clone method creates a new vector with the elements of indexList and returns it as a new FeatureSubSet.
  *
  * @return A new vector with the elements of indexList and returns it as a new FeatureSubSet.
  */
-FeatureSubSet FeatureSubSet::clone() {
+FeatureSubSet FeatureSubSet::clone() const{
     vector<int> newIndexList(indexList);
     return FeatureSubSet(newIndexList);
 }
@@ -46,7 +44,7 @@ FeatureSubSet FeatureSubSet::clone() {
  *
  * @return The size of the indexList.
  */
-int FeatureSubSet::size() {
+int FeatureSubSet::size() const{
     return indexList.size();
 }
 
@@ -56,7 +54,7 @@ int FeatureSubSet::size() {
  * @param index Index of the indexList to be accessed.
  * @return The item of indexList at given index.
  */
-int FeatureSubSet::get(int index) {
+int FeatureSubSet::get(int index) const{
     return indexList.at(index);
 }
 
@@ -66,7 +64,7 @@ int FeatureSubSet::get(int index) {
  * @param featureNo Feature number that will be checked.
  * @return True, if indexList contains given input number.
  */
-bool FeatureSubSet::contains(int featureNo) {
+bool FeatureSubSet::contains(int featureNo) const{
     return find(indexList.begin(), indexList.end(), featureNo) != indexList.end();
 }
 

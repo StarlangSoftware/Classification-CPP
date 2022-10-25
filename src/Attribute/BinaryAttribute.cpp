@@ -12,5 +12,5 @@
 BinaryAttribute::BinaryAttribute(bool value) : DiscreteAttribute(value) {
 }
 
-BinaryAttribute::BinaryAttribute(string value) : DiscreteAttribute(move(value)) {
+BinaryAttribute::BinaryAttribute(const string& value) : DiscreteAttribute(value) {
 }

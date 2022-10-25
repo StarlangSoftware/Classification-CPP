@@ -19,10 +19,10 @@ private:
     DistanceMetric* distanceMetric;
 public:
     explicit KnnModel(ifstream& inputFile);
-    KnnModel(InstanceList& data, int k, DistanceMetric* distanceMetric);
+    KnnModel(const InstanceList& data, int k, DistanceMetric* distanceMetric);
     string predict(Instance* instance) override;
     map<string, double> predictProbability(Instance* instance) override;
-    InstanceList nearestNeighbors(Instance* instance);
+    InstanceList nearestNeighbors(Instance* instance) const;
     void serialize(ostream &outputFile) override;
 };
 

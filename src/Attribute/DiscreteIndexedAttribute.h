@@ -11,15 +11,15 @@ private:
     int index;
     int maxIndex;
 public:
-    DiscreteIndexedAttribute(string value, int index, int maxIndex);
-    int getIndex();
-    int getMaxIndex();
-    int continuousAttributeSize() override;
-    vector<double> continuousAttributes() override;
-    bool isDiscrete() override {return false;}
-    bool isContinuous() override {return false;};
-    bool isDiscreteIndexed() override {return true;};
-    bool isBinary() override {return false;};
+    DiscreteIndexedAttribute(const string& value, int index, int maxIndex);
+    int getIndex() const;
+    int getMaxIndex() const;
+    int continuousAttributeSize() const override;
+    vector<double> continuousAttributes() const override;
+    bool isDiscrete() const override {return false;}
+    bool isContinuous() const override {return false;};
+    bool isDiscreteIndexed() const override {return true;};
+    bool isBinary() const override {return false;};
 };
 
 

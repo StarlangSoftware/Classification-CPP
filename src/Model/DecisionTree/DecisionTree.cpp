@@ -14,7 +14,7 @@
  */
 string DecisionTree::predict(Instance *instance) {
     string predictedClass = root.predict(instance);
-    if (predictedClass == "" && instance->isComposite()) {
+    if (predictedClass.empty() && instance->isComposite()) {
         predictedClass = ((CompositeInstance*) instance)->getPossibleClassLabels().at(0);
     }
     return predictedClass;
@@ -25,7 +25,7 @@ string DecisionTree::predict(Instance *instance) {
  *
  * @param root DecisionNode type input.
  */
-DecisionTree::DecisionTree(DecisionNode root) {
+DecisionTree::DecisionTree(const DecisionNode& root) {
     this->root = root;
 }
 
@@ -34,7 +34,7 @@ DecisionTree::DecisionTree(DecisionNode root) {
  *
  * @param pruneSet {@link InstanceList} to perform pruning.
  */
-void DecisionTree::prune(InstanceList pruneSet) {
+void DecisionTree::prune(const InstanceList& pruneSet) {
     pruneNode(root, pruneSet);
 }
 
@@ -46,7 +46,7 @@ void DecisionTree::prune(InstanceList pruneSet) {
  * @param tree     DecisionTree that will be pruned if conditions hold.
  * @param pruneSet Small subset of tree that will be removed from tree.
  */
-void DecisionTree::pruneNode(DecisionNode decisionNode, InstanceList pruneSet) {
+void DecisionTree::pruneNode(DecisionNode decisionNode, const InstanceList& pruneSet) {
     if (decisionNode.isLeaf())
         return;
     ClassificationPerformance* before = testClassifier(pruneSet);
@@ -54,7 +54,7 @@ void DecisionTree::pruneNode(DecisionNode decisionNode, InstanceList pruneSet) {
     ClassificationPerformance* after = testClassifier(pruneSet);
     if (after->getAccuracy() < before->getAccuracy()) {
         decisionNode.setLeaf(false);
-        for (DecisionNode node : decisionNode.getChildren()) {
+        for (const DecisionNode& node : decisionNode.getChildren()) {
             pruneNode(node, pruneSet);
         }
     }

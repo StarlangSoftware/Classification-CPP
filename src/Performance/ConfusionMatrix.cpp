@@ -14,8 +14,8 @@ ConfusionMatrix::ConfusionMatrix() {
  *
  * @param classLabels {@link ArrayList} of String.
  */
-ConfusionMatrix::ConfusionMatrix(vector<string> classLabels) {
-    this->classLabels = move(classLabels);
+ConfusionMatrix::ConfusionMatrix(const vector<string>& classLabels) {
+    this->classLabels = classLabels;
 }
 
 /**
@@ -27,12 +27,12 @@ ConfusionMatrix::ConfusionMatrix(vector<string> classLabels) {
  * @param actualClass    String input actual class.
  * @param predictedClass String input predicted class.
  */
-void ConfusionMatrix::classify(string actualClass, string predictedClass) {
+void ConfusionMatrix::classify(const string& actualClass, const string& predictedClass) {
     CounterHashMap<string> counterHashMap;
     if (matrix.contains(actualClass)) {
         counterHashMap = matrix.find(actualClass)->second;
     }
-    counterHashMap.put(move(predictedClass));
+    counterHashMap.put(predictedClass);
     matrix.insert_or_assign(actualClass, counterHashMap);
 }
 
@@ -42,7 +42,7 @@ void ConfusionMatrix::classify(string actualClass, string predictedClass) {
  *
  * @param confusionMatrix {@link ConfusionMatrix} input.
  */
-void ConfusionMatrix::addConfusionMatrix(ConfusionMatrix confusionMatrix) {
+void ConfusionMatrix::addConfusionMatrix(const ConfusionMatrix& confusionMatrix) {
     for (auto &it : confusionMatrix.matrix) {
         CounterHashMap<string> rowToBeAdded = it.second;
         if (matrix.contains(it.first)) {
@@ -61,7 +61,7 @@ void ConfusionMatrix::addConfusionMatrix(ConfusionMatrix confusionMatrix) {
  *
  * @return The summation of values.
  */
-double ConfusionMatrix::sumOfElements() {
+double ConfusionMatrix::sumOfElements() const{
     double result = 0;
     for (auto& it : matrix) {
         result += it.second.sumOfCounts();
@@ -75,7 +75,7 @@ double ConfusionMatrix::sumOfElements() {
  *
  * @return Summation of values.
  */
-double ConfusionMatrix::trace() {
+double ConfusionMatrix::trace() const{
     double result = 0;
     for (auto& it : matrix) {
         if (it.second.containsKey(it.first)) {
@@ -92,7 +92,7 @@ double ConfusionMatrix::trace() {
  * @param predictedClass String input predicted class.
  * @return Summation of values.
  */
-double ConfusionMatrix::columnSum(string predictedClass) {
+double ConfusionMatrix::columnSum(const string& predictedClass) const{
     double result = 0;
     for (auto& it : matrix) {
         if (it.second.containsKey(predictedClass)) {
@@ -107,7 +107,7 @@ double ConfusionMatrix::columnSum(string predictedClass) {
  *
  * @return the result of  TP+TN / TP+TN+FP+FN
  */
-double ConfusionMatrix::getAccuracy() {
+double ConfusionMatrix::getAccuracy() const{
     return trace() / sumOfElements();
 }
 
@@ -116,8 +116,8 @@ double ConfusionMatrix::getAccuracy() {
  *
  * @return The result of TP/FP+TP.
  */
-double *ConfusionMatrix::precision() {
-    double* result = new double[classLabels.size()];
+double *ConfusionMatrix::precision() const{
+    auto* result = new double[classLabels.size()];
     for (int i = 0; i < classLabels.size(); i++) {
         string actualClass = classLabels.at(i);
         if (matrix.contains(actualClass)) {
@@ -132,8 +132,8 @@ double *ConfusionMatrix::precision() {
  *
  * @return The result of TP/FN+TP.
  */
-double *ConfusionMatrix::recall() {
-    double* result = new double[classLabels.size()];
+double *ConfusionMatrix::recall() const{
+    auto* result = new double[classLabels.size()];
     for (int i = 0; i < classLabels.size(); i++) {
         string actualClass = classLabels.at(i);
         if (matrix.contains(actualClass)) {
@@ -149,10 +149,10 @@ double *ConfusionMatrix::recall() {
  *
  * @return The average of recall and precision.
  */
-double *ConfusionMatrix::fMeasure() {
+double *ConfusionMatrix::fMeasure() const{
     double* precisionValues = precision();
     double* recallValues = recall();
-    double* result = new double[classLabels.size()];
+    auto* result = new double[classLabels.size()];
     for (int i = 0; i < classLabels.size(); i++) {
         result[i] = 2 / (1 / precisionValues[i] + 1 / recallValues[i]);
     }
@@ -167,7 +167,7 @@ double *ConfusionMatrix::fMeasure() {
  *
  * @return The weighted average of recall and precision.
  */
-double ConfusionMatrix::weightedFMeasure() {
+double ConfusionMatrix::weightedFMeasure() const{
     double* fMeasureValues = fMeasure();
     double sum = 0;
     for (int i = 0; i < classLabels.size(); i++) {

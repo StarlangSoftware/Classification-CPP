@@ -17,19 +17,19 @@ private:
     string classLabel;
     bool leaf = false;
     DecisionCondition condition = DecisionCondition(-1, nullptr);
-    double entropyForDiscreteAttribute(int attributeIndex);
+    double entropyForDiscreteAttribute(int attributeIndex) const;
     void createChildrenForDiscreteIndexed(int attributeIndex, int attributeValue, RandomForestParameter* parameter, bool isStump);
     void createChildrenForDiscrete(int attributeIndex, RandomForestParameter* parameter, bool isStump);
     void createChildrenForContinuous(int attributeIndex, double splitValue, RandomForestParameter* parameter, bool isStump);
 public:
     DecisionNode();
     explicit DecisionNode(ifstream& inputFile);
-    DecisionNode(InstanceList data, DecisionCondition condition, RandomForestParameter* parameter, bool isStump);
+    DecisionNode(InstanceList data, const DecisionCondition& condition, RandomForestParameter* parameter, bool isStump);
     string predict(Instance* instance);
     map<string, double> predictProbabilityDistribution(Instance* instance);
-    bool isLeaf();
+    bool isLeaf() const;
     void setLeaf(bool leaf);
-    vector<DecisionNode> getChildren();
+    vector<DecisionNode> getChildren() const;
     void serialize(ostream &outputFile);
 };
 

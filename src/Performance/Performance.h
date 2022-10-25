@@ -11,9 +11,9 @@ protected:
     double errorRate;
 public:
     explicit Performance(double errorRate);
-    double getErrorRate();
-    virtual bool containsDetails();
-    virtual bool isClassification();
+    double getErrorRate() const;
+    virtual bool containsDetails() const;
+    virtual bool isClassification() const;
 };
 
 

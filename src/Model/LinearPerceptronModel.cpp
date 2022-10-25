@@ -24,7 +24,7 @@ LinearPerceptronModel::LinearPerceptronModel(InstanceList &trainSet) : NeuralNet
  * @param validationSet InstanceList that is used to validate.
  * @param parameters    Linear perceptron parameters; learningRate, etaDecrease, crossValidationRatio, epoch.
  */
-LinearPerceptronModel::LinearPerceptronModel(InstanceList &trainSet, InstanceList &validationSet,
+LinearPerceptronModel::LinearPerceptronModel(InstanceList &trainSet, const InstanceList &validationSet,
                                              LinearPerceptronParameter *parameters) : NeuralNetworkModel(trainSet){
     int epoch;
     double learningRate;

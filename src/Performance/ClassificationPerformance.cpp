@@ -28,14 +28,14 @@ ClassificationPerformance::ClassificationPerformance(double accuracy, double err
  *
  * @return Accuracy value.
  */
-double ClassificationPerformance::getAccuracy() {
+double ClassificationPerformance::getAccuracy() const{
     return accuracy;
 }
 
-bool ClassificationPerformance::containsDetails() {
+bool ClassificationPerformance::containsDetails() const{
     return false;
 }
 
-bool ClassificationPerformance::isClassification() {
+bool ClassificationPerformance::isClassification() const{
     return true;
 }

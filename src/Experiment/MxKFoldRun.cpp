@@ -21,10 +21,10 @@ MxKFoldRun::MxKFoldRun(int M, int K) : KFoldRun(K){
  * @param experiment Experiment to be run.
  * @return An array of performances: result. result[i] is the performance of the classifier on the i'th bootstrap run.
  */
-ExperimentPerformance *MxKFoldRun::execute(Experiment experiment) {
-    ExperimentPerformance* result = new ExperimentPerformance();
+ExperimentPerformance *MxKFoldRun::execute(const Experiment& experiment) {
+    auto* result = new ExperimentPerformance();
     for (int j = 0; j < M; j++) {
-        KFoldCrossValidation<Instance*>* crossValidation = new KFoldCrossValidation<Instance*>(experiment.getDataSet().getInstances(), K, experiment.getParameter()->getSeed());
+        auto* crossValidation = new KFoldCrossValidation<Instance*>(experiment.getDataSet().getInstances(), K, experiment.getParameter()->getSeed());
         runExperiment(experiment.getClassifier(), experiment.getParameter(), result, crossValidation);
     }
     return result;

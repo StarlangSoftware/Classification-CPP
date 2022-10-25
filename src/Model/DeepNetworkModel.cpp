@@ -31,7 +31,7 @@ void DeepNetworkModel::allocateWeights(DeepNetworkParameter *parameters) {
  *
  * @return An {@link vector} clones from the weights ArrayList.
  */
-vector<Matrix> DeepNetworkModel::setBestWeights() {
+vector<Matrix> DeepNetworkModel::setBestWeights() const{
     vector<Matrix> bestWeights;
     for (Matrix m : weights) {
         bestWeights.push_back(m.clone());
@@ -39,7 +39,7 @@ vector<Matrix> DeepNetworkModel::setBestWeights() {
     return bestWeights;
 }
 
-DeepNetworkModel::DeepNetworkModel(InstanceList &trainSet, InstanceList &validationSet,
+DeepNetworkModel::DeepNetworkModel(InstanceList &trainSet, const InstanceList &validationSet,
                                    DeepNetworkParameter *parameters) : NeuralNetworkModel(trainSet){
     int epoch;
     double learningRate;

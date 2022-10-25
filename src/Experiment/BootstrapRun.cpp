@@ -20,7 +20,7 @@ BootstrapRun::BootstrapRun(int numberOfBootstraps) {
  * @param experiment Experiment to be run.
  * @return An array of performances: result. result[i] is the performance of the classifier on the i'th bootstrap run.
  */
-ExperimentPerformance* BootstrapRun::execute(Experiment experiment) {
+ExperimentPerformance* BootstrapRun::execute(const Experiment& experiment) {
     auto* result = new ExperimentPerformance();
     for (int i = 0; i < numberOfBootstraps; i++) {
         Bootstrap<Instance*> bootstrap = Bootstrap<Instance*>(experiment.getDataSet().getInstances(), i + experiment.getParameter()->getSeed());

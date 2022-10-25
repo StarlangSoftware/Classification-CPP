@@ -13,16 +13,16 @@ class DiscreteAttribute : public Attribute{
 private:
     string value = "NULL";
 public:
-    explicit DiscreteAttribute(string value);
+    explicit DiscreteAttribute(const string& value);
     explicit DiscreteAttribute(bool value);
-    int continuousAttributeSize() override;
-    vector<double> continuousAttributes() override;
-    bool isDiscrete() override {return true;}
-    bool isContinuous() override {return false;};
-    bool isDiscreteIndexed() override {return false;};
-    bool isBinary() override {return false;};
-    string getValue();
-    string to_string() override;
+    int continuousAttributeSize() const override;
+    vector<double> continuousAttributes() const override;
+    bool isDiscrete() const override {return true;}
+    bool isContinuous() const override {return false;};
+    bool isDiscreteIndexed() const override {return false;};
+    bool isBinary() const override {return false;};
+    string getValue() const;
+    string to_string() const override;
 };
 
 

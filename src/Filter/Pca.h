@@ -16,9 +16,9 @@ private:
     void removeUnnecessaryEigenvectors();
     void removeAllEigenvectorsExceptTheMostImportantK();
 public:
-    Pca(DataSet dataSet, double covarianceExplained);
-    Pca(DataSet dataSet, int numberOfDimensions);
-    explicit Pca(DataSet dataSet);
+    Pca(const DataSet& dataSet, double covarianceExplained);
+    Pca(const DataSet& dataSet, int numberOfDimensions);
+    explicit Pca(const DataSet& dataSet);
     void train() override;
 protected:
     void convertInstance(Instance* instance) override;

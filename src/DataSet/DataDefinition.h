@@ -16,12 +16,12 @@ private:
     vector<AttributeType> attributeTypes;
 public:
     DataDefinition();
-    explicit DataDefinition(vector<AttributeType> attributeTypes);
-    DataDefinition getSubSetOfFeatures(FeatureSubSet featureSubSet);
-    int attributeCount();
-    int discreteAttributeCount();
-    int continuousAttributeCount();
-    AttributeType getAttributeType(int index);
+    explicit DataDefinition(const vector<AttributeType>& attributeTypes);
+    DataDefinition getSubSetOfFeatures(const FeatureSubSet& featureSubSet);
+    int attributeCount() const;
+    int discreteAttributeCount() const;
+    int continuousAttributeCount() const;
+    AttributeType getAttributeType(int index) const;
     void addAttribute(AttributeType attributeType);
     void removeAttribute(int index);
     void removeAllAttributes();

@@ -13,7 +13,7 @@
  * @param index Index of the attribute.
  * @param maxIndex Maximum index of the attribute.
  */
-DiscreteIndexedAttribute::DiscreteIndexedAttribute(string value, int index, int maxIndex) : DiscreteAttribute(move(value)){
+DiscreteIndexedAttribute::DiscreteIndexedAttribute(const string& value, int index, int maxIndex) : DiscreteAttribute(value){
     this->index = index;
     this->maxIndex = maxIndex;
 }
@@ -23,7 +23,7 @@ DiscreteIndexedAttribute::DiscreteIndexedAttribute(string value, int index, int 
  *
  * @return index.
  */
-int DiscreteIndexedAttribute::getIndex() {
+int DiscreteIndexedAttribute::getIndex() const{
     return index;
 }
 
@@ -32,15 +32,15 @@ int DiscreteIndexedAttribute::getIndex() {
  *
  * @return maxIndex.
  */
-int DiscreteIndexedAttribute::getMaxIndex() {
+int DiscreteIndexedAttribute::getMaxIndex() const{
     return maxIndex;
 }
 
-int DiscreteIndexedAttribute::continuousAttributeSize() {
+int DiscreteIndexedAttribute::continuousAttributeSize() const{
     return maxIndex;
 }
 
-vector<double> DiscreteIndexedAttribute::continuousAttributes() {
+vector<double> DiscreteIndexedAttribute::continuousAttributes() const{
     vector<double> result;
     result.reserve(maxIndex);
     for (int i = 0; i < maxIndex; i++) {

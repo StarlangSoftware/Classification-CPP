@@ -12,8 +12,8 @@ private:
     double crossValidationRatio;
 public:
     C45Parameter(int seed, bool prune, double crossValidationRatio);
-    bool isPrune();
-    double getCrossValidationRatio();
+    bool isPrune() const;
+    double getCrossValidationRatio() const;
 };
 
 

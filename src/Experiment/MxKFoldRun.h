@@ -11,7 +11,7 @@ protected:
     int M;
 public:
     MxKFoldRun(int M, int K);
-    ExperimentPerformance* execute(Experiment experiment) override;
+    ExperimentPerformance* execute(const Experiment& experiment) override;
 };
 
 

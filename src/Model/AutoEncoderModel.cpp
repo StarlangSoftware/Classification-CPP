@@ -30,7 +30,7 @@ void AutoEncoderModel::allocateWeights(int H, default_random_engine randomEngine
  * @param validationSet {@link InstanceList} to use as validation set.
  * @param parameters    {@link MultiLayerPerceptronParameter} is used to get the parameters.
  */
-AutoEncoderModel::AutoEncoderModel(InstanceList &trainSet, InstanceList &validationSet,
+AutoEncoderModel::AutoEncoderModel(InstanceList &trainSet, const InstanceList &validationSet,
                                    MultiLayerPerceptronParameter *parameters) : NeuralNetworkModel(trainSet){
     Matrix bestW = Matrix(0), bestV = Matrix(0);
     int epoch;
@@ -87,7 +87,7 @@ AutoEncoderModel::AutoEncoderModel(InstanceList &trainSet, InstanceList &validat
  * @param data {@link InstanceList} to use as validation set.
  * @return Error rate by finding the mean of total errors.
  */
-Performance *AutoEncoderModel::testAutoEncoder(InstanceList &data) {
+Performance *AutoEncoderModel::testAutoEncoder(const InstanceList &data) {
     double total = data.size();
     double error = 0.0;
     for (int i = 0; i < total; i++) {

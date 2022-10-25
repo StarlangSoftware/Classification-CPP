@@ -18,14 +18,14 @@ Performance::Performance(double errorRate) {
  *
  * @return Double errorRate.
  */
-double Performance::getErrorRate() {
+double Performance::getErrorRate() const{
     return errorRate;
 }
 
-bool Performance::isClassification() {
+bool Performance::isClassification() const{
     return false;
 }
 
-bool Performance::containsDetails() {
+bool Performance::containsDetails() const{
     return false;
 }

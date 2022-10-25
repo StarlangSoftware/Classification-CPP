@@ -13,7 +13,7 @@
  * @param instance {@link Instance} to predict.
  * @return The class which has the maximum value of metric.
  */
-string GaussianModel::predict(Instance *instance) {
+string GaussianModel::predict(Instance *instance){
     string predictedClass;
     string Ci;
     vector<string> possibleLabels;

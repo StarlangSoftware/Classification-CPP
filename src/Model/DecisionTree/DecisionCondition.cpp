@@ -49,7 +49,7 @@ DecisionCondition::DecisionCondition(int attributeIndex, char comparison, Attrib
  * @param instance Instance to compare.
  * @return True if gicen instance satisfies the conditions.
  */
-bool DecisionCondition::satisfy(Instance *instance) {
+bool DecisionCondition::satisfy(Instance *instance) const{
     if (value->isDiscreteIndexed()) {
         if (((DiscreteIndexedAttribute*) value)->getIndex() != -1) {
             return ((DiscreteIndexedAttribute*) instance->getAttribute(attributeIndex))->getIndex() == ((DiscreteIndexedAttribute*) value)->getIndex();
@@ -74,7 +74,7 @@ bool DecisionCondition::satisfy(Instance *instance) {
     return false;
 }
 
-int DecisionCondition::getAttributeIndex() {
+int DecisionCondition::getAttributeIndex() const{
     return attributeIndex;
 }
 

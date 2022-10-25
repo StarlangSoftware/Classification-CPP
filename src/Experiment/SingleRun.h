@@ -10,7 +10,7 @@
 
 class SingleRun {
 public:
-    virtual Performance* execute(Experiment experiment) = 0;
+    virtual Performance* execute(const Experiment& experiment) = 0;
 };
 
 

@@ -17,8 +17,8 @@ private:
     void allocateWeights(int H, default_random_engine randomEngine);
     Vector predictInput(Instance* instance);
 public:
-    AutoEncoderModel(InstanceList& trainSet, InstanceList& validationSet, MultiLayerPerceptronParameter* parameters);
-    Performance* testAutoEncoder(InstanceList& data);
+    AutoEncoderModel(InstanceList& trainSet, const InstanceList& validationSet, MultiLayerPerceptronParameter* parameters);
+    Performance* testAutoEncoder(const InstanceList& data);
     void serialize(ostream &outputFile) override;
 };
 

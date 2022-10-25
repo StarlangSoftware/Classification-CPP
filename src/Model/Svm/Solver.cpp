@@ -7,11 +7,11 @@
 #include "Solver.h"
 #include "QMatrix.h"
 
-Solver::Solver(int l, vector<double> b, vector<double> y, SvmParameter *parameter, Problem problem) {
+Solver::Solver(int l, const vector<double>& b, const vector<double>& y, SvmParameter *parameter, const Problem& problem) {
     this->parameter = parameter;
     this->l = l;
-    this->Q = QMatrix(move(problem), parameter, y);
-    this->b = move(b);
+    this->Q = QMatrix(problem, parameter, y);
+    this->b = b;
     this->y = y;
     C = parameter->getC();
 }
@@ -181,19 +181,19 @@ void Solver::updateAlphaStatus(int i) {
     }
 }
 
-bool Solver::isUpperBound(int i) {
+bool Solver::isUpperBound(int i) const{
     return alphaStatus[i] == AlphaStatusType::UPPER_BOUND;
 }
 
-bool Solver::isLowerBound(int i) {
+bool Solver::isLowerBound(int i) const{
     return alphaStatus[i] == AlphaStatusType::LOWER_BOUND;
 }
 
-bool Solver::isFree(int i) {
+bool Solver::isFree(int i) const{
     return alphaStatus[i] == AlphaStatusType::FREE;
 }
 
-vector<double> Solver::getQ(int i, int length) {
+vector<double> Solver::getQ(int i, int length) const{
     return Q.getQ(i, length);
 }
 
@@ -265,7 +265,7 @@ bool Solver::selectWorkingSet(int out[]) {
     return false;
 }
 
-double Solver::calculateRho() {
+double Solver::calculateRho() const{
     double upperBound = DBL_MAX, lowerBound = -DBL_MAX, sumFree = 0, yG;
     int numberOfFree = 0;
     for (int i = 0; i < activeSize; i++){
@@ -297,7 +297,7 @@ double Solver::calculateRho() {
 }
 
 void Solver::doShrinking() {
-    double* Gm = new double[2];
+    auto* Gm = new double[2];
     int* out = new int[2];
     if (selectWorkingSet(out)){
         return;

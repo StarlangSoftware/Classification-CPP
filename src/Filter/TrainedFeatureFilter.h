@@ -12,7 +12,7 @@ class TrainedFeatureFilter : public FeatureFilter{
 protected:
     virtual void train() = 0;
 public:
-    explicit TrainedFeatureFilter(DataSet& dataSet);
+    explicit TrainedFeatureFilter(const DataSet& dataSet);
 };
 
 

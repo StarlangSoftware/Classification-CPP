@@ -30,7 +30,7 @@ void KFoldRun::runExperiment(Classifier *classifier, Parameter *parameter, Exper
  * @param experiment Experiment to be run.
  * @return An array of performances: result. result[i] is the performance of the classifier on the i'th fold.
  */
-ExperimentPerformance *KFoldRun::execute(Experiment experiment) {
+ExperimentPerformance *KFoldRun::execute(const Experiment& experiment) {
     auto* result = new ExperimentPerformance();
     auto* crossValidation = new KFoldCrossValidation<Instance*>(experiment.getDataSet().getInstances(), K, experiment.getParameter()->getSeed());
     runExperiment(experiment.getClassifier(), experiment.getParameter(), result, crossValidation);

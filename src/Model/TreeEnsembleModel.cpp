@@ -25,8 +25,8 @@ string TreeEnsembleModel::predict(Instance *instance) {
  *
  * @param forest An {@link vector} of {@link DecisionTree}.
  */
-TreeEnsembleModel::TreeEnsembleModel(vector<DecisionTree> forest) {
-    this->forest = move(forest);
+TreeEnsembleModel::TreeEnsembleModel(const vector<DecisionTree>& forest) {
+    this->forest = forest;
 }
 
 void TreeEnsembleModel::serialize(ostream &outputFile) {

@@ -37,7 +37,7 @@ Matrix NeuralNetworkModel::allocateLayerWeights(int row, int column, default_ran
  * @param o Vector to normalize.
  * @return Normalized vector.
  */
-Vector NeuralNetworkModel::normalizeOutput(Vector o) {
+Vector NeuralNetworkModel::normalizeOutput(const Vector& o) const{
     double sum = 0.0;
     vector<double> values(o.getSize());
     for (int i = 0; i < o.getSize(); i++)
@@ -66,7 +66,7 @@ void NeuralNetworkModel::createInputVector(Instance* instance) {
  * @param weights Matrix is multiplied with input Vector.
  * @return Result of sigmoid function.
  */
-Vector NeuralNetworkModel::calculateHidden(Vector& input, Matrix weights, ActivationFunction activationFunction) {
+Vector NeuralNetworkModel::calculateHidden(const Vector& input, const Matrix& weights, ActivationFunction activationFunction) const{
     Vector z = weights.multiplyWithVectorFromRight(input);
     switch (activationFunction) {
         case ActivationFunction::SIGMOID:
@@ -90,7 +90,7 @@ Vector NeuralNetworkModel::calculateHidden(Vector& input, Matrix weights, Activa
  * @return Returns the difference between ones Vector and input Vector.
  * @throws VectorSizeMismatch Return: Number of items in both vectors must be the same.
  */
-Vector NeuralNetworkModel::calculateOneMinusHidden(Vector hidden) {
+Vector NeuralNetworkModel::calculateOneMinusHidden(const Vector& hidden) const{
     Vector one = Vector(hidden.getSize(), 1.0);
     return one.difference(hidden);
 }
@@ -103,7 +103,7 @@ Vector NeuralNetworkModel::calculateOneMinusHidden(Vector hidden) {
  * @param V Matrix to multiply.
  * @param activationFunction Activation function.
  */
-void NeuralNetworkModel::calculateForwardSingleHiddenLayer(Matrix W, Matrix V, ActivationFunction activationFunction) {
+void NeuralNetworkModel::calculateForwardSingleHiddenLayer(const Matrix& W, const Matrix& V, ActivationFunction activationFunction) {
     Vector hidden = calculateHidden(x, W, activationFunction);
     Vector hiddenBiased = hidden.biased();
     y = V.multiplyWithVectorFromRight(hiddenBiased);
@@ -119,8 +119,8 @@ void NeuralNetworkModel::calculateForwardSingleHiddenLayer(Matrix W, Matrix V, A
  * @param weights  Matrix of weights/
  * @return Difference between newly created Vector and normalized output.
  */
-Vector NeuralNetworkModel::calculateRMinusY(Instance *instance, Vector input, Matrix weights) {
-    r = Vector(K, std::find(classLabels.begin(), classLabels.end(), instance->getClassLabel()) - classLabels.begin(), 1.0);
+Vector NeuralNetworkModel::calculateRMinusY(Instance *instance, const Vector& input, const Matrix& weights) {
+    r = Vector(K, find(classLabels.begin(), classLabels.end(), instance->getClassLabel()) - classLabels.begin(), 1.0);
     Vector o = weights.multiplyWithVectorFromRight(input);
     y = normalizeOutput(o);
     return r.difference(y);
@@ -133,7 +133,7 @@ Vector NeuralNetworkModel::calculateRMinusY(Instance *instance, Vector input, Ma
  * @param possibleClassLabels ArrayList that has the class labels.
  * @return The class label which has the maximum value of y.
  */
-string NeuralNetworkModel::predictWithCompositeInstance(vector<string> possibleClassLabels) {
+string NeuralNetworkModel::predictWithCompositeInstance(const vector<string>& possibleClassLabels) const{
     string predictedClass = possibleClassLabels.at(0);
     double maxY = -DBL_MAX;
     for (int i = 0; i < classLabels.size(); i++) {
@@ -152,7 +152,7 @@ string NeuralNetworkModel::predictWithCompositeInstance(vector<string> possibleC
  * @param instance Instance to predict.
  * @return The class lable which has the maximum y.
  */
-string NeuralNetworkModel::predict(Instance *instance) {
+string NeuralNetworkModel::predict(Instance *instance){
     createInputVector(instance);
     calculateOutput();
     if (instance->isComposite()) {

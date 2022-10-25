@@ -10,7 +10,7 @@
 
 class DiscreteToIndexed : public LaryFilter{
 public:
-    DiscreteToIndexed(DataSet& dataSet);
+    DiscreteToIndexed(const DataSet& dataSet);
 protected:
     void convertInstance(Instance* instance) override;
     void convertDataDefinition() override;

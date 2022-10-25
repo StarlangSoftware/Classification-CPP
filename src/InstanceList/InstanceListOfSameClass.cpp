@@ -9,8 +9,8 @@
  *
  * @param classLabel Class labels of instance list.
  */
-InstanceListOfSameClass::InstanceListOfSameClass(string classLabel) {
-    this->classLabel = move(classLabel);
+InstanceListOfSameClass::InstanceListOfSameClass(const string& classLabel) {
+    this->classLabel = classLabel;
 }
 
 /**
@@ -18,6 +18,6 @@ InstanceListOfSameClass::InstanceListOfSameClass(string classLabel) {
  *
  * @return Class labels.
  */
-string InstanceListOfSameClass::getClassLabel() {
+string InstanceListOfSameClass::getClassLabel() const{
     return classLabel;
 }

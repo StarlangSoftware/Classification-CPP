@@ -12,7 +12,7 @@
 class StratifiedMxKFoldRun : public MxKFoldRun, public StratifiedKFoldRun{
 public:
     StratifiedMxKFoldRun(int M, int K);
-    ExperimentPerformance* execute(Experiment experiment) override;
+    ExperimentPerformance* execute(const Experiment& experiment) override;
 };
 
 

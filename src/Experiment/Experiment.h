@@ -17,11 +17,11 @@ private:
     Parameter* parameter;
     DataSet dataSet;
 public:
-    Experiment(Classifier* classifier, Parameter* parameter, DataSet& dataSet);
-    Classifier* getClassifier();
-    Parameter* getParameter();
-    DataSet getDataSet();
-    Experiment featureSelectedExperiment(FeatureSubSet featureSubSet);
+    Experiment(Classifier* classifier, Parameter* parameter, const DataSet& dataSet);
+    Classifier* getClassifier() const;
+    Parameter* getParameter() const;
+    DataSet getDataSet() const;
+    Experiment featureSelectedExperiment(const FeatureSubSet& featureSubSet);
 };
 
 

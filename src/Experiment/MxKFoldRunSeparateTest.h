@@ -12,7 +12,7 @@
 class MxKFoldRunSeparateTest : public MxKFoldRun, public KFoldRunSeparateTest {
 public:
     MxKFoldRunSeparateTest(int M, int K);
-    ExperimentPerformance* execute(Experiment experiment);
+    ExperimentPerformance* execute(const Experiment& experiment);
 };
 
 

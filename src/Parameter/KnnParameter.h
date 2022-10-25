@@ -12,7 +12,7 @@ private:
 public:
     KnnParameter(int seed, int k, DistanceMetric* distanceMetric);
     KnnParameter(int seed, int k);
-    int getK();
+    int getK() const;
 };
 
 

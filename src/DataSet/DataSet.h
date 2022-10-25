@@ -16,27 +16,27 @@ private:
     DataDefinition definition;
 public:
     DataSet();
-    explicit DataSet(DataDefinition& definition);
-    explicit DataSet(ifstream file);
-    DataSet(DataDefinition definition, string separator, string fileName);
-    DataSet getSubSetOfFeatures(FeatureSubSet featureSubSet);
-    bool checkDefinition(Instance* instance);
+    explicit DataSet(const DataDefinition& definition);
+    explicit DataSet(ifstream& file);
+    DataSet(const DataDefinition& definition, const string& separator, const string& fileName);
+    DataSet getSubSetOfFeatures(const FeatureSubSet& featureSubSet);
+    bool checkDefinition(Instance* instance) const;
     void setDefinition(Instance* instance);
-    int sampleSize();
-    int classCount();
-    int attributeCount();
-    int discreteAttributeCount();
-    int continuousAttributeCount();
-    string getClasses();
-    string info(string dataSetName);
-    string to_string(string dataSetName);
+    int sampleSize() const;
+    int classCount() const;
+    int attributeCount() const;
+    int discreteAttributeCount() const;
+    int continuousAttributeCount() const;
+    string getClasses() const;
+    string info(const string& dataSetName) const;
+    string to_string(const string& dataSetName) const;
     void addInstance(Instance* current);
-    void addInstanceList(vector<Instance*> instanceList);
-    vector<Instance*> getInstances();
-    Partition getClassInstances();
-    InstanceList getInstanceList();
-    DataDefinition getDataDefinition();
-    void writeToFile(string outFileName);
+    void addInstanceList(const vector<Instance*>& instanceList);
+    vector<Instance*> getInstances() const;
+    Partition getClassInstances() const;
+    InstanceList getInstanceList() const;
+    DataDefinition getDataDefinition() const;
+    void writeToFile(const string& outFileName);
 };
 
 

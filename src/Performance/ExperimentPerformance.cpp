@@ -20,7 +20,7 @@ ExperimentPerformance::ExperimentPerformance() = default;
  *
  * @param fileName String input.
  */
-ExperimentPerformance::ExperimentPerformance(string fileName) {
+ExperimentPerformance::ExperimentPerformance(const string& fileName) {
     string performance;
     containsDetails = false;
     ifstream inputFile;
@@ -47,7 +47,7 @@ void ExperimentPerformance::add(Performance *performance) {
  *
  * @return The results {@link vector}.
  */
-int ExperimentPerformance::numberOfExperiments() {
+int ExperimentPerformance::numberOfExperiments() const{
     return results.size();
 }
 
@@ -57,7 +57,7 @@ int ExperimentPerformance::numberOfExperiments() {
  * @param index Index of results {@link vector} to retrieve.
  * @return The errorRate at given index of results {@link vector}.
  */
-double ExperimentPerformance::getErrorRate(int index) {
+double ExperimentPerformance::getErrorRate(int index) const{
     return results.at(index)->getErrorRate();
 }
 
@@ -67,7 +67,7 @@ double ExperimentPerformance::getErrorRate(int index) {
  * @param index Index of results {@link vector} to retrieve.
  * @return The accuracy of a {@link Performance} at given index of results {@link vector}.
  */
-double ExperimentPerformance::getAccuracy(int index) {
+double ExperimentPerformance::getAccuracy(int index) const{
     if (results.at(index)->isClassification()) {
         return ((ClassificationPerformance*)(results.at(index)))->getAccuracy();
     } else {
@@ -81,7 +81,7 @@ double ExperimentPerformance::getAccuracy(int index) {
  *
  * @return A new {@link Performance} with the mean of the summation of errorRates.
  */
-Performance *ExperimentPerformance::meanPerformance() {
+Performance *ExperimentPerformance::meanPerformance() const{
     double sumError = 0;
     for (Performance* performance : results) {
         sumError += performance->getErrorRate();
@@ -95,7 +95,7 @@ Performance *ExperimentPerformance::meanPerformance() {
  *
  * @return A new classificationPerformance with the mean of that summation.
  */
-ClassificationPerformance *ExperimentPerformance::meanClassificationPerformance() {
+ClassificationPerformance *ExperimentPerformance::meanClassificationPerformance() const{
     if (results.empty() || !classification) {
         return nullptr;
     }
@@ -114,7 +114,7 @@ ClassificationPerformance *ExperimentPerformance::meanClassificationPerformance(
  *
  * @return A new {@link DetailedClassificationPerformance} with the {@link ConfusionMatrix} sum.
  */
-DetailedClassificationPerformance *ExperimentPerformance::meanDetailedPerformance() {
+DetailedClassificationPerformance *ExperimentPerformance::meanDetailedPerformance() const{
     if (results.empty() || !containsDetails) {
         return nullptr;
     }
@@ -131,7 +131,7 @@ DetailedClassificationPerformance *ExperimentPerformance::meanDetailedPerformanc
  *
  * @return A new Performance with the standard deviation.
  */
-Performance* ExperimentPerformance::standardDeviationPerformance() {
+Performance* ExperimentPerformance::standardDeviationPerformance() const{
     double sumErrorRate = 0;
     Performance* averagePerformance;
     averagePerformance = meanPerformance();
@@ -147,7 +147,7 @@ Performance* ExperimentPerformance::standardDeviationPerformance() {
  *
  * @return A new {@link ClassificationPerformance} with standard deviation.
  */
-ClassificationPerformance *ExperimentPerformance::standardDeviationClassificationPerformance() {
+ClassificationPerformance *ExperimentPerformance::standardDeviationClassificationPerformance() const{
     if (results.empty() || !classification) {
         return nullptr;
     }
@@ -169,7 +169,7 @@ ClassificationPerformance *ExperimentPerformance::standardDeviationClassificatio
  * @param experimentPerformance {@link ExperimentPerformance} input.
  * @return True if the result of compareTo method is positive and false otherwise.
  */
-bool ExperimentPerformance::isBetter(ExperimentPerformance* experimentPerformance) {
+bool ExperimentPerformance::isBetter(ExperimentPerformance* experimentPerformance) const{
     double accuracy1, accuracy2;
     accuracy1 = meanClassificationPerformance()->getAccuracy();
     accuracy2 = experimentPerformance->meanClassificationPerformance()->getAccuracy();

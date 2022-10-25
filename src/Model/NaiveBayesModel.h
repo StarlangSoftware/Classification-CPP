@@ -13,14 +13,14 @@ private:
     map<string, Vector> classMeans;
     map<string, Vector> classDeviations;
     map<string, vector<DiscreteDistribution>> classAttributeDistributions;
-    double logLikelihoodContinuous(string classLabel, Instance* instance);
-    double logLikelihoodDiscrete(string classLabel, Instance* instance);
+    double logLikelihoodContinuous(const string& classLabel, Instance* instance) const;
+    double logLikelihoodDiscrete(const string& classLabel, Instance* instance) const;
 protected:
-    double calculateMetric(Instance* instance, string Ci) override;
+    double calculateMetric(Instance* instance, const string& Ci) const override;
 public:
     explicit NaiveBayesModel(ifstream& inputFile);
-    NaiveBayesModel(DiscreteDistribution priorDistribution, map<string, Vector> classMeans, map<string, Vector> classDeviations);
-    NaiveBayesModel(DiscreteDistribution priorDistribution, map<string, vector<DiscreteDistribution>> classAttributeDistributions);
+    NaiveBayesModel(const DiscreteDistribution& priorDistribution, const map<string, Vector>& classMeans, const map<string, Vector>& classDeviations);
+    NaiveBayesModel(const DiscreteDistribution& priorDistribution, const map<string, vector<DiscreteDistribution>>& classAttributeDistributions);
     void serialize(ostream &outputFile) override;
 };
 

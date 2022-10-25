@@ -13,9 +13,9 @@ private:
     Kernel kernel = Kernel();
     vector<double> y;
 public:
-    QMatrix(Problem problem, SvmParameter* parameter, vector<double> y);
+    QMatrix(const Problem& problem, SvmParameter* parameter, const vector<double>& y);
     QMatrix();
-    vector<double> getQ(int i, int length);
+    vector<double> getQ(int i, int length) const;
     void swapIndex(int i, int j);
 };
 

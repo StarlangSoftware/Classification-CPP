@@ -9,7 +9,7 @@
  *
  * @param initialSubSet {@link FeatureSubSet} input.
  */
-SubSetSelection::SubSetSelection(FeatureSubSet& initialSubSet) {
+SubSetSelection::SubSetSelection(const FeatureSubSet& initialSubSet) {
     this->initialSubSet = initialSubSet;
 }
 
@@ -20,7 +20,7 @@ SubSetSelection::SubSetSelection(FeatureSubSet& initialSubSet) {
  * @param current           FeatureSubset that will be added to currentSubSetList.
  * @param numberOfFeatures  The number of features to add the subset.
  */
-void SubSetSelection::forward(vector<FeatureSubSet> currentSubSetList, FeatureSubSet &current, int numberOfFeatures) {
+void SubSetSelection::forward(vector<FeatureSubSet>& currentSubSetList, const FeatureSubSet& current, int numberOfFeatures) {
     for (int i = 0; i < numberOfFeatures; i++) {
         if (!current.contains(i)) {
             FeatureSubSet candidate = current.clone();
@@ -36,7 +36,7 @@ void SubSetSelection::forward(vector<FeatureSubSet> currentSubSetList, FeatureSu
  * @param currentSubSetList ArrayList to add the FeatureSubsets.
  * @param current           FeatureSubset that will be added to currentSubSetList
  */
-void SubSetSelection::backward(vector<FeatureSubSet> currentSubSetList, FeatureSubSet& current) {
+void SubSetSelection::backward(vector<FeatureSubSet>& currentSubSetList, const FeatureSubSet& current) {
     for (int i = 0; i < current.size(); i++) {
         FeatureSubSet candidate = current.clone();
         candidate.remove(i);
@@ -65,10 +65,10 @@ FeatureSubSet SubSetSelection::execute(MultipleRun *multipleRun, Experiment expe
     while (betterFound) {
         betterFound = false;
         vector<FeatureSubSet> candidateList = operatorToModify(best, experiment.getDataSet().getDataDefinition().attributeCount());
-        for (FeatureSubSet candidateSubSet : candidateList) {
+        for (const FeatureSubSet& candidateSubSet : candidateList) {
             bool found = false;
-            for (int i = 0; i < processed.size(); i++){
-                if (processed[i] == candidateSubSet){
+            for (auto & subSetOfProcessed : processed){
+                if (subSetOfProcessed == candidateSubSet){
                     found = true;
                     break;
                 }

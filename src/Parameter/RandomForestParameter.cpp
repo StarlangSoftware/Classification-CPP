@@ -20,6 +20,6 @@ RandomForestParameter::RandomForestParameter(int seed, int ensembleSize, int att
  *
  * @return The attributeSubsetSize.
  */
-int RandomForestParameter::getAttributeSubsetSize() {
+int RandomForestParameter::getAttributeSubsetSize() const{
     return attributeSubsetSize;
 }

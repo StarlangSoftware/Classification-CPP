@@ -18,7 +18,7 @@ void MultiLayerPerceptronModel::allocateWeights(int H, default_random_engine ran
     V = allocateLayerWeights(K, H + 1, randomEngine);
 }
 
-MultiLayerPerceptronModel::MultiLayerPerceptronModel(InstanceList &trainSet, InstanceList &validationSet,
+MultiLayerPerceptronModel::MultiLayerPerceptronModel(InstanceList &trainSet, const InstanceList &validationSet,
                                                      MultiLayerPerceptronParameter *parameters) : LinearPerceptronModel(trainSet){
     int epoch;
     double learningRate;

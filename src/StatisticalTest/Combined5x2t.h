@@ -10,9 +10,9 @@
 
 class Combined5x2t : public PairedTest{
 private:
-    double testStatistic(ExperimentPerformance classifier1, ExperimentPerformance classifier2);
+    double testStatistic(const ExperimentPerformance& classifier1, const ExperimentPerformance& classifier2) const;
 public:
-    StatisticalTestResult compare(ExperimentPerformance classifier1, ExperimentPerformance classifier2) override;
+    StatisticalTestResult compare(const ExperimentPerformance& classifier1, const ExperimentPerformance& classifier2) const override;
 };
 
 

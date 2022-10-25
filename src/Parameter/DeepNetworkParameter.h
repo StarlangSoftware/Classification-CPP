@@ -16,10 +16,10 @@ private:
     vector<int> hiddenLayers;
     ActivationFunction activationFunction;
 public:
-    DeepNetworkParameter(int seed, double learningRate, double etaDecrease, double crossValidationRatio, int epoch, vector<int> hiddenLayers, ActivationFunction activationFunction);
-    int layerSize();
-    int getHiddenNodes(int layerIndex);
-    ActivationFunction getActivationFunction();
+    DeepNetworkParameter(int seed, double learningRate, double etaDecrease, double crossValidationRatio, int epoch, const vector<int>& hiddenLayers, ActivationFunction activationFunction);
+    int layerSize() const;
+    int getHiddenNodes(int layerIndex) const;
+    ActivationFunction getActivationFunction() const;
 };
 
 

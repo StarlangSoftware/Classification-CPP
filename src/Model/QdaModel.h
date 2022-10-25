@@ -12,9 +12,9 @@ class QdaModel : public LdaModel{
 private:
     map<string, Matrix> W;
 public:
-    double calculateMetric(Instance* instance, string Ci) override;
+    double calculateMetric(Instance* instance, const string& Ci) const override;
     explicit QdaModel(ifstream& inputFile);
-    QdaModel(DiscreteDistribution priorDistribution, map<string, Matrix> W, map<string, Vector> w, map<string, double> w0);
+    QdaModel(const DiscreteDistribution& priorDistribution, const map<string, Matrix>& W, const map<string, Vector>& w, const map<string, double>& w0);
     void serialize(ostream &outputFile) override;
 };
 

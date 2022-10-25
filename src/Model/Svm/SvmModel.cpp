@@ -127,7 +127,7 @@ SvmModel::SvmModel(InstanceList &trainSet, SvmParameter *parameter) {
     }
 }
 
-vector<int> SvmModel::groupClasses() {
+vector<int> SvmModel::groupClasses() const{
     vector<int> start;
     vector<string> classes = classDistribution.getItems();
     start.reserve(numberOfClasses);
@@ -138,7 +138,7 @@ vector<int> SvmModel::groupClasses() {
     return start;
 }
 
-SolutionInfo SvmModel::solveSingle(Problem problem) {
+SolutionInfo SvmModel::solveSingle(const Problem& problem) {
     vector<double> minusOnes(problem.getL(), -1.0);
     vector<double> y;
     y.reserve(problem.getL());
@@ -157,7 +157,7 @@ SolutionInfo SvmModel::solveSingle(Problem problem) {
     return solutionInfo;
 }
 
-vector<double> SvmModel::predictValues(NodeList x) {
+vector<double> SvmModel::predictValues(const NodeList& x) {
     vector<int> start;
     int p, si, sj, ci, cj;
     int l = supportVectors.size();

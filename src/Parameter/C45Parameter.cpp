@@ -21,7 +21,7 @@ C45Parameter::C45Parameter(int seed, bool prune, double crossValidationRatio) : 
  *
  * @return Prune.
  */
-bool C45Parameter::isPrune() {
+bool C45Parameter::isPrune() const{
     return prune;
 }
 
@@ -30,6 +30,6 @@ bool C45Parameter::isPrune() {
  *
  * @return crossValidationRatio.
  */
-double C45Parameter::getCrossValidationRatio() {
+double C45Parameter::getCrossValidationRatio() const{
     return crossValidationRatio;
 }

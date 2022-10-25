@@ -19,16 +19,16 @@ private:
     int degree;
     double gamma;
     double coefficient0;
-    double linear(int i, int j);
-    double polynom(int i, int j);
-    double rbf(int i, int j);
-    double sigmoid(int i, int j);
+    double linear(int i, int j) const;
+    double polynom(int i, int j) const;
+    double rbf(int i, int j) const;
+    double sigmoid(int i, int j) const;
 public:
-    Kernel(int l, vector<NodeList> x, KernelType kernelType, int degree, double gamma, double coefficient0);
+    Kernel(int l, const vector<NodeList>& x, KernelType kernelType, int degree, double gamma, double coefficient0);
     Kernel();
     void swapIndex(int i, int j);
-    double function(int i, int j);
-    static double function(NodeList x, NodeList y, SvmParameter* parameter);
+    double function(int i, int j) const;
+    static double function(const NodeList& x, const NodeList& y, SvmParameter* parameter);
 };
 
 

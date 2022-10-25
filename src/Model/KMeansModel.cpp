@@ -12,10 +12,10 @@
  * @param classMeans        {@link InstanceList} of class means.
  * @param distanceMetric    {@link DistanceMetric} input.
  */
-KMeansModel::KMeansModel(DiscreteDistribution priorDistribution, InstanceList &classMeans,
+KMeansModel::KMeansModel(const DiscreteDistribution& priorDistribution, const InstanceList &classMeans,
                          DistanceMetric *distanceMetric) {
     this->classMeans = classMeans;
-    this->priorDistribution = move(priorDistribution);
+    this->priorDistribution = priorDistribution;
     this->distanceMetric = distanceMetric;
 }
 
@@ -28,7 +28,7 @@ KMeansModel::KMeansModel(DiscreteDistribution priorDistribution, InstanceList &c
  * @param Ci       String input.
  * @return The negated distance between given instance and the current item of class means.
  */
-double KMeansModel::calculateMetric(Instance *instance, string Ci) {
+double KMeansModel::calculateMetric(Instance *instance, const string& Ci) const{
     for (int i = 0; i < classMeans.size(); i++) {
         if (classMeans.get(i)->getClassLabel() == Ci) {
             return -distanceMetric->distance(instance, classMeans.get(i));

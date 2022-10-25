@@ -17,8 +17,8 @@ public:
     explicit DecisionCondition(ifstream& inputFile);
     DecisionCondition(int attributeIndex, Attribute* value);
     DecisionCondition(int attributeIndex, char comparison, Attribute* value);
-    bool satisfy(Instance* instance);
-    int getAttributeIndex();
+    bool satisfy(Instance* instance) const;
+    int getAttributeIndex() const;
     void serialize(ostream &outputFile);
 };
 

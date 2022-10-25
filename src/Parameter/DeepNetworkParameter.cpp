@@ -16,9 +16,9 @@
  * @param activationFunction   Activation function
  */
 DeepNetworkParameter::DeepNetworkParameter(int seed, double learningRate, double etaDecrease,
-                                           double crossValidationRatio, int epoch, vector<int> hiddenLayers,
+                                           double crossValidationRatio, int epoch, const vector<int>& hiddenLayers,
                                            ActivationFunction activationFunction) : LinearPerceptronParameter(seed, learningRate, etaDecrease, crossValidationRatio, epoch) {
-    this->hiddenLayers = move(hiddenLayers);
+    this->hiddenLayers = hiddenLayers;
     this->activationFunction = activationFunction;
 }
 
@@ -27,7 +27,7 @@ DeepNetworkParameter::DeepNetworkParameter(int seed, double learningRate, double
  *
  * @return The size of the hiddenLayers {@link ArrayList}.
  */
-int DeepNetworkParameter::layerSize() {
+int DeepNetworkParameter::layerSize() const{
     return hiddenLayers.size();
 }
 
@@ -38,7 +38,7 @@ int DeepNetworkParameter::layerSize() {
  * @param layerIndex Index of the layer.
  * @return The element at the layerIndex of hiddenLayers {@link vector}.
  */
-int DeepNetworkParameter::getHiddenNodes(int layerIndex) {
+int DeepNetworkParameter::getHiddenNodes(int layerIndex) const{
     return hiddenLayers.at(layerIndex);
 }
 
@@ -47,6 +47,6 @@ int DeepNetworkParameter::getHiddenNodes(int layerIndex) {
  *
  * @return The activation function.
  */
-ActivationFunction DeepNetworkParameter::getActivationFunction() {
+ActivationFunction DeepNetworkParameter::getActivationFunction() const{
     return activationFunction;
 }

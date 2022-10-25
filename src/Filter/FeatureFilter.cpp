@@ -9,7 +9,7 @@
  *
  * @param dataSet DataSet that will bu used.
  */
-FeatureFilter::FeatureFilter(DataSet& dataSet) {
+FeatureFilter::FeatureFilter(const DataSet& dataSet) {
     this->dataSet = dataSet;
 }
 

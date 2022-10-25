@@ -8,7 +8,7 @@
 
 class BackwardSelection : public SubSetSelection {
 protected:
-    vector<FeatureSubSet> operatorToModify(FeatureSubSet& current, int numberOfFeatures) override;
+    vector<FeatureSubSet> operatorToModify(const FeatureSubSet& current, int numberOfFeatures) override;
 public:
     explicit BackwardSelection(int numberOfFeatures);
 };

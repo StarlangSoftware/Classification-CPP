@@ -12,10 +12,10 @@ class LdaModel : public GaussianModel {
 protected:
     map<string, double> w0;
     map<string, Vector> w;
-    double calculateMetric(Instance* instance, string Ci) override;
+    double calculateMetric(Instance* instance, const string& Ci) const override;
 public:
     explicit LdaModel(ifstream& inputFile);
-    LdaModel(DiscreteDistribution priorDistribution, map<string, Vector> w, map<string, double> w0);
+    LdaModel(const DiscreteDistribution& priorDistribution, const map<string, Vector>& w, const map<string, double>& w0);
     void serialize(ostream &outputFile) override;
 };
 

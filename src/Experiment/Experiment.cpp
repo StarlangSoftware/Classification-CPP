@@ -4,25 +4,25 @@
 
 #include "Experiment.h"
 
-Experiment::Experiment(Classifier *classifier, Parameter *parameter, DataSet &dataSet) {
+Experiment::Experiment(Classifier *classifier, Parameter *parameter, const DataSet &dataSet) {
     this->classifier = classifier;
     this->parameter = parameter;
     this->dataSet = dataSet;
 }
 
-Classifier *Experiment::getClassifier() {
+Classifier *Experiment::getClassifier() const{
     return classifier;
 }
 
-Parameter *Experiment::getParameter() {
+Parameter *Experiment::getParameter() const{
     return parameter;
 }
 
-DataSet Experiment::getDataSet() {
+DataSet Experiment::getDataSet() const{
     return dataSet;
 }
 
-Experiment Experiment::featureSelectedExperiment(FeatureSubSet featureSubSet) {
+Experiment Experiment::featureSelectedExperiment(const FeatureSubSet& featureSubSet) {
     DataSet newDataSet = dataSet.getSubSetOfFeatures(featureSubSet);
     return Experiment(classifier, parameter, newDataSet);
 }

@@ -18,9 +18,9 @@ private:
     vector<vector<double>> supportVectorCoefficients;
     SvmParameter* parameter;
     int numberOfClasses, numberOfProblems;
-    vector<int> groupClasses();
-    SolutionInfo solveSingle(Problem problem);
-    vector<double> predictValues(NodeList x);
+    vector<int> groupClasses() const;
+    SolutionInfo solveSingle(const Problem& problem);
+    vector<double> predictValues(const NodeList& x);
 public:
     explicit SvmModel(ifstream& inputFile);
     SvmModel(InstanceList& trainSet, SvmParameter* parameter);

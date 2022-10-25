@@ -13,7 +13,7 @@
  * @param classLabels An array of class labels.
  * @return The class label that occurs most in the array of class labels (mod of class label list).
  */
-string Classifier::getMaximum(vector<string> classLabels) {
+string Classifier::getMaximum(const vector<string>& classLabels) {
     CounterHashMap<string> frequencies;
     for (const string &label : classLabels) {
         frequencies.put(label);
@@ -27,7 +27,7 @@ string Classifier::getMaximum(vector<string> classLabels) {
  * @param instance Instance to check.
  * @return True if instance is a discrete indexed attribute, false otherwise.
  */
-bool Classifier::discreteCheck(Instance *instance) {
+bool Classifier::discreteCheck(Instance *instance) const{
     for (int i = 0; i < instance->attributeSize(); i++) {
         if (instance->getAttribute(i)->isDiscrete() && !(instance->getAttribute(i)->isDiscreteIndexed())) {
             return false;
@@ -42,7 +42,7 @@ bool Classifier::discreteCheck(Instance *instance) {
  * @param testSet Test data (list of instances) to be tested.
  * @return The accuracy (and error) of the model as an instance of Performance class.
  */
-Performance* Classifier::test(InstanceList testSet) {
+Performance* Classifier::test(const InstanceList& testSet) const{
     vector<string> classLabels = testSet.getUnionOfPossibleClassLabels();
     ConfusionMatrix confusion = ConfusionMatrix(classLabels);
     for (int i = 0; i < testSet.size(); i++) {
@@ -61,7 +61,7 @@ Performance* Classifier::test(InstanceList testSet) {
  * @return The accuracy (and error) of the trained model as an instance of Performance class.
  * @throws DiscreteFeaturesNotAllowed Exception for discrete features.
  */
-Performance *Classifier::singleRun(Parameter *parameter, InstanceList& trainSet, InstanceList& testSet) {
+Performance *Classifier::singleRun(Parameter *parameter, InstanceList& trainSet, const InstanceList& testSet){
     train(trainSet, parameter);
     return test(testSet);
 }
@@ -71,6 +71,6 @@ Performance *Classifier::singleRun(Parameter *parameter, InstanceList& trainSet,
  *
  * @return Model.
  */
-Model* Classifier::getModel() {
+Model* Classifier::getModel() const{
     return model;
 }

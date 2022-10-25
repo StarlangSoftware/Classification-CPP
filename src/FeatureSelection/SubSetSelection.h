@@ -13,11 +13,11 @@
 class SubSetSelection {
 protected:
     FeatureSubSet initialSubSet;
-    virtual vector<FeatureSubSet> operatorToModify(FeatureSubSet& current, int numberOfFeatures) = 0;
-    void forward(vector<FeatureSubSet> currentSubSetList, FeatureSubSet& current, int numberOfFeatures);
-    void backward(vector<FeatureSubSet> currentSubSetList, FeatureSubSet& current);
+    virtual vector<FeatureSubSet> operatorToModify(const FeatureSubSet& current, int numberOfFeatures) = 0;
+    void forward(vector<FeatureSubSet>& currentSubSetList, const FeatureSubSet& current, int numberOfFeatures);
+    void backward(vector<FeatureSubSet>& currentSubSetList, const FeatureSubSet& current);
 public:
-    explicit SubSetSelection(FeatureSubSet& initialSubSet);
+    explicit SubSetSelection(const FeatureSubSet& initialSubSet);
     explicit SubSetSelection(int numberOfFeatures);
     SubSetSelection();
     FeatureSubSet execute(MultipleRun* multipleRun, Experiment experiment);

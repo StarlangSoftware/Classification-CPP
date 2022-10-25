@@ -20,7 +20,7 @@ DummyModel::DummyModel(InstanceList& trainSet) {
  * @param instance Instance to make prediction.
  * @return The entry of distribution which has the maximum value.
  */
-string DummyModel::predict(Instance *instance) {
+string DummyModel::predict(Instance *instance){
     if (instance->isComposite()) {
         vector<string> possibleClassLabels = instance->getPossibleClassLabels();
         return distribution.getMaxItem(possibleClassLabels);
@@ -37,6 +37,6 @@ DummyModel::DummyModel(ifstream &inputFile) {
     distribution = DiscreteDistribution(inputFile);
 }
 
-map<string, double> DummyModel::predictProbability(Instance *instance) {
+map<string, double> DummyModel::predictProbability(Instance *instance){
     return distribution.getProbabilityDistribution();
 }

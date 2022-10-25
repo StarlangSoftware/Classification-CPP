@@ -18,7 +18,7 @@ ForwardSelection::ForwardSelection() : SubSetSelection(){
  * @param numberOfFeatures Indicates the indices of indexList.
  * @return ArrayList of FeatureSubSets created from backward.
  */
-vector<FeatureSubSet> ForwardSelection::operatorToModify(FeatureSubSet &current, int numberOfFeatures) {
+vector<FeatureSubSet> ForwardSelection::operatorToModify(const FeatureSubSet &current, int numberOfFeatures) {
     vector<FeatureSubSet> result;
     forward(result, current, numberOfFeatures);
     return result;

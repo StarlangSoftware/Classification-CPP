@@ -10,13 +10,13 @@ using namespace std;
 
 class Attribute {
 public:
-    virtual int continuousAttributeSize() = 0;
-    virtual vector<double> continuousAttributes() = 0;
-    virtual string to_string() = 0;
-    virtual bool isDiscrete() = 0;
-    virtual bool isContinuous() = 0;
-    virtual bool isDiscreteIndexed() = 0;
-    virtual bool isBinary() = 0;
+    virtual int continuousAttributeSize() const = 0;
+    virtual vector<double> continuousAttributes() const = 0;
+    virtual string to_string() const = 0;
+    virtual bool isDiscrete() const = 0;
+    virtual bool isContinuous() const = 0;
+    virtual bool isDiscreteIndexed() const = 0;
+    virtual bool isBinary() const = 0;
 };
 
 

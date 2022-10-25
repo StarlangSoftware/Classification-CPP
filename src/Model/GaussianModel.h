@@ -18,7 +18,7 @@ protected:
     * @param Ci       String input.
     * @return A double value as metric.
     */
-    virtual double calculateMetric(Instance* instance, string Ci) = 0;
+    virtual double calculateMetric(Instance* instance, const string& Ci) const = 0;
 public:
     GaussianModel() = default;
     explicit GaussianModel(ifstream& inputFile);

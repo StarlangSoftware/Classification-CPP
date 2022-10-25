@@ -10,7 +10,7 @@ StatisticalTestResult::StatisticalTestResult(double pValue, bool onlyTwoTailed) 
     this->onlyTwoTailed = onlyTwoTailed;
 }
 
-StatisticalTestResultType StatisticalTestResult::oneTailed(double alpha) {
+StatisticalTestResultType StatisticalTestResult::oneTailed(double alpha) const{
     if (onlyTwoTailed){
         throw StatisticalTestNotApplicable("The test", "One tailed option is not available for this test. The distribution is one tailed distribution.");
     }
@@ -21,7 +21,7 @@ StatisticalTestResultType StatisticalTestResult::oneTailed(double alpha) {
     }
 }
 
-StatisticalTestResultType StatisticalTestResult::twoTailed(double alpha) {
+StatisticalTestResultType StatisticalTestResult::twoTailed(double alpha) const{
     if (onlyTwoTailed){
         if (pValue < alpha){
             return StatisticalTestResultType::REJECT;
@@ -37,6 +37,6 @@ StatisticalTestResultType StatisticalTestResult::twoTailed(double alpha) {
     }
 }
 
-double StatisticalTestResult::getPValue() {
+double StatisticalTestResult::getPValue() const{
     return pValue;
 }

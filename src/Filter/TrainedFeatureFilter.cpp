@@ -9,5 +9,5 @@
  *
  * @param dataSet DataSet that will be used.
  */
-TrainedFeatureFilter::TrainedFeatureFilter(DataSet &dataSet) : FeatureFilter(dataSet) {
+TrainedFeatureFilter::TrainedFeatureFilter(const DataSet &dataSet) : FeatureFilter(dataSet) {
 }

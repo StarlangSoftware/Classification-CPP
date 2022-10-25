@@ -10,7 +10,7 @@
  *
  * @param dataSet The dataSet whose instances whose discrete attributes will be converted to indexed attributes
  */
-DiscreteToIndexed::DiscreteToIndexed(DataSet &dataSet) : LaryFilter(dataSet) {
+DiscreteToIndexed::DiscreteToIndexed(const DataSet &dataSet) : LaryFilter(dataSet) {
 
 }
 

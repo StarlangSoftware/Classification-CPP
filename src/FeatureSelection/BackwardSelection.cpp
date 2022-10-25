@@ -19,7 +19,7 @@ BackwardSelection::BackwardSelection(int numberOfFeatures) : SubSetSelection(num
  * @param numberOfFeatures Indicates the indices of indexList.
  * @return ArrayList of FeatureSubSets created from backward.
  */
-vector<FeatureSubSet> BackwardSelection::operatorToModify(FeatureSubSet &current, int numberOfFeatures) {
+vector<FeatureSubSet> BackwardSelection::operatorToModify(const FeatureSubSet &current, int numberOfFeatures) {
     vector<FeatureSubSet> result;
     backward(result, current);
     return result;

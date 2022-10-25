@@ -30,6 +30,6 @@ KnnParameter::KnnParameter(int seed, int k) : KMeansParameter(seed){
  *
  * @return Value of the k.
  */
-int KnnParameter::getK() {
+int KnnParameter::getK() const{
     return k;
 }

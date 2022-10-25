@@ -6,7 +6,7 @@
 #include "Sign.h"
 #include "StatisticalTestNotApplicable.h"
 
-int Sign::factorial(int n) {
+int Sign::factorial(int n) const{
     int i, result = 1;
     for (i = 2; i <= n; i++){
         result *= i;
@@ -14,7 +14,7 @@ int Sign::factorial(int n) {
     return result;
 }
 
-int Sign::binomial(int m, int n) {
+int Sign::binomial(int m, int n) const{
     if (n == 0 || m == n){
         return 1;
     }
@@ -23,7 +23,7 @@ int Sign::binomial(int m, int n) {
     }
 }
 
-StatisticalTestResult Sign::compare(ExperimentPerformance classifier1, ExperimentPerformance classifier2) {
+StatisticalTestResult Sign::compare(const ExperimentPerformance& classifier1, const ExperimentPerformance& classifier2) const{
     if (classifier1.numberOfExperiments() != classifier2.numberOfExperiments()){
         throw StatisticalTestNotApplicable("Sign test", "In order to apply a paired test, you need to have the same number of experiments in both algorithms.");
     }

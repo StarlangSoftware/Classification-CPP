@@ -13,7 +13,7 @@ private:
     Instance* averageInstance;
     Instance* standardDeviationInstance;
 public:
-    explicit Normalize(DataSet& dataSet);
+    explicit Normalize(const DataSet& dataSet);
 protected:
     void convertInstance(Instance* instance) override;
     void convertDataDefinition() override;

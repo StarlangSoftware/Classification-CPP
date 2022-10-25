@@ -13,9 +13,9 @@
  * @param classLabel Class label of the instance.
  * @param attributes Attributes of the instance.
  */
-Instance::Instance(string classLabel, vector<Attribute *> attributes) {
-    this->classLabel = move(classLabel);
-    this->attributes = move(attributes);
+Instance::Instance(const string& classLabel, const vector<Attribute *>& attributes) {
+    this->classLabel = classLabel;
+    this->attributes = attributes;
 }
 
 /**
@@ -24,8 +24,8 @@ Instance::Instance(string classLabel, vector<Attribute *> attributes) {
  *
  * @param classLabel Class label of the instance.
  */
-Instance::Instance(string classLabel) {
-    this->classLabel = move(classLabel);
+Instance::Instance(const string& classLabel) {
+    this->classLabel = classLabel;
 }
 
 /**
@@ -33,8 +33,8 @@ Instance::Instance(string classLabel) {
  *
  * @param value Value of the discrete attribute.
  */
-void Instance::addAttribute(string value) {
-    attributes.push_back(new DiscreteAttribute(move(value)));
+void Instance::addAttribute(const string& value) {
+    attributes.push_back(new DiscreteAttribute(value));
 }
 
 /**
@@ -60,7 +60,7 @@ void Instance::addAttribute(Attribute *attribute) {
  *
  * @param vector {@link Vector} that has the continuous attributes.
  */
-void Instance::addVectorAttribute(Vector vector) {
+void Instance::addVectorAttribute(const Vector& vector) {
     for (int i = 0; i < vector.getSize(); i++) {
         attributes.push_back(new ContinuousAttribute(vector.getValue(i)));
     }
@@ -88,7 +88,7 @@ void Instance::removeAllAttributes() {
  * @param index Index of the attribute to be accessed.
  * @return Attribute with index 'index'.
  */
-Attribute *Instance::getAttribute(int index) {
+Attribute *Instance::getAttribute(int index) const{
     return attributes.at(index);
 }
 
@@ -97,7 +97,7 @@ Attribute *Instance::getAttribute(int index) {
  *
  * @return Number of attributes in the attributes list.
  */
-int Instance::attributeSize() {
+int Instance::attributeSize() const{
     return attributes.size();
 }
 
@@ -106,7 +106,7 @@ int Instance::attributeSize() {
  *
  * @return Number of continuous and discrete indexed attributes in the attributes list.
  */
-int Instance::continuousAttributeSize() {
+int Instance::continuousAttributeSize() const{
     int size = 0;
     for (Attribute* attribute : attributes) {
         size += attribute->continuousAttributeSize();
@@ -121,7 +121,7 @@ int Instance::continuousAttributeSize() {
  *
  * @return result {@link vector} that has continuous and discrete indexed attributes.
  */
-vector<double> Instance::continuousAttributes() {
+vector<double> Instance::continuousAttributes() const{
     vector<double> result;
     for (Attribute* attribute : attributes) {
         vector<double> inserted = attribute->continuousAttributes();
@@ -135,11 +135,11 @@ vector<double> Instance::continuousAttributes() {
  *
  * @return Class label of the instance.
  */
-string Instance::getClassLabel() {
+string Instance::getClassLabel() const{
     return classLabel;
 }
 
-vector<string> Instance::getPossibleClassLabels() {
+vector<string> Instance::getPossibleClassLabels() const{
     vector<string> classLabels;
     classLabels.push_back(classLabel);
     return classLabels;
@@ -150,10 +150,10 @@ vector<string> Instance::getPossibleClassLabels() {
  *
  * @return A string of attributes separated with comma character.
  */
-string Instance::to_string() {
+string Instance::to_string() const{
     string result;
     for (Attribute* attribute : attributes) {
-        result = result + attribute->to_string() + ",";
+        result += attribute->to_string() + ",";
     }
     result = result + classLabel;
     return result;
@@ -164,7 +164,7 @@ string Instance::to_string() {
  *
  * @return {@link Vector} of continuous attributes and discrete indexed attributes.
  */
-Vector Instance::toVector() {
+Vector Instance::toVector() const{
     vector<double> values;
     for (Attribute* attribute : attributes) {
         vector<double> inserted = attribute->continuousAttributes();
@@ -186,8 +186,8 @@ Instance::~Instance() {
  * @param featureSubSet {@link FeatureSubSet} an {@link vector} of indices.
  * @return result Instance.
  */
-Instance *Instance::getSubSetOfFeatures(FeatureSubSet featureSubSet) {
-    Instance* result = new Instance(classLabel);
+Instance *Instance::getSubSetOfFeatures(const FeatureSubSet& featureSubSet) const{
+    auto* result = new Instance(classLabel);
     for (int i = 0; i < featureSubSet.size(); i++) {
         result->addAttribute(attributes.at(featureSubSet.get(i)));
     }
@@ -199,7 +199,7 @@ Instance *Instance::getSubSetOfFeatures(FeatureSubSet featureSubSet) {
  *
  * @return {@link NodeList} that has continuous and discrete indexed attributes.
  */
-NodeList Instance::toNodeList() {
+NodeList Instance::toNodeList() const{
     return NodeList(continuousAttributes());
 }
 

@@ -14,7 +14,7 @@
  * @param gamma        Gamma value.
  * @param coefficient0 First coefficient.
  */
-Kernel::Kernel(int l, vector<NodeList> x, KernelType kernelType, int degree, double gamma, double coefficient0) {
+Kernel::Kernel(int l, const vector<NodeList>& x, KernelType kernelType, int degree, double gamma, double coefficient0) {
     this->kernelType = kernelType;
     this->degree = degree;
     this->gamma = gamma;
@@ -42,7 +42,7 @@ void Kernel::swapIndex(int i, int j) {
     tmp = x[i];
     x[i] = x[j];
     x[j] = tmp;
-    if (xSquare.size() > 0) {
+    if (!xSquare.empty()) {
         double tmpd;
         tmpd = xSquare[i];
         xSquare[i] = xSquare[j];
@@ -57,7 +57,7 @@ void Kernel::swapIndex(int i, int j) {
  * @param j Index of the second instance.
  * @return Linear kernel value for two instances.
  */
-double Kernel::linear(int i, int j) {
+double Kernel::linear(int i, int j) const{
     return x[i].dot(x[j]);
 }
 
@@ -68,7 +68,7 @@ double Kernel::linear(int i, int j) {
  * @param j Index of the second instance.
  * @return Polynomial kernel value for two instances..
  */
-double Kernel::polynom(int i, int j) {
+double Kernel::polynom(int i, int j) const{
     return pow(gamma * x[i].dot(x[j]) + coefficient0, degree);
 }
 
@@ -79,7 +79,7 @@ double Kernel::polynom(int i, int j) {
  * @param j Index of the second instance.
  * @return Radial basis kernel value for two instances.
  */
-double Kernel::rbf(int i, int j) {
+double Kernel::rbf(int i, int j) const{
     return exp(-gamma * (xSquare[i] + xSquare[j] - 2 * x[i].dot(x[j])));
 }
 
@@ -90,7 +90,7 @@ double Kernel::rbf(int i, int j) {
  * @param j Index of the second instance.
  * @return Sigmoid kernel value for two instances.
  */
-double Kernel::sigmoid(int i, int j) {
+double Kernel::sigmoid(int i, int j) const{
     return tanh(gamma * x[i].dot(x[j]) + coefficient0);
 }
 
@@ -102,7 +102,7 @@ double Kernel::sigmoid(int i, int j) {
  * @param j Index of the second instance.
  * @return Kernel value for two instances.
  */
-double Kernel::function(int i, int j) {
+double Kernel::function(int i, int j) const{
     switch (kernelType) {
         case KernelType::LINEAR:
             return linear(i, j);
@@ -127,7 +127,7 @@ double Kernel::function(int i, int j) {
  * @param parameter Kernel parameters including kernel type, gamma, x_0 etc.
  * @return Kernel value for two instances.
  */
-double Kernel::function(NodeList x, NodeList y, SvmParameter *parameter) {
+double Kernel::function(const NodeList& x, const NodeList& y, SvmParameter *parameter) {
     switch (parameter->getKernelType()) {
         case KernelType::LINEAR:
             return x.dot(y);
@@ -167,5 +167,4 @@ double Kernel::function(NodeList x, NodeList y, SvmParameter *parameter) {
     }
 }
 
-Kernel::Kernel() {
-}
+Kernel::Kernel() = default;

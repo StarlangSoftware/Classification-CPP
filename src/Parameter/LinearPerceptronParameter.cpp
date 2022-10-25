@@ -26,7 +26,7 @@ LinearPerceptronParameter::LinearPerceptronParameter(int seed, double learningRa
  *
  * @return The learningRate.
  */
-double LinearPerceptronParameter::getLearningRate() {
+double LinearPerceptronParameter::getLearningRate() const{
     return learningRate;
 }
 
@@ -35,7 +35,7 @@ double LinearPerceptronParameter::getLearningRate() {
  *
  * @return The etaDecrease.
  */
-double LinearPerceptronParameter::getEtaDecrease() {
+double LinearPerceptronParameter::getEtaDecrease() const{
     return etaDecrease;
 }
 
@@ -44,7 +44,7 @@ double LinearPerceptronParameter::getEtaDecrease() {
  *
  * @return The crossValidationRatio.
  */
-double LinearPerceptronParameter::getCrossValidationRatio() {
+double LinearPerceptronParameter::getCrossValidationRatio() const{
     return crossValidationRatio;
 }
 
@@ -53,6 +53,6 @@ double LinearPerceptronParameter::getCrossValidationRatio() {
  *
  * @return The epoch.
  */
-int LinearPerceptronParameter::getEpoch() {
+int LinearPerceptronParameter::getEpoch() const{
     return epoch;
 }

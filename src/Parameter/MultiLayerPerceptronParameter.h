@@ -15,8 +15,8 @@ private:
     ActivationFunction activationFunction;
 public:
     MultiLayerPerceptronParameter(int seed, double learningRate, double etaDecrease, double crossValidationRatio, int epoch, int hiddenNodes, ActivationFunction activationFunction);
-    int getHiddenNodes();
-    ActivationFunction getActivationFunction();
+    int getHiddenNodes() const;
+    ActivationFunction getActivationFunction() const;
 };
 
 

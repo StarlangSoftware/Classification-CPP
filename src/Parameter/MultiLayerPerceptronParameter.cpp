@@ -27,7 +27,7 @@ MultiLayerPerceptronParameter::MultiLayerPerceptronParameter(int seed, double le
  *
  * @return The hiddenNodes.
  */
-int MultiLayerPerceptronParameter::getHiddenNodes() {
+int MultiLayerPerceptronParameter::getHiddenNodes() const{
     return hiddenNodes;
 }
 
@@ -36,6 +36,6 @@ int MultiLayerPerceptronParameter::getHiddenNodes() {
  *
  * @return The activation function.
  */
-ActivationFunction MultiLayerPerceptronParameter::getActivationFunction() {
+ActivationFunction MultiLayerPerceptronParameter::getActivationFunction() const{
     return activationFunction;
 }

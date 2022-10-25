@@ -20,7 +20,7 @@ KnnInstance::KnnInstance(Instance* instance, double distance) {
  *
  * @return The concatenation of class label of the instance and the distance value.
  */
-string KnnInstance::to_string() {
+string KnnInstance::to_string() const{
     string str;
     str += instance->getClassLabel();
     str += + " ";
@@ -28,10 +28,10 @@ string KnnInstance::to_string() {
     return str;
 }
 
-double KnnInstance::getDistance() {
+double KnnInstance::getDistance() const{
     return distance;
 }
 
-Instance *KnnInstance::getInstance() {
+Instance *KnnInstance::getInstance() const{
     return instance;
 }

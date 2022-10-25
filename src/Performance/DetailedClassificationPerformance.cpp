@@ -19,10 +19,10 @@ DetailedClassificationPerformance::DetailedClassificationPerformance(ConfusionMa
  *
  * @return ConfusionMatrix.
  */
-ConfusionMatrix DetailedClassificationPerformance::getConfusionMatrix() {
+ConfusionMatrix DetailedClassificationPerformance::getConfusionMatrix() const{
     return confusionMatrix;
 }
 
-bool DetailedClassificationPerformance::containsDetails() {
+bool DetailedClassificationPerformance::containsDetails() const{
     return true;
 }

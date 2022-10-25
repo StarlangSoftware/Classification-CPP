@@ -12,8 +12,8 @@ class InstanceListOfSameClass : public InstanceList {
 private:
     string classLabel;
 public:
-    explicit InstanceListOfSameClass(string classLabel);
-    string getClassLabel() override;
+    explicit InstanceListOfSameClass(const string& classLabel);
+    string getClassLabel() const override;
 };
 
 

@@ -14,7 +14,7 @@ protected:
     void runExperiment(Classifier* classifier, Parameter* parameter, ExperimentPerformance* experimentPerformance, CrossValidation<Instance*>* crossValidation);
 public:
     KFoldRun(int K);
-    ExperimentPerformance* execute(Experiment experiment);
+    ExperimentPerformance* execute(const Experiment& experiment);
 };
 
 

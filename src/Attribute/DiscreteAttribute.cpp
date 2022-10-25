@@ -9,8 +9,8 @@
  *
  * @param value Value of the attribute.
  */
-DiscreteAttribute::DiscreteAttribute(string value) {
-    this->value = move(value);
+DiscreteAttribute::DiscreteAttribute(const string& value) {
+    this->value = value;
 }
 
 /**
@@ -18,7 +18,7 @@ DiscreteAttribute::DiscreteAttribute(string value) {
  *
  * @return value
  */
-string DiscreteAttribute::getValue() {
+string DiscreteAttribute::getValue() const{
     return value;
 }
 
@@ -27,7 +27,7 @@ string DiscreteAttribute::getValue() {
  *
  * @return String representation of value.
  */
-string DiscreteAttribute::to_string() {
+string DiscreteAttribute::to_string() const{
     if (value == ","){
         return "comma";
     } else {
@@ -43,10 +43,10 @@ DiscreteAttribute::DiscreteAttribute(bool value) {
     }
 }
 
-int DiscreteAttribute::continuousAttributeSize() {
+int DiscreteAttribute::continuousAttributeSize() const{
     return 0;
 }
 
-vector<double> DiscreteAttribute::continuousAttributes() {
-    return vector<double>();
+vector<double> DiscreteAttribute::continuousAttributes() const{
+    return {};
 }

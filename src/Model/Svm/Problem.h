@@ -16,11 +16,11 @@ private:
     vector<double> y;
     vector<NodeList> x;
 public:
-    Problem(vector<NodeList> x, vector<double> y);
-    explicit Problem(InstanceList& instanceList);
-    int getL();
-    vector<NodeList> getX();
-    vector<double> getY();
+    Problem(const vector<NodeList>& x, const vector<double>& y);
+    explicit Problem(const InstanceList& instanceList);
+    int getL() const;
+    vector<NodeList> getX() const;
+    vector<double> getY() const;
 };
 
 

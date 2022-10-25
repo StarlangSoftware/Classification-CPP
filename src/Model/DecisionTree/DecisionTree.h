@@ -10,13 +10,13 @@
 class DecisionTree : public ValidatedModel{
 private:
     DecisionNode root;
-    void pruneNode(DecisionNode decisionNode, InstanceList pruneSet);
+    void pruneNode(DecisionNode decisionNode, const InstanceList& pruneSet);
 public:
     string predict(Instance* instance) override;
     map<string, double> predictProbability(Instance* instance) override;
     explicit DecisionTree(ifstream& inputFile);
-    explicit DecisionTree(DecisionNode root);
-    void prune(InstanceList pruneSet);
+    explicit DecisionTree(const DecisionNode& root);
+    void prune(const InstanceList& pruneSet);
     void serialize(ostream &outputFile) override;
 };
 

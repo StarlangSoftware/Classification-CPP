@@ -13,7 +13,7 @@
  * @param dataSet             DataSet that will bu used.
  * @param covarianceExplained Number that shows the explained covariance.
  */
-Pca::Pca(DataSet dataSet, double covarianceExplained) : TrainedFeatureFilter(dataSet) {
+Pca::Pca(const DataSet& dataSet, double covarianceExplained) : TrainedFeatureFilter(dataSet) {
     this->covarianceExplained = covarianceExplained;
     train();
 }
@@ -24,7 +24,7 @@ Pca::Pca(DataSet dataSet, double covarianceExplained) : TrainedFeatureFilter(dat
  * @param dataSet            DataSet that will bu used.
  * @param numberOfDimensions Dimension number.
  */
-Pca::Pca(DataSet dataSet, int numberOfDimensions) : TrainedFeatureFilter(dataSet) {
+Pca::Pca(const DataSet& dataSet, int numberOfDimensions) : TrainedFeatureFilter(dataSet) {
     this->numberOfDimensions = numberOfDimensions;
     train();
 }
@@ -34,7 +34,7 @@ Pca::Pca(DataSet dataSet, int numberOfDimensions) : TrainedFeatureFilter(dataSet
  *
  * @param dataSet DataSet that will bu used.
  */
-Pca::Pca(DataSet dataSet) : TrainedFeatureFilter(dataSet) {
+Pca::Pca(const DataSet& dataSet) : TrainedFeatureFilter(dataSet) {
     train();
 }
 
@@ -45,7 +45,7 @@ Pca::Pca(DataSet dataSet) : TrainedFeatureFilter(dataSet) {
  */
 void Pca::removeUnnecessaryEigenvectors() {
     double sum = 0.0, currentSum = 0.0;
-    for (Eigenvector eigenvector : eigenvectors) {
+    for (const Eigenvector& eigenvector : eigenvectors) {
         sum += eigenvector.getEigenValue();
     }
     vector<Eigenvector>::iterator item;

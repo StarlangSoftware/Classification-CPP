@@ -21,7 +21,7 @@ DataSet::DataSet() {
  *
  * @param definition Data definition of the data set.
  */
-DataSet::DataSet(DataDefinition& definition) {
+DataSet::DataSet(const DataDefinition& definition) {
     this->definition = definition;
     instances = InstanceList();
 }
@@ -31,7 +31,7 @@ DataSet::DataSet(DataDefinition& definition) {
  *
  * @param file {@link ifstream} to generate {@link DataSet} from.
  */
-DataSet::DataSet(ifstream file) {
+DataSet::DataSet(ifstream& file) {
     Instance* instance;
     int i = 0;
     string instanceText;
@@ -92,9 +92,9 @@ DataSet::DataSet(ifstream file) {
  * @param separator  Separator character which separates the attribute values in the data file.
  * @param fileName   Name of the data set file.
  */
-DataSet::DataSet(DataDefinition definition, string separator, string fileName) {
+DataSet::DataSet(const DataDefinition& definition, const string& separator, const string& fileName) {
     this->definition = definition;
-    instances = InstanceList(move(definition), move(separator), move(fileName));
+    instances = InstanceList(definition, separator, fileName);
 }
 
 /**
@@ -105,7 +105,7 @@ DataSet::DataSet(DataDefinition definition, string separator, string fileName) {
  * @param instance {@link Instance} to checks the attribute type.
  * @return true if attribute types of given {@link Instance} and data definition matches.
  */
-bool DataSet::checkDefinition(Instance *instance) {
+bool DataSet::checkDefinition(Instance *instance) const{
     for (int i = 0; i < instance->attributeSize(); i++) {
         if (instance->getAttribute(i)->isBinary()) {
             if (definition.getAttributeType(i) != AttributeType::BINARY)
@@ -164,7 +164,7 @@ void DataSet::setDefinition(Instance *instance) {
  *
  * @return Size of the {@link InstanceList}.
  */
-int DataSet::sampleSize() {
+int DataSet::sampleSize() const{
     return instances.size();
 }
 
@@ -173,7 +173,7 @@ int DataSet::sampleSize() {
  *
  * @return Size of the class label distribution of {@link InstanceList}.
  */
-int DataSet::classCount() {
+int DataSet::classCount() const{
     return instances.classDistribution().size();
 }
 
@@ -182,7 +182,7 @@ int DataSet::classCount() {
  *
  * @return The number of attribute types at {@link DataDefinition} list.
  */
-int DataSet::attributeCount() {
+int DataSet::attributeCount() const{
     return definition.attributeCount();
 }
 
@@ -191,7 +191,7 @@ int DataSet::attributeCount() {
  *
  * @return The number of discrete attribute types at {@link DataDefinition} list.
  */
-int DataSet::discreteAttributeCount() {
+int DataSet::discreteAttributeCount() const{
     return definition.discreteAttributeCount();
 }
 
@@ -200,7 +200,7 @@ int DataSet::discreteAttributeCount() {
  *
  * @return The number of continuous attribute types at {@link DataDefinition} list.
  */
-int DataSet::continuousAttributeCount() {
+int DataSet::continuousAttributeCount() const{
     return definition.continuousAttributeCount();
 }
 
@@ -209,12 +209,12 @@ int DataSet::continuousAttributeCount() {
  *
  * @return The accumulated {@link String} of class labels of the {@link InstanceList}.
  */
-string DataSet::getClasses() {
+string DataSet::getClasses() const{
     string result;
     vector<string> classLabels = instances.getDistinctClassLabels();
     result = classLabels.at(0);
     for (int i = 1; i < classLabels.size(); i++) {
-        result.append(";").append(classLabels.at(i));
+        result += ";" + classLabels.at(i);
     }
     return result;
 }
@@ -226,7 +226,7 @@ string DataSet::getClasses() {
  * @param dataSetName Data set name.
  * @return General information about the given data set.
  */
-string DataSet::info(string dataSetName) {
+string DataSet::info(const string& dataSetName) const{
     string result = "DATASET: " + dataSetName + "\n";
     result = result + "Number of instances: " + std::to_string(sampleSize()) + "\n";
     result = result + "Number of distinct class labels: " + std::to_string(classCount()) + "\n";
@@ -238,12 +238,12 @@ string DataSet::info(string dataSetName) {
 }
 
 /**
- * Returns a formatted String of general information aboutt he data set.
+ * Returns a formatted String of general information about the data set.
  *
  * @param dataSetName Data set name.
- * @return Formatted String of general information aboutt he data set.
+ * @return Formatted String of general information about the data set.
  */
-string DataSet::to_string(string dataSetName) {
+string DataSet::to_string(const string& dataSetName) const{
     return dataSetName + std::to_string(sampleSize()) + std::to_string(classCount()) + std::to_string(attributeCount()) + std::to_string(discreteAttributeCount()) + std::to_string(continuousAttributeCount());
 }
 
@@ -268,7 +268,7 @@ void DataSet::addInstance(Instance *current) {
  *
  * @param instanceList {@link InstanceList} to add instances from.
  */
-void DataSet::addInstanceList(vector<Instance *> instanceList) {
+void DataSet::addInstanceList(const vector<Instance *>& instanceList) {
     for (Instance* instance : instanceList) {
         addInstance(instance);
     }
@@ -279,7 +279,7 @@ void DataSet::addInstanceList(vector<Instance *> instanceList) {
  *
  * @return The instances of {@link InstanceList}.
  */
-vector<Instance *> DataSet::getInstances() {
+vector<Instance *> DataSet::getInstances() const{
     return instances.getInstances();
 }
 
@@ -288,7 +288,7 @@ vector<Instance *> DataSet::getInstances() {
  *
  * @return Instances of the items at the list of instance lists from the partitions.
  */
-Partition DataSet::getClassInstances() {
+Partition DataSet::getClassInstances() const{
     return Partition(instances);
 }
 
@@ -297,7 +297,7 @@ Partition DataSet::getClassInstances() {
  *
  * @return The {@link InstanceList}.
  */
-InstanceList DataSet::getInstanceList() {
+InstanceList DataSet::getInstanceList() const{
     return instances;
 }
 
@@ -306,7 +306,7 @@ InstanceList DataSet::getInstanceList() {
  *
  * @return The data definition.
  */
-DataDefinition DataSet::getDataDefinition() {
+DataDefinition DataSet::getDataDefinition() const{
     return definition;
 }
 
@@ -315,7 +315,7 @@ DataDefinition DataSet::getDataDefinition() {
  *
  * @param outFileName File name to write the output.
  */
-void DataSet::writeToFile(string outFileName) {
+void DataSet::writeToFile(const string& outFileName) {
     ofstream outfile;
     outfile = ofstream(outFileName, ofstream::out);
     for (int i = 0; i < instances.size(); i++) {
@@ -330,7 +330,7 @@ void DataSet::writeToFile(string outFileName) {
  * @param featureSubSet {@link FeatureSubSet} input.
  * @return Subset generated via the given {@link FeatureSubSet}.
  */
-DataSet DataSet::getSubSetOfFeatures(FeatureSubSet featureSubSet) {
+DataSet DataSet::getSubSetOfFeatures(const FeatureSubSet& featureSubSet) {
     DataDefinition dataDefinition = definition.getSubSetOfFeatures(featureSubSet);
     DataSet result = DataSet(dataDefinition);
     for (int i = 0; i < instances.size(); i++) {

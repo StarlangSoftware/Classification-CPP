@@ -11,9 +11,9 @@
 class KFoldRunSeparateTest : virtual public KFoldRun {
 public:
     explicit KFoldRunSeparateTest(int K);
-    ExperimentPerformance* execute(Experiment experiment) override;
+    ExperimentPerformance* execute(const Experiment& experiment) override;
 protected:
-    void runExperiment(Classifier* classifier, Parameter* parameter, ExperimentPerformance* experimentPerformance, CrossValidation<Instance*>* crossValidation, InstanceList testSet);
+    void runExperiment(Classifier* classifier, Parameter* parameter, ExperimentPerformance* experimentPerformance, CrossValidation<Instance*>* crossValidation, const InstanceList& testSet);
 };
 
 

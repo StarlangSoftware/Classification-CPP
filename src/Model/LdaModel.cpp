@@ -15,7 +15,7 @@
  * @param Ci       String input.
  * @return The dot product of given Instance and w0 plus w1.
  */
-double LdaModel::calculateMetric(Instance *instance, string Ci) {
+double LdaModel::calculateMetric(Instance *instance, const string& Ci) const{
     double w0i;
     Vector xi = instance->toVector();
     Vector wi = w.find(Ci)->second;
@@ -34,10 +34,10 @@ double LdaModel::calculateMetric(Instance *instance, string Ci) {
  * @param w                 {@link HashMap} of String and Vectors.
  * @param w0                {@link HashMap} of String and Double.
  */
-LdaModel::LdaModel(DiscreteDistribution priorDistribution, map<string, Vector> w, map<string, double> w0) {
-    this->priorDistribution = move(priorDistribution);
-    this->w = move(w);
-    this->w0 = move(w0);
+LdaModel::LdaModel(const DiscreteDistribution& priorDistribution, const map<string, Vector>& w, const map<string, double>& w0) {
+    this->priorDistribution = priorDistribution;
+    this->w = w;
+    this->w0 = w0;
 }
 
 void LdaModel::serialize(ostream &outputFile) {

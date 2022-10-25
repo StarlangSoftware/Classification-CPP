@@ -40,12 +40,6 @@ TEST_CASE("KnnTest-testTrain") {
     }
     dataDefinition = DataDefinition(attributeTypes);
     tictactoe = DataSet(dataDefinition, ",", "tictactoe.data");
-    attributeTypes.clear();
-    for (int i = 0; i < 8; i++) {
-        attributeTypes.emplace_back(AttributeType::DISCRETE);
-    }
-    dataDefinition = DataDefinition(attributeTypes);
-    nursery = DataSet(dataDefinition, ",", "nursery.data");
     Knn knn = Knn();
     auto* knnParameter = new KnnParameter(1, 3, new EuclidianDistance());
     InstanceList instanceList = iris.getInstanceList();
@@ -63,7 +57,4 @@ TEST_CASE("KnnTest-testTrain") {
     instanceList = tictactoe.getInstanceList();
     knn.train(instanceList, knnParameter);
     REQUIRE_THAT(32.57, Catch::Matchers::WithinAbs(100 * knn.test(tictactoe.getInstanceList())->getErrorRate(), 0.01));
-    instanceList = nursery.getInstanceList();
-    knn.train(instanceList, knnParameter);
-    REQUIRE_THAT(18.46, Catch::Matchers::WithinAbs(100 * knn.test(nursery.getInstanceList())->getErrorRate(), 0.01));
 }

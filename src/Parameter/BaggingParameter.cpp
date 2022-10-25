@@ -19,6 +19,6 @@ BaggingParameter::BaggingParameter(int seed, int ensembleSize) : Parameter(seed)
  *
  * @return The ensemble size.
  */
-int BaggingParameter::getEnsembleSize() {
+int BaggingParameter::getEnsembleSize() const{
     return ensembleSize;
 }

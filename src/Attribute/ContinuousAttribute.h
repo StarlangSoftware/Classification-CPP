@@ -14,15 +14,15 @@ private:
     double value;
 public:
     explicit ContinuousAttribute(double value);
-    double getValue();
-    int continuousAttributeSize() override;
-    vector<double> continuousAttributes() override;
-    void setValue(double value);
-    string to_string() override;
-    bool isDiscrete() override {return false;}
-    bool isContinuous() override {return true;};
-    bool isDiscreteIndexed() override {return false;};
-    bool isBinary() override {return false;};
+    double getValue() const;
+    int continuousAttributeSize() const override;
+    vector<double> continuousAttributes() const override;
+    void setValue(double _value);
+    string to_string() const override;
+    bool isDiscrete() const override {return false;}
+    bool isContinuous() const override {return true;};
+    bool isDiscreteIndexed() const override {return false;};
+    bool isBinary() const override {return false;};
 };
 
 

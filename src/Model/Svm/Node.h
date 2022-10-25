@@ -16,9 +16,9 @@ private:
 public:
     explicit Node(ifstream& inputFile);
     Node(int index, double value);
-    Node clone();
-    int getIndex();
-    double getValue();
+    Node clone() const;
+    int getIndex() const;
+    double getValue() const;
     void serialize(ostream &outputFile);
 };
 

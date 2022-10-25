@@ -11,7 +11,7 @@
 class StratifiedKFoldRun : virtual public KFoldRun {
 public:
     explicit StratifiedKFoldRun(int K);
-    ExperimentPerformance* execute(Experiment experiment) override;
+    ExperimentPerformance* execute(const Experiment& experiment) override;
 };
 
 
