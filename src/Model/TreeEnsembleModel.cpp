@@ -14,8 +14,8 @@
  */
 string TreeEnsembleModel::predict(Instance *instance) {
     DiscreteDistribution distribution = DiscreteDistribution();
-    for (DecisionTree tree : forest) {
-        distribution.addItem(tree.predict(instance));
+    for (DecisionTree* tree : forest) {
+        distribution.addItem(tree->predict(instance));
     }
     return distribution.getMaxItem();
 }
@@ -25,14 +25,14 @@ string TreeEnsembleModel::predict(Instance *instance) {
  *
  * @param forest An {@link vector} of {@link DecisionTree}.
  */
-TreeEnsembleModel::TreeEnsembleModel(const vector<DecisionTree>& forest) {
+TreeEnsembleModel::TreeEnsembleModel(const vector<DecisionTree*>& forest) {
     this->forest = forest;
 }
 
 void TreeEnsembleModel::serialize(ostream &outputFile) {
     outputFile << forest.size() << "\n";
-    for (DecisionTree tree : forest){
-        tree.serialize(outputFile);
+    for (DecisionTree* tree : forest){
+        tree->serialize(outputFile);
     }
 }
 
@@ -40,15 +40,15 @@ TreeEnsembleModel::TreeEnsembleModel(ifstream &inputFile) {
     int size;
     inputFile >> size;
     for (int i = 0; i < size; i++){
-        DecisionTree tree = DecisionTree(inputFile);
+        DecisionTree* tree = new DecisionTree(inputFile);
         forest.push_back(tree);
     }
 }
 
 map<string, double> TreeEnsembleModel::predictProbability(Instance *instance) {
     DiscreteDistribution distribution = DiscreteDistribution();
-    for (DecisionTree tree : forest) {
-        distribution.addItem(tree.predict(instance));
+    for (DecisionTree* tree : forest) {
+        distribution.addItem(tree->predict(instance));
     }
     return distribution.getProbabilityDistribution();
 }

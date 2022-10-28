@@ -38,12 +38,6 @@ TEST_CASE("NaiveBayesTest-testTrain") {
     }
     dataDefinition = DataDefinition(attributeTypes);
     tictactoe = DataSet(dataDefinition, ",", "tictactoe.data");
-    attributeTypes.clear();
-    for (int i = 0; i < 8; i++) {
-        attributeTypes.emplace_back(AttributeType::DISCRETE);
-    }
-    dataDefinition = DataDefinition(attributeTypes);
-    nursery = DataSet(dataDefinition, ",", "nursery.data");
     NaiveBayes naiveBayes = NaiveBayes();
     InstanceList instanceList = iris.getInstanceList();
     naiveBayes.train(instanceList, nullptr);
@@ -60,7 +54,4 @@ TEST_CASE("NaiveBayesTest-testTrain") {
     instanceList = tictactoe.getInstanceList();
     naiveBayes.train(instanceList, nullptr);
     REQUIRE_THAT(30.17, Catch::Matchers::WithinAbs(100 * naiveBayes.test(tictactoe.getInstanceList())->getErrorRate(), 0.01));
-    instanceList = nursery.getInstanceList();
-    naiveBayes.train(instanceList, nullptr);
-    REQUIRE_THAT(9.70, Catch::Matchers::WithinAbs(100 * naiveBayes.test(nursery.getInstanceList())->getErrorRate(), 0.01));
 }

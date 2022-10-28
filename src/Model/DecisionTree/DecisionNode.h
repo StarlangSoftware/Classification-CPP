@@ -25,7 +25,7 @@ public:
     DecisionNode();
     explicit DecisionNode(ifstream& inputFile);
     DecisionNode(InstanceList data, const DecisionCondition& condition, RandomForestParameter* parameter, bool isStump);
-    string predict(Instance* instance);
+    string predict(Instance* instance) const;
     map<string, double> predictProbabilityDistribution(Instance* instance);
     bool isLeaf() const;
     void setLeaf(bool leaf);

@@ -212,7 +212,7 @@ DecisionNode::DecisionNode(InstanceList data, const DecisionCondition& condition
  * @param instance Instance to make prediction.
  * @return The prediction for given instance.
  */
-string DecisionNode::predict(Instance *instance) {
+string DecisionNode::predict(Instance *instance) const{
     if (instance->isComposite()) {
         vector<string> possibleClassLabels = ((CompositeInstance*) instance)->getPossibleClassLabels();
         DiscreteDistribution distribution = data.classDistribution();
@@ -220,7 +220,7 @@ string DecisionNode::predict(Instance *instance) {
         if (leaf) {
             return predictedClass;
         } else {
-            for (DecisionNode node : children) {
+            for (const DecisionNode& node : children) {
                 if (node.condition.satisfy(instance)) {
                     string childPrediction = node.predict(instance);
                     if (!childPrediction.empty()) {
@@ -236,7 +236,7 @@ string DecisionNode::predict(Instance *instance) {
         if (leaf) {
             return classLabel;
         } else {
-            for (DecisionNode node : children) {
+            for (const DecisionNode& node : children) {
                 if (node.condition.satisfy(instance)) {
                     return node.predict(instance);
                 }

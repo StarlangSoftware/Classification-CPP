@@ -16,10 +16,10 @@
  */
 void RandomForest::train(InstanceList &trainSet, Parameter *parameters) {
     int forestSize = ((RandomForestParameter*) parameters)->getEnsembleSize();
-    vector<DecisionTree> forest;
+    vector<DecisionTree*> forest;
     for (int i = 0; i < forestSize; i++){
         Bootstrap<Instance*> bootstrap = trainSet.bootstrap(i);
-        forest.emplace_back(DecisionTree(DecisionNode(InstanceList(bootstrap.getSample()), DecisionCondition(), (RandomForestParameter*) parameters, false)));
+        forest.emplace_back(new DecisionTree(DecisionNode(InstanceList(bootstrap.getSample()), DecisionCondition(), (RandomForestParameter*) parameters, false)));
     }
     model = new TreeEnsembleModel(forest);
 }

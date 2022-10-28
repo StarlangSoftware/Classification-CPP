@@ -12,7 +12,7 @@
  * @param instance Instance make prediction.
  * @return Possible class labels.
  */
-string DecisionTree::predict(Instance *instance) {
+string DecisionTree::predict(Instance *instance){
     string predictedClass = root.predict(instance);
     if (predictedClass.empty() && instance->isComposite()) {
         predictedClass = ((CompositeInstance*) instance)->getPossibleClassLabels().at(0);

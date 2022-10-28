@@ -40,7 +40,7 @@ TEST_CASE("C45Test-testTrain") {
     dataDefinition = DataDefinition(attributeTypes);
     tictactoe = DataSet(dataDefinition, ",", "tictactoe.data");
     C45 c45 = C45();
-    C45Parameter* c45Parameter = new C45Parameter(1, true, 0.2);
+    auto* c45Parameter = new C45Parameter(1, true, 0.2);
     InstanceList instanceList = iris.getInstanceList();
     c45.train(instanceList, c45Parameter);
     REQUIRE_THAT(4.00, Catch::Matchers::WithinAbs(100 * c45.test(iris.getInstanceList())->getErrorRate(), 0.01));

@@ -9,12 +9,12 @@
 
 class TreeEnsembleModel : public Model {
 private:
-    vector<DecisionTree> forest;
+    vector<DecisionTree*> forest;
 public:
     string predict(Instance* instance) override;
     map<string, double> predictProbability(Instance* instance) override;
     explicit TreeEnsembleModel(ifstream& inputFile);
-    explicit TreeEnsembleModel(const vector<DecisionTree>& forest);
+    explicit TreeEnsembleModel(const vector<DecisionTree*>& forest);
     void serialize(ostream &outputFile) override;
 };
 

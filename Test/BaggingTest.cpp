@@ -39,12 +39,6 @@ TEST_CASE("BaggingTest-testTrain") {
     }
     dataDefinition = DataDefinition(attributeTypes);
     tictactoe = DataSet(dataDefinition, ",", "tictactoe.data");
-    attributeTypes.clear();
-    for (int i = 0; i < 8; i++) {
-        attributeTypes.emplace_back(AttributeType::DISCRETE);
-    }
-    dataDefinition = DataDefinition(attributeTypes);
-    nursery = DataSet(dataDefinition, ",", "nursery.data");
     Bagging bagging = Bagging();
     auto* baggingParameter = new BaggingParameter(1, 100);
     InstanceList instanceList = iris.getInstanceList();
@@ -62,7 +56,4 @@ TEST_CASE("BaggingTest-testTrain") {
     instanceList = tictactoe.getInstanceList();
     bagging.train(instanceList, baggingParameter);
     REQUIRE_THAT(0.0, Catch::Matchers::WithinAbs(100 * bagging.test(tictactoe.getInstanceList())->getErrorRate(), 0.01));
-    instanceList = nursery.getInstanceList();
-    bagging.train(instanceList, baggingParameter);
-    REQUIRE_THAT(0.0, Catch::Matchers::WithinAbs(100 * bagging.test(nursery.getInstanceList())->getErrorRate(), 0.01));
 }
