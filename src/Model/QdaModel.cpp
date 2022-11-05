@@ -43,23 +43,3 @@ QdaModel::QdaModel(const DiscreteDistribution& priorDistribution, const map<stri
                    const map<string, double>& w0) : LdaModel(priorDistribution, w, w0) {
     this->W = W;
 }
-
-void QdaModel::serialize(ostream &outputFile) {
-    LdaModel::serialize(outputFile);
-    outputFile << W.size() << "\n";
-    for (auto& iterator : W){
-        outputFile << iterator.first << "\n";
-        iterator.second.serialize(outputFile);
-    }
-}
-
-QdaModel::QdaModel(ifstream &inputFile) : LdaModel(inputFile) {
-    int size;
-    string classLabel;
-    inputFile >> size;
-    for (int i = 0; i < size; i++){
-        inputFile >> classLabel;
-        Matrix matrix = Matrix(inputFile);
-        W.emplace(classLabel, matrix);
-    }
-}

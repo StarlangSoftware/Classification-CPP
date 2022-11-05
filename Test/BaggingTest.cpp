@@ -8,7 +8,7 @@
 #include "../src/Parameter/BaggingParameter.h"
 
 TEST_CASE("BaggingTest-testTrain") {
-    DataSet iris, car, bupa, tictactoe, dermatology, nursery;
+    DataSet iris, car, bupa, tictactoe, dermatology;
     vector<AttributeType> attributeTypes;
     for (int i = 0; i < 4; i++) {
         attributeTypes.emplace_back(AttributeType::CONTINUOUS);

@@ -90,12 +90,3 @@ void MultiLayerPerceptronModel::calculateOutput() {
     } catch (MatrixColumnMismatch& matrixColumnMismatch) {
     }
 }
-
-void MultiLayerPerceptronModel::serialize(ostream &outputFile) {
-    LinearPerceptronModel::serialize(outputFile);
-    V.serialize(outputFile);
-}
-
-MultiLayerPerceptronModel::MultiLayerPerceptronModel(ifstream &inputFile) : LinearPerceptronModel(inputFile) {
-    V = Matrix(inputFile);
-}

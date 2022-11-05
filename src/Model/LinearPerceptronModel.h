@@ -12,10 +12,8 @@ protected:
     Matrix W = Matrix(0, 0);
     void calculateOutput() override;
 public:
-    explicit LinearPerceptronModel(ifstream& inputFile);
     explicit LinearPerceptronModel(InstanceList& trainSet);
     LinearPerceptronModel(InstanceList& trainSet, const InstanceList& validationSet, LinearPerceptronParameter* parameters);
-    void serialize(ostream &outputFile) override;
 };
 
 

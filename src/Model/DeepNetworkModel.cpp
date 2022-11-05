@@ -143,19 +143,3 @@ void DeepNetworkModel::calculateOutput() {
     } catch (MatrixColumnMismatch& matrixColumnMismatch) {
     }
 }
-
-void DeepNetworkModel::serialize(ostream &outputFile) {
-    NeuralNetworkModel::serialize(outputFile);
-    outputFile << hiddenLayerSize << "\n";
-    for (Matrix matrix : weights){
-        matrix.serialize(outputFile);
-    }
-}
-
-DeepNetworkModel::DeepNetworkModel(ifstream &inputFile) : NeuralNetworkModel(inputFile) {
-    inputFile >> hiddenLayerSize;
-    for (int i = 0; i < hiddenLayerSize + 1; i++){
-        Matrix matrix = Matrix(inputFile);
-        weights.push_back(matrix);
-    }
-}
