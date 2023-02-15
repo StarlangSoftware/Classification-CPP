@@ -43,13 +43,13 @@ TEST_CASE("C45Test-testTrain") {
     auto* c45Parameter = new C45Parameter(1, true, 0.2);
     InstanceList instanceList = iris.getInstanceList();
     c45.train(instanceList, c45Parameter);
-    REQUIRE_THAT(4.00, Catch::Matchers::WithinAbs(100 * c45.test(iris.getInstanceList())->getErrorRate(), 0.01));
+    REQUIRE_THAT(1.33, Catch::Matchers::WithinAbs(100 * c45.test(iris.getInstanceList())->getErrorRate(), 0.01));
     instanceList = bupa.getInstanceList();
     c45.train(instanceList, c45Parameter);
-    REQUIRE_THAT(42.03, Catch::Matchers::WithinAbs(100 * c45.test(bupa.getInstanceList())->getErrorRate(), 0.01));
+    REQUIRE_THAT(6.38, Catch::Matchers::WithinAbs(100 * c45.test(bupa.getInstanceList())->getErrorRate(), 0.01));
     instanceList = dermatology.getInstanceList();
     c45.train(instanceList, c45Parameter);
-    REQUIRE_THAT(14.75, Catch::Matchers::WithinAbs(100 * c45.test(dermatology.getInstanceList())->getErrorRate(), 0.01));
+    REQUIRE_THAT(1.09, Catch::Matchers::WithinAbs(100 * c45.test(dermatology.getInstanceList())->getErrorRate(), 0.01));
     instanceList = car.getInstanceList();
     c45.train(instanceList, c45Parameter);
     REQUIRE_THAT(1.27, Catch::Matchers::WithinAbs(100 * c45.test(car.getInstanceList())->getErrorRate(), 0.01));

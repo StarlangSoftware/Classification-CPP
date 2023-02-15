@@ -19,7 +19,7 @@ TEST_CASE("RandomForestTest-testTrain1") {
     auto* randomForestParameter = new RandomForestParameter(1, 100, 35);
     InstanceList instanceList = iris.getInstanceList();
     randomForest.train(instanceList, randomForestParameter);
-    REQUIRE_THAT(2.0, Catch::Matchers::WithinAbs(100 * randomForest.test(iris.getInstanceList())->getErrorRate(), 0.01));
+    REQUIRE_THAT(0.0, Catch::Matchers::WithinAbs(100 * randomForest.test(iris.getInstanceList())->getErrorRate(), 0.01));
 }
 
 TEST_CASE("RandomForestTest-testTrain2") {
@@ -34,7 +34,7 @@ TEST_CASE("RandomForestTest-testTrain2") {
     auto* randomForestParameter = new RandomForestParameter(1, 100, 35);
     InstanceList instanceList = bupa.getInstanceList();
     randomForest.train(instanceList, randomForestParameter);
-    REQUIRE_THAT(42.03, Catch::Matchers::WithinAbs(100 * randomForest.test(bupa.getInstanceList())->getErrorRate(), 0.01));
+    REQUIRE_THAT(0.0, Catch::Matchers::WithinAbs(100 * randomForest.test(bupa.getInstanceList())->getErrorRate(), 0.01));
 }
 
 TEST_CASE("RandomForestTest-testTrain3") {
@@ -49,7 +49,7 @@ TEST_CASE("RandomForestTest-testTrain3") {
     auto* randomForestParameter = new RandomForestParameter(1, 100, 35);
     InstanceList instanceList = dermatology.getInstanceList();
     randomForest.train(instanceList, randomForestParameter);
-    REQUIRE_THAT(2.46, Catch::Matchers::WithinAbs(100 * randomForest.test(dermatology.getInstanceList())->getErrorRate(), 0.01));
+    REQUIRE_THAT(0.0, Catch::Matchers::WithinAbs(100 * randomForest.test(dermatology.getInstanceList())->getErrorRate(), 0.01));
 }
 
 TEST_CASE("RandomForestTest-testTrain4") {

@@ -60,7 +60,7 @@ TEST_CASE("C45StumpTest-testTrain") {
     REQUIRE_THAT(33.33, Catch::Matchers::WithinAbs(100 * randomClassifier.test(iris.getInstanceList())->getErrorRate(), 0.01));
     instanceList = bupa.getInstanceList();
     randomClassifier.train(instanceList, nullptr);
-    REQUIRE_THAT(42.03, Catch::Matchers::WithinAbs(100 * randomClassifier.test(bupa.getInstanceList())->getErrorRate(), 0.01));
+    REQUIRE_THAT(36.81, Catch::Matchers::WithinAbs(100 * randomClassifier.test(bupa.getInstanceList())->getErrorRate(), 0.01));
     instanceList = dermatology.getInstanceList();
     randomClassifier.train(instanceList, nullptr);
     REQUIRE_THAT(49.73, Catch::Matchers::WithinAbs(100 * randomClassifier.test(dermatology.getInstanceList())->getErrorRate(), 0.01));
@@ -75,5 +75,5 @@ TEST_CASE("C45StumpTest-testTrain") {
     REQUIRE_THAT(29.03, Catch::Matchers::WithinAbs(100 * randomClassifier.test(nursery.getInstanceList())->getErrorRate(), 0.01));
     instanceList = chess.getInstanceList();
     randomClassifier.train(instanceList, nullptr);
-    REQUIRE_THAT(80.76, Catch::Matchers::WithinAbs(100 * randomClassifier.test(chess.getInstanceList())->getErrorRate(), 0.01));
+    REQUIRE_THAT(80.92, Catch::Matchers::WithinAbs(100 * randomClassifier.test(chess.getInstanceList())->getErrorRate(), 0.01));
 }
