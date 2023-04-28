@@ -13,37 +13,37 @@ TEST_CASE("DataSetTest-testSampleSize") {
         attributeTypes.emplace_back(AttributeType::CONTINUOUS);
     }
     DataDefinition dataDefinition = DataDefinition(attributeTypes);
-    iris = DataSet(dataDefinition, ",", "iris.data");
+    iris = DataSet(dataDefinition, ",", "datasets/iris.data");
     attributeTypes.clear();
     for (int i = 0; i < 6; i++){
         attributeTypes.emplace_back(AttributeType::CONTINUOUS);
     }
     dataDefinition = DataDefinition(attributeTypes);
-    bupa = DataSet(dataDefinition, ",", "bupa.data");
+    bupa = DataSet(dataDefinition, ",", "datasets/bupa.data");
     attributeTypes.clear();
     for (int i = 0; i < 34; i++){
         attributeTypes.emplace_back(AttributeType::CONTINUOUS);
     }
     dataDefinition = DataDefinition(attributeTypes);
-    dermatology = DataSet(dataDefinition, ",", "dermatology.data");
+    dermatology = DataSet(dataDefinition, ",", "datasets/dermatology.data");
     attributeTypes.clear();
     for (int i = 0; i < 6; i++){
         attributeTypes.emplace_back(AttributeType::DISCRETE);
     }
     dataDefinition = DataDefinition(attributeTypes);
-    car = DataSet(dataDefinition, ",", "car.data");
+    car = DataSet(dataDefinition, ",", "datasets/car.data");
     attributeTypes.clear();
     for (int i = 0; i < 9; i++){
         attributeTypes.emplace_back(AttributeType::DISCRETE);
     }
     dataDefinition = DataDefinition(attributeTypes);
-    tictactoe = DataSet(dataDefinition, ",", "tictactoe.data");
+    tictactoe = DataSet(dataDefinition, ",", "datasets/tictactoe.data");
     attributeTypes.clear();
     for (int i = 0; i < 8; i++){
         attributeTypes.emplace_back(AttributeType::DISCRETE);
     }
     dataDefinition = DataDefinition(attributeTypes);
-    nursery = DataSet(dataDefinition, ",", "nursery.data");
+    nursery = DataSet(dataDefinition, ",", "datasets/nursery.data");
     attributeTypes.clear();
     for (int i = 0; i < 6; i++){
         if (i % 2 == 0){
@@ -53,7 +53,7 @@ TEST_CASE("DataSetTest-testSampleSize") {
         }
     }
     dataDefinition = DataDefinition(attributeTypes);
-    chess = DataSet(dataDefinition, ",", "chess.data");
+    chess = DataSet(dataDefinition, ",", "datasets/chess.data");
     REQUIRE(150 == iris.sampleSize());
     REQUIRE(345 == bupa.sampleSize());
     REQUIRE(366 == dermatology.sampleSize());
@@ -70,37 +70,37 @@ TEST_CASE("DataSetTest-testClassCount") {
         attributeTypes.emplace_back(AttributeType::CONTINUOUS);
     }
     DataDefinition dataDefinition = DataDefinition(attributeTypes);
-    iris = DataSet(dataDefinition, ",", "iris.data");
+    iris = DataSet(dataDefinition, ",", "datasets/iris.data");
     attributeTypes.clear();
     for (int i = 0; i < 6; i++){
         attributeTypes.emplace_back(AttributeType::CONTINUOUS);
     }
     dataDefinition = DataDefinition(attributeTypes);
-    bupa = DataSet(dataDefinition, ",", "bupa.data");
+    bupa = DataSet(dataDefinition, ",", "datasets/bupa.data");
     attributeTypes.clear();
     for (int i = 0; i < 34; i++){
         attributeTypes.emplace_back(AttributeType::CONTINUOUS);
     }
     dataDefinition = DataDefinition(attributeTypes);
-    dermatology = DataSet(dataDefinition, ",", "dermatology.data");
+    dermatology = DataSet(dataDefinition, ",", "datasets/dermatology.data");
     attributeTypes.clear();
     for (int i = 0; i < 6; i++){
         attributeTypes.emplace_back(AttributeType::DISCRETE);
     }
     dataDefinition = DataDefinition(attributeTypes);
-    car = DataSet(dataDefinition, ",", "car.data");
+    car = DataSet(dataDefinition, ",", "datasets/car.data");
     attributeTypes.clear();
     for (int i = 0; i < 9; i++){
         attributeTypes.emplace_back(AttributeType::DISCRETE);
     }
     dataDefinition = DataDefinition(attributeTypes);
-    tictactoe = DataSet(dataDefinition, ",", "tictactoe.data");
+    tictactoe = DataSet(dataDefinition, ",", "datasets/tictactoe.data");
     attributeTypes.clear();
     for (int i = 0; i < 8; i++){
         attributeTypes.emplace_back(AttributeType::DISCRETE);
     }
     dataDefinition = DataDefinition(attributeTypes);
-    nursery = DataSet(dataDefinition, ",", "nursery.data");
+    nursery = DataSet(dataDefinition, ",", "datasets/nursery.data");
     attributeTypes.clear();
     for (int i = 0; i < 6; i++){
         if (i % 2 == 0){
@@ -110,7 +110,7 @@ TEST_CASE("DataSetTest-testClassCount") {
         }
     }
     dataDefinition = DataDefinition(attributeTypes);
-    chess = DataSet(dataDefinition, ",", "chess.data");
+    chess = DataSet(dataDefinition, ",", "datasets/chess.data");
     REQUIRE(3 == iris.classCount());
     REQUIRE(2 == bupa.classCount());
     REQUIRE(6 == dermatology.classCount());
@@ -127,37 +127,37 @@ TEST_CASE("DataSetTest-testGetClasses") {
         attributeTypes.emplace_back(AttributeType::CONTINUOUS);
     }
     DataDefinition dataDefinition = DataDefinition(attributeTypes);
-    iris = DataSet(dataDefinition, ",", "iris.data");
+    iris = DataSet(dataDefinition, ",", "datasets/iris.data");
     attributeTypes.clear();
     for (int i = 0; i < 6; i++) {
         attributeTypes.emplace_back(AttributeType::CONTINUOUS);
     }
     dataDefinition = DataDefinition(attributeTypes);
-    bupa = DataSet(dataDefinition, ",", "bupa.data");
+    bupa = DataSet(dataDefinition, ",", "datasets/bupa.data");
     attributeTypes.clear();
     for (int i = 0; i < 34; i++) {
         attributeTypes.emplace_back(AttributeType::CONTINUOUS);
     }
     dataDefinition = DataDefinition(attributeTypes);
-    dermatology = DataSet(dataDefinition, ",", "dermatology.data");
+    dermatology = DataSet(dataDefinition, ",", "datasets/dermatology.data");
     attributeTypes.clear();
     for (int i = 0; i < 6; i++) {
         attributeTypes.emplace_back(AttributeType::DISCRETE);
     }
     dataDefinition = DataDefinition(attributeTypes);
-    car = DataSet(dataDefinition, ",", "car.data");
+    car = DataSet(dataDefinition, ",", "datasets/car.data");
     attributeTypes.clear();
     for (int i = 0; i < 9; i++) {
         attributeTypes.emplace_back(AttributeType::DISCRETE);
     }
     dataDefinition = DataDefinition(attributeTypes);
-    tictactoe = DataSet(dataDefinition, ",", "tictactoe.data");
+    tictactoe = DataSet(dataDefinition, ",", "datasets/tictactoe.data");
     attributeTypes.clear();
     for (int i = 0; i < 8; i++) {
         attributeTypes.emplace_back(AttributeType::DISCRETE);
     }
     dataDefinition = DataDefinition(attributeTypes);
-    nursery = DataSet(dataDefinition, ",", "nursery.data");
+    nursery = DataSet(dataDefinition, ",", "datasets/nursery.data");
     attributeTypes.clear();
     for (int i = 0; i < 6; i++) {
         if (i % 2 == 0) {
@@ -167,7 +167,7 @@ TEST_CASE("DataSetTest-testGetClasses") {
         }
     }
     dataDefinition = DataDefinition(attributeTypes);
-    chess = DataSet(dataDefinition, ",", "chess.data");
+    chess = DataSet(dataDefinition, ",", "datasets/chess.data");
     REQUIRE("Iris-setosa;Iris-versicolor;Iris-virginica" == iris.getClasses());
     REQUIRE("1;2" == bupa.getClasses());
     REQUIRE("2;1;3;5;4;6" == dermatology.getClasses());

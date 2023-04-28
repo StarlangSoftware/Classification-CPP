@@ -13,6 +13,7 @@ protected:
     void calculateOutput() override;
 public:
     explicit LinearPerceptronModel(InstanceList& trainSet);
+    explicit LinearPerceptronModel(ifstream& inputFile);
     LinearPerceptronModel(InstanceList& trainSet, const InstanceList& validationSet, LinearPerceptronParameter* parameters);
 };
 

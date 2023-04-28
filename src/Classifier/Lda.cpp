@@ -3,6 +3,7 @@
 //
 
 #include <iostream>
+#include <fstream>
 #include <VectorSizeMismatch.h>
 #include <cmath>
 #include "Lda.h"
@@ -59,4 +60,11 @@ void Lda::train(InstanceList &trainSet, Parameter *parameters) {
         }
     }
     model = new LdaModel(priorDistribution, w, w0);
+}
+
+void Lda::loadModel(const string &fileName) {
+    ifstream inputFile;
+    inputFile.open(fileName, ifstream :: in);
+    model = new LdaModel(inputFile);
+    inputFile.close();
 }

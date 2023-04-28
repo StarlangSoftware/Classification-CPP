@@ -4,6 +4,7 @@
 
 #include <cfloat>
 #include "KMeansModel.h"
+#include "../DistanceMetric/EuclidianDistance.h"
 
 /**
  * The constructor that sets the classMeans, priorDistribution and distanceMetric according to given inputs.
@@ -44,4 +45,5 @@ void KMeansModel::serialize(ostream &outputFile) {
 
 KMeansModel::KMeansModel(ifstream &inputFile) : GaussianModel(inputFile) {
     classMeans = InstanceList(inputFile);
+    distanceMetric = new EuclidianDistance();
 }

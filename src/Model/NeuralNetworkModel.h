@@ -23,6 +23,7 @@ protected:
     void calculateForwardSingleHiddenLayer(const Matrix& W, const Matrix& V, ActivationFunction activationFunction);
     Vector calculateRMinusY(Instance* instance, const Vector& input, const Matrix& weights);
     string predictWithCompositeInstance(const vector<string>& possibleClassLabels) const;
+    ActivationFunction getActivationFunction(ifstream& inputFile) const;
 public:
     explicit NeuralNetworkModel(ifstream& inputFile);
     explicit NeuralNetworkModel(InstanceList& trainSet);

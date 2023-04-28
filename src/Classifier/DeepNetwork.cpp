@@ -2,6 +2,7 @@
 // Created by Olcay Taner Yıldız on 14.02.2019.
 //
 
+#include <fstream>
 #include "DeepNetwork.h"
 #include "../InstanceList/Partition.h"
 #include "../Parameter/DeepNetworkParameter.h"
@@ -21,4 +22,11 @@ void DeepNetwork::train(InstanceList &trainSet, Parameter *parameters) {
     }
     Partition partition = Partition(trainSet, ((DeepNetworkParameter*) parameters)->getCrossValidationRatio(), parameters->getSeed(), true);
     model = new DeepNetworkModel(*(partition.get(1)), *(partition.get(0)), (DeepNetworkParameter*) parameters);
+}
+
+void DeepNetwork::loadModel(const string &fileName) {
+    ifstream inputFile;
+    inputFile.open(fileName, ifstream :: in);
+    model = new DeepNetworkModel(inputFile);
+    inputFile.close();
 }

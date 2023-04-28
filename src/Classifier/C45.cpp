@@ -2,6 +2,7 @@
 // Created by Olcay Taner Yıldız on 16.02.2019.
 //
 
+#include <fstream>
 #include "C45.h"
 #include "../Model/DecisionTree/DecisionTree.h"
 #include "../Parameter/C45Parameter.h"
@@ -24,4 +25,11 @@ void C45::train(InstanceList &trainSet, Parameter *parameters) {
         tree = new DecisionTree(DecisionNode(trainSet, DecisionCondition(), nullptr, false));
     }
     model = tree;
+}
+
+void C45::loadModel(const string &fileName) {
+    ifstream inputFile;
+    inputFile.open(fileName, ifstream :: in);
+    model = new DecisionTree(inputFile);
+    inputFile.close();
 }

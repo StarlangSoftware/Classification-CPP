@@ -2,6 +2,7 @@
 // Created by Olcay Taner Yıldız on 16.02.2019.
 //
 
+#include <fstream>
 #include "C45Stump.h"
 #include "../Model/DecisionTree/DecisionTree.h"
 
@@ -13,4 +14,11 @@
  */
 void C45Stump::train(InstanceList &trainSet, Parameter *parameters) {
     model = new DecisionTree(DecisionNode(trainSet, DecisionCondition(), nullptr, true));
+}
+
+void C45Stump::loadModel(const string &fileName) {
+    ifstream inputFile;
+    inputFile.open(fileName, ifstream :: in);
+    model = new DecisionTree(inputFile);
+    inputFile.close();
 }

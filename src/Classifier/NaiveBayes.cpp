@@ -2,6 +2,7 @@
 // Created by Olcay Taner Yıldız on 9.02.2019.
 //
 
+#include <fstream>
 #include "NaiveBayes.h"
 #include "../InstanceList/InstanceListOfSameClass.h"
 #include "../Model/NaiveBayesModel.h"
@@ -53,4 +54,11 @@ void NaiveBayes::train(InstanceList &trainSet, Parameter *parameters) {
     } else {
         trainContinuousVersion(priorDistribution, classLists);
     }
+}
+
+void NaiveBayes::loadModel(const string &fileName) {
+    ifstream inputFile;
+    inputFile.open(fileName, ifstream :: in);
+    model = new NaiveBayesModel(inputFile);
+    inputFile.close();
 }

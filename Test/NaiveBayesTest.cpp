@@ -6,52 +6,62 @@
 #include "../src/DataSet/DataSet.h"
 #include "../src/Classifier/NaiveBayes.h"
 
-TEST_CASE("NaiveBayesTest-testTrain") {
+TEST_CASE("NaiveBayesTest") {
     DataSet iris, car, bupa, tictactoe, dermatology, nursery;
     vector<AttributeType> attributeTypes;
     for (int i = 0; i < 4; i++) {
         attributeTypes.emplace_back(AttributeType::CONTINUOUS);
     }
     DataDefinition dataDefinition = DataDefinition(attributeTypes);
-    iris = DataSet(dataDefinition, ",", "iris.data");
+    iris = DataSet(dataDefinition, ",", "datasets/iris.data");
     attributeTypes.clear();
     for (int i = 0; i < 6; i++) {
         attributeTypes.emplace_back(AttributeType::CONTINUOUS);
     }
     dataDefinition = DataDefinition(attributeTypes);
-    bupa = DataSet(dataDefinition, ",", "bupa.data");
+    bupa = DataSet(dataDefinition, ",", "datasets/bupa.data");
     attributeTypes.clear();
     for (int i = 0; i < 34; i++) {
         attributeTypes.emplace_back(AttributeType::CONTINUOUS);
     }
     dataDefinition = DataDefinition(attributeTypes);
-    dermatology = DataSet(dataDefinition, ",", "dermatology.data");
+    dermatology = DataSet(dataDefinition, ",", "datasets/dermatology.data");
     attributeTypes.clear();
     for (int i = 0; i < 6; i++) {
         attributeTypes.emplace_back(AttributeType::DISCRETE);
     }
     dataDefinition = DataDefinition(attributeTypes);
-    car = DataSet(dataDefinition, ",", "car.data");
+    car = DataSet(dataDefinition, ",", "datasets/car.data");
     attributeTypes.clear();
     for (int i = 0; i < 9; i++) {
         attributeTypes.emplace_back(AttributeType::DISCRETE);
     }
     dataDefinition = DataDefinition(attributeTypes);
-    tictactoe = DataSet(dataDefinition, ",", "tictactoe.data");
+    tictactoe = DataSet(dataDefinition, ",", "datasets/tictactoe.data");
     NaiveBayes naiveBayes = NaiveBayes();
-    InstanceList instanceList = iris.getInstanceList();
-    naiveBayes.train(instanceList, nullptr);
-    REQUIRE_THAT(5.33, Catch::Matchers::WithinAbs(100 * naiveBayes.test(iris.getInstanceList())->getErrorRate(), 0.01));
-    instanceList = bupa.getInstanceList();
-    naiveBayes.train(instanceList, nullptr);
-    REQUIRE_THAT(38.55, Catch::Matchers::WithinAbs(100 * naiveBayes.test(bupa.getInstanceList())->getErrorRate(), 0.01));
-    instanceList = dermatology.getInstanceList();
-    naiveBayes.train(instanceList, nullptr);
-    REQUIRE_THAT(69.40, Catch::Matchers::WithinAbs(100 * naiveBayes.test(dermatology.getInstanceList())->getErrorRate(), 0.01));
-    instanceList = car.getInstanceList();
-    naiveBayes.train(instanceList, nullptr);
-    REQUIRE_THAT(12.91, Catch::Matchers::WithinAbs(100 * naiveBayes.test(car.getInstanceList())->getErrorRate(), 0.01));
-    instanceList = tictactoe.getInstanceList();
-    naiveBayes.train(instanceList, nullptr);
-    REQUIRE_THAT(30.17, Catch::Matchers::WithinAbs(100 * naiveBayes.test(tictactoe.getInstanceList())->getErrorRate(), 0.01));
+    SECTION("train"){
+        InstanceList instanceList = iris.getInstanceList();
+        naiveBayes.train(instanceList, nullptr);
+        REQUIRE_THAT(5.33, Catch::Matchers::WithinAbs(100 * naiveBayes.test(iris.getInstanceList())->getErrorRate(), 0.01));
+        instanceList = bupa.getInstanceList();
+        naiveBayes.train(instanceList, nullptr);
+        REQUIRE_THAT(38.55, Catch::Matchers::WithinAbs(100 * naiveBayes.test(bupa.getInstanceList())->getErrorRate(), 0.01));
+        instanceList = dermatology.getInstanceList();
+        naiveBayes.train(instanceList, nullptr);
+        REQUIRE_THAT(69.40, Catch::Matchers::WithinAbs(100 * naiveBayes.test(dermatology.getInstanceList())->getErrorRate(), 0.01));
+        instanceList = car.getInstanceList();
+        naiveBayes.train(instanceList, nullptr);
+        REQUIRE_THAT(12.91, Catch::Matchers::WithinAbs(100 * naiveBayes.test(car.getInstanceList())->getErrorRate(), 0.01));
+        instanceList = tictactoe.getInstanceList();
+        naiveBayes.train(instanceList, nullptr);
+        REQUIRE_THAT(30.17, Catch::Matchers::WithinAbs(100 * naiveBayes.test(tictactoe.getInstanceList())->getErrorRate(), 0.01));
+    }
+    SECTION("load"){
+        naiveBayes.loadModel("models/naiveBayes-iris.txt");
+        REQUIRE_THAT(5.33, Catch::Matchers::WithinAbs(100 * naiveBayes.test(iris.getInstanceList())->getErrorRate(), 0.01));
+        naiveBayes.loadModel("models/naiveBayes-bupa.txt");
+        REQUIRE_THAT(38.55, Catch::Matchers::WithinAbs(100 * naiveBayes.test(bupa.getInstanceList())->getErrorRate(), 0.01));
+        naiveBayes.loadModel("models/naiveBayes-dermatology.txt");
+        REQUIRE_THAT(69.40, Catch::Matchers::WithinAbs(100 * naiveBayes.test(dermatology.getInstanceList())->getErrorRate(), 0.01));
+    }
 }

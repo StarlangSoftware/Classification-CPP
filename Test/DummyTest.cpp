@@ -13,37 +13,37 @@ TEST_CASE("DummyTest-testTrain") {
         attributeTypes.emplace_back(AttributeType::CONTINUOUS);
     }
     DataDefinition dataDefinition = DataDefinition(attributeTypes);
-    iris = DataSet(dataDefinition, ",", "iris.data");
+    iris = DataSet(dataDefinition, ",", "datasets/iris.data");
     attributeTypes.clear();
     for (int i = 0; i < 6; i++) {
         attributeTypes.emplace_back(AttributeType::CONTINUOUS);
     }
     dataDefinition = DataDefinition(attributeTypes);
-    bupa = DataSet(dataDefinition, ",", "bupa.data");
+    bupa = DataSet(dataDefinition, ",", "datasets/bupa.data");
     attributeTypes.clear();
     for (int i = 0; i < 34; i++) {
         attributeTypes.emplace_back(AttributeType::CONTINUOUS);
     }
     dataDefinition = DataDefinition(attributeTypes);
-    dermatology = DataSet(dataDefinition, ",", "dermatology.data");
+    dermatology = DataSet(dataDefinition, ",", "datasets/dermatology.data");
     attributeTypes.clear();
     for (int i = 0; i < 6; i++) {
         attributeTypes.emplace_back(AttributeType::DISCRETE);
     }
     dataDefinition = DataDefinition(attributeTypes);
-    car = DataSet(dataDefinition, ",", "car.data");
+    car = DataSet(dataDefinition, ",", "datasets/car.data");
     attributeTypes.clear();
     for (int i = 0; i < 9; i++) {
         attributeTypes.emplace_back(AttributeType::DISCRETE);
     }
     dataDefinition = DataDefinition(attributeTypes);
-    tictactoe = DataSet(dataDefinition, ",", "tictactoe.data");
+    tictactoe = DataSet(dataDefinition, ",", "datasets/tictactoe.data");
     attributeTypes.clear();
     for (int i = 0; i < 8; i++) {
         attributeTypes.emplace_back(AttributeType::DISCRETE);
     }
     dataDefinition = DataDefinition(attributeTypes);
-    nursery = DataSet(dataDefinition, ",", "nursery.data");
+    nursery = DataSet(dataDefinition, ",", "datasets/nursery.data");
     attributeTypes.clear();
     for (int i = 0; i < 6; i++) {
         if (i % 2 == 0) {
@@ -53,7 +53,7 @@ TEST_CASE("DummyTest-testTrain") {
         }
     }
     dataDefinition = DataDefinition(attributeTypes);
-    chess = DataSet(dataDefinition, ",", "chess.data");
+    chess = DataSet(dataDefinition, ",", "datasets/chess.data");
     Dummy dummy = Dummy();
     InstanceList instanceList = iris.getInstanceList();
     dummy.train(instanceList, nullptr);

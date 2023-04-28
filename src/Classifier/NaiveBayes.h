@@ -13,6 +13,7 @@ private:
     void trainDiscreteVersion(DiscreteDistribution priorDistribution, Partition classLists);
 public:
     void train(InstanceList& trainSet, Parameter* parameters) override;
+    void loadModel(const string& fileName) override;
 };
 
 

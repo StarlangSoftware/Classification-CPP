@@ -2,6 +2,7 @@
 // Created by Olcay Taner Yıldız on 14.02.2019.
 //
 
+#include <fstream>
 #include "MultiLayerPerceptron.h"
 #include "../InstanceList/Partition.h"
 #include "../Parameter/MultiLayerPerceptronParameter.h"
@@ -22,4 +23,11 @@ void MultiLayerPerceptron::train(InstanceList &trainSet, Parameter *parameters) 
     }
     Partition partition = Partition(trainSet, ((MultiLayerPerceptronParameter*) parameters)->getCrossValidationRatio(), parameters->getSeed(), true);
     model = new MultiLayerPerceptronModel(*(partition.get(1)), *(partition.get(0)), (MultiLayerPerceptronParameter*) parameters);
+}
+
+void MultiLayerPerceptron::loadModel(const string &fileName) {
+    ifstream inputFile;
+    inputFile.open(fileName, ifstream :: in);
+    model = new MultiLayerPerceptronModel(inputFile);
+    inputFile.close();
 }

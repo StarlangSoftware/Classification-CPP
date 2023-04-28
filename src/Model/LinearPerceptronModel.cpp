@@ -66,3 +66,7 @@ void LinearPerceptronModel::calculateOutput() {
     } catch (MatrixColumnMismatch& matrixColumnMismatch) {
     }
 }
+
+LinearPerceptronModel::LinearPerceptronModel(ifstream &inputFile) : NeuralNetworkModel(inputFile) {
+    W = Matrix(inputFile);
+}

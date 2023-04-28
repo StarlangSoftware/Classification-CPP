@@ -43,3 +43,12 @@ QdaModel::QdaModel(const DiscreteDistribution& priorDistribution, const map<stri
                    const map<string, double>& w0) : LdaModel(priorDistribution, w, w0) {
     this->W = W;
 }
+
+QdaModel::QdaModel(ifstream &inputFile) : LdaModel(inputFile) {
+    string classLabel;
+    for (int i = 0; i < priorDistribution.size(); i++){
+        inputFile >> classLabel;
+        auto matrix = Matrix(inputFile);
+        W.emplace(classLabel, matrix);
+    }
+}

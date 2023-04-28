@@ -14,7 +14,7 @@ TEST_CASE("RandomForestTest-testTrain1") {
         attributeTypes.emplace_back(AttributeType::CONTINUOUS);
     }
     DataDefinition dataDefinition = DataDefinition(attributeTypes);
-    iris = DataSet(dataDefinition, ",", "iris.data");
+    iris = DataSet(dataDefinition, ",", "datasets/iris.data");
     RandomForest randomForest = RandomForest();
     auto* randomForestParameter = new RandomForestParameter(1, 100, 35);
     InstanceList instanceList = iris.getInstanceList();
@@ -29,7 +29,7 @@ TEST_CASE("RandomForestTest-testTrain2") {
         attributeTypes.emplace_back(AttributeType::CONTINUOUS);
     }
     DataDefinition dataDefinition = DataDefinition(attributeTypes);
-    bupa = DataSet(dataDefinition, ",", "bupa.data");
+    bupa = DataSet(dataDefinition, ",", "datasets/bupa.data");
     RandomForest randomForest = RandomForest();
     auto* randomForestParameter = new RandomForestParameter(1, 100, 35);
     InstanceList instanceList = bupa.getInstanceList();
@@ -44,7 +44,7 @@ TEST_CASE("RandomForestTest-testTrain3") {
         attributeTypes.emplace_back(AttributeType::CONTINUOUS);
     }
     DataDefinition dataDefinition = DataDefinition(attributeTypes);
-    dermatology = DataSet(dataDefinition, ",", "dermatology.data");
+    dermatology = DataSet(dataDefinition, ",", "datasets/dermatology.data");
     RandomForest randomForest = RandomForest();
     auto* randomForestParameter = new RandomForestParameter(1, 100, 35);
     InstanceList instanceList = dermatology.getInstanceList();
@@ -59,7 +59,7 @@ TEST_CASE("RandomForestTest-testTrain4") {
         attributeTypes.emplace_back(AttributeType::DISCRETE);
     }
     DataDefinition dataDefinition = DataDefinition(attributeTypes);
-    car = DataSet(dataDefinition, ",", "car.data");
+    car = DataSet(dataDefinition, ",", "datasets/car.data");
     RandomForest randomForest = RandomForest();
     auto* randomForestParameter = new RandomForestParameter(1, 100, 35);
     InstanceList instanceList = car.getInstanceList();
@@ -74,7 +74,7 @@ TEST_CASE("RandomForestTest-testTrain5") {
         attributeTypes.emplace_back(AttributeType::DISCRETE);
     }
     DataDefinition dataDefinition = DataDefinition(attributeTypes);
-    tictactoe = DataSet(dataDefinition, ",", "tictactoe.data");
+    tictactoe = DataSet(dataDefinition, ",", "datasets/tictactoe.data");
     RandomForest randomForest = RandomForest();
     auto* randomForestParameter = new RandomForestParameter(1, 100, 35);
     InstanceList instanceList = tictactoe.getInstanceList();

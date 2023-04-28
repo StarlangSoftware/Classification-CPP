@@ -57,6 +57,9 @@ InstanceList::InstanceList(const DataDefinition& definition, const string& separ
                         current->addAttribute(new ContinuousAttribute(stod(attributeList[i])));
                         break;
                     case AttributeType::DISCRETE_INDEXED:
+                        current->addAttribute(new DiscreteIndexedAttribute(attributeList[i],
+                                                                          definition.featureValueIndex(i, attributeList[i]),
+                                                                          definition.numberOfValues(i)));
                         break;
                 }
             }
@@ -579,37 +582,29 @@ void InstanceList::serialize(ostream &outputFile) {
 }
 
 InstanceList::InstanceList(ifstream &inputFile) {
-    int size, attributeSize;
-    double continuousAttribute;
-    string line, attributeType, discreteAttribute, binaryAttribute, classLabel;
-    vector<string> attributeTypes;
+    int size;
+    string line, discreteAttribute;
+    vector<string> attributeTypes, attributeValues;
     Instance* current;
-    inputFile >> attributeSize;
-    for (int i = 0; i < attributeSize; i++){
-        inputFile >> attributeType;
-        attributeTypes.push_back(attributeType);
-    }
+    inputFile.ignore();
+    getline(inputFile, line);
+    attributeTypes = Word::split(line);
     inputFile >> size;
+    inputFile.ignore();
     for (int i = 0; i < size; i++){
         vector<Attribute*> attributeList;
-        for (int j = 0; j < attributeSize; j++) {
-            if (attributeTypes.at(j) == "Discrete"){
-                inputFile >> discreteAttribute;
-                attributeList.push_back(new DiscreteAttribute(discreteAttribute));
+        getline(inputFile, line);
+        attributeValues = Word::split(line, ",");
+        for (int j = 0; j < attributeTypes.size(); j++) {
+            if (attributeTypes[j] == "DISCRETE"){
+                attributeList.push_back(new DiscreteAttribute(attributeValues[j]));
             } else {
-                if (attributeTypes.at(j) == "Continuous"){
-                    inputFile >> continuousAttribute;
-                    attributeList.push_back(new ContinuousAttribute(continuousAttribute));
-                } else {
-                    if (attributeTypes.at(j) == "Binary"){
-                        inputFile >> discreteAttribute;
-                        attributeList.push_back(new BinaryAttribute(discreteAttribute));
-                    }
+                if (attributeTypes[j] == "CONTINUOUS"){
+                    attributeList.push_back(new ContinuousAttribute(stof(attributeValues[j])));
                 }
             }
         }
-        inputFile >> classLabel;
-        current = new Instance(classLabel, attributeList);
+        current = new Instance(attributeValues[attributeTypes.size()], attributeList);
         list.push_back(current);
     }
 }

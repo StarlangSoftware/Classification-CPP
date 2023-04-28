@@ -96,22 +96,22 @@ void DecisionCondition::serialize(ostream &outputFile) {
 }
 
 DecisionCondition::DecisionCondition(ifstream &inputFile) {
-    string type, discreteAttribute;
-    double continuousAttribute;
+    string type;
+    int maxIndex;
     inputFile >> attributeIndex;
+    inputFile >> comparison;
+    inputFile >> type;
     if (attributeIndex != -1){
-        inputFile >> comparison;
-        inputFile >> type;
-        if (type == "Discrete"){
-            inputFile >> discreteAttribute;
-            value = new DiscreteAttribute(discreteAttribute);
+        if (comparison == '='){
+            value = new DiscreteAttribute(type);
         } else {
-            if (type == "Continuous"){
-                inputFile >> continuousAttribute;
-                value = new ContinuousAttribute(continuousAttribute);
+            if (comparison == ':'){
+                comparison = '=';
+                inputFile >> maxIndex;
+                value = new DiscreteIndexedAttribute("", stoi(type), maxIndex);
+            } else {
+                value = new ContinuousAttribute(stof(type));
             }
         }
-    } else {
-
     }
 }

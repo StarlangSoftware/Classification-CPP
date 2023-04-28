@@ -143,3 +143,11 @@ void DeepNetworkModel::calculateOutput() {
     } catch (MatrixColumnMismatch& matrixColumnMismatch) {
     }
 }
+
+DeepNetworkModel::DeepNetworkModel(ifstream &inputFile) : NeuralNetworkModel(inputFile) {
+    inputFile >> hiddenLayerSize;
+    for (int i = 0; i < hiddenLayerSize + 1; i++){
+        weights.emplace_back(inputFile);
+    }
+    activationFunction = getActivationFunction(inputFile);
+}

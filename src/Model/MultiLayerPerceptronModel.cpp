@@ -2,6 +2,7 @@
 // Created by Olcay Taner Yıldız on 14.02.2019.
 //
 
+#include <fstream>
 #include <MatrixColumnMismatch.h>
 #include <MatrixRowMismatch.h>
 #include <MatrixDimensionMismatch.h>
@@ -89,4 +90,9 @@ void MultiLayerPerceptronModel::calculateOutput() {
         calculateForwardSingleHiddenLayer(W, V, activationFunction);
     } catch (MatrixColumnMismatch& matrixColumnMismatch) {
     }
+}
+
+MultiLayerPerceptronModel::MultiLayerPerceptronModel(ifstream& inputFile) : LinearPerceptronModel(inputFile){
+    V = Matrix(inputFile);
+    activationFunction = getActivationFunction(inputFile);
 }

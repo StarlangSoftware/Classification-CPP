@@ -189,3 +189,17 @@ map<string, double> NeuralNetworkModel::predictProbability(Instance *instance) {
     }
     return result;
 }
+
+ActivationFunction NeuralNetworkModel::getActivationFunction(ifstream& inputFile) const {
+    string function;
+    inputFile >> function;
+    if (function == "TANH"){
+        return ActivationFunction::TANH;
+    } else {
+        if (function == "RELU"){
+            return ActivationFunction::RELU;
+        } else {
+            return ActivationFunction::SIGMOID;
+        }
+    }
+}

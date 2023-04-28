@@ -17,6 +17,7 @@ private:
     void allocateWeights(int H, default_random_engine randomEngine);
 public:
     MultiLayerPerceptronModel(InstanceList& trainSet, const InstanceList& validationSet, MultiLayerPerceptronParameter* parameters);
+    MultiLayerPerceptronModel(ifstream& inputFile);
 };
 
 

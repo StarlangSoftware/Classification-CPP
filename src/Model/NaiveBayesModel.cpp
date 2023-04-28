@@ -106,15 +106,13 @@ void NaiveBayesModel::serialize(ostream &outputFile) {
 }
 
 NaiveBayesModel::NaiveBayesModel(ifstream &inputFile) : GaussianModel(inputFile) {
-    int size;
     string classLabel;
-    inputFile >> size;
-    for (int i = 0; i < size; i++){
+    for (int i = 0; i < priorDistribution.size(); i++){
         inputFile >> classLabel;
         Vector vector = Vector(inputFile);
         classMeans.emplace(classLabel, vector);
     }
-    for (int i = 0; i < size; i++){
+    for (int i = 0; i < priorDistribution.size(); i++){
         inputFile >> classLabel;
         Vector vector = Vector(inputFile);
         classDeviations.emplace(classLabel, vector);

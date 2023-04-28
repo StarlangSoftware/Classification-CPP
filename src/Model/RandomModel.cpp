@@ -46,6 +46,7 @@ void RandomModel::serialize(ostream &outputFile) {
 RandomModel::RandomModel(ifstream &inputFile) {
     int size;
     string classLabel;
+    inputFile >> seed;
     inputFile >> size;
     for (int i = 0; i < size; i++){
         inputFile >> classLabel;

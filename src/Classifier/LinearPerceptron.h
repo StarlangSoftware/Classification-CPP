@@ -9,6 +9,7 @@
 class LinearPerceptron : public Classifier{
 public:
     void train(InstanceList& trainSet, Parameter* parameters) override;
+    void loadModel(const string& fileName) override;
 };
 
 

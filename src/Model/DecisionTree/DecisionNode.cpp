@@ -261,26 +261,30 @@ vector<DecisionNode> DecisionNode::getChildren() const{
 }
 
 void DecisionNode::serialize(ostream &outputFile) {
-    outputFile << classLabel << "\n";
-    outputFile << leaf << "\n";
-    data.serialize(outputFile);
     condition.serialize(outputFile);
-    outputFile << children.size() << "\n";
-    for (DecisionNode decisionNode : children){
-        decisionNode.serialize(outputFile);
+    outputFile << children.size() << endl;
+    if (!children.empty()){
+        for (DecisionNode decisionNode : children){
+            decisionNode.serialize(outputFile);
+        }
+    } else {
+        outputFile << classLabel << endl;
     }
 }
 
 DecisionNode::DecisionNode(ifstream &inputFile) {
     int size;
-    inputFile >> classLabel;
-    inputFile >> leaf;
-    data = InstanceList(inputFile);
     condition = DecisionCondition(inputFile);
     inputFile >> size;
-    for (int i = 0; i < size; i++){
-        DecisionNode decisionNode = DecisionNode(inputFile);
-        children.push_back(decisionNode);
+    if (size != 0){
+        leaf = false;
+        for (int i = 0; i < size; i++){
+            DecisionNode decisionNode = DecisionNode(inputFile);
+            children.push_back(decisionNode);
+        }
+    } else {
+        leaf = true;
+        inputFile >> classLabel;
     }
 }
 

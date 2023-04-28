@@ -106,3 +106,27 @@ DataDefinition DataDefinition::getSubSetOfFeatures(const FeatureSubSet& featureS
     }
     return DataDefinition(newAttributeTypes);
 }
+
+int DataDefinition::numberOfValues(int attributeIndex) const{
+    return attributeValueList[attributeIndex].size();
+}
+
+int DataDefinition::featureValueIndex(int attributeIndex, const string& value) const{
+    for (int i = 0; i < attributeValueList[attributeIndex].size(); i++){
+        if (attributeValueList[attributeIndex][i] == value){
+            return i;
+        }
+    }
+    return -1;
+}
+
+/**
+ * Constructor for creating a new {@link DataDefinition} with given attribute types.
+ *
+ * @param attributeTypes Attribute types of the data definition.
+ * @param attributeValueList Array of array of strings to represent all possible values of discrete features.
+ */
+DataDefinition::DataDefinition(const vector<AttributeType> &attributeTypes, const vector<vector<string>> &attributeValueList) {
+    this->attributeTypes = attributeTypes;
+    this->attributeValueList = attributeValueList;
+}

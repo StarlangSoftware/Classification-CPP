@@ -54,16 +54,14 @@ void LdaModel::serialize(ostream &outputFile) {
 }
 
 LdaModel::LdaModel(ifstream &inputFile) : GaussianModel(inputFile) {
-    int size;
     double weight;
     string classLabel;
-    inputFile >> size;
-    for (int i = 0; i < size; i++){
+    for (int i = 0; i < priorDistribution.size(); i++){
         inputFile >> classLabel;
         inputFile >> weight;
         w0.emplace(classLabel, weight);
     }
-    for (int i = 0; i < size; i++){
+    for (int i = 0; i < priorDistribution.size(); i++){
         inputFile >> classLabel;
         Vector vector = Vector(inputFile);
         w.emplace(classLabel, vector);

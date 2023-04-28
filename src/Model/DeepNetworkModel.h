@@ -18,6 +18,7 @@ private:
     vector<Matrix> setBestWeights() const;
 public:
     DeepNetworkModel(InstanceList& trainSet, const InstanceList& validationSet, DeepNetworkParameter* parameters);
+    explicit DeepNetworkModel(ifstream& inputFile);
 protected:
     void calculateOutput() override;
 };

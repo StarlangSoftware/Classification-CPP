@@ -9,6 +9,7 @@
 class C45 : public Classifier{
 public:
     void train(InstanceList& trainSet, Parameter* parameters) override;
+    void loadModel(const string& fileName) override;
 };
 
 

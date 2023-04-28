@@ -2,6 +2,7 @@
 // Created by Olcay Taner Yıldız on 10.02.2019.
 //
 
+#include <fstream>
 #include "KMeans.h"
 #include "../InstanceList/Partition.h"
 #include "../Model/KMeansModel.h"
@@ -21,4 +22,11 @@ void KMeans::train(InstanceList &trainSet, Parameter *parameters) {
         classMeans.add(classLists.get(i)->average());
     }
     model = new KMeansModel(priorDistribution, classMeans, ((KMeansParameter*)(parameters))->getDistanceMetric());
+}
+
+void KMeans::loadModel(const string &fileName) {
+    ifstream inputFile;
+    inputFile.open(fileName, ifstream :: in);
+    model = new KMeansModel(inputFile);
+    inputFile.close();
 }

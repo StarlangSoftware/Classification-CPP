@@ -2,6 +2,7 @@
 // Created by Olcay Taner Yıldız on 9.02.2019.
 //
 
+#include <fstream>
 #include <DeterminantZero.h>
 #include <iostream>
 #include <cmath>
@@ -53,4 +54,11 @@ void Qda::train(InstanceList& trainSet, Parameter *parameters) {
         }
     }
     model = new QdaModel(priorDistribution, W, w, w0);
+}
+
+void Qda::loadModel(const string &fileName) {
+    ifstream inputFile;
+    inputFile.open(fileName, ifstream :: in);
+    model = new QdaModel(inputFile);
+    inputFile.close();
 }

@@ -8,6 +8,7 @@
 
 class RandomModel : public Model{
 private:
+    int seed;
     vector<string> classLabels;
 public:
     explicit RandomModel(ifstream& inputFile);

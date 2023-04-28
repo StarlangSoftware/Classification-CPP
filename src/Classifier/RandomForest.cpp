@@ -2,6 +2,7 @@
 // Created by Olcay Taner Yıldız on 16.02.2019.
 //
 
+#include <fstream>
 #include "RandomForest.h"
 #include "../Parameter/RandomForestParameter.h"
 #include "../Model/DecisionTree/DecisionTree.h"
@@ -22,4 +23,11 @@ void RandomForest::train(InstanceList &trainSet, Parameter *parameters) {
         forest.emplace_back(new DecisionTree(DecisionNode(InstanceList(bootstrap.getSample()), DecisionCondition(), (RandomForestParameter*) parameters, false)));
     }
     model = new TreeEnsembleModel(forest);
+}
+
+void RandomForest::loadModel(const string &fileName) {
+    ifstream inputFile;
+    inputFile.open(fileName, ifstream :: in);
+    model = new TreeEnsembleModel(inputFile);
+    inputFile.close();
 }

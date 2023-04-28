@@ -2,6 +2,7 @@
 // Created by olcay on 12.02.2019.
 //
 
+#include <fstream>
 #include "Knn.h"
 #include "../Model/KnnModel.h"
 #include "../Parameter/KnnParameter.h"
@@ -15,4 +16,11 @@
  */
 void Knn::train(InstanceList &trainSet, Parameter *parameters) {
     model = new KnnModel(trainSet, ((KnnParameter*) parameters)->getK(), ((KnnParameter*) parameters)->getDistanceMetric());
+}
+
+void Knn::loadModel(const string &fileName) {
+    ifstream inputFile;
+    inputFile.open(fileName, ifstream :: in);
+    model = new KnnModel(inputFile);
+    inputFile.close();
 }

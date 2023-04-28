@@ -5,7 +5,6 @@
 #include <cmath>
 #include <fstream>
 #include "KnnModel.h"
-#include "../Instance/CompositeInstance.h"
 #include "../Classifier/Classifier.h"
 #include "../DistanceMetric/EuclidianDistance.h"
 

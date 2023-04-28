@@ -2,6 +2,7 @@
 // Created by olcay on 12.02.2019.
 //
 
+#include <fstream>
 #include "LinearPerceptron.h"
 #include "../InstanceList/Partition.h"
 #include "../Parameter/LinearPerceptronParameter.h"
@@ -22,4 +23,11 @@ void LinearPerceptron::train(InstanceList& trainSet, Parameter *parameters) {
     }
     Partition partition = Partition(trainSet, ((LinearPerceptronParameter*) parameters)->getCrossValidationRatio(), parameters->getSeed(), true);
     model = new LinearPerceptronModel(*(partition.get(1)), *(partition.get(0)), (LinearPerceptronParameter*) parameters);
+}
+
+void LinearPerceptron::loadModel(const string &fileName) {
+    ifstream inputFile;
+    inputFile.open(fileName, ifstream :: in);
+    model = new LinearPerceptronModel(inputFile);
+    inputFile.close();
 }

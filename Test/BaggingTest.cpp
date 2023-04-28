@@ -14,31 +14,31 @@ TEST_CASE("BaggingTest-testTrain") {
         attributeTypes.emplace_back(AttributeType::CONTINUOUS);
     }
     DataDefinition dataDefinition = DataDefinition(attributeTypes);
-    iris = DataSet(dataDefinition, ",", "iris.data");
+    iris = DataSet(dataDefinition, ",", "datasets/iris.data");
     attributeTypes.clear();
     for (int i = 0; i < 6; i++) {
         attributeTypes.emplace_back(AttributeType::CONTINUOUS);
     }
     dataDefinition = DataDefinition(attributeTypes);
-    bupa = DataSet(dataDefinition, ",", "bupa.data");
+    bupa = DataSet(dataDefinition, ",", "datasets/bupa.data");
     attributeTypes.clear();
     for (int i = 0; i < 34; i++) {
         attributeTypes.emplace_back(AttributeType::CONTINUOUS);
     }
     dataDefinition = DataDefinition(attributeTypes);
-    dermatology = DataSet(dataDefinition, ",", "dermatology.data");
+    dermatology = DataSet(dataDefinition, ",", "datasets/dermatology.data");
     attributeTypes.clear();
     for (int i = 0; i < 6; i++) {
         attributeTypes.emplace_back(AttributeType::DISCRETE);
     }
     dataDefinition = DataDefinition(attributeTypes);
-    car = DataSet(dataDefinition, ",", "car.data");
+    car = DataSet(dataDefinition, ",", "datasets/car.data");
     attributeTypes.clear();
     for (int i = 0; i < 9; i++) {
         attributeTypes.emplace_back(AttributeType::DISCRETE);
     }
     dataDefinition = DataDefinition(attributeTypes);
-    tictactoe = DataSet(dataDefinition, ",", "tictactoe.data");
+    tictactoe = DataSet(dataDefinition, ",", "datasets/tictactoe.data");
     Bagging bagging = Bagging();
     auto* baggingParameter = new BaggingParameter(1, 100);
     InstanceList instanceList = iris.getInstanceList();

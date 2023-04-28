@@ -1,6 +1,7 @@
 //
 // Created by Olcay Taner Yıldız on 16.02.2019.
 //
+#include <fstream>
 #include "../InstanceList/Partition.h"
 #include "../Parameter/BaggingParameter.h"
 #include "../Model/DecisionTree/DecisionTree.h"
@@ -25,4 +26,11 @@ void Bagging::train(InstanceList &trainSet, Parameter *parameters) {
         forest.emplace_back(new DecisionTree(DecisionNode(InstanceList(bootstrap.getSample()), DecisionCondition(), nullptr, false)));
     }
     model = new TreeEnsembleModel(forest);
+}
+
+void Bagging::loadModel(const string &fileName) {
+    ifstream inputFile;
+    inputFile.open(fileName, ifstream :: in);
+    model = new TreeEnsembleModel(inputFile);
+    inputFile.close();
 }

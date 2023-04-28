@@ -7,37 +7,47 @@
 #include "../src/Classifier/MultiLayerPerceptron.h"
 #include "../src/Parameter/MultiLayerPerceptronParameter.h"
 
-TEST_CASE("MultiLayerPerceptronTest-testTrain") {
+TEST_CASE("MultiLayerPerceptronTest") {
     DataSet iris, bupa, dermatology;
     vector<AttributeType> attributeTypes;
     for (int i = 0; i < 4; i++) {
         attributeTypes.emplace_back(AttributeType::CONTINUOUS);
     }
     DataDefinition dataDefinition = DataDefinition(attributeTypes);
-    iris = DataSet(dataDefinition, ",", "iris.data");
+    iris = DataSet(dataDefinition, ",", "datasets/iris.data");
     attributeTypes.clear();
     for (int i = 0; i < 6; i++) {
         attributeTypes.emplace_back(AttributeType::CONTINUOUS);
     }
     dataDefinition = DataDefinition(attributeTypes);
-    bupa = DataSet(dataDefinition, ",", "bupa.data");
+    bupa = DataSet(dataDefinition, ",", "datasets/bupa.data");
     attributeTypes.clear();
     for (int i = 0; i < 34; i++) {
         attributeTypes.emplace_back(AttributeType::CONTINUOUS);
     }
     dataDefinition = DataDefinition(attributeTypes);
-    dermatology = DataSet(dataDefinition, ",", "dermatology.data");
+    dermatology = DataSet(dataDefinition, ",", "datasets/dermatology.data");
     MultiLayerPerceptron multiLayerPerceptron = MultiLayerPerceptron();
-    InstanceList instanceList = iris.getInstanceList();
-    MultiLayerPerceptronParameter* multiLayerPerceptronParameter = new MultiLayerPerceptronParameter(1, 0.1, 0.99, 0.2, 100, 3, ActivationFunction::SIGMOID);
-    multiLayerPerceptron.train(instanceList, multiLayerPerceptronParameter);
-    REQUIRE_THAT(3.33, Catch::Matchers::WithinAbs(100 * multiLayerPerceptron.test(iris.getInstanceList())->getErrorRate(), 0.01));
-    instanceList = bupa.getInstanceList();
-    multiLayerPerceptronParameter = new MultiLayerPerceptronParameter(1, 0.01, 0.99, 0.2, 100, 30, ActivationFunction::SIGMOID);
-    multiLayerPerceptron.train(instanceList, multiLayerPerceptronParameter);
-    REQUIRE_THAT(27.83, Catch::Matchers::WithinAbs(100 * multiLayerPerceptron.test(bupa.getInstanceList())->getErrorRate(), 0.01));
-    instanceList = dermatology.getInstanceList();
-    multiLayerPerceptronParameter = new MultiLayerPerceptronParameter(1, 0.01, 0.99, 0.2, 100, 20, ActivationFunction::SIGMOID);
-    multiLayerPerceptron.train(instanceList, multiLayerPerceptronParameter);
-    REQUIRE_THAT(2.46, Catch::Matchers::WithinAbs(100 * multiLayerPerceptron.test(dermatology.getInstanceList())->getErrorRate(), 0.01));
+    auto* multiLayerPerceptronParameter = new MultiLayerPerceptronParameter(1, 0.1, 0.99, 0.2, 100, 3, ActivationFunction::SIGMOID);
+    SECTION("train"){
+        InstanceList instanceList = iris.getInstanceList();
+        multiLayerPerceptron.train(instanceList, multiLayerPerceptronParameter);
+        REQUIRE_THAT(3.33, Catch::Matchers::WithinAbs(100 * multiLayerPerceptron.test(iris.getInstanceList())->getErrorRate(), 0.01));
+        instanceList = bupa.getInstanceList();
+        multiLayerPerceptronParameter = new MultiLayerPerceptronParameter(1, 0.01, 0.99, 0.2, 100, 30, ActivationFunction::SIGMOID);
+        multiLayerPerceptron.train(instanceList, multiLayerPerceptronParameter);
+        REQUIRE_THAT(27.83, Catch::Matchers::WithinAbs(100 * multiLayerPerceptron.test(bupa.getInstanceList())->getErrorRate(), 0.01));
+        instanceList = dermatology.getInstanceList();
+        multiLayerPerceptronParameter = new MultiLayerPerceptronParameter(1, 0.01, 0.99, 0.2, 100, 20, ActivationFunction::SIGMOID);
+        multiLayerPerceptron.train(instanceList, multiLayerPerceptronParameter);
+        REQUIRE_THAT(2.46, Catch::Matchers::WithinAbs(100 * multiLayerPerceptron.test(dermatology.getInstanceList())->getErrorRate(), 0.01));
+    }
+    SECTION("load"){
+        multiLayerPerceptron.loadModel("models/multiLayerPerceptron-iris.txt");
+        REQUIRE_THAT(2.67, Catch::Matchers::WithinAbs(100 * multiLayerPerceptron.test(iris.getInstanceList())->getErrorRate(), 0.01));
+        multiLayerPerceptron.loadModel("models/multiLayerPerceptron-bupa.txt");
+        REQUIRE_THAT(27.54, Catch::Matchers::WithinAbs(100 * multiLayerPerceptron.test(bupa.getInstanceList())->getErrorRate(), 0.01));
+        multiLayerPerceptron.loadModel("models/multiLayerPerceptron-dermatology.txt");
+        REQUIRE_THAT(1.09, Catch::Matchers::WithinAbs(100 * multiLayerPerceptron.test(dermatology.getInstanceList())->getErrorRate(), 0.01));
+    }
 }
