@@ -115,7 +115,12 @@ DecisionNode::DecisionNode(InstanceList data, const DecisionCondition& condition
     vector<string> classLabels;
     this->condition = condition;
     this->data = data;
-    classLabel = Classifier::getMaximum(data.getClassLabels());
+    classLabelsDistribution = DiscreteDistribution();
+    vector<string> labels = data.getClassLabels();
+    for (const string& label : labels){
+        classLabelsDistribution.addItem(label);
+    }
+    classLabel = Classifier::getMaximum(labels);
     leaf = true;
     classLabels = data.getDistinctClassLabels();
     if (classLabels.size() == 1) {
@@ -285,12 +290,13 @@ DecisionNode::DecisionNode(ifstream &inputFile) {
     } else {
         leaf = true;
         inputFile >> classLabel;
+        classLabelsDistribution = DiscreteDistribution(inputFile);
     }
 }
 
 map<string, double> DecisionNode::predictProbabilityDistribution(Instance *instance) {
     if (leaf) {
-        return data.classDistribution().getProbabilityDistribution();
+        return classLabelsDistribution.getProbabilityDistribution();
     } else {
         for (DecisionNode node : children) {
             if (node.condition.satisfy(instance)) {

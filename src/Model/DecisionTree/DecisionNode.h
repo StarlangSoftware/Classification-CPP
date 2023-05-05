@@ -16,6 +16,7 @@ private:
     InstanceList data;
     string classLabel;
     bool leaf = false;
+    DiscreteDistribution classLabelsDistribution;
     DecisionCondition condition = DecisionCondition(-1, nullptr);
     double entropyForDiscreteAttribute(int attributeIndex) const;
     void createChildrenForDiscreteIndexed(int attributeIndex, int attributeValue, RandomForestParameter* parameter, bool isStump);
