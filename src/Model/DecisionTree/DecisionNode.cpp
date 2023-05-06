@@ -17,10 +17,11 @@
  * The entropyForDiscreteAttribute method takes an attributeIndex and creates an ArrayList of DiscreteDistribution.
  * Then loops through the distributions and calculates the total entropy.
  *
+ * @param data InstanceList.
  * @param attributeIndex Index of the attribute.
  * @return Total entropy for the discrete attribute.
  */
-double DecisionNode::entropyForDiscreteAttribute(int attributeIndex) const{
+double DecisionNode::entropyForDiscreteAttribute(const InstanceList& data, int attributeIndex) const{
     double sum = 0.0;
     vector<DiscreteDistribution> distributions = data.attributeClassDistribution(attributeIndex);
     for (const DiscreteDistribution& distribution : distributions) {
@@ -33,13 +34,14 @@ double DecisionNode::entropyForDiscreteAttribute(int attributeIndex) const{
  * The createChildrenForDiscreteIndexed method creates an ArrayList of DecisionNodes as children and a partition with respect to
  * indexed attribute.
  *
+ * @param data InstanceList.
  * @param attributeIndex Index of the attribute.
  * @param attributeValue Value of the attribute.
  * @param parameter      RandomForestParameter like seed, ensembleSize, attributeSubsetSize.
  * @param isStump        Refers to decision trees with only 1 splitting rule.
  */
 void
-DecisionNode::createChildrenForDiscreteIndexed(int attributeIndex, int attributeValue, RandomForestParameter *parameter,
+DecisionNode::createChildrenForDiscreteIndexed(const InstanceList& data, int attributeIndex, int attributeValue, RandomForestParameter *parameter,
                                                bool isStump) {
     Partition childrenData;
     childrenData = Partition(data, attributeIndex, attributeValue);
@@ -51,11 +53,12 @@ DecisionNode::createChildrenForDiscreteIndexed(int attributeIndex, int attribute
  * The createChildrenForDiscrete method creates an ArrayList of values, a partition with respect to attributes and an ArrayList
  * of DecisionNodes as children.
  *
+ * @param data InstanceList.
  * @param attributeIndex Index of the attribute.
  * @param parameter      RandomForestParameter like seed, ensembleSize, attributeSubsetSize.
  * @param isStump        Refers to decision trees with only 1 splitting rule.
  */
-void DecisionNode::createChildrenForDiscrete(int attributeIndex, RandomForestParameter *parameter, bool isStump) {
+void DecisionNode::createChildrenForDiscrete(const InstanceList& data, int attributeIndex, RandomForestParameter *parameter, bool isStump) {
     Partition childrenData;
     vector<string> valueList;
     valueList = data.getAttributeValueList(attributeIndex);
@@ -69,12 +72,13 @@ void DecisionNode::createChildrenForDiscrete(int attributeIndex, RandomForestPar
  * The createChildrenForContinuous method creates an ArrayList of DecisionNodes as children and a partition with respect to
  * continious attribute and the given split value.
  *
+ * @param data InstanceList.
  * @param attributeIndex Index of the attribute.
  * @param parameter      RandomForestParameter like seed, ensembleSize, attributeSubsetSize.
  * @param isStump        Refers to decision trees with only 1 splitting rule.
  * @param splitValue     Split value is used for partitioning.
  */
-void DecisionNode::createChildrenForContinuous(int attributeIndex, double splitValue, RandomForestParameter *parameter,
+void DecisionNode::createChildrenForContinuous(const InstanceList& data, int attributeIndex, double splitValue, RandomForestParameter *parameter,
                                                bool isStump) {
     Partition childrenData;
     childrenData = Partition(data, attributeIndex, splitValue);
@@ -114,7 +118,6 @@ DecisionNode::DecisionNode(InstanceList data, const DecisionCondition& condition
     Instance* instance;
     vector<string> classLabels;
     this->condition = condition;
-    this->data = data;
     classLabelsDistribution = DiscreteDistribution();
     vector<string> labels = data.getClassLabels();
     for (const string& label : labels){
@@ -160,7 +163,7 @@ DecisionNode::DecisionNode(InstanceList data, const DecisionCondition& condition
             }
         } else {
             if (data.get(0)->getAttribute(index)->isDiscrete()) {
-                entropy = entropyForDiscreteAttribute(index);
+                entropy = entropyForDiscreteAttribute(data, index);
                 if (entropy < bestEntropy) {
                     bestEntropy = entropy;
                     bestAttribute = index;
@@ -197,13 +200,13 @@ DecisionNode::DecisionNode(InstanceList data, const DecisionCondition& condition
     if (bestAttribute != -1) {
         leaf = false;
         if (data.get(0)->getAttribute(bestAttribute)->isDiscreteIndexed()) {
-            createChildrenForDiscreteIndexed(bestAttribute, (int) bestSplitValue, parameter, isStump);
+            createChildrenForDiscreteIndexed(data, bestAttribute, (int) bestSplitValue, parameter, isStump);
         } else {
             if (data.get(0)->getAttribute(bestAttribute)->isDiscrete()) {
-                createChildrenForDiscrete(bestAttribute, parameter, isStump);
+                createChildrenForDiscrete(data, bestAttribute, parameter, isStump);
             } else {
                 if (data.get(0)->getAttribute(bestAttribute)->isContinuous()) {
-                    createChildrenForContinuous(bestAttribute, bestSplitValue, parameter, isStump);
+                    createChildrenForContinuous(data, bestAttribute, bestSplitValue, parameter, isStump);
                 }
             }
         }
@@ -220,7 +223,7 @@ DecisionNode::DecisionNode(InstanceList data, const DecisionCondition& condition
 string DecisionNode::predict(Instance *instance) const{
     if (instance->isComposite()) {
         vector<string> possibleClassLabels = ((CompositeInstance*) instance)->getPossibleClassLabels();
-        DiscreteDistribution distribution = data.classDistribution();
+        DiscreteDistribution distribution = classLabelsDistribution;
         string predictedClass = distribution.getMaxItem(possibleClassLabels);
         if (leaf) {
             return predictedClass;
@@ -303,6 +306,6 @@ map<string, double> DecisionNode::predictProbabilityDistribution(Instance *insta
                 return node.predictProbabilityDistribution(instance);
             }
         }
-        return data.classDistribution().getProbabilityDistribution();
+        return classLabelsDistribution.getProbabilityDistribution();
     }
 }
