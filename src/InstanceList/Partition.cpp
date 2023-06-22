@@ -85,11 +85,11 @@ Partition::Partition(const InstanceList &list){
  * @return 2 group stratified partition of the instances in this instance list.
  */
 Partition::Partition(InstanceList& list, double ratio, int seed, bool stratified) {
+    add(new InstanceList());
+    add(new InstanceList());
     if (stratified){
         CounterHashMap<string> counts;
         DiscreteDistribution distribution;
-        add(new InstanceList());
-        add(new InstanceList());
         distribution = list.classDistribution();
         vector<int> randomArray = RandomArray::indexArray(list.size(), seed);
         for (int i = 0; i < list.size(); i++) {
@@ -102,8 +102,6 @@ Partition::Partition(InstanceList& list, double ratio, int seed, bool stratified
             counts.put(instance->getClassLabel());
         }
     } else {
-        add(new InstanceList());
-        add(new InstanceList());
         list.shuffle(seed);
         for (int i = 0; i < list.size(); i++) {
             Instance* instance = list.get(i);

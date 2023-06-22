@@ -10,7 +10,6 @@ ConfusionMatrix::ConfusionMatrix() {
 
 /**
  * Constructor that sets the class labels {@link ArrayList} and creates new {@link HashMap} matrix
- * .
  *
  * @param classLabels {@link ArrayList} of String.
  */
