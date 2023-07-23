@@ -144,7 +144,7 @@ DecisionNode::DecisionNode(InstanceList data, const DecisionCondition& condition
         size = data.get(0)->attributeSize();
     }
     classDistribution = data.classDistribution();
-    bestEntropy = data.classDistribution().entropy();
+    bestEntropy = classDistribution.entropy();
     for (int j = 0; j < size; j++) {
         int index = indexList.at(j);
         if (data.get(0)->getAttribute(index)->isDiscreteIndexed()) {

@@ -13,7 +13,7 @@
  * @param priorDistribution Probability distribution of classes P(C_i)
  * @param classLists        Instances are divided into K lists, where each list contains only instances from a single class
  */
-void NaiveBayes::trainContinuousVersion(DiscreteDistribution priorDistribution, Partition classLists) {
+void NaiveBayes::trainContinuousVersion(const DiscreteDistribution& priorDistribution, const Partition& classLists) {
     string classLabel;
     map<string, Vector> classMeans;
     map<string, Vector> classDeviations;
@@ -24,7 +24,7 @@ void NaiveBayes::trainContinuousVersion(DiscreteDistribution priorDistribution, 
         Vector standardDeviationVector = classLists.get(i)->standardDeviation()->toVector();
         classDeviations.emplace(classLabel, standardDeviationVector);
     }
-    model = new NaiveBayesModel(move(priorDistribution), classMeans, classDeviations);
+    model = new NaiveBayesModel(priorDistribution, classMeans, classDeviations);
 }
 
 /**
@@ -32,12 +32,12 @@ void NaiveBayes::trainContinuousVersion(DiscreteDistribution priorDistribution, 
  * @param priorDistribution Probability distribution of classes P(C_i)
  * @param classLists Instances are divided into K lists, where each list contains only instances from a single class
  */
-void NaiveBayes::trainDiscreteVersion(DiscreteDistribution priorDistribution, Partition classLists) {
+void NaiveBayes::trainDiscreteVersion(const DiscreteDistribution& priorDistribution, const Partition& classLists) {
     map<string, vector<DiscreteDistribution>> classAttributeDistributions;
     for (int i = 0; i < classLists.size(); i++){
         classAttributeDistributions.emplace(((InstanceListOfSameClass*)(classLists.get(i)))->getClassLabel(), classLists.get(i)->allAttributesDistribution());
     }
-    model = new NaiveBayesModel(move(priorDistribution), classAttributeDistributions);
+    model = new NaiveBayesModel(priorDistribution, classAttributeDistributions);
 }
 
 /**

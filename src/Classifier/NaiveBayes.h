@@ -9,8 +9,8 @@
 
 class NaiveBayes : public Classifier{
 private:
-    void trainContinuousVersion(DiscreteDistribution priorDistribution, Partition classLists);
-    void trainDiscreteVersion(DiscreteDistribution priorDistribution, Partition classLists);
+    void trainContinuousVersion(const DiscreteDistribution& priorDistribution, const Partition& classLists);
+    void trainDiscreteVersion(const DiscreteDistribution& priorDistribution, const Partition& classLists);
 public:
     void train(InstanceList& trainSet, Parameter* parameters) override;
     void loadModel(const string& fileName) override;

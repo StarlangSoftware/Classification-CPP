@@ -94,7 +94,6 @@ NaiveBayesModel::NaiveBayesModel(const DiscreteDistribution& priorDistribution,
 
 void NaiveBayesModel::serialize(ostream &outputFile) {
     GaussianModel::serialize(outputFile);
-    outputFile << classMeans.size() << "\n";
     for (auto& iterator : classMeans){
         outputFile << iterator.first << "\n";
         iterator.second.serialize(outputFile);
