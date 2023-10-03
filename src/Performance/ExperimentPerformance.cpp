@@ -10,13 +10,13 @@
 #include "ClassificationPerformance.h"
 
 /**
- * A constructor which creates a new {@link ArrayList} of {@link Performance} as results.
+ * A constructor which creates a new ArrayList of Performance as results.
  */
 ExperimentPerformance::ExperimentPerformance() = default;
 
 /**
  * A constructor that takes a file name as an input and takes the inputs from that file assigns these inputs to the errorRate
- * and adds them to the results {@link ArrayList} as a new {@link Performance}.
+ * and adds them to the results ArrayList as a new Performance.
  *
  * @param fileName String input.
  */
@@ -32,9 +32,9 @@ ExperimentPerformance::ExperimentPerformance(const string& fileName) {
 }
 
 /**
- * The add method takes a {@link Performance} as an input and adds it to the results {@link ArrayList}.
+ * The add method takes a Performance as an input and adds it to the results ArrayList.
  *
- * @param performance {@link Performance} input.
+ * @param performance Performance input.
  */
 void ExperimentPerformance::add(Performance *performance) {
     containsDetails = performance->containsDetails();
@@ -43,29 +43,29 @@ void ExperimentPerformance::add(Performance *performance) {
 }
 
 /**
- * The numberOfExperiments method returns the size of the results {@link vector}.
+ * The numberOfExperiments method returns the size of the results vector.
  *
- * @return The results {@link vector}.
+ * @return The results vector.
  */
 int ExperimentPerformance::numberOfExperiments() const{
     return results.size();
 }
 
 /**
- * The getErrorRate method takes an index as an input and returns the errorRate at given index of results {@link vector}.
+ * The getErrorRate method takes an index as an input and returns the errorRate at given index of results vector.
  *
- * @param index Index of results {@link vector} to retrieve.
- * @return The errorRate at given index of results {@link vector}.
+ * @param index Index of results vector to retrieve.
+ * @return The errorRate at given index of results vector.
  */
 double ExperimentPerformance::getErrorRate(int index) const{
     return results.at(index)->getErrorRate();
 }
 
 /**
- * The getAccuracy method takes an index as an input. It returns the accuracy of a {@link Performance} at given index of results {@link vector}.
+ * The getAccuracy method takes an index as an input. It returns the accuracy of a Performance at given index of results vector.
  *
- * @param index Index of results {@link vector} to retrieve.
- * @return The accuracy of a {@link Performance} at given index of results {@link vector}.
+ * @param index Index of results vector to retrieve.
+ * @return The accuracy of a Performance at given index of results vector.
  */
 double ExperimentPerformance::getAccuracy(int index) const{
     if (results.at(index)->isClassification()) {
@@ -76,10 +76,10 @@ double ExperimentPerformance::getAccuracy(int index) const{
 }
 
 /**
- * The meanPerformance method loops through the performances of results {@link ArrayList} and sums up the errorRates of each then
- * returns a new {@link Performance} with the mean of that summation.
+ * The meanPerformance method loops through the performances of results ArrayList and sums up the errorRates of each then
+ * returns a new Performance with the mean of that summation.
  *
- * @return A new {@link Performance} with the mean of the summation of errorRates.
+ * @return A new Performance with the mean of the summation of errorRates.
  */
 Performance *ExperimentPerformance::meanPerformance() const{
     double sumError = 0;
@@ -90,7 +90,7 @@ Performance *ExperimentPerformance::meanPerformance() const{
 }
 
 /**
- * The meanClassificationPerformance method loops through the performances of results {@link ArrayList} and sums up the accuracy of each
+ * The meanClassificationPerformance method loops through the performances of results ArrayList and sums up the accuracy of each
  * classification performance, then returns a new classificationPerformance with the mean of that summation.
  *
  * @return A new classificationPerformance with the mean of that summation.
@@ -108,11 +108,11 @@ ClassificationPerformance *ExperimentPerformance::meanClassificationPerformance(
 }
 
 /**
- * The meanDetailedPerformance method gets the first confusion matrix of results {@link ArrayList}.
- * Then, it adds new confusion matrices as the {@link DetailedClassificationPerformance} of
- * other elements of results ArrayList' confusion matrices as a {@link DetailedClassificationPerformance}.
+ * The meanDetailedPerformance method gets the first confusion matrix of results ArrayList.
+ * Then, it adds new confusion matrices as the DetailedClassificationPerformance of
+ * other elements of results ArrayList' confusion matrices as a DetailedClassificationPerformance.
  *
- * @return A new {@link DetailedClassificationPerformance} with the {@link ConfusionMatrix} sum.
+ * @return A new DetailedClassificationPerformance with the ConfusionMatrix sum.
  */
 DetailedClassificationPerformance *ExperimentPerformance::meanDetailedPerformance() const{
     if (results.empty() || !containsDetails) {
@@ -126,7 +126,7 @@ DetailedClassificationPerformance *ExperimentPerformance::meanDetailedPerformanc
 }
 
 /**
- * The standardDeviationPerformance method loops through the {@link Performance}s of results {@link ArrayList} and returns
+ * The standardDeviationPerformance method loops through the Performances of results ArrayList and returns
  * a new Performance with the standard deviation.
  *
  * @return A new Performance with the standard deviation.
@@ -142,10 +142,10 @@ Performance* ExperimentPerformance::standardDeviationPerformance() const{
 }
 
 /**
- * The standardDeviationClassificationPerformance method loops through the {@link Performance}s of results {@link ArrayList} and
- * returns a new {@link ClassificationPerformance} with standard deviation.
+ * The standardDeviationClassificationPerformance method loops through the Performances of results ArrayList and
+ * returns a new ClassificationPerformance with standard deviation.
  *
- * @return A new {@link ClassificationPerformance} with standard deviation.
+ * @return A new ClassificationPerformance with standard deviation.
  */
 ClassificationPerformance *ExperimentPerformance::standardDeviationClassificationPerformance() const{
     if (results.empty() || !classification) {
@@ -163,10 +163,10 @@ ClassificationPerformance *ExperimentPerformance::standardDeviationClassificatio
 }
 
 /**
- * The isBetter method  takes an {@link ExperimentPerformance} as an input and returns true if the result of compareTo method is positive
+ * The isBetter method  takes an ExperimentPerformance as an input and returns true if the result of compareTo method is positive
  * and false otherwise.
  *
- * @param experimentPerformance {@link ExperimentPerformance} input.
+ * @param experimentPerformance ExperimentPerformance input.
  * @return True if the result of compareTo method is positive and false otherwise.
  */
 bool ExperimentPerformance::isBetter(ExperimentPerformance* experimentPerformance) const{

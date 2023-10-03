@@ -10,11 +10,11 @@
 #include "DeepNetworkModel.h"
 
 /**
- * The allocateWeights method takes {@link DeepNetworkParameter}s as an input. First it adds random weights to the {@link ArrayList}
- * of {@link Matrix} weights' first layer. Then it loops through the layers and adds random weights till the last layer.
+ * The allocateWeights method takes DeepNetworkParameters as an input. First it adds random weights to the ArrayList
+ * of Matrix weights' first layer. Then it loops through the layers and adds random weights till the last layer.
  * At the end it adds random weights to the last layer and also sets the hiddenLayerSize value.
  *
- * @param parameters {@link DeepNetworkParameter} input.
+ * @param parameters DeepNetworkParameter input.
  */
 void DeepNetworkModel::allocateWeights(DeepNetworkParameter *parameters) {
     weights.push_back(allocateLayerWeights(parameters->getHiddenNodes(0), d + 1, default_random_engine(parameters->getSeed())));
@@ -26,10 +26,10 @@ void DeepNetworkModel::allocateWeights(DeepNetworkParameter *parameters) {
 }
 
 /**
- * The setBestWeights method creates an {@link vector} of Matrix as bestWeights and clones the values of weights {@link ArrayList}
- * into this newly created {@link vector}.
+ * The setBestWeights method creates an vector of Matrix as bestWeights and clones the values of weights ArrayList
+ * into this newly created vector.
  *
- * @return An {@link vector} clones from the weights ArrayList.
+ * @return An vector clones from the weights ArrayList.
  */
 vector<Matrix> DeepNetworkModel::setBestWeights() const{
     vector<Matrix> bestWeights;

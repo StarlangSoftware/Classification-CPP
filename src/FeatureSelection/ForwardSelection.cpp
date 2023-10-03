@@ -5,7 +5,7 @@
 #include "ForwardSelection.h"
 
 /**
- * Constructor that creates a new {@link FeatureSubSet}.
+ * Constructor that creates a new FeatureSubSet.
  */
 ForwardSelection::ForwardSelection() : SubSetSelection(){
 }

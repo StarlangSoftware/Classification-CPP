@@ -30,16 +30,16 @@ DecisionTree::DecisionTree(const DecisionNode& root) {
 }
 
 /**
- * The prune method takes an {@link InstanceList} and  performs pruning to the root node.
+ * The prune method takes an InstanceList and  performs pruning to the root node.
  *
- * @param pruneSet {@link InstanceList} to perform pruning.
+ * @param pruneSet InstanceList to perform pruning.
  */
 void DecisionTree::prune(const InstanceList& pruneSet) {
     pruneNode(root, pruneSet);
 }
 
 /**
- * The prune method takes a {@link DecisionNode} and an {@link InstanceList} as inputs. It checks the classification performance
+ * The prune method takes a DecisionNode and an InstanceList as inputs. It checks the classification performance
  * of given InstanceList before pruning, i.e making a node leaf, and after pruning. If the after performance is better than the
  * before performance it prune the given InstanceList from the tree.
  *

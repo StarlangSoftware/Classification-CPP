@@ -9,10 +9,10 @@
 #include "QdaModel.h"
 
 /**
- * The calculateMetric method takes an {@link Instance} and a String as inputs. It multiplies Matrix Wi with Vector xi
+ * The calculateMetric method takes an Instance and a String as inputs. It multiplies Matrix Wi with Vector xi
  * then calculates the dot product of it with xi. Then, again it finds the dot product of wi and xi and returns the summation with w0i.
  *
- * @param instance {@link Instance} input.
+ * @param instance Instance input.
  * @param Ci       String input.
  * @return The result of Wi.multiplyWithVectorFromLeft(xi).dotProduct(xi) + wi.dotProduct(xi) + w0i.
  */
@@ -34,10 +34,10 @@ double QdaModel::calculateMetric(Instance *instance, const string& Ci) const{
 /**
  * The constructor which sets the priorDistribution, w w1 and HashMap of String Matrix.
  *
- * @param priorDistribution {@link DiscreteDistribution} input.
- * @param W                 {@link HashMap} of String and Matrix.
- * @param w                 {@link HashMap} of String and Vectors.
- * @param w0                {@link HashMap} of String and Double.
+ * @param priorDistribution DiscreteDistribution input.
+ * @param W                 HashMap of String and Matrix.
+ * @param w                 HashMap of String and Vectors.
+ * @param w0                HashMap of String and Double.
  */
 QdaModel::QdaModel(const DiscreteDistribution& priorDistribution, const map<string, Matrix>& W, const map<string, Vector>& w,
                    const map<string, double>& w0) : LdaModel(priorDistribution, w, w0) {

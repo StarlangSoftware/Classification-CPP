@@ -5,7 +5,7 @@
 #include "FeatureSubSet.h"
 
 /**
- * A constructor that sets the indexList {@link vector}.
+ * A constructor that sets the indexList vector.
  *
  * @param indexList A vector consists of integer indices.
  */

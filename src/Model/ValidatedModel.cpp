@@ -5,10 +5,10 @@
 #include "ValidatedModel.h"
 
 /**
- * The testClassifier method takes an {@link InstanceList} as an input and returns an accuracy value as {@link ClassificationPerformance}.
+ * The testClassifier method takes an InstanceList as an input and returns an accuracy value as ClassificationPerformance.
  *
- * @param data {@link InstanceList} to test.
- * @return Accuracy value as {@link ClassificationPerformance}.
+ * @param data InstanceList to test.
+ * @return Accuracy value as ClassificationPerformance.
  */
 ClassificationPerformance *ValidatedModel::testClassifier(InstanceList data) {
     double total = data.size();

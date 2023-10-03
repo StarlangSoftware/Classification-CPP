@@ -10,7 +10,7 @@
  * Then it gets the possible class labels and and calculates metric value. At the end, it returns the class which has the
  * maximum value of metric.
  *
- * @param instance {@link Instance} to predict.
+ * @param instance Instance to predict.
  * @return The class which has the maximum value of metric.
  */
 string GaussianModel::predict(Instance *instance){

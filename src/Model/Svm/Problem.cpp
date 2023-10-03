@@ -17,7 +17,7 @@ Problem::Problem(const vector<NodeList>& x, const vector<double>& y) {
 }
 
 /**
- * A constructor that takes an {@link InstanceList} as an input and sets l, x, and y from that InstanceList.
+ * A constructor that takes an InstanceList as an input and sets l, x, and y from that InstanceList.
  *
  * @param instanceList InstanceList to use.
  */

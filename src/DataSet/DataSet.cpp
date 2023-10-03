@@ -10,14 +10,14 @@
 #include "../Attribute/DiscreteAttribute.h"
 
 /**
- * Constructor for generating a new {@link DataSet}.
+ * Constructor for generating a new DataSet.
  */
 DataSet::DataSet() {
     instances = InstanceList();
 }
 
 /**
- * Constructor for generating a new {@link DataSet} with given {@link DataDefinition}.
+ * Constructor for generating a new DataSet with given DataDefinition.
  *
  * @param definition Data definition of the data set.
  */
@@ -27,9 +27,9 @@ DataSet::DataSet(const DataDefinition& definition) {
 }
 
 /**
- * Constructor for generating a new {@link DataSet} from given {@link ifstream}.
+ * Constructor for generating a new DataSet from given ifstream.
  *
- * @param file {@link ifstream} to generate {@link DataSet} from.
+ * @param file ifstream to generate DataSet from.
  */
 DataSet::DataSet(ifstream& file) {
     Instance* instance;
@@ -86,7 +86,7 @@ DataSet::DataSet(ifstream& file) {
 }
 
 /**
- * Constructor for generating a new {@link DataSet} with a {@link DataDefinition}, from a {@link File} by using a separator.
+ * Constructor for generating a new DataSet with a DataDefinition, from a File by using a separator.
  *
  * @param definition Data definition of the data set.
  * @param separator  Separator character which separates the attribute values in the data file.
@@ -102,8 +102,8 @@ DataSet::DataSet(const DataDefinition& definition, const string& separator, cons
  * and the attribute type of the corresponding item of the data definition is also a Binary attribute, it then
  * returns true, and false otherwise.
  *
- * @param instance {@link Instance} to checks the attribute type.
- * @return true if attribute types of given {@link Instance} and data definition matches.
+ * @param instance Instance to checks the attribute type.
+ * @return true if attribute types of given Instance and data definition matches.
  */
 bool DataSet::checkDefinition(Instance *instance) const{
     for (int i = 0; i < instance->attributeSize(); i++) {
@@ -131,10 +131,10 @@ bool DataSet::checkDefinition(Instance *instance) const{
 }
 
 /**
- * Adds the attribute types according to given {@link Instance}. For instance, if the attribute type of given {@link Instance}
+ * Adds the attribute types according to given Instance. For instance, if the attribute type of given Instance
  * is a Discrete type, it than adds a discrete attribute type to the list of attribute types.
  *
- * @param instance {@link Instance} input.
+ * @param instance Instance input.
  */
 void DataSet::setDefinition(Instance *instance) {
     vector<AttributeType> attributeTypes;
@@ -160,54 +160,54 @@ void DataSet::setDefinition(Instance *instance) {
 }
 
 /**
- * Returns the size of the {@link InstanceList}.
+ * Returns the size of the InstanceList.
  *
- * @return Size of the {@link InstanceList}.
+ * @return Size of the InstanceList.
  */
 int DataSet::sampleSize() const{
     return instances.size();
 }
 
 /**
- * Returns the size of the class label distribution of {@link InstanceList}.
+ * Returns the size of the class label distribution of InstanceList.
  *
- * @return Size of the class label distribution of {@link InstanceList}.
+ * @return Size of the class label distribution of InstanceList.
  */
 int DataSet::classCount() const{
     return instances.classDistribution().size();
 }
 
 /**
- * Returns the number of attribute types at {@link DataDefinition} list.
+ * Returns the number of attribute types at DataDefinition list.
  *
- * @return The number of attribute types at {@link DataDefinition} list.
+ * @return The number of attribute types at DataDefinition list.
  */
 int DataSet::attributeCount() const{
     return definition.attributeCount();
 }
 
 /**
- * Returns the number of discrete attribute types at {@link DataDefinition} list.
+ * Returns the number of discrete attribute types at DataDefinition list.
  *
- * @return The number of discrete attribute types at {@link DataDefinition} list.
+ * @return The number of discrete attribute types at DataDefinition list.
  */
 int DataSet::discreteAttributeCount() const{
     return definition.discreteAttributeCount();
 }
 
 /**
- * Returns the number of continuous attribute types at {@link DataDefinition} list.
+ * Returns the number of continuous attribute types at DataDefinition list.
  *
- * @return The number of continuous attribute types at {@link DataDefinition} list.
+ * @return The number of continuous attribute types at DataDefinition list.
  */
 int DataSet::continuousAttributeCount() const{
     return definition.continuousAttributeCount();
 }
 
 /**
- * Returns the accumulated {@link String} of class labels of the {@link InstanceList}.
+ * Returns the accumulated String of class labels of the InstanceList.
  *
- * @return The accumulated {@link String} of class labels of the {@link InstanceList}.
+ * @return The accumulated String of class labels of the InstanceList.
  */
 string DataSet::getClasses() const{
     string result;
@@ -248,9 +248,9 @@ string DataSet::to_string(const string& dataSetName) const{
 }
 
 /**
- * Adds a new instance to the {@link InstanceList}.
+ * Adds a new instance to the InstanceList.
  *
- * @param current {@link Instance} to add.
+ * @param current Instance to add.
  */
 void DataSet::addInstance(Instance *current) {
     if (definition.attributeCount() == 0) {
@@ -264,9 +264,9 @@ void DataSet::addInstance(Instance *current) {
 }
 
 /**
- * Adds all the instances of given instance list to the {@link InstanceList}.
+ * Adds all the instances of given instance list to the InstanceList.
  *
- * @param instanceList {@link InstanceList} to add instances from.
+ * @param instanceList InstanceList to add instances from.
  */
 void DataSet::addInstanceList(const vector<Instance *>& instanceList) {
     for (Instance* instance : instanceList) {
@@ -275,9 +275,9 @@ void DataSet::addInstanceList(const vector<Instance *>& instanceList) {
 }
 
 /**
- * Returns the instances of {@link InstanceList}.
+ * Returns the instances of InstanceList.
  *
- * @return The instances of {@link InstanceList}.
+ * @return The instances of InstanceList.
  */
 vector<Instance *> DataSet::getInstances() const{
     return instances.getInstances();
@@ -293,9 +293,9 @@ Partition DataSet::getClassInstances() const{
 }
 
 /**
- * Accessor for the {@link InstanceList}.
+ * Accessor for the InstanceList.
  *
- * @return The {@link InstanceList}.
+ * @return The InstanceList.
  */
 InstanceList DataSet::getInstanceList() const{
     return instances;
@@ -311,7 +311,7 @@ DataDefinition DataSet::getDataDefinition() const{
 }
 
 /**
- * Print out the instances of {@link InstanceList} as a {@link String}.
+ * Print out the instances of InstanceList as a String.
  *
  * @param outFileName File name to write the output.
  */
@@ -325,10 +325,10 @@ void DataSet::writeToFile(const string& outFileName) {
 }
 
 /**
- * Return a subset generated via the given {@link FeatureSubSet}.
+ * Return a subset generated via the given FeatureSubSet.
  *
- * @param featureSubSet {@link FeatureSubSet} input.
- * @return Subset generated via the given {@link FeatureSubSet}.
+ * @param featureSubSet FeatureSubSet input.
+ * @return Subset generated via the given FeatureSubSet.
  */
 DataSet DataSet::getSubSetOfFeatures(const FeatureSubSet& featureSubSet) {
     DataDefinition dataDefinition = definition.getSubSetOfFeatures(featureSubSet);

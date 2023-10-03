@@ -5,12 +5,12 @@
 #include "DataDefinition.h"
 
 /**
- * Constructor for creating a new {@link DataDefinition}.
+ * Constructor for creating a new DataDefinition.
  */
 DataDefinition::DataDefinition() = default;
 
 /**
- * Constructor for creating a new {@link DataDefinition} with given attribute types.
+ * Constructor for creating a new DataDefinition with given attribute types.
  *
  * @param attributeTypes Attribute types of the data definition.
  */
@@ -95,7 +95,7 @@ void DataDefinition::removeAllAttributes() {
 /**
  * Generates new subset of attribute types by using given feature subset.
  *
- * @param featureSubSet {@link FeatureSubSet} input.
+ * @param featureSubSet FeatureSubSet input.
  * @return DataDefinition with new subset of attribute types.
  */
 DataDefinition DataDefinition::getSubSetOfFeatures(const FeatureSubSet& featureSubSet) {
@@ -121,7 +121,7 @@ int DataDefinition::featureValueIndex(int attributeIndex, const string& value) c
 }
 
 /**
- * Constructor for creating a new {@link DataDefinition} with given attribute types.
+ * Constructor for creating a new DataDefinition with given attribute types.
  *
  * @param attributeTypes Attribute types of the data definition.
  * @param attributeValueList Array of array of strings to represent all possible values of discrete features.

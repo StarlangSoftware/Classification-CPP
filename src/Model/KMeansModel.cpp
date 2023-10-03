@@ -9,9 +9,9 @@
 /**
  * The constructor that sets the classMeans, priorDistribution and distanceMetric according to given inputs.
  *
- * @param priorDistribution {@link DiscreteDistribution} input.
- * @param classMeans        {@link InstanceList} of class means.
- * @param distanceMetric    {@link DistanceMetric} input.
+ * @param priorDistribution DiscreteDistribution input.
+ * @param classMeans        InstanceList of class means.
+ * @param distanceMetric    DistanceMetric input.
  */
 KMeansModel::KMeansModel(const DiscreteDistribution& priorDistribution, const InstanceList &classMeans,
                          DistanceMetric *distanceMetric) {
@@ -21,11 +21,11 @@ KMeansModel::KMeansModel(const DiscreteDistribution& priorDistribution, const In
 }
 
 /**
- * The calculateMetric method takes an {@link Instance} and a String as inputs. It loops through the class means, if
+ * The calculateMetric method takes an Instance and a String as inputs. It loops through the class means, if
  * the corresponding class label is same as the given String it returns the negated distance between given instance and the
  * current item of class means. Otherwise it returns the smallest negative number.
  *
- * @param instance {@link Instance} input.
+ * @param instance Instance input.
  * @param Ci       String input.
  * @return The negated distance between given instance and the current item of class means.
  */

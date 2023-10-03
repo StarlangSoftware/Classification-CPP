@@ -20,15 +20,15 @@ void AutoEncoderModel::allocateWeights(int H, default_random_engine randomEngine
 }
 
 /**
- * The {@link AutoEncoderModel} method takes two {@link InstanceList}s as inputs; train set and validation set. First it allocates
- * the weights of W and V matrices using given {@link MultiLayerPerceptronParameter} and takes the clones of these matrices as the bestW and bestV.
+ * The AutoEncoderModel method takes two InstanceLists as inputs; train set and validation set. First it allocates
+ * the weights of W and V matrices using given MultiLayerPerceptronParameter and takes the clones of these matrices as the bestW and bestV.
  * Then, it gets the epoch and starts to iterate over them. First it shuffles the train set and tries to find the new W and V matrices.
  * At the end it tests the autoencoder with given validation set and if its performance is better than the previous one,
  * it reassigns the bestW and bestV matrices. Continue to iterate with a lower learning rate till the end of an episode.
  *
- * @param trainSet      {@link InstanceList} to use as train set.
- * @param validationSet {@link InstanceList} to use as validation set.
- * @param parameters    {@link MultiLayerPerceptronParameter} is used to get the parameters.
+ * @param trainSet      InstanceList to use as train set.
+ * @param validationSet InstanceList to use as validation set.
+ * @param parameters    MultiLayerPerceptronParameter is used to get the parameters.
  */
 AutoEncoderModel::AutoEncoderModel(InstanceList &trainSet, const InstanceList &validationSet,
                                    MultiLayerPerceptronParameter *parameters) : NeuralNetworkModel(trainSet){
@@ -81,10 +81,10 @@ AutoEncoderModel::AutoEncoderModel(InstanceList &trainSet, const InstanceList &v
 }
 
 /**
- * The testAutoEncoder method takes an {@link InstanceList} as an input and tries to predict a value and finds the difference with the
+ * The testAutoEncoder method takes an InstanceList as an input and tries to predict a value and finds the difference with the
  * actual value for each item of that InstanceList. At the end, it returns an error rate by finding the mean of total errors.
  *
- * @param data {@link InstanceList} to use as validation set.
+ * @param data InstanceList to use as validation set.
  * @return Error rate by finding the mean of total errors.
  */
 Performance *AutoEncoderModel::testAutoEncoder(const InstanceList &data) {
@@ -102,9 +102,9 @@ Performance *AutoEncoderModel::testAutoEncoder(const InstanceList &data) {
 }
 
 /**
- * The predictInput method takes an {@link Instance} as an input and calculates a forward single hidden layer and returns the predicted value.
+ * The predictInput method takes an Instance as an input and calculates a forward single hidden layer and returns the predicted value.
  *
- * @param instance {@link Instance} to predict.
+ * @param instance Instance to predict.
  * @return Predicted value.
  */
 Vector AutoEncoderModel::predictInput(Instance *instance) {

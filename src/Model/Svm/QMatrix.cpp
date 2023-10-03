@@ -7,8 +7,8 @@
 /**
  * Constructor that sets problem, parameter and double array y.
  *
- * @param problem   {@link Problem} input.
- * @param parameter {@link SvmParameter} input.
+ * @param problem   Problem input.
+ * @param parameter SvmParameter input.
  * @param y         A double array input.
  */
 QMatrix::QMatrix(const Problem& problem, SvmParameter *parameter, const vector<double>& y) {

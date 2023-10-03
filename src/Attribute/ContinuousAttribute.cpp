@@ -32,7 +32,7 @@ void ContinuousAttribute::setValue(double _value) {
 }
 
 /**
- * Converts value to {@link String}.
+ * Converts value to String.
  *
  * @return String representation of value.
  */

@@ -8,7 +8,7 @@
 #include "LinearPerceptronModel.h"
 
 /**
- * Constructor that sets the {@link NeuralNetworkModel} nodes with given {@link InstanceList}.
+ * Constructor that sets the NeuralNetworkModel nodes with given InstanceList.
  *
  * @param trainSet InstanceList that is used to train.
  */
@@ -16,7 +16,7 @@ LinearPerceptronModel::LinearPerceptronModel(InstanceList &trainSet) : NeuralNet
 }
 
 /**
- * Constructor that takes {@link InstanceList}s as trainsSet and validationSet. Initially it allocates layer weights,
+ * Constructor that takes InstanceLists as trainsSet and validationSet. Initially it allocates layer weights,
  * then creates an input vector by using given trainSet and finds error. Via the validationSet it finds the classification
  * performance and at the end it reassigns the allocated weight Matrix with the matrix that has the best accuracy.
  *
@@ -58,7 +58,7 @@ LinearPerceptronModel::LinearPerceptronModel(InstanceList &trainSet, const Insta
 }
 
 /**
- * The calculateOutput method calculates the {@link Matrix} y by multiplying Matrix W with {@link Vector} x.
+ * The calculateOutput method calculates the Matrix y by multiplying Matrix W with Vector x.
  */
 void LinearPerceptronModel::calculateOutput() {
     try {

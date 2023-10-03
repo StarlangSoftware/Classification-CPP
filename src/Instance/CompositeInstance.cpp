@@ -7,7 +7,7 @@
 #include "CompositeInstance.h"
 
 /**
- * Constructor of {@link CompositeInstance} class which takes a class label as an input. It generates a new composite instance
+ * Constructor of CompositeInstance class which takes a class label as an input. It generates a new composite instance
  * with given class label.
  *
  * @param classLabel Class label of the composite instance.
@@ -16,7 +16,7 @@ CompositeInstance::CompositeInstance(const string& classLabel) : Instance(classL
 }
 
 /**
- * Constructor of {@link CompositeInstance} class which takes a class label and attributes as inputs. It generates
+ * Constructor of CompositeInstance class which takes a class label and attributes as inputs. It generates
  * a new composite instance with given class label and attributes.
  *
  * @param classLabel Class label of the composite instance.
@@ -26,7 +26,7 @@ CompositeInstance::CompositeInstance(const string& classLabel, const vector<Attr
 }
 
 /**
- * Constructor of {@link CompositeInstance} class which takes an {@link java.lang.reflect.Array} of possible labels as
+ * Constructor of CompositeInstance class which takes an {@link java.lang.reflect.Array} of possible labels as
  * input. It generates a new composite instance with given labels.
  *
  * @param possibleLabels Possible labels of the composite instance.
@@ -36,7 +36,7 @@ CompositeInstance::CompositeInstance(const vector<string>& possibleLabels) : Ins
 }
 
 /**
- * Constructor of {@link CompositeInstance} class which takes a class label, attributes and an {@link ArrayList} of
+ * Constructor of CompositeInstance class which takes a class label, attributes and an ArrayList of
  * possible labels as inputs. It generates a new composite instance with given labels, attributes and possible labels.
  *
  * @param classLabel          Class label of the composite instance.
@@ -67,7 +67,7 @@ void CompositeInstance::setPossibleClassLabels(const vector<string>& _possibleCl
 }
 
 /**
- * Converts possible class labels to {@link String}.
+ * Converts possible class labels to String.
  *
  * @return String representation of possible class labels.
  */

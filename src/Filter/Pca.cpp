@@ -60,7 +60,7 @@ void Pca::removeUnnecessaryEigenvectors() {
 }
 
 /**
- * The removeAllEigenvectorsExceptTheMostImportantK method takes an {@link ArrayList} of {@link Eigenvector}s and removes the
+ * The removeAllEigenvectorsExceptTheMostImportantK method takes an ArrayList of Eigenvectors and removes the
  * surplus eigenvectors when the number of eigenvectors is greater than the dimension.
  */
 void Pca::removeAllEigenvectorsExceptTheMostImportantK() {
@@ -68,7 +68,7 @@ void Pca::removeAllEigenvectorsExceptTheMostImportantK() {
 }
 
 /**
- * The train method creates an averageVector from continuousAttributeAverage and a covariance {@link Matrix} from that averageVector.
+ * The train method creates an averageVector from continuousAttributeAverage and a covariance Matrix from that averageVector.
  * Then finds the eigenvectors of that covariance matrix and removes its unnecessary eigenvectors.
  */
 void Pca::train() {
@@ -86,11 +86,11 @@ void Pca::train() {
 }
 
 /**
- * The convertInstance method takes an {@link Instance} as an input and creates a {@link java.util.Vector} attributes from continuousAttributes.
- * After removing all attributes of given instance, it then adds new {@link ContinuousAttribute} by using the dot
+ * The convertInstance method takes an Instance as an input and creates a {@link java.util.Vector} attributes from continuousAttributes.
+ * After removing all attributes of given instance, it then adds new ContinuousAttribute by using the dot
  * product of attributes Vector and the eigenvectors.
  *
- * @param instance Instance that will be converted to {@link ContinuousAttribute} by using eigenvectors.
+ * @param instance Instance that will be converted to ContinuousAttribute by using eigenvectors.
  */
 void Pca::convertInstance(Instance* instance) {
     Vector attributes = Vector(instance->continuousAttributes());

@@ -23,7 +23,7 @@ string DiscreteAttribute::getValue() const{
 }
 
 /**
- * Converts value to {@link String}.
+ * Converts value to String.
  *
  * @return String representation of value.
  */

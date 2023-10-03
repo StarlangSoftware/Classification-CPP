@@ -5,7 +5,7 @@
 #include "BackwardSelection.h"
 
 /**
- * Constructor that creates a new {@link FeatureSubSet} and initializes indexList with given number of features.
+ * Constructor that creates a new FeatureSubSet and initializes indexList with given number of features.
  *
  * @param numberOfFeatures Indicates the indices of indexList.
  */

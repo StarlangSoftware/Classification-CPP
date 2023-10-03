@@ -9,11 +9,11 @@
 #include "../DistanceMetric/EuclidianDistance.h"
 
 /**
- * Constructor that sets the data {@link InstanceList}, k value and the {@link DistanceMetric}.
+ * Constructor that sets the data InstanceList, k value and the DistanceMetric.
  *
- * @param data           {@link InstanceList} input.
+ * @param data           InstanceList input.
  * @param k              K value.
- * @param distanceMetric {@link DistanceMetric} input.
+ * @param distanceMetric DistanceMetric input.
  */
 KnnModel::KnnModel(const InstanceList &data, int k, DistanceMetric *distanceMetric) {
     this->data = data;
@@ -22,10 +22,10 @@ KnnModel::KnnModel(const InstanceList &data, int k, DistanceMetric *distanceMetr
 }
 
 /**
- * The predict method takes an {@link Instance} as an input and finds the nearest neighbors of given instance. Then
+ * The predict method takes an Instance as an input and finds the nearest neighbors of given instance. Then
  * it returns the first possible class label as the predicted class.
  *
- * @param instance {@link Instance} to make prediction.
+ * @param instance Instance to make prediction.
  * @return The first possible class label as the predicted class.
  */
 string KnnModel::predict(Instance *instance){
@@ -41,13 +41,13 @@ string KnnModel::predict(Instance *instance){
 
 bool knnInstanceComparator(KnnInstance instanceA, KnnInstance instanceB) { return (instanceA.getDistance() < instanceB.getDistance()); }
 /**
- * The nearestNeighbors method takes an {@link Instance} as an input. First it gets the possible class labels, then loops
- * through the data {@link InstanceList} and creates new {@link ArrayList} of {@link KnnInstance}s and adds the corresponding data with
+ * The nearestNeighbors method takes an Instance as an input. First it gets the possible class labels, then loops
+ * through the data InstanceList and creates new ArrayList of KnnInstances and adds the corresponding data with
  * the distance between data and given instance. After sorting this newly created ArrayList, it loops k times and
- * returns the first k instances as an {@link InstanceList}.
+ * returns the first k instances as an InstanceList.
  *
- * @param instance {@link Instance} to find nearest neighbors/
- * @return The first k instances which are nearest to the given instance as an {@link InstanceList}.
+ * @param instance Instance to find nearest neighbors/
+ * @return The first k instances which are nearest to the given instance as an InstanceList.
  */
 InstanceList KnnModel::nearestNeighbors(Instance *instance) const{
     InstanceList result = InstanceList();

@@ -8,10 +8,10 @@
 #include "LdaModel.h"
 
 /**
- * The calculateMetric method takes an {@link Instance} and a String as inputs. It returns the dot product of given Instance
+ * The calculateMetric method takes an Instance and a String as inputs. It returns the dot product of given Instance
  * and w0 plus w1.
  *
- * @param instance {@link Instance} input.
+ * @param instance Instance input.
  * @param Ci       String input.
  * @return The dot product of given Instance and w0 plus w1.
  */
@@ -30,9 +30,9 @@ double LdaModel::calculateMetric(Instance *instance, const string& Ci) const{
 /**
  * A constructor which sets the priorDistribution, w and w1 according to given inputs.
  *
- * @param priorDistribution {@link DiscreteDistribution} input.
- * @param w                 {@link HashMap} of String and Vectors.
- * @param w0                {@link HashMap} of String and Double.
+ * @param priorDistribution DiscreteDistribution input.
+ * @param w                 HashMap of String and Vectors.
+ * @param w0                HashMap of String and Double.
  */
 LdaModel::LdaModel(const DiscreteDistribution& priorDistribution, const map<string, Vector>& w, const map<string, double>& w0) {
     this->priorDistribution = priorDistribution;

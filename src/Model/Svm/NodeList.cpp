@@ -24,9 +24,9 @@ NodeList::NodeList(const vector<double>& values) {
 NodeList::NodeList() = default;
 
 /**
- * The clone method creates a new {@link NodeList} and as the clone of the initial {@link NodeList}.
+ * The clone method creates a new NodeList and as the clone of the initial NodeList.
  *
- * @return A clone of the {@link NodeList}.
+ * @return A clone of the NodeList.
  */
 NodeList NodeList::clone() const {
     NodeList result = NodeList();
@@ -37,7 +37,7 @@ NodeList NodeList::clone() const {
 }
 
 /**
- * The dot method takes a {@link NodeList} as an input and returns the dot product of given {@link NodeList}
+ * The dot method takes a NodeList as an input and returns the dot product of given NodeList
  * and initial NodeList.
  *
  * @param nodeList NodeList to find the dot product.

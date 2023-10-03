@@ -6,7 +6,7 @@
 #include "TreeEnsembleModel.h"
 
 /**
- * The predict method takes an {@link Instance} as an input and loops through the {@link ArrayList} of {@link DecisionTree}s.
+ * The predict method takes an Instance as an input and loops through the ArrayList of DecisionTrees.
  * Makes prediction for the items of that ArrayList and returns the maximum item of that ArrayList.
  *
  * @param instance Instance to make prediction.
@@ -21,9 +21,9 @@ string TreeEnsembleModel::predict(Instance *instance) {
 }
 
 /**
- * A constructor which sets the {@link vector} of {@link DecisionTree} with given input.
+ * A constructor which sets the vector of DecisionTree with given input.
  *
- * @param forest An {@link vector} of {@link DecisionTree}.
+ * @param forest An vector of DecisionTree.
  */
 TreeEnsembleModel::TreeEnsembleModel(const vector<DecisionTree*>& forest) {
     this->forest = forest;

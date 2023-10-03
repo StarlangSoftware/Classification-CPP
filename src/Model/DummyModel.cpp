@@ -6,9 +6,9 @@
 #include "../Instance/CompositeInstance.h"
 
 /**
- * Constructor which sets the distribution using the given {@link InstanceList}.
+ * Constructor which sets the distribution using the given InstanceList.
  *
- * @param trainSet {@link InstanceList} which is used to get the class distribution.
+ * @param trainSet InstanceList which is used to get the class distribution.
  */
 DummyModel::DummyModel(InstanceList& trainSet) {
     distribution = trainSet.classDistribution();

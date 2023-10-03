@@ -149,11 +149,11 @@ void InstanceList::sort(int attributeIndex) {
 }
 
 /**
- * Compares two {@link Instance} inputs and returns a positive value if the first input's class label is greater
+ * Compares two Instance inputs and returns a positive value if the first input's class label is greater
  * than the second's class label input lexicographically.
  *
- * @param o1 First {@link Instance} to be compared.
- * @param o2 Second {@link Instance} to be compared.
+ * @param o1 First Instance to be compared.
+ * @param o2 Second Instance to be compared.
  * @return Negative value if the class label of the first instance is less than the class label of the second instance.
  * Positive value if the class label of the first instance is greater than the class label of the second instance.
  * 0 if the class label of the first instance is equal to the class label of the second instance.
@@ -194,9 +194,9 @@ Bootstrap <Instance*> InstanceList::bootstrap(int seed) const{
 }
 
 /**
- * Extracts the class labels of each instance in the instance list and returns them in an array of {@link String}.
+ * Extracts the class labels of each instance in the instance list and returns them in an array of String.
  *
- * @return A {@link vector} of class labels.
+ * @return A vector of class labels.
  */
 vector<string> InstanceList::getClassLabels() const{
     vector<string> classLabels;
@@ -210,7 +210,7 @@ vector<string> InstanceList::getClassLabels() const{
 /**
  * Extracts the class labels of each instance in the instance list and returns them as a set.
  *
- * @return A {@link vector} of distinct class labels.
+ * @return A vector of distinct class labels.
  */
 vector<string> InstanceList::getDistinctClassLabels() const{
     vector<string> classLabels;
@@ -234,7 +234,7 @@ vector<Instance *> InstanceList::getInstances() const{
 /**
  * Extracts the possible class labels of each instance in the instance list and returns them as a set.
  *
- * @return An {@link vector} of distinct class labels.
+ * @return An vector of distinct class labels.
  */
 vector<string> InstanceList::getUnionOfPossibleClassLabels() const{
     vector<string> possibleClassLabels;
@@ -534,10 +534,10 @@ vector<double> InstanceList::continuousAttributeStandardDeviation() const{
 }
 
 /**
- * Calculates a covariance {@link Matrix} by using an average {@link Vector}.
+ * Calculates a covariance Matrix by using an average Vector.
  *
  * @param average Vector input.
- * @return Covariance {@link Matrix}.
+ * @return Covariance Matrix.
  */
 Matrix InstanceList::covariance(const Vector& average) const{
     double mi, mj, xi, xj;

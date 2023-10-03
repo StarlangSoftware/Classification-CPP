@@ -8,7 +8,7 @@
  * Parameters of the Support Vector Machine classifier.
  *
  * @param seed         Seed is used for random number generation.
- * @param kernelType   Specifies the {@link KernelType} to be used in the algorithm. It can be ona of the LINEAR, POLYNOM, RBF or SIGMOID.
+ * @param kernelType   Specifies the KernelType to be used in the algorithm. It can be ona of the LINEAR, POLYNOM, RBF or SIGMOID.
  * @param degree       Degree of the polynomial kernel function.
  * @param gamma        Kernel coefficient for ?RBF, POLYNOM and SIGMOID.
  * @param coefficient0 Independent term in kernel function. It is only significant in POLYNOM and SIGMOID.

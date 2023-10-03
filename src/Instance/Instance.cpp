@@ -29,7 +29,7 @@ Instance::Instance(const string& classLabel) {
 }
 
 /**
- * Adds a discrete attribute with the given {@link String} value.
+ * Adds a discrete attribute with the given String value.
  *
  * @param value Value of the discrete attribute.
  */
@@ -38,7 +38,7 @@ void Instance::addAttribute(const string& value) {
 }
 
 /**
- * Adds a continuous attribute with the given {@link double} value.
+ * Adds a continuous attribute with the given double value.
  *
  * @param value Value of the continuous attribute.
  */
@@ -56,9 +56,9 @@ void Instance::addAttribute(Attribute *attribute) {
 }
 
 /**
- * Adds a {@link Vector} of continuous attributes.
+ * Adds a Vector of continuous attributes.
  *
- * @param vector {@link Vector} that has the continuous attributes.
+ * @param vector Vector that has the continuous attributes.
  */
 void Instance::addVectorAttribute(const Vector& vector) {
     for (int i = 0; i < vector.getSize(); i++) {
@@ -115,11 +115,11 @@ int Instance::continuousAttributeSize() const{
 }
 
 /**
- * The continuousAttributes method creates a new {@link vector} result and it adds the continuous attributes of the
+ * The continuousAttributes method creates a new vector result and it adds the continuous attributes of the
  * attributes list and also it adds 1 for the discrete indexed attributes
  * .
  *
- * @return result {@link vector} that has continuous and discrete indexed attributes.
+ * @return result vector that has continuous and discrete indexed attributes.
  */
 vector<double> Instance::continuousAttributes() const{
     vector<double> result;
@@ -146,7 +146,7 @@ vector<string> Instance::getPossibleClassLabels() const{
 }
 
 /**
- * Converts instance to a {@link String}.
+ * Converts instance to a String.
  *
  * @return A string of attributes separated with comma character.
  */
@@ -160,9 +160,9 @@ string Instance::to_string() const{
 }
 
 /**
- * The toVector method returns a {@link Vector} of continuous attributes and discrete indexed attributes.
+ * The toVector method returns a Vector of continuous attributes and discrete indexed attributes.
  *
- * @return {@link Vector} of continuous attributes and discrete indexed attributes.
+ * @return Vector of continuous attributes and discrete indexed attributes.
  */
 Vector Instance::toVector() const{
     vector<double> values;
@@ -180,10 +180,10 @@ Instance::~Instance() {
 }
 
 /**
- * The getSubSetOfFeatures method takes a {@link FeatureSubSet} as an input. First it creates a result {@link Instance}
+ * The getSubSetOfFeatures method takes a FeatureSubSet as an input. First it creates a result Instance
  * with the class label, and adds the attributes of the given featureSubSet to it.
  *
- * @param featureSubSet {@link FeatureSubSet} an {@link vector} of indices.
+ * @param featureSubSet FeatureSubSet an vector of indices.
  * @return result Instance.
  */
 Instance *Instance::getSubSetOfFeatures(const FeatureSubSet& featureSubSet) const{
@@ -195,9 +195,9 @@ Instance *Instance::getSubSetOfFeatures(const FeatureSubSet& featureSubSet) cons
 }
 
 /**
- * Returns a new {@link NodeList} with the {@link ArrayList} that has continuous and discrete indexed attributes.
+ * Returns a new NodeList with the ArrayList that has continuous and discrete indexed attributes.
  *
- * @return {@link NodeList} that has continuous and discrete indexed attributes.
+ * @return NodeList that has continuous and discrete indexed attributes.
  */
 NodeList Instance::toNodeList() const{
     return NodeList(continuousAttributes());

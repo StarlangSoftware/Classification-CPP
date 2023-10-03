@@ -19,7 +19,7 @@ Node::Node(int index, double value) {
 /**
  * The clone method creates a new Node as a clone.
  *
- * @return New {@link Node}.
+ * @return New Node.
  */
 Node Node::clone() const{
     return Node(index, value);

@@ -9,10 +9,10 @@
 #include "../Attribute/DiscreteAttribute.h"
 
 /**
- * The calculateMetric method takes an {@link Instance} and a String as inputs and it returns the log likelihood of
+ * The calculateMetric method takes an Instance and a String as inputs and it returns the log likelihood of
  * these inputs.
  *
- * @param instance {@link Instance} input.
+ * @param instance Instance input.
  * @param Ci       String input.
  * @return The log likelihood of inputs.
  */
@@ -25,13 +25,13 @@ double NaiveBayesModel::calculateMetric(Instance *instance, const string& Ci) co
 }
 
 /**
- * The logLikelihoodContinuous method takes an {@link Instance} and a class label as inputs. First it gets the logarithm
+ * The logLikelihoodContinuous method takes an Instance and a class label as inputs. First it gets the logarithm
  * of given class label's probability via prior distribution as logLikelihood. Then it loops times of given instance attribute size, and accumulates the
  * logLikelihood by calculating -0.5 * ((xi - mi) / si )** 2).
  *
  * @param classLabel String input class label.
- * @param instance   {@link Instance} input.
- * @return The log likelihood of given class label and {@link Instance}.
+ * @param instance   Instance input.
+ * @return The log likelihood of given class label and Instance.
  */
 double NaiveBayesModel::logLikelihoodContinuous(const string& classLabel, Instance *instance) const{
     double xi, mi, si;
@@ -46,14 +46,14 @@ double NaiveBayesModel::logLikelihoodContinuous(const string& classLabel, Instan
 }
 
 /**
- * The logLikelihoodDiscrete method takes an {@link Instance} and a class label as inputs. First it gets the logarithm
+ * The logLikelihoodDiscrete method takes an Instance and a class label as inputs. First it gets the logarithm
  * of given class label's probability via prior distribution as logLikelihood and gets the class attribute distribution of given class label.
  * Then it loops times of given instance attribute size, and accumulates the logLikelihood by calculating the logarithm of
  * corresponding attribute distribution's smoothed probability by using laplace smoothing on xi.
  *
  * @param classLabel String input class label.
- * @param instance   {@link Instance} input.
- * @return The log likelihood of given class label and {@link Instance}.
+ * @param instance   Instance input.
+ * @return The log likelihood of given class label and Instance.
  */
 double NaiveBayesModel::logLikelihoodDiscrete(const string& classLabel, Instance *instance) const{
     string xi;
@@ -69,9 +69,9 @@ double NaiveBayesModel::logLikelihoodDiscrete(const string& classLabel, Instance
 /**
  * A constructor that sets the priorDistribution, classMeans and classDeviations.
  *
- * @param priorDistribution {@link DiscreteDistribution} input.
- * @param classMeans        A {@link HashMap} of String and {@link Vector}.
- * @param classDeviations   A {@link HashMap} of String and {@link Vector}.
+ * @param priorDistribution DiscreteDistribution input.
+ * @param classMeans        A HashMap of String and Vector.
+ * @param classDeviations   A HashMap of String and Vector.
  */
 NaiveBayesModel::NaiveBayesModel(const DiscreteDistribution& priorDistribution, const map<string, Vector>& classMeans,
                                  const map<string, Vector>& classDeviations) {
@@ -83,8 +83,8 @@ NaiveBayesModel::NaiveBayesModel(const DiscreteDistribution& priorDistribution, 
 /**
  * A constructor that sets the priorDistribution and classAttributeDistributions.
  *
- * @param priorDistribution           {@link DiscreteDistribution} input.
- * @param classAttributeDistributions {@link HashMap} of String and {@link ArrayList} of {@link DiscreteDistribution}s.
+ * @param priorDistribution           DiscreteDistribution input.
+ * @param classAttributeDistributions HashMap of String and ArrayList of DiscreteDistributions.
  */
 NaiveBayesModel::NaiveBayesModel(const DiscreteDistribution& priorDistribution,
                                  const map<string, vector<DiscreteDistribution>>& classAttributeDistributions) {

@@ -87,25 +87,25 @@ void DecisionNode::createChildrenForContinuous(const InstanceList& data, int att
 }
 
 /**
- * The DecisionNode method takes {@link InstanceList} data as input and then it sets the class label parameter by finding
+ * The DecisionNode method takes InstanceList data as input and then it sets the class label parameter by finding
  * the most occurred class label of given data, it then gets distinct class labels as class labels ArrayList. Later, it adds ordered
  * indices to the indexList and shuffles them randomly. Then, it gets the class distribution of given data and finds the best entropy value
  * of these class distribution.
  * <p>
- * If an attribute of given data is {@link DiscreteIndexedAttribute}, it creates a Distribution according to discrete indexed attribute class distribution
+ * If an attribute of given data is DiscreteIndexedAttribute, it creates a Distribution according to discrete indexed attribute class distribution
  * and finds the entropy. If it is better than the last best entropy it reassigns the best entropy, best attribute and best split value according to
  * the newly founded best entropy's index. At the end, it also add new distribution to the class distribution .
  * <p>
- * If an attribute of given data is {@link DiscreteAttribute}, it directly finds the entropy. If it is better than the last best entropy it
+ * If an attribute of given data is DiscreteAttribute, it directly finds the entropy. If it is better than the last best entropy it
  * reassigns the best entropy, best attribute and best split value according to the newly founded best entropy's index.
  * <p>
- * If an attribute of given data is {@link ContinuousAttribute}, it creates two distributions; left and right according to class distribution
+ * If an attribute of given data is ContinuousAttribute, it creates two distributions; left and right according to class distribution
  * and discrete distribution respectively, and finds the entropy. If it is better than the last best entropy it reassigns the best entropy,
  * best attribute and best split value according to the newly founded best entropy's index. At the end, it also add new distribution to
  * the right distribution and removes from left distribution .
  *
- * @param data      {@link InstanceList} input.
- * @param condition {@link DecisionCondition} to check.
+ * @param data      InstanceList input.
+ * @param condition DecisionCondition to check.
  * @param parameter RandomForestParameter like seed, ensembleSize, attributeSubsetSize.
  * @param isStump   Refers to decision trees with only 1 splitting rule.
  */
@@ -214,7 +214,7 @@ DecisionNode::DecisionNode(InstanceList data, const DecisionCondition& condition
 }
 
 /**
- * The predict method takes an {@link Instance} as input and performs prediction on the DecisionNodes and returns the prediction
+ * The predict method takes an Instance as input and performs prediction on the DecisionNodes and returns the prediction
  * for that instance.
  *
  * @param instance Instance to make prediction.

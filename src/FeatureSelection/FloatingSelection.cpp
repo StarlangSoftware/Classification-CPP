@@ -5,7 +5,7 @@
 #include "FloatingSelection.h"
 
 /**
- * Constructor that creates a new {@link FeatureSubSet}.
+ * Constructor that creates a new FeatureSubSet.
  */
 FloatingSelection::FloatingSelection() : SubSetSelection(){
 }
@@ -13,7 +13,7 @@ FloatingSelection::FloatingSelection() : SubSetSelection(){
 /**
  * The operator method calls forward and backward methods.
  *
- * @param current          {@link FeatureSubSet} input.
+ * @param current          FeatureSubSet input.
  * @param numberOfFeatures Indicates the indices of indexList.
  * @return ArrayList of FeatureSubSet.
  */

@@ -7,7 +7,7 @@
 /**
  * A constructor that sets the initial subset with given input.
  *
- * @param initialSubSet {@link FeatureSubSet} input.
+ * @param initialSubSet FeatureSubSet input.
  */
 SubSetSelection::SubSetSelection(const FeatureSubSet& initialSubSet) {
     this->initialSubSet = initialSubSet;
@@ -45,11 +45,11 @@ void SubSetSelection::backward(vector<FeatureSubSet>& currentSubSetList, const F
 }
 
 /**
- * The execute method takes an {@link Experiment} and a {@link MultipleRun} as inputs. By selecting a candidateList from given
+ * The execute method takes an Experiment and a MultipleRun as inputs. By selecting a candidateList from given
  * Experiment it tries to find a FeatureSubSet that gives best performance.
  *
- * @param multipleRun {@link MultipleRun} type input.
- * @param experiment  {@link Experiment} type input.
+ * @param multipleRun MultipleRun type input.
+ * @param experiment  Experiment type input.
  * @return FeatureSubSet that gives best performance.
  */
 FeatureSubSet SubSetSelection::execute(MultipleRun *multipleRun, Experiment experiment) {
