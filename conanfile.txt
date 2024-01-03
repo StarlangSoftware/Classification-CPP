@@ -1,8 +1,0 @@
-[requires]
-Dictionary/1.0.0
-Sampling/1.0.0
-DataStructure/1.0.0
-Util/1.0.0
-
-[generators]
-cmake
