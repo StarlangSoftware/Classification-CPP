@@ -29,6 +29,10 @@ TreeEnsembleModel::TreeEnsembleModel(const vector<DecisionTree*>& forest) {
     this->forest = forest;
 }
 
+/**
+ * Loads a tree ensemble model such as Random Forest model or Bagging model from an input model file.
+ * @param outputFile Model file.
+ */
 void TreeEnsembleModel::serialize(ostream &outputFile) {
     outputFile << forest.size() << "\n";
     for (DecisionTree* tree : forest){
@@ -36,6 +40,10 @@ void TreeEnsembleModel::serialize(ostream &outputFile) {
     }
 }
 
+/**
+ * Loads a tree ensemble model such as Random Forest model or Bagging model from an input model file.
+ * @param inputFile Model file.
+ */
 TreeEnsembleModel::TreeEnsembleModel(ifstream &inputFile) {
     int size;
     inputFile >> size;
@@ -45,6 +53,11 @@ TreeEnsembleModel::TreeEnsembleModel(ifstream &inputFile) {
     }
 }
 
+/**
+ * Calculates the posterior probability distribution for the given instance according to ensemble tree model.
+ * @param instance Instance for which posterior probability distribution is calculated.
+ * @return Posterior probability distribution for the given instance.
+ */
 map<string, double> TreeEnsembleModel::predictProbability(Instance *instance) {
     DiscreteDistribution distribution = DiscreteDistribution();
     for (DecisionTree* tree : forest) {

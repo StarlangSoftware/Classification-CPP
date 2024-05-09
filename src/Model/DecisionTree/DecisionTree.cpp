@@ -60,14 +60,27 @@ void DecisionTree::pruneNode(DecisionNode decisionNode, const InstanceList& prun
     }
 }
 
+/**
+ * Prints the decision tree to an output file
+ * @param outputFile Output file
+ */
 void DecisionTree::serialize(ostream &outputFile) {
     root.serialize(outputFile);
 }
 
+/**
+ * Reads a decision tree from an input file
+ * @param inputFile Input file
+ */
 DecisionTree::DecisionTree(ifstream &inputFile) {
     root = DecisionNode(inputFile);
 }
 
+/**
+ * Calculates the posterior probability distribution for the given instance according to Decision tree model.
+ * @param instance Instance for which posterior probability distribution is calculated.
+ * @return Posterior probability distribution for the given instance.
+ */
 map<string, double> DecisionTree::predictProbability(Instance *instance) {
     return root.predictProbabilityDistribution(instance);
 }

@@ -40,6 +40,10 @@ LdaModel::LdaModel(const DiscreteDistribution& priorDistribution, const map<stri
     this->w0 = w0;
 }
 
+/**
+ * Saves the Linear discriminant analysis model to an output file.
+ * @param outputFile Output file.
+ */
 void LdaModel::serialize(ostream &outputFile) {
     GaussianModel::serialize(outputFile);
     outputFile << w0.size() << "\n";
@@ -53,6 +57,10 @@ void LdaModel::serialize(ostream &outputFile) {
     }
 }
 
+/**
+ * Loads a Linear Discriminant Analysis model from an input model file.
+ * @param inputFile Model file.
+ */
 LdaModel::LdaModel(ifstream &inputFile) : GaussianModel(inputFile) {
     double weight;
     string classLabel;

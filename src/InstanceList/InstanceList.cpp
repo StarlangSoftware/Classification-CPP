@@ -558,6 +558,10 @@ Matrix InstanceList::covariance(const Vector& average) const{
     return result;
 }
 
+/**
+ * Prints an instance list to an output file
+ * @param outputFile Output file
+ */
 void InstanceList::serialize(ostream &outputFile) {
     Instance* firstInstance = list.at(0);
     outputFile << firstInstance->attributeSize() << "\n";
@@ -581,6 +585,10 @@ void InstanceList::serialize(ostream &outputFile) {
     }
 }
 
+/**
+ * Reads an instance list from an input file
+ * @param inputFile Input file
+ */
 InstanceList::InstanceList(ifstream &inputFile) {
     int size;
     string line, discreteAttribute;
@@ -609,6 +617,9 @@ InstanceList::InstanceList(ifstream &inputFile) {
     }
 }
 
+/**
+ * Removes the instances in the instance list.
+ */
 void InstanceList::clear() {
     list.clear();
 }

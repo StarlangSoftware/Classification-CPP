@@ -44,6 +44,10 @@ QdaModel::QdaModel(const DiscreteDistribution& priorDistribution, const map<stri
     this->W = W;
 }
 
+/**
+ * Loads a quadratic discriminant analysis model from an input model file.
+ * @param inputFile Model file.
+ */
 QdaModel::QdaModel(ifstream &inputFile) : LdaModel(inputFile) {
     string classLabel;
     for (int i = 0; i < priorDistribution.size(); i++){

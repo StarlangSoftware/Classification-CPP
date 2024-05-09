@@ -25,6 +25,10 @@ void RandomForest::train(InstanceList &trainSet, Parameter *parameters) {
     model = new TreeEnsembleModel(forest);
 }
 
+/**
+ * Loads the random forest model from an input file.
+ * @param fileName File name of the random forest model.
+ */
 void RandomForest::loadModel(const string &fileName) {
     ifstream inputFile;
     inputFile.open(fileName, ifstream :: in);

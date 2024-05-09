@@ -27,6 +27,10 @@ void C45::train(InstanceList &trainSet, Parameter *parameters) {
     model = tree;
 }
 
+/**
+ * Loads the decision tree model from an input file.
+ * @param fileName File name of the decision tree model.
+ */
 void C45::loadModel(const string &fileName) {
     ifstream inputFile;
     inputFile.open(fileName, ifstream :: in);

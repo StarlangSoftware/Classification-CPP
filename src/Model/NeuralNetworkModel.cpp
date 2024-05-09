@@ -6,7 +6,6 @@
 #include <cfloat>
 #include "../Instance/CompositeInstance.h"
 #include "NeuralNetworkModel.h"
-#include "../Parameter/ActivationFunction.h"
 
 /**
  * Constructor that sets the class labels, their sizes as K and the size of the continuous attributes as d.
@@ -162,6 +161,10 @@ string NeuralNetworkModel::predict(Instance *instance){
     }
 }
 
+/**
+ * Saves Neural Network model to an output file
+ * @param outputFile Output file
+ */
 void NeuralNetworkModel::serialize(ostream &outputFile) {
     outputFile << K << "\n";
     outputFile << d << "\n";
@@ -170,6 +173,10 @@ void NeuralNetworkModel::serialize(ostream &outputFile) {
     }
 }
 
+/**
+ * Loads a neural network model from an input file
+ * @param inputFile Input file
+ */
 NeuralNetworkModel::NeuralNetworkModel(ifstream &inputFile) {
     string classLabel;
     inputFile >> K;
@@ -180,6 +187,11 @@ NeuralNetworkModel::NeuralNetworkModel(ifstream &inputFile) {
     }
 }
 
+/**
+ * Calculates the posterior probability distribution for the given instance according to neural network model.
+ * @param instance Instance for which posterior probability distribution is calculated.
+ * @return Posterior probability distribution for the given instance.
+ */
 map<string, double> NeuralNetworkModel::predictProbability(Instance *instance) {
     createInputVector(instance);
     calculateOutput();
@@ -190,6 +202,11 @@ map<string, double> NeuralNetworkModel::predictProbability(Instance *instance) {
     return result;
 }
 
+/**
+ * Loads the activation function from an input model file.
+ * @param inputFile Input model file.
+ * @return Activation function read.
+ */
 ActivationFunction NeuralNetworkModel::getActivationFunction(ifstream& inputFile) const {
     string function;
     inputFile >> function;

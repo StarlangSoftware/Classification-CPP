@@ -28,6 +28,10 @@ void Bagging::train(InstanceList &trainSet, Parameter *parameters) {
     model = new TreeEnsembleModel(forest);
 }
 
+/**
+ * Loads the Bagging ensemble model from an input file.
+ * @param fileName File name of the decision tree model.
+ */
 void Bagging::loadModel(const string &fileName) {
     ifstream inputFile;
     inputFile.open(fileName, ifstream :: in);

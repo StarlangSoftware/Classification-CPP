@@ -6,6 +6,12 @@
 #include "Distribution.h"
 #include "StatisticalTestNotApplicable.h"
 
+/**
+ * Calculates the test statistic of the combined 5x2 cv F test.
+ * @param classifier1 Performance (error rate or accuracy) results of the first classifier.
+ * @param classifier2 Performance (error rate or accuracy) results of the second classifier.
+ * @return Given the performances of two classifiers, the test statistic of the combined 5x2 cv F test.
+ */
 double Combined5x2f::testStatistic(const ExperimentPerformance& classifier1, const ExperimentPerformance& classifier2) const{
     if (classifier1.numberOfExperiments() != classifier2.numberOfExperiments()){
         throw StatisticalTestNotApplicable("Combined 5x2 F test", "In order to apply a paired test, you need to have the same number of experiments in both algorithms.");
@@ -34,6 +40,12 @@ double Combined5x2f::testStatistic(const ExperimentPerformance& classifier1, con
     return numerator / denominator;
 }
 
+/**
+ * Compares two classification algorithms based on their performances (accuracy or error rate) using combined 5x2 cv F test.
+ * @param classifier1 Performance (error rate or accuracy) results of the first classifier.
+ * @param classifier2 Performance (error rate or accuracy) results of the second classifier.
+ * @return Statistical test result of the comparison.
+ */
 StatisticalTestResult Combined5x2f::compare(const ExperimentPerformance& classifier1, const ExperimentPerformance& classifier2) const{
     double statistic = testStatistic(classifier1, classifier2);
     int degreeOfFreedom1 = classifier1.numberOfExperiments();

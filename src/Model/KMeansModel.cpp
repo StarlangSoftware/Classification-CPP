@@ -38,11 +38,19 @@ double KMeansModel::calculateMetric(Instance *instance, const string& Ci) const{
     return -DBL_MAX;
 }
 
+/**
+ * Saves the K-Means model to an output file.
+ * @param outputFile Output file.
+ */
 void KMeansModel::serialize(ostream &outputFile) {
     GaussianModel::serialize(outputFile);
     classMeans.serialize(outputFile);
 }
 
+/**
+ * Loads a K-means model from an input model file.
+ * @param inputFile Model file.
+ */
 KMeansModel::KMeansModel(ifstream &inputFile) : GaussianModel(inputFile) {
     classMeans = InstanceList(inputFile);
     distanceMetric = new EuclidianDistance();

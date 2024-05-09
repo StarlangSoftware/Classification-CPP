@@ -2,10 +2,8 @@
 // Created by Olcay Taner Yıldız on 9.02.2019.
 //
 
-#include <random>
 #include <fstream>
 #include "RandomModel.h"
-#include "../Instance/CompositeInstance.h"
 
 /**
  * A constructor that sets the class labels.
@@ -36,6 +34,10 @@ string RandomModel::predict(Instance *instance) {
     }
 }
 
+/**
+ * Saves the random classifier model to an output file.
+ * @param outputFile Output file.
+ */
 void RandomModel::serialize(ostream &outputFile) {
     outputFile << classLabels.size() << "\n";
     for (const string& classLabel : classLabels){
@@ -43,6 +45,10 @@ void RandomModel::serialize(ostream &outputFile) {
     }
 }
 
+/**
+ * Loads a random classifier model from an input model file.
+ * @param inputFile Model file.
+ */
 RandomModel::RandomModel(ifstream &inputFile) {
     int size;
     string classLabel;
@@ -54,6 +60,11 @@ RandomModel::RandomModel(ifstream &inputFile) {
     }
 }
 
+/**
+ * Calculates the posterior probability distribution for the given instance according to random model.
+ * @param instance Instance for which posterior probability distribution is calculated.
+ * @return Posterior probability distribution for the given instance.
+ */
 map<string, double> RandomModel::predictProbability(Instance *instance) {
     map<string, double> result;
     for (const string& classLabel : classLabels){

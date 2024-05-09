@@ -56,6 +56,10 @@ void NaiveBayes::train(InstanceList &trainSet, Parameter *parameters) {
     }
 }
 
+/**
+ * Loads the naive Bayes model from an input file.
+ * @param fileName File name of the naive Bayes model.
+ */
 void NaiveBayes::loadModel(const string &fileName) {
     ifstream inputFile;
     inputFile.open(fileName, ifstream :: in);

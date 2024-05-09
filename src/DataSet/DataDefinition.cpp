@@ -107,10 +107,21 @@ DataDefinition DataDefinition::getSubSetOfFeatures(const FeatureSubSet& featureS
     return DataDefinition(newAttributeTypes);
 }
 
+/**
+ * Returns number of distinct values for a given discrete attribute with index attributeIndex.
+ * @param attributeIndex Index of the discrete attribute.
+ * @return Number of distinct values for a given discrete attribute
+ */
 int DataDefinition::numberOfValues(int attributeIndex) const{
     return attributeValueList[attributeIndex].size();
 }
 
+/**
+ * Returns the index of the given value in the values list of the attributeIndex'th discrete attribute.
+ * @param attributeIndex Index of the discrete attribute.
+ * @param value Value of the discrete attribute
+ * @return Index of the given value in the values list of the discrete attribute.
+ */
 int DataDefinition::featureValueIndex(int attributeIndex, const string& value) const{
     for (int i = 0; i < attributeValueList[attributeIndex].size(); i++){
         if (attributeValueList[attributeIndex][i] == value){

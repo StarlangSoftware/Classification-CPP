@@ -3,7 +3,6 @@
 //
 #include <cfloat>
 #include "GaussianModel.h"
-#include "../Instance/CompositeInstance.h"
 
 /**
  * The predict method takes an Instance as an input. First it gets the size of prior distribution and loops this size times.
@@ -45,10 +44,18 @@ string GaussianModel::predict(Instance *instance){
     return predictedClass;
 }
 
+/**
+ * Saves the Gaussian model to an output file
+ * @param outputFile Output file
+ */
 void GaussianModel::serialize(ostream &outputFile) {
     priorDistribution.serialize(outputFile);
 }
 
+/**
+ * Loads a Gaussian mode from an input file
+ * @param inputFile Input file
+ */
 GaussianModel::GaussianModel(ifstream &inputFile) {
     priorDistribution = DiscreteDistribution(inputFile);
 }

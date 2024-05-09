@@ -3,7 +3,6 @@
 //
 
 #include "DummyModel.h"
-#include "../Instance/CompositeInstance.h"
 
 /**
  * Constructor which sets the distribution using the given InstanceList.
@@ -29,14 +28,27 @@ string DummyModel::predict(Instance *instance){
     }
 }
 
+/**
+ * Saves the dummy model to an output file.
+ * @param outputFile Output file.
+ */
 void DummyModel::serialize(ostream &outputFile) {
     distribution.serialize(outputFile);
 }
 
+/**
+ * Loads a dummy model from an input model file.
+ * @param fileName Model file name.
+ */
 DummyModel::DummyModel(ifstream &inputFile) {
     distribution = DiscreteDistribution(inputFile);
 }
 
+/**
+ * Calculates the posterior probability distribution for the given instance according to dummy model.
+ * @param instance Instance for which posterior probability distribution is calculated.
+ * @return Posterior probability distribution for the given instance.
+ */
 map<string, double> DummyModel::predictProbability(Instance *instance){
     return distribution.getProbabilityDistribution();
 }

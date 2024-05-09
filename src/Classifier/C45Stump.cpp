@@ -16,6 +16,10 @@ void C45Stump::train(InstanceList &trainSet, Parameter *parameters) {
     model = new DecisionTree(DecisionNode(trainSet, DecisionCondition(), nullptr, true));
 }
 
+/**
+ * Loads the decision tree model from an input file.
+ * @param fileName File name of the decision tree model.
+ */
 void C45Stump::loadModel(const string &fileName) {
     ifstream inputFile;
     inputFile.open(fileName, ifstream :: in);

@@ -203,6 +203,10 @@ NodeList Instance::toNodeList() const{
     return NodeList(continuousAttributes());
 }
 
+/**
+ * Prints an instance to an output file.
+ * @param outputFile Output file
+ */
 void Instance::serialize(ostream &outputFile) {
     for (Attribute* attribute : attributes){
         outputFile << attribute->to_string() << " ";

@@ -18,6 +18,10 @@ void Knn::train(InstanceList &trainSet, Parameter *parameters) {
     model = new KnnModel(trainSet, ((KnnParameter*) parameters)->getK(), ((KnnParameter*) parameters)->getDistanceMetric());
 }
 
+/**
+ * Loads the K-nearest neighbor model from an input file.
+ * @param fileName File name of the K-nearest neighbor model.
+ */
 void Knn::loadModel(const string &fileName) {
     ifstream inputFile;
     inputFile.open(fileName, ifstream :: in);

@@ -25,6 +25,10 @@ void LinearPerceptron::train(InstanceList& trainSet, Parameter *parameters) {
     model = new LinearPerceptronModel(*(partition.get(1)), *(partition.get(0)), (LinearPerceptronParameter*) parameters);
 }
 
+/**
+ * Loads the linear perceptron model from an input file.
+ * @param fileName File name of the linear perceptron model.
+ */
 void LinearPerceptron::loadModel(const string &fileName) {
     ifstream inputFile;
     inputFile.open(fileName, ifstream :: in);

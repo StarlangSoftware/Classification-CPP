@@ -62,6 +62,10 @@ void Lda::train(InstanceList &trainSet, Parameter *parameters) {
     model = new LdaModel(priorDistribution, w, w0);
 }
 
+/**
+ * Loads the Lda model from an input file.
+ * @param fileName File name of the Lda model.
+ */
 void Lda::loadModel(const string &fileName) {
     ifstream inputFile;
     inputFile.open(fileName, ifstream :: in);

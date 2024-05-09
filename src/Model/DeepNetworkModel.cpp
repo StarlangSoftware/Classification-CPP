@@ -39,6 +39,19 @@ vector<Matrix> DeepNetworkModel::setBestWeights() const{
     return bestWeights;
 }
 
+/**
+ * Constructor that takes two InstanceList train set and validation set and DeepNetworkParameter as inputs.
+ * First it sets the class labels, their sizes as K and the size of the continuous attributes as d of given train set and
+ * allocates weights and sets the best weights. At each epoch, it shuffles the train set and loops through the each item of that train set,
+ * it multiplies the weights Matrix with input Vector than applies the sigmoid function and stores the result as hidden and add bias.
+ * Then updates weights and at the end it compares the performance of these weights with validation set. It updates the bestClassificationPerformance and
+ * bestWeights according to the current situation. At the end it updates the learning rate via etaDecrease value and finishes
+ * with clearing the weights.
+ *
+ * @param trainSet      InstanceList to be used as trainSet.
+ * @param validationSet InstanceList to be used as validationSet.
+ * @param parameters    DeepNetworkParameter input.
+ */
 DeepNetworkModel::DeepNetworkModel(InstanceList &trainSet, const InstanceList &validationSet,
                                    DeepNetworkParameter *parameters) : NeuralNetworkModel(trainSet){
     int epoch;
@@ -144,6 +157,10 @@ void DeepNetworkModel::calculateOutput() {
     }
 }
 
+/**
+ * Loads a deep network model from an input model file.
+ * @param inputFile Model file.
+ */
 DeepNetworkModel::DeepNetworkModel(ifstream &inputFile) : NeuralNetworkModel(inputFile) {
     inputFile >> hiddenLayerSize;
     for (int i = 0; i < hiddenLayerSize + 1; i++){

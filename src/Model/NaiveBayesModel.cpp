@@ -92,6 +92,10 @@ NaiveBayesModel::NaiveBayesModel(const DiscreteDistribution& priorDistribution,
     this->classAttributeDistributions = classAttributeDistributions;
 }
 
+/**
+ * Saves the Naive Bayes model to an output file.
+ * @param outputFile Output file.
+ */
 void NaiveBayesModel::serialize(ostream &outputFile) {
     GaussianModel::serialize(outputFile);
     for (auto& iterator : classMeans){
@@ -104,6 +108,10 @@ void NaiveBayesModel::serialize(ostream &outputFile) {
     }
 }
 
+/**
+ * Loads a naive Bayes model from an input model file.
+ * @param inputFile Model file.
+ */
 NaiveBayesModel::NaiveBayesModel(ifstream &inputFile) : GaussianModel(inputFile) {
     string classLabel;
     for (int i = 0; i < priorDistribution.size(); i++){

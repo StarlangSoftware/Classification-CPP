@@ -56,6 +56,10 @@ void Qda::train(InstanceList& trainSet, Parameter *parameters) {
     model = new QdaModel(priorDistribution, W, w, w0);
 }
 
+/**
+ * Loads the Qda model from an input file.
+ * @param fileName File name of the Qda model.
+ */
 void Qda::loadModel(const string &fileName) {
     ifstream inputFile;
     inputFile.open(fileName, ifstream :: in);

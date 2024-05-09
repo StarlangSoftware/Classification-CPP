@@ -254,20 +254,39 @@ string DecisionNode::predict(Instance *instance) const{
     }
 }
 
+/**
+ * Default constructor
+ */
 DecisionNode::DecisionNode() = default;
 
+/**
+ * Accessor method for leaf attribute
+ * @return Leaf
+ */
 bool DecisionNode::isLeaf() const{
     return leaf;
 }
 
+/**
+ * Mutator method for leaf attribute
+ * @param _leaf New value for leaf attribute
+ */
 void DecisionNode::setLeaf(bool _leaf) {
     this->leaf = _leaf;
 }
 
+/**
+ * Accessor method for children attribute
+ * @return Children of the decision node
+ */
 vector<DecisionNode> DecisionNode::getChildren() const{
     return children;
 }
 
+/**
+ * Prints the decision node to an output file
+ * @param outputFile Output file
+ */
 void DecisionNode::serialize(ostream &outputFile) {
     condition.serialize(outputFile);
     outputFile << children.size() << endl;
@@ -280,6 +299,10 @@ void DecisionNode::serialize(ostream &outputFile) {
     }
 }
 
+/**
+ * Reads the decision node from an input file
+ * @param inputFile Input file
+ */
 DecisionNode::DecisionNode(ifstream &inputFile) {
     int size;
     condition = DecisionCondition(inputFile);
@@ -297,6 +320,13 @@ DecisionNode::DecisionNode(ifstream &inputFile) {
     }
 }
 
+/**
+ * Recursive method that returns the posterior probability distribution of a given instance. If the node is a leaf
+ * node, it returns the class label distribution, otherwise it checks in which direction (child node) this instance
+ * is forwarded.
+ * @param instance Instance for which the posterior probability distribution is calculated.
+ * @return Posterior probability distribution for this instance.
+ */
 map<string, double> DecisionNode::predictProbabilityDistribution(Instance *instance) {
     if (leaf) {
         return classLabelsDistribution.getProbabilityDistribution();

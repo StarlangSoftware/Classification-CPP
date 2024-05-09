@@ -14,6 +14,15 @@
 KFoldRunSeparateTest::KFoldRunSeparateTest(int K) : KFoldRun(K) {
 }
 
+/**
+ * Runs a K fold cross-validated experiment for the given classifier with the given parameters. Testing will be
+ * done on the separate test set. The experiment results will be added to the experimentPerformance.
+ * @param classifier Classifier for the experiment
+ * @param parameter Hyperparameters of the classifier of the experiment
+ * @param experimentPerformance Storage to add experiment results
+ * @param crossValidation K-fold crossvalidated dataset.
+ * @param testSet Test set on which experiment performance is calculated.
+ */
 void KFoldRunSeparateTest::runExperiment(Classifier* classifier, Parameter *parameter,
                                          ExperimentPerformance *experimentPerformance,
                                          CrossValidation<Instance *>* crossValidation, const InstanceList& testSet) {

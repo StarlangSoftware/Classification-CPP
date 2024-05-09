@@ -24,6 +24,10 @@ void DeepNetwork::train(InstanceList &trainSet, Parameter *parameters) {
     model = new DeepNetworkModel(*(partition.get(1)), *(partition.get(0)), (DeepNetworkParameter*) parameters);
 }
 
+/**
+ * Loads the deep network model from an input file.
+ * @param fileName File name of the deep network model.
+ */
 void DeepNetwork::loadModel(const string &fileName) {
     ifstream inputFile;
     inputFile.open(fileName, ifstream :: in);

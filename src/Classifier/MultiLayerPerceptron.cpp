@@ -25,6 +25,10 @@ void MultiLayerPerceptron::train(InstanceList &trainSet, Parameter *parameters) 
     model = new MultiLayerPerceptronModel(*(partition.get(1)), *(partition.get(0)), (MultiLayerPerceptronParameter*) parameters);
 }
 
+/**
+ * Loads the multi-layer perceptron model from an input file.
+ * @param fileName File name of the multi-layer perceptron model.
+ */
 void MultiLayerPerceptron::loadModel(const string &fileName) {
     ifstream inputFile;
     inputFile.open(fileName, ifstream :: in);

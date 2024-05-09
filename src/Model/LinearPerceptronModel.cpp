@@ -67,6 +67,10 @@ void LinearPerceptronModel::calculateOutput() {
     }
 }
 
+/**
+ * Loads a linear perceptron model from an input model file.
+ * @param inputFile Model file.
+ */
 LinearPerceptronModel::LinearPerceptronModel(ifstream &inputFile) : NeuralNetworkModel(inputFile) {
     W = Matrix(inputFile);
 }

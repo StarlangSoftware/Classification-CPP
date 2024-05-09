@@ -74,12 +74,23 @@ bool DecisionCondition::satisfy(Instance *instance) const{
     return false;
 }
 
+/**
+ * Accessor for the attribute index.
+ * @return Attribute index.
+ */
 int DecisionCondition::getAttributeIndex() const{
     return attributeIndex;
 }
 
+/**
+ * Default constructor
+ */
 DecisionCondition::DecisionCondition() = default;
 
+/**
+ * Prints the decision condition into an output file.
+ * @param outputFile Output file
+ */
 void DecisionCondition::serialize(ostream &outputFile) {
     outputFile << attributeIndex << "\n";
     if (attributeIndex != -1){
@@ -95,6 +106,10 @@ void DecisionCondition::serialize(ostream &outputFile) {
     }
 }
 
+/**
+ * Reads a decision condition from an input file
+ * @param inputFile Input file
+ */
 DecisionCondition::DecisionCondition(ifstream &inputFile) {
     string type;
     int maxIndex;

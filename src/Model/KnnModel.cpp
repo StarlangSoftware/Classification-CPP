@@ -68,17 +68,30 @@ InstanceList KnnModel::nearestNeighbors(Instance *instance) const{
     return result;
 }
 
+/**
+ * Saves the K-nearest neighbor model to an output file.
+ * @param outputFile Output file.
+ */
 void KnnModel::serialize(ostream &outputFile) {
     outputFile << k << "\n";
     data.serialize(outputFile);
 }
 
+/**
+ * Loads a K-nearest neighbor model from an input model file.
+ * @param inputFile Model file.
+ */
 KnnModel::KnnModel(ifstream &inputFile) {
     inputFile >> k;
     data = InstanceList(inputFile);
     distanceMetric = new EuclidianDistance();
 }
 
+/**
+ * Calculates the posterior probability distribution for the given instance according to K-means model.
+ * @param instance Instance for which posterior probability distribution is calculated.
+ * @return Posterior probability distribution for the given instance.
+ */
 map<string, double> KnnModel::predictProbability(Instance *instance){
     InstanceList neighbors = nearestNeighbors(instance);
     return neighbors.classDistribution().getProbabilityDistribution();
