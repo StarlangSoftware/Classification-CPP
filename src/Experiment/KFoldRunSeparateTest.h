@@ -13,7 +13,7 @@ public:
     explicit KFoldRunSeparateTest(int K);
     ExperimentPerformance* execute(const Experiment& experiment) override;
 protected:
-    void runExperiment(Classifier* classifier, Parameter* parameter, ExperimentPerformance* experimentPerformance, CrossValidation<Instance*>* crossValidation, const InstanceList& testSet);
+    void runExperiment(Model* model, Parameter* parameter, ExperimentPerformance* experimentPerformance, CrossValidation<Instance*>* crossValidation, const InstanceList& testSet);
 };
 
 

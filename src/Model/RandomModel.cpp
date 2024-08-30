@@ -50,14 +50,7 @@ void RandomModel::serialize(ostream &outputFile) {
  * @param inputFile Model file.
  */
 RandomModel::RandomModel(ifstream &inputFile) {
-    int size;
-    string classLabel;
-    inputFile >> seed;
-    inputFile >> size;
-    for (int i = 0; i < size; i++){
-        inputFile >> classLabel;
-        classLabels.push_back(classLabel);
-    }
+    load(inputFile);
 }
 
 /**
@@ -71,4 +64,40 @@ map<string, double> RandomModel::predictProbability(Instance *instance) {
         result.insert_or_assign(classLabel, 1.0 / classLabels.size());
     }
     return result;
+}
+
+/**
+ * Training algorithm for random classifier.
+ *
+ * @param trainSet   Training data given to the algorithm.
+ * @param parameters -
+ */
+void RandomModel::train(InstanceList &trainSet, Parameter *parameters) {
+    this->classLabels = trainSet.classDistribution().getItems();
+}
+
+/**
+ * Loads the random classifier model from an input file.
+ * @param fileName File name of the random classifier model.
+ */
+void RandomModel::loadModel(const string &fileName) {
+    ifstream inputFile;
+    inputFile.open(fileName, ifstream :: in);
+    load(inputFile);
+    inputFile.close();
+}
+
+/**
+ * Loads a random classifier model from an input model file.
+ * @param inputFile Model file.
+ */
+void RandomModel::load(ifstream& inputFile){
+    int size;
+    string classLabel;
+    inputFile >> seed;
+    inputFile >> size;
+    for (int i = 0; i < size; i++){
+        inputFile >> classLabel;
+        classLabels.push_back(classLabel);
+    }
 }

@@ -13,7 +13,7 @@ public:
     explicit SingleRunWithK(int K);
 protected:
     int K;
-    Performance* runExperiment(Classifier* classifier, Parameter* parameter, CrossValidation<Instance*>* crossValidation);
+    Performance* runExperiment(Model* classifier, Parameter* parameter, CrossValidation<Instance*>* crossValidation);
     Performance* execute(const Experiment& experiment);
 };
 

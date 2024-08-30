@@ -25,7 +25,7 @@ ExperimentPerformance *MxKFoldRun::execute(const Experiment& experiment) {
     auto* result = new ExperimentPerformance();
     for (int j = 0; j < M; j++) {
         auto* crossValidation = new KFoldCrossValidation<Instance*>(experiment.getDataSet().getInstances(), K, experiment.getParameter()->getSeed());
-        runExperiment(experiment.getClassifier(), experiment.getParameter(), result, crossValidation);
+        runExperiment(experiment.getModel(), experiment.getParameter(), result, crossValidation);
     }
     return result;
 }

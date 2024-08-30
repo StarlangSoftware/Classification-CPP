@@ -25,8 +25,8 @@ ExperimentPerformance* BootstrapRun::execute(const Experiment& experiment) {
     for (int i = 0; i < numberOfBootstraps; i++) {
         Bootstrap<Instance*> bootstrap = Bootstrap<Instance*>(experiment.getDataSet().getInstances(), i + experiment.getParameter()->getSeed());
         InstanceList bootstrapSample = InstanceList(bootstrap.getSample());
-        experiment.getClassifier()->train(bootstrapSample, experiment.getParameter());
-        result->add(experiment.getClassifier()->test(experiment.getDataSet().getInstanceList()));
+        experiment.getModel()->train(bootstrapSample, experiment.getParameter());
+        result->add(experiment.getModel()->test(experiment.getDataSet().getInstanceList()));
     }
     return result;
 }

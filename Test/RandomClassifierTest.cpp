@@ -4,7 +4,7 @@
 
 #include "catch.hpp"
 #include "../src/DataSet/DataSet.h"
-#include "../src/Classifier/RandomClassifier.h"
+#include "../src/Model/RandomModel.h"
 
 TEST_CASE("RandomClassifierTest-testTrain") {
     DataSet iris, car, chess, bupa, tictactoe, dermatology, nursery;
@@ -54,26 +54,32 @@ TEST_CASE("RandomClassifierTest-testTrain") {
     }
     dataDefinition = DataDefinition(attributeTypes);
     chess = DataSet(dataDefinition, ",", "datasets/chess.data");
-    RandomClassifier randomClassifier = RandomClassifier();
+    RandomModel randomClassifier = RandomModel();
     InstanceList instanceList = iris.getInstanceList();
     Parameter* parameter = new Parameter(1);
     randomClassifier.train(instanceList, parameter);
     REQUIRE_THAT(69.33, Catch::Matchers::WithinAbs(100 * randomClassifier.test(iris.getInstanceList())->getErrorRate(), 0.01));
+    randomClassifier = RandomModel();
     instanceList = bupa.getInstanceList();
     randomClassifier.train(instanceList, parameter);
     REQUIRE_THAT(49.27, Catch::Matchers::WithinAbs(100 * randomClassifier.test(bupa.getInstanceList())->getErrorRate(), 0.01));
+    randomClassifier = RandomModel();
     instanceList = dermatology.getInstanceList();
     randomClassifier.train(instanceList, parameter);
     REQUIRE_THAT(83.61, Catch::Matchers::WithinAbs(100 * randomClassifier.test(dermatology.getInstanceList())->getErrorRate(), 0.01));
+    randomClassifier = RandomModel();
     instanceList = car.getInstanceList();
     randomClassifier.train(instanceList, parameter);
     REQUIRE_THAT(75.46, Catch::Matchers::WithinAbs(100 * randomClassifier.test(car.getInstanceList())->getErrorRate(), 0.01));
+    randomClassifier = RandomModel();
     instanceList = tictactoe.getInstanceList();
     randomClassifier.train(instanceList, parameter);
     REQUIRE_THAT(53.24, Catch::Matchers::WithinAbs(100 * randomClassifier.test(tictactoe.getInstanceList())->getErrorRate(), 0.01));
+    randomClassifier = RandomModel();
     instanceList = nursery.getInstanceList();
     randomClassifier.train(instanceList, parameter);
     REQUIRE_THAT(80.05, Catch::Matchers::WithinAbs(100 * randomClassifier.test(nursery.getInstanceList())->getErrorRate(), 0.01));
+    randomClassifier = RandomModel();
     instanceList = chess.getInstanceList();
     randomClassifier.train(instanceList, parameter);
     REQUIRE_THAT(94.43, Catch::Matchers::WithinAbs(100 * randomClassifier.test(chess.getInstanceList())->getErrorRate(), 0.01));

@@ -22,7 +22,7 @@ SingleRunWithK::SingleRunWithK(int K) {
  * @param crossValidation K-fold crossvalidated dataset.
  * @return The experiment result of the first fold of the K-fold cross-validated experiment.
  */
-Performance *SingleRunWithK::runExperiment(Classifier *classifier, Parameter *parameter,
+Performance *SingleRunWithK::runExperiment(Model *classifier, Parameter *parameter,
                                            CrossValidation<Instance *> *crossValidation) {
     InstanceList trainSet = InstanceList(crossValidation->getTrainFold(0));
     InstanceList testSet = InstanceList(crossValidation->getTestFold(0));
@@ -37,5 +37,5 @@ Performance *SingleRunWithK::runExperiment(Classifier *classifier, Parameter *pa
  */
 Performance *SingleRunWithK::execute(const Experiment& experiment) {
     auto* crossValidation = new KFoldCrossValidation<Instance*>(experiment.getDataSet().getInstances(), K, experiment.getParameter()->getSeed());
-    return runExperiment(experiment.getClassifier(), experiment.getParameter(), crossValidation);
+    return runExperiment(experiment.getModel(), experiment.getParameter(), crossValidation);
 }

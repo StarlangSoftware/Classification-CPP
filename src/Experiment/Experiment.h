@@ -6,19 +6,19 @@
 #define CLASSIFICATION_EXPERIMENT_H
 
 
-#include "../Classifier/Classifier.h"
+#include "../Model/Model.h"
 #include "../Parameter/Parameter.h"
 #include "../DataSet/DataSet.h"
 #include "../FeatureSelection/FeatureSubSet.h"
 
 class Experiment {
 private:
-    Classifier* classifier;
+    Model* model;
     Parameter* parameter;
     DataSet dataSet;
 public:
-    Experiment(Classifier* classifier, Parameter* parameter, const DataSet& dataSet);
-    Classifier* getClassifier() const;
+    Experiment(Model* model, Parameter* parameter, const DataSet& dataSet);
+    Model* getModel() const;
     Parameter* getParameter() const;
     DataSet getDataSet() const;
     Experiment featureSelectedExperiment(const FeatureSubSet& featureSubSet);

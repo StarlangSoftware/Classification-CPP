@@ -4,13 +4,12 @@
 
 #include <cfloat>
 #include <fstream>
-#include <random>
 #include "DecisionNode.h"
 #include "../../InstanceList/Partition.h"
 #include "../../Attribute/DiscreteIndexedAttribute.h"
 #include "../../Attribute/ContinuousAttribute.h"
-#include "../../Classifier/Classifier.h"
 #include "../../Instance/CompositeInstance.h"
+#include "../../Model/Model.h"
 #include "RandomArray.h"
 
 /**
@@ -123,7 +122,7 @@ DecisionNode::DecisionNode(InstanceList data, const DecisionCondition& condition
     for (const string& label : labels){
         classLabelsDistribution.addItem(label);
     }
-    classLabel = Classifier::getMaximum(labels);
+    classLabel = Model::getMaximum(labels);
     leaf = true;
     classLabels = data.getDistinctClassLabels();
     if (classLabels.size() == 1) {

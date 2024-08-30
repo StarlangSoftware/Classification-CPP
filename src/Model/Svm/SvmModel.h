@@ -23,9 +23,9 @@ private:
     vector<double> predictValues(const NodeList& x);
 public:
     explicit SvmModel(ifstream& inputFile);
-    SvmModel(InstanceList& trainSet, SvmParameter* parameter);
     string predict(Instance* instance) override;
     void serialize(ostream &outputFile) override;
+    void train(InstanceList& trainSet, Parameter* parameters) override;
 };
 
 

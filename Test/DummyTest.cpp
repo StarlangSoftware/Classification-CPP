@@ -4,7 +4,7 @@
 
 #include "catch.hpp"
 #include "../src/DataSet/DataSet.h"
-#include "../src/Classifier/Dummy.h"
+#include "../src/Model/DummyModel.h"
 
 TEST_CASE("DummyTest-testTrain") {
     DataSet iris, car, chess, bupa, tictactoe, dermatology, nursery;
@@ -54,25 +54,31 @@ TEST_CASE("DummyTest-testTrain") {
     }
     dataDefinition = DataDefinition(attributeTypes);
     chess = DataSet(dataDefinition, ",", "datasets/chess.data");
-    Dummy dummy = Dummy();
+    DummyModel dummy = DummyModel();
     InstanceList instanceList = iris.getInstanceList();
     dummy.train(instanceList, nullptr);
     REQUIRE_THAT(66.67, Catch::Matchers::WithinAbs(100 * dummy.test(iris.getInstanceList())->getErrorRate(), 0.01));
+    dummy = DummyModel();
     instanceList = bupa.getInstanceList();
     dummy.train(instanceList, nullptr);
     REQUIRE_THAT(42.03, Catch::Matchers::WithinAbs(100 * dummy.test(bupa.getInstanceList())->getErrorRate(), 0.01));
+    dummy = DummyModel();
     instanceList = dermatology.getInstanceList();
     dummy.train(instanceList, nullptr);
     REQUIRE_THAT(69.40, Catch::Matchers::WithinAbs(100 * dummy.test(dermatology.getInstanceList())->getErrorRate(), 0.01));
+    dummy = DummyModel();
     instanceList = car.getInstanceList();
     dummy.train(instanceList, nullptr);
     REQUIRE_THAT(29.98, Catch::Matchers::WithinAbs(100 * dummy.test(car.getInstanceList())->getErrorRate(), 0.01));
+    dummy = DummyModel();
     instanceList = tictactoe.getInstanceList();
     dummy.train(instanceList, nullptr);
     REQUIRE_THAT(34.66, Catch::Matchers::WithinAbs(100 * dummy.test(tictactoe.getInstanceList())->getErrorRate(), 0.01));
+    dummy = DummyModel();
     instanceList = nursery.getInstanceList();
     dummy.train(instanceList, nullptr);
     REQUIRE_THAT(66.67, Catch::Matchers::WithinAbs(100 * dummy.test(nursery.getInstanceList())->getErrorRate(), 0.01));
+    dummy = DummyModel();
     instanceList = chess.getInstanceList();
     dummy.train(instanceList, nullptr);
     REQUIRE_THAT(83.77, Catch::Matchers::WithinAbs(100 * dummy.test(chess.getInstanceList())->getErrorRate(), 0.01));

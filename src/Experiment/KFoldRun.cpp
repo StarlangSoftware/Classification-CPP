@@ -22,13 +22,13 @@ KFoldRun::KFoldRun(int K) {
  * @param experimentPerformance Storage to add experiment results
  * @param crossValidation K-fold crossvalidated dataset.
  */
-void KFoldRun::runExperiment(Classifier *classifier, Parameter *parameter, ExperimentPerformance *experimentPerformance,
+void KFoldRun::runExperiment(Model *model, Parameter *parameter, ExperimentPerformance *experimentPerformance,
                              CrossValidation<Instance *>* crossValidation) {
     for (int i = 0; i < K; i++) {
         InstanceList trainSet = InstanceList(crossValidation->getTrainFold(i));
         InstanceList testSet = InstanceList(crossValidation->getTestFold(i));
-        classifier->train(trainSet, parameter);
-        experimentPerformance->add(classifier->test(testSet));
+        model->train(trainSet, parameter);
+        experimentPerformance->add(model->test(testSet));
     }
 }
 
@@ -41,6 +41,6 @@ void KFoldRun::runExperiment(Classifier *classifier, Parameter *parameter, Exper
 ExperimentPerformance *KFoldRun::execute(const Experiment& experiment) {
     auto* result = new ExperimentPerformance();
     auto* crossValidation = new KFoldCrossValidation<Instance*>(experiment.getDataSet().getInstances(), K, experiment.getParameter()->getSeed());
-    runExperiment(experiment.getClassifier(), experiment.getParameter(), result, crossValidation);
+    runExperiment(experiment.getModel(), experiment.getParameter(), result, crossValidation);
     return result;
 }

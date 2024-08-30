@@ -10,8 +10,8 @@
  * @param parameter Parameter(s) of the classifier.
  * @param dataSet DataSet on which the classifier is run.
  */
-Experiment::Experiment(Classifier *classifier, Parameter *parameter, const DataSet &dataSet) {
-    this->classifier = classifier;
+Experiment::Experiment(Model *model, Parameter *parameter, const DataSet &dataSet) {
+    this->model = model;
     this->parameter = parameter;
     this->dataSet = dataSet;
 }
@@ -20,8 +20,8 @@ Experiment::Experiment(Classifier *classifier, Parameter *parameter, const DataS
  * Accessor for the classifier attribute.
  * @return Classifier attribute.
  */
-Classifier *Experiment::getClassifier() const{
-    return classifier;
+Model *Experiment::getModel() const{
+    return model;
 }
 
 /**
@@ -47,5 +47,5 @@ DataSet Experiment::getDataSet() const{
  */
 Experiment Experiment::featureSelectedExperiment(const FeatureSubSet& featureSubSet) {
     DataSet newDataSet = dataSet.getSubSetOfFeatures(featureSubSet);
-    return Experiment(classifier, parameter, newDataSet);
+    return Experiment(model, parameter, newDataSet);
 }

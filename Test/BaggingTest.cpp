@@ -4,8 +4,7 @@
 
 #include "catch.hpp"
 #include "../src/DataSet/DataSet.h"
-#include "../src/Classifier/Bagging.h"
-#include "../src/Parameter/BaggingParameter.h"
+#include "../src/Model/Ensemble/BaggingModel.h"
 
 TEST_CASE("BaggingTest-testTrain") {
     DataSet iris, car, bupa, tictactoe, dermatology;
@@ -39,20 +38,24 @@ TEST_CASE("BaggingTest-testTrain") {
     }
     dataDefinition = DataDefinition(attributeTypes);
     tictactoe = DataSet(dataDefinition, ",", "datasets/tictactoe.data");
-    Bagging bagging = Bagging();
+    BaggingModel bagging = BaggingModel();
     auto* baggingParameter = new BaggingParameter(1, 100);
     InstanceList instanceList = iris.getInstanceList();
     bagging.train(instanceList, baggingParameter);
     REQUIRE_THAT(0.0, Catch::Matchers::WithinAbs(100 * bagging.test(iris.getInstanceList())->getErrorRate(), 0.01));
+    bagging = BaggingModel();
     instanceList = bupa.getInstanceList();
     bagging.train(instanceList, baggingParameter);
     REQUIRE_THAT(0.0, Catch::Matchers::WithinAbs(100 * bagging.test(bupa.getInstanceList())->getErrorRate(), 0.01));
+    bagging = BaggingModel();
     instanceList = dermatology.getInstanceList();
     bagging.train(instanceList, baggingParameter);
     REQUIRE_THAT(0.0, Catch::Matchers::WithinAbs(100 * bagging.test(dermatology.getInstanceList())->getErrorRate(), 0.01));
+    bagging = BaggingModel();
     instanceList = car.getInstanceList();
     bagging.train(instanceList, baggingParameter);
     REQUIRE_THAT(0.0, Catch::Matchers::WithinAbs(100 * bagging.test(car.getInstanceList())->getErrorRate(), 0.01));
+    bagging = BaggingModel();
     instanceList = tictactoe.getInstanceList();
     bagging.train(instanceList, baggingParameter);
     REQUIRE_THAT(0.0, Catch::Matchers::WithinAbs(100 * bagging.test(tictactoe.getInstanceList())->getErrorRate(), 0.01));

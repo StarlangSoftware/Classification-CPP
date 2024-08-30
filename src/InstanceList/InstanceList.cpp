@@ -6,7 +6,7 @@
 #include <random>
 #include "InstanceList.h"
 #include "Dictionary/Word.h"
-#include "../Classifier/Classifier.h"
+#include "../Model/Model.h"
 #include "../Attribute/DiscreteAttribute.h"
 #include "../Attribute/DiscreteIndexedAttribute.h"
 #include "../Attribute/BinaryAttribute.h"
@@ -280,7 +280,7 @@ Attribute *InstanceList::attributeAverage(int index) const{
         for (Instance* instance : list) {
             values.push_back(((DiscreteAttribute*)(instance->getAttribute(index)))->getValue());
         }
-        return new DiscreteAttribute(Classifier::getMaximum(values));
+        return new DiscreteAttribute(Model::getMaximum(values));
     } else {
         if (list.at(0)->getAttribute(index)->isContinuous()) {
             double sum = 0.0;

@@ -7,8 +7,19 @@
 #include "SolutionInfo.h"
 #include "Problem.h"
 #include "Solver.h"
+#include "../../Model/DiscreteFeaturesNotAllowed.h"
 
-SvmModel::SvmModel(InstanceList &trainSet, SvmParameter *parameter) {
+/**
+ * Training algorithm for Support Vector Machine classifier.
+ *
+ * @param trainSet   Training data given to the algorithm.
+ * @param parameters Parameters of the SVM classifier algorithm.
+ */
+void SvmModel::train(InstanceList &trainSet, Parameter *parameters) {
+    if (!discreteCheck(trainSet.get(0))){
+        throw DiscreteFeaturesNotAllowed();
+    }
+    parameter = (SvmParameter*) parameters;
     vector<int> start;
     vector<int> nonZeroCount;
     vector<int> nonZeroStart;
@@ -19,7 +30,6 @@ SvmModel::SvmModel(InstanceList &trainSet, SvmParameter *parameter) {
     vector<double> subProblemY;
     vector<bool> nonZero;
     vector<SolutionInfo> weights;
-    this->parameter = parameter;
     trainSet.sort();
     Problem problem = Problem(trainSet);
     l = problem.getL();

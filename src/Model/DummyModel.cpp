@@ -3,6 +3,7 @@
 //
 
 #include "DummyModel.h"
+#include <fstream>
 
 /**
  * Constructor which sets the distribution using the given InstanceList.
@@ -41,7 +42,7 @@ void DummyModel::serialize(ostream &outputFile) {
  * @param fileName Model file name.
  */
 DummyModel::DummyModel(ifstream &inputFile) {
-    distribution = DiscreteDistribution(inputFile);
+    load(inputFile);
 }
 
 /**
@@ -51,4 +52,34 @@ DummyModel::DummyModel(ifstream &inputFile) {
  */
 map<string, double> DummyModel::predictProbability(Instance *instance){
     return distribution.getProbabilityDistribution();
+}
+
+/**
+ * Training algorithm for the dummy classifier. Actually dummy classifier returns the maximum occurring class in
+ * the training data, there is no training.
+ *
+ * @param trainSet   Training data given to the algorithm.
+ * @param parameters -
+ */
+void DummyModel::train(InstanceList &trainSet, Parameter *parameters) {
+    distribution = trainSet.classDistribution();
+}
+
+/**
+ * Loads the dummy model from an input file.
+ * @param fileName File name of the dummy model.
+ */
+void DummyModel::loadModel(const string &fileName) {
+    ifstream inputFile;
+    inputFile.open(fileName, ifstream :: in);
+    load(inputFile);
+    inputFile.close();
+}
+
+/**
+ * Loads a dummy model from an input model file.
+ * @param fileName Model file name.
+ */
+ void DummyModel::load(ifstream& inputFile){
+    distribution = DiscreteDistribution(inputFile);
 }

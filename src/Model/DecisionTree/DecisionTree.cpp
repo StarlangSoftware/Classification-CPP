@@ -2,8 +2,12 @@
 // Created by Olcay Taner Yıldız on 16.02.2019.
 //
 
+#include <fstream>
 #include "DecisionTree.h"
 #include "../../Instance/CompositeInstance.h"
+#include "../../Model/DecisionTree/DecisionTree.h"
+#include "../../Parameter/C45Parameter.h"
+#include "../../InstanceList/Partition.h"
 
 /**
  * The predict method  performs prediction on the root node of given instance, and if it is null, it returns the possible class labels.
@@ -83,4 +87,33 @@ DecisionTree::DecisionTree(ifstream &inputFile) {
  */
 map<string, double> DecisionTree::predictProbability(Instance *instance) {
     return root.predictProbabilityDistribution(instance);
+}
+
+/**
+ * Training algorithm for C4.5 univariate decision tree classifier. 20 percent of the data are left aside for pruning
+ * 80 percent of the data is used for constructing the tree.
+ *
+ * @param trainSet   Training data given to the algorithm.
+ * @param parameters -
+ */
+void DecisionTree::train(InstanceList &trainSet, Parameter *parameters) {
+    DecisionTree* tree;
+    if (((C45Parameter*) parameters)->isPrune()) {
+        Partition partition = Partition(trainSet, ((C45Parameter*) parameters)->getCrossValidationRatio(), parameters->getSeed(), true);
+        root = DecisionNode(*(partition.get(1)), DecisionCondition(), nullptr, false);
+        prune(*(partition.get(0)));
+    } else {
+        root = DecisionNode(trainSet, DecisionCondition(), nullptr, false);
+    }
+}
+
+/**
+ * Loads the decision tree model from an input file.
+ * @param fileName File name of the decision tree model.
+ */
+void DecisionTree::loadModel(const string &fileName) {
+    ifstream inputFile;
+    inputFile.open(fileName, ifstream :: in);
+    root = DecisionNode(inputFile);
+    inputFile.close();
 }

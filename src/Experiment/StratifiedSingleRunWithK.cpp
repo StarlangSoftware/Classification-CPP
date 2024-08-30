@@ -25,5 +25,5 @@ Performance *StratifiedSingleRunWithK::execute(const Experiment& experiment) {
     auto * crossValidation = new StratifiedKFoldCrossValidation<Instance*>(partition.getLists(), partition.size(), SingleRunWithK::K, experiment.getParameter()->getSeed());
     InstanceList trainSet = InstanceList(crossValidation->getTrainFold(0));
     InstanceList testSet = InstanceList(crossValidation->getTestFold(0));
-    return experiment.getClassifier()->singleRun(experiment.getParameter(), trainSet, testSet);
+    return experiment.getModel()->singleRun(experiment.getParameter(), trainSet, testSet);
 }

@@ -4,7 +4,7 @@
 
 #include "catch.hpp"
 #include "../src/DataSet/DataSet.h"
-#include "../src/Classifier/C45Stump.h"
+#include "../src/Model/DecisionTree/DecisionStump.h"
 
 TEST_CASE("C45StumpTest-testTrain") {
     DataSet iris, car, chess, bupa, tictactoe, dermatology, nursery;
@@ -54,26 +54,32 @@ TEST_CASE("C45StumpTest-testTrain") {
     }
     dataDefinition = DataDefinition(attributeTypes);
     chess = DataSet(dataDefinition, ",", "datasets/chess.data");
-    C45Stump randomClassifier = C45Stump();
+    DecisionStump stump = DecisionStump();
     InstanceList instanceList = iris.getInstanceList();
-    randomClassifier.train(instanceList, nullptr);
-    REQUIRE_THAT(33.33, Catch::Matchers::WithinAbs(100 * randomClassifier.test(iris.getInstanceList())->getErrorRate(), 0.01));
+    stump.train(instanceList, nullptr);
+    REQUIRE_THAT(33.33, Catch::Matchers::WithinAbs(100 * stump.test(iris.getInstanceList())->getErrorRate(), 0.01));
+    stump = DecisionStump();
     instanceList = bupa.getInstanceList();
-    randomClassifier.train(instanceList, nullptr);
-    REQUIRE_THAT(36.81, Catch::Matchers::WithinAbs(100 * randomClassifier.test(bupa.getInstanceList())->getErrorRate(), 0.01));
+    stump.train(instanceList, nullptr);
+    REQUIRE_THAT(36.81, Catch::Matchers::WithinAbs(100 * stump.test(bupa.getInstanceList())->getErrorRate(), 0.01));
+    stump = DecisionStump();
     instanceList = dermatology.getInstanceList();
-    randomClassifier.train(instanceList, nullptr);
-    REQUIRE_THAT(49.73, Catch::Matchers::WithinAbs(100 * randomClassifier.test(dermatology.getInstanceList())->getErrorRate(), 0.01));
+    stump.train(instanceList, nullptr);
+    REQUIRE_THAT(49.73, Catch::Matchers::WithinAbs(100 * stump.test(dermatology.getInstanceList())->getErrorRate(), 0.01));
+    stump = DecisionStump();
     instanceList = car.getInstanceList();
-    randomClassifier.train(instanceList, nullptr);
-    REQUIRE_THAT(29.98, Catch::Matchers::WithinAbs(100 * randomClassifier.test(car.getInstanceList())->getErrorRate(), 0.01));
+    stump.train(instanceList, nullptr);
+    REQUIRE_THAT(29.98, Catch::Matchers::WithinAbs(100 * stump.test(car.getInstanceList())->getErrorRate(), 0.01));
+    stump = DecisionStump();
     instanceList = tictactoe.getInstanceList();
-    randomClassifier.train(instanceList, nullptr);
-    REQUIRE_THAT(30.06, Catch::Matchers::WithinAbs(100 * randomClassifier.test(tictactoe.getInstanceList())->getErrorRate(), 0.01));
+    stump.train(instanceList, nullptr);
+    REQUIRE_THAT(30.06, Catch::Matchers::WithinAbs(100 * stump.test(tictactoe.getInstanceList())->getErrorRate(), 0.01));
+    stump = DecisionStump();
     instanceList = nursery.getInstanceList();
-    randomClassifier.train(instanceList, nullptr);
-    REQUIRE_THAT(29.03, Catch::Matchers::WithinAbs(100 * randomClassifier.test(nursery.getInstanceList())->getErrorRate(), 0.01));
+    stump.train(instanceList, nullptr);
+    REQUIRE_THAT(29.03, Catch::Matchers::WithinAbs(100 * stump.test(nursery.getInstanceList())->getErrorRate(), 0.01));
+    stump = DecisionStump();
     instanceList = chess.getInstanceList();
-    randomClassifier.train(instanceList, nullptr);
-    REQUIRE_THAT(80.92, Catch::Matchers::WithinAbs(100 * randomClassifier.test(chess.getInstanceList())->getErrorRate(), 0.01));
+    stump.train(instanceList, nullptr);
+    REQUIRE_THAT(80.92, Catch::Matchers::WithinAbs(100 * stump.test(chess.getInstanceList())->getErrorRate(), 0.01));
 }

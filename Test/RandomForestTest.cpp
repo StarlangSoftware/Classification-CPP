@@ -4,8 +4,7 @@
 
 #include "catch.hpp"
 #include "../src/DataSet/DataSet.h"
-#include "../src/Classifier/RandomForest.h"
-#include "../src/Parameter/RandomForestParameter.h"
+#include "../src/Model/Ensemble/RandomForestModel.h"
 
 TEST_CASE("RandomForestTest-testTrain1") {
     DataSet iris;
@@ -15,7 +14,7 @@ TEST_CASE("RandomForestTest-testTrain1") {
     }
     DataDefinition dataDefinition = DataDefinition(attributeTypes);
     iris = DataSet(dataDefinition, ",", "datasets/iris.data");
-    RandomForest randomForest = RandomForest();
+    RandomForestModel randomForest = RandomForestModel();
     auto* randomForestParameter = new RandomForestParameter(1, 100, 35);
     InstanceList instanceList = iris.getInstanceList();
     randomForest.train(instanceList, randomForestParameter);
@@ -30,7 +29,7 @@ TEST_CASE("RandomForestTest-testTrain2") {
     }
     DataDefinition dataDefinition = DataDefinition(attributeTypes);
     bupa = DataSet(dataDefinition, ",", "datasets/bupa.data");
-    RandomForest randomForest = RandomForest();
+    RandomForestModel randomForest = RandomForestModel();
     auto* randomForestParameter = new RandomForestParameter(1, 100, 35);
     InstanceList instanceList = bupa.getInstanceList();
     randomForest.train(instanceList, randomForestParameter);
@@ -45,7 +44,7 @@ TEST_CASE("RandomForestTest-testTrain3") {
     }
     DataDefinition dataDefinition = DataDefinition(attributeTypes);
     dermatology = DataSet(dataDefinition, ",", "datasets/dermatology.data");
-    RandomForest randomForest = RandomForest();
+    RandomForestModel randomForest = RandomForestModel();
     auto* randomForestParameter = new RandomForestParameter(1, 100, 35);
     InstanceList instanceList = dermatology.getInstanceList();
     randomForest.train(instanceList, randomForestParameter);
@@ -60,7 +59,7 @@ TEST_CASE("RandomForestTest-testTrain4") {
     }
     DataDefinition dataDefinition = DataDefinition(attributeTypes);
     car = DataSet(dataDefinition, ",", "datasets/car.data");
-    RandomForest randomForest = RandomForest();
+    RandomForestModel randomForest = RandomForestModel();
     auto* randomForestParameter = new RandomForestParameter(1, 100, 35);
     InstanceList instanceList = car.getInstanceList();
     randomForest.train(instanceList, randomForestParameter);
@@ -75,7 +74,7 @@ TEST_CASE("RandomForestTest-testTrain5") {
     }
     DataDefinition dataDefinition = DataDefinition(attributeTypes);
     tictactoe = DataSet(dataDefinition, ",", "datasets/tictactoe.data");
-    RandomForest randomForest = RandomForest();
+    RandomForestModel randomForest = RandomForestModel();
     auto* randomForestParameter = new RandomForestParameter(1, 100, 35);
     InstanceList instanceList = tictactoe.getInstanceList();
     randomForest.train(instanceList, randomForestParameter);

@@ -4,8 +4,8 @@
 
 #include "catch.hpp"
 #include "../src/DataSet/DataSet.h"
-#include "../src/Classifier/C45.h"
 #include "../src/Parameter/C45Parameter.h"
+#include "../src/Model/DecisionTree//DecisionTree.h"
 
 TEST_CASE("C45Test") {
     DataSet iris, car, chess, bupa, tictactoe, dermatology, nursery, carIndexed, tictactoeIndexed;
@@ -61,38 +61,49 @@ TEST_CASE("C45Test") {
     }
     dataDefinition = DataDefinition(attributeTypes, attributeValueList);
     tictactoeIndexed = DataSet(dataDefinition, ",", "datasets/tictactoe.data");
-    C45 c45 = C45();
     auto* c45Parameter = new C45Parameter(1, true, 0.2);
     SECTION("train"){
+        DecisionTree c45 = DecisionTree();
         InstanceList instanceList = iris.getInstanceList();
         c45.train(instanceList, c45Parameter);
         REQUIRE_THAT(1.33, Catch::Matchers::WithinAbs(100 * c45.test(iris.getInstanceList())->getErrorRate(), 0.01));
+        c45 = DecisionTree();
         instanceList = bupa.getInstanceList();
         c45.train(instanceList, c45Parameter);
         REQUIRE_THAT(6.38, Catch::Matchers::WithinAbs(100 * c45.test(bupa.getInstanceList())->getErrorRate(), 0.01));
+        c45 = DecisionTree();
         instanceList = dermatology.getInstanceList();
         c45.train(instanceList, c45Parameter);
         REQUIRE_THAT(1.09, Catch::Matchers::WithinAbs(100 * c45.test(dermatology.getInstanceList())->getErrorRate(), 0.01));
+        c45 = DecisionTree();
         instanceList = car.getInstanceList();
         c45.train(instanceList, c45Parameter);
         REQUIRE_THAT(1.27, Catch::Matchers::WithinAbs(100 * c45.test(car.getInstanceList())->getErrorRate(), 0.01));
+        c45 = DecisionTree();
         instanceList = tictactoe.getInstanceList();
         c45.train(instanceList, c45Parameter);
         REQUIRE_THAT(3.24, Catch::Matchers::WithinAbs(100 * c45.test(tictactoe.getInstanceList())->getErrorRate(), 0.01));
     }
     SECTION("load"){
+        DecisionTree c45 = DecisionTree();
         c45.loadModel("models/c45-iris.txt");
         REQUIRE_THAT(4.00, Catch::Matchers::WithinAbs(100 * c45.test(iris.getInstanceList())->getErrorRate(), 0.01));
+        c45 = DecisionTree();
         c45.loadModel("models/c45-bupa.txt");
         REQUIRE_THAT(42.03, Catch::Matchers::WithinAbs(100 * c45.test(bupa.getInstanceList())->getErrorRate(), 0.01));
+        c45 = DecisionTree();
         c45.loadModel("models/c45-dermatology.txt");
         REQUIRE_THAT(2.19, Catch::Matchers::WithinAbs(100 * c45.test(dermatology.getInstanceList())->getErrorRate(), 0.01));
+        c45 = DecisionTree();
         c45.loadModel("models/c45-car.txt");
         REQUIRE_THAT(8.16, Catch::Matchers::WithinAbs(100 * c45.test(car.getInstanceList())->getErrorRate(), 0.01));
+        c45 = DecisionTree();
         c45.loadModel("models/c45-carIndexed.txt");
         REQUIRE_THAT(3.36, Catch::Matchers::WithinAbs(100 * c45.test(carIndexed.getInstanceList())->getErrorRate(), 0.01));
+        c45 = DecisionTree();
         c45.loadModel("models/c45-tictactoe.txt");
         REQUIRE_THAT(14.61, Catch::Matchers::WithinAbs(100 * c45.test(tictactoe.getInstanceList())->getErrorRate(), 0.01));
+        c45 = DecisionTree();
         c45.loadModel("models/c45-tictactoeIndexed.txt");
         REQUIRE_THAT(4.49, Catch::Matchers::WithinAbs(100 * c45.test(tictactoeIndexed.getInstanceList())->getErrorRate(), 0.01));
     }

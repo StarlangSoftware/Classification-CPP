@@ -27,7 +27,7 @@ ExperimentPerformance *MxKFoldRunSeparateTest::execute(const Experiment& experim
     Partition partition = Partition(instanceList, 0.25, experiment.getParameter()->getSeed(), false);
     for (int j = 0; j < M; j++) {
         auto* crossValidation = new KFoldCrossValidation<Instance*>(partition.get(1)->getInstances(), KFoldRunSeparateTest::K, experiment.getParameter()->getSeed());
-        KFoldRunSeparateTest::runExperiment(experiment.getClassifier(), experiment.getParameter(), result, crossValidation, *(partition.get(0)));
+        KFoldRunSeparateTest::runExperiment(experiment.getModel(), experiment.getParameter(), result, crossValidation, *(partition.get(0)));
     }
     return result;
 }

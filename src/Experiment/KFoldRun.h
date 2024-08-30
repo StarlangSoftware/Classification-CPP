@@ -11,7 +11,7 @@
 class KFoldRun : public MultipleRun{
 protected:
     int K;
-    void runExperiment(Classifier* classifier, Parameter* parameter, ExperimentPerformance* experimentPerformance, CrossValidation<Instance*>* crossValidation);
+    void runExperiment(Model* model, Parameter* parameter, ExperimentPerformance* experimentPerformance, CrossValidation<Instance*>* crossValidation);
 public:
     KFoldRun(int K);
     ExperimentPerformance* execute(const Experiment& experiment);

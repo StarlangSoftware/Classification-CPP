@@ -4,7 +4,7 @@
 
 #include "catch.hpp"
 #include "../src/DataSet/DataSet.h"
-#include "../src/Classifier/NaiveBayes.h"
+#include "../src/Model/Parametric/NaiveBayesModel.h"
 
 TEST_CASE("NaiveBayesTest") {
     DataSet iris, car, bupa, tictactoe, dermatology, nursery;
@@ -38,29 +38,36 @@ TEST_CASE("NaiveBayesTest") {
     }
     dataDefinition = DataDefinition(attributeTypes);
     tictactoe = DataSet(dataDefinition, ",", "datasets/tictactoe.data");
-    NaiveBayes naiveBayes = NaiveBayes();
     SECTION("train"){
+        NaiveBayesModel naiveBayes = NaiveBayesModel();
         InstanceList instanceList = iris.getInstanceList();
         naiveBayes.train(instanceList, nullptr);
         REQUIRE_THAT(5.33, Catch::Matchers::WithinAbs(100 * naiveBayes.test(iris.getInstanceList())->getErrorRate(), 0.01));
+        naiveBayes = NaiveBayesModel();
         instanceList = bupa.getInstanceList();
         naiveBayes.train(instanceList, nullptr);
         REQUIRE_THAT(38.55, Catch::Matchers::WithinAbs(100 * naiveBayes.test(bupa.getInstanceList())->getErrorRate(), 0.01));
+        naiveBayes = NaiveBayesModel();
         instanceList = dermatology.getInstanceList();
         naiveBayes.train(instanceList, nullptr);
         REQUIRE_THAT(69.40, Catch::Matchers::WithinAbs(100 * naiveBayes.test(dermatology.getInstanceList())->getErrorRate(), 0.01));
+        naiveBayes = NaiveBayesModel();
         instanceList = car.getInstanceList();
         naiveBayes.train(instanceList, nullptr);
         REQUIRE_THAT(12.91, Catch::Matchers::WithinAbs(100 * naiveBayes.test(car.getInstanceList())->getErrorRate(), 0.01));
+        naiveBayes = NaiveBayesModel();
         instanceList = tictactoe.getInstanceList();
         naiveBayes.train(instanceList, nullptr);
         REQUIRE_THAT(30.17, Catch::Matchers::WithinAbs(100 * naiveBayes.test(tictactoe.getInstanceList())->getErrorRate(), 0.01));
     }
     SECTION("load"){
+        NaiveBayesModel naiveBayes = NaiveBayesModel();
         naiveBayes.loadModel("models/naiveBayes-iris.txt");
         REQUIRE_THAT(5.33, Catch::Matchers::WithinAbs(100 * naiveBayes.test(iris.getInstanceList())->getErrorRate(), 0.01));
+        naiveBayes = NaiveBayesModel();
         naiveBayes.loadModel("models/naiveBayes-bupa.txt");
         REQUIRE_THAT(38.55, Catch::Matchers::WithinAbs(100 * naiveBayes.test(bupa.getInstanceList())->getErrorRate(), 0.01));
+        naiveBayes = NaiveBayesModel();
         naiveBayes.loadModel("models/naiveBayes-dermatology.txt");
         REQUIRE_THAT(69.40, Catch::Matchers::WithinAbs(100 * naiveBayes.test(dermatology.getInstanceList())->getErrorRate(), 0.01));
     }

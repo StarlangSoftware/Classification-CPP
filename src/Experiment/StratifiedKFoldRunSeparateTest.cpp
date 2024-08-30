@@ -27,6 +27,6 @@ ExperimentPerformance *StratifiedKFoldRunSeparateTest::execute(const Experiment&
     Partition partition = Partition(instanceList, 0.25, experiment.getParameter()->getSeed(), true);
     Partition classPartition = Partition(*(partition.get(1)));
     auto* crossValidation = new StratifiedKFoldCrossValidation<Instance*>(classPartition.getLists(), classPartition.size(), StratifiedKFoldRun::K, experiment.getParameter()->getSeed());
-    KFoldRunSeparateTest::runExperiment(experiment.getClassifier(), experiment.getParameter(), result, crossValidation, *(partition.get(0)));
+    KFoldRunSeparateTest::runExperiment(experiment.getModel(), experiment.getParameter(), result, crossValidation, *(partition.get(0)));
     return result;
 }

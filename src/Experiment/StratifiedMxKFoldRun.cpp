@@ -25,7 +25,7 @@ ExperimentPerformance *StratifiedMxKFoldRun::execute(const Experiment& experimen
     for (int j = 0; j < M; j++) {
         Partition partition = experiment.getDataSet().getClassInstances();
         auto* crossValidation = new StratifiedKFoldCrossValidation<Instance*>(partition.getLists(), partition.size(), StratifiedKFoldRun::K, experiment.getParameter()->getSeed());
-        KFoldRun::runExperiment(experiment.getClassifier(), experiment.getParameter(), result, crossValidation);
+        KFoldRun::runExperiment(experiment.getModel(), experiment.getParameter(), result, crossValidation);
     }
     return result;
 }

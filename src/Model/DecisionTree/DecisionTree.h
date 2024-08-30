@@ -8,16 +8,19 @@
 #include "DecisionNode.h"
 
 class DecisionTree : public ValidatedModel{
-private:
+protected:
     DecisionNode root;
     void pruneNode(DecisionNode decisionNode, const InstanceList& pruneSet);
 public:
+    DecisionTree() = default;
     string predict(Instance* instance) override;
     map<string, double> predictProbability(Instance* instance) override;
     explicit DecisionTree(ifstream& inputFile);
     explicit DecisionTree(const DecisionNode& root);
     void prune(const InstanceList& pruneSet);
     void serialize(ostream &outputFile) override;
+    void train(InstanceList& trainSet, Parameter* parameters) override;
+    void loadModel(const string& fileName) override;
 };
 
 

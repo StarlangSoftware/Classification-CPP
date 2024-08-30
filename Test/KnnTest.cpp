@@ -4,7 +4,7 @@
 
 #include "catch.hpp"
 #include "../src/DataSet/DataSet.h"
-#include "../src/Classifier/Knn.h"
+#include "../src/Model/NonParametric/KnnModel.h"
 #include "../src/Parameter/KnnParameter.h"
 #include "../src/DistanceMetric/EuclidianDistance.h"
 
@@ -40,34 +40,43 @@ TEST_CASE("KnnTest") {
     }
     dataDefinition = DataDefinition(attributeTypes);
     tictactoe = DataSet(dataDefinition, ",", "datasets/tictactoe.data");
-    Knn knn = Knn();
     auto* knnParameter = new KnnParameter(1, 3, new EuclidianDistance());
     SECTION("train"){
+        KnnModel knn = KnnModel();
         InstanceList instanceList = iris.getInstanceList();
         knn.train(instanceList, knnParameter);
         REQUIRE_THAT(4.00, Catch::Matchers::WithinAbs(100 * knn.test(iris.getInstanceList())->getErrorRate(), 0.01));
+        knn = KnnModel();
         instanceList = bupa.getInstanceList();
         knn.train(instanceList, knnParameter);
         REQUIRE_THAT(19.42, Catch::Matchers::WithinAbs(100 * knn.test(bupa.getInstanceList())->getErrorRate(), 0.01));
+        knn = KnnModel();
         instanceList = dermatology.getInstanceList();
         knn.train(instanceList, knnParameter);
         REQUIRE_THAT(3.83, Catch::Matchers::WithinAbs(100 * knn.test(dermatology.getInstanceList())->getErrorRate(), 0.01));
+        knn = KnnModel();
         instanceList = car.getInstanceList();
         knn.train(instanceList, knnParameter);
         REQUIRE_THAT(21.06, Catch::Matchers::WithinAbs(100 * knn.test(car.getInstanceList())->getErrorRate(), 0.01));
+        knn = KnnModel();
         instanceList = tictactoe.getInstanceList();
         knn.train(instanceList, knnParameter);
         REQUIRE_THAT(32.57, Catch::Matchers::WithinAbs(100 * knn.test(tictactoe.getInstanceList())->getErrorRate(), 0.01));
     }
     SECTION("load"){
+        KnnModel knn = KnnModel();
         knn.loadModel("models/knn-iris.txt");
         REQUIRE_THAT(4.00, Catch::Matchers::WithinAbs(100 * knn.test(iris.getInstanceList())->getErrorRate(), 0.01));
+        knn = KnnModel();
         knn.loadModel("models/knn-bupa.txt");
         REQUIRE_THAT(19.42, Catch::Matchers::WithinAbs(100 * knn.test(bupa.getInstanceList())->getErrorRate(), 0.01));
+        knn = KnnModel();
         knn.loadModel("models/knn-dermatology.txt");
         REQUIRE_THAT(3.83, Catch::Matchers::WithinAbs(100 * knn.test(dermatology.getInstanceList())->getErrorRate(), 0.01));
+        knn = KnnModel();
         knn.loadModel("models/knn-car.txt");
         REQUIRE_THAT(21.06, Catch::Matchers::WithinAbs(100 * knn.test(car.getInstanceList())->getErrorRate(), 0.01));
+        knn = KnnModel();
         knn.loadModel("models/knn-tictactoe.txt");
         REQUIRE_THAT(32.57, Catch::Matchers::WithinAbs(100 * knn.test(tictactoe.getInstanceList())->getErrorRate(), 0.01));
     }
