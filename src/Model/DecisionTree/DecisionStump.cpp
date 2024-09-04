@@ -26,12 +26,3 @@ void DecisionStump::loadModel(const string &fileName) {
     root = DecisionNode(inputFile);
     inputFile.close();
 }
-
-/**
- * Constructor that sets root node of the decision tree.
- *
- * @param root DecisionNode type input.
- */
-DecisionStump::DecisionStump(const DecisionNode& root) {
-    this->root = root;
-}

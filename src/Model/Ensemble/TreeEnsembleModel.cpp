@@ -21,15 +21,6 @@ string TreeEnsembleModel::predict(Instance *instance) {
 }
 
 /**
- * A constructor which sets the vector of DecisionTree with given input.
- *
- * @param forest An vector of DecisionTree.
- */
-TreeEnsembleModel::TreeEnsembleModel(const vector<DecisionTree*>& forest) {
-    this->forest = forest;
-}
-
-/**
  * Loads a tree ensemble model such as Random Forest model or Bagging model from an input model file.
  * @param outputFile Model file.
  */

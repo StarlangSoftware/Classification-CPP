@@ -68,32 +68,6 @@ double NaiveBayesModel::logLikelihoodDiscrete(const string& classLabel, Instance
 }
 
 /**
- * A constructor that sets the priorDistribution, classMeans and classDeviations.
- *
- * @param priorDistribution DiscreteDistribution input.
- * @param classMeans        A HashMap of String and Vector.
- * @param classDeviations   A HashMap of String and Vector.
- */
-NaiveBayesModel::NaiveBayesModel(const DiscreteDistribution& priorDistribution, const map<string, Vector>& classMeans,
-                                 const map<string, Vector>& classDeviations) {
-    this->priorDistribution = priorDistribution;
-    this->classMeans = classMeans;
-    this->classDeviations = classDeviations;
-}
-
-/**
- * A constructor that sets the priorDistribution and classAttributeDistributions.
- *
- * @param priorDistribution           DiscreteDistribution input.
- * @param classAttributeDistributions HashMap of String and ArrayList of DiscreteDistributions.
- */
-NaiveBayesModel::NaiveBayesModel(const DiscreteDistribution& priorDistribution,
-                                 const map<string, vector<DiscreteDistribution>>& classAttributeDistributions) {
-    this->priorDistribution = priorDistribution;
-    this->classAttributeDistributions = classAttributeDistributions;
-}
-
-/**
  * Saves the Naive Bayes model to an output file.
  * @param outputFile Output file.
  */
@@ -123,10 +97,8 @@ NaiveBayesModel::NaiveBayesModel(ifstream &inputFile) : GaussianModel(inputFile)
  * @param priorDistribution Probability distribution of classes P(C_i)
  * @param classLists        Instances are divided into K lists, where each list contains only instances from a single class
  */
-void NaiveBayesModel::trainContinuousVersion(const DiscreteDistribution& priorDistribution, const Partition& classLists) {
+void NaiveBayesModel::trainContinuousVersion(const Partition& classLists) {
     string classLabel;
-    map<string, Vector> classMeans;
-    map<string, Vector> classDeviations;
     for (int i = 0; i < classLists.size(); i++){
         classLabel = ((InstanceListOfSameClass*)(classLists.get(i)))->getClassLabel();
         Vector averageVector = classLists.get(i)->average()->toVector();
@@ -134,9 +106,6 @@ void NaiveBayesModel::trainContinuousVersion(const DiscreteDistribution& priorDi
         Vector standardDeviationVector = classLists.get(i)->standardDeviation()->toVector();
         classDeviations.emplace(classLabel, standardDeviationVector);
     }
-    this->priorDistribution = priorDistribution;
-    this->classDeviations = classDeviations;
-    this->classMeans = classMeans;
 }
 
 /**
@@ -144,13 +113,10 @@ void NaiveBayesModel::trainContinuousVersion(const DiscreteDistribution& priorDi
  * @param priorDistribution Probability distribution of classes P(C_i)
  * @param classLists Instances are divided into K lists, where each list contains only instances from a single class
  */
-void NaiveBayesModel::trainDiscreteVersion(const DiscreteDistribution& priorDistribution, const Partition& classLists) {
-    map<string, vector<DiscreteDistribution>> classAttributeDistributions;
+void NaiveBayesModel::trainDiscreteVersion(const Partition& classLists) {
     for (int i = 0; i < classLists.size(); i++){
         classAttributeDistributions.emplace(((InstanceListOfSameClass*)(classLists.get(i)))->getClassLabel(), classLists.get(i)->allAttributesDistribution());
     }
-    this->priorDistribution = priorDistribution;
-    this->classAttributeDistributions = classAttributeDistributions;
 }
 
 /**
@@ -160,12 +126,12 @@ void NaiveBayesModel::trainDiscreteVersion(const DiscreteDistribution& priorDist
  * @param parameters -
  */
 void NaiveBayesModel::train(InstanceList &trainSet, Parameter *parameters) {
-    DiscreteDistribution priorDistribution = trainSet.classDistribution();
+    priorDistribution = trainSet.classDistribution();
     Partition classLists = Partition(trainSet);
     if (classLists.get(0)->get(0)->getAttribute(0)->isDiscrete()){
-        trainDiscreteVersion(priorDistribution, classLists);
+        trainDiscreteVersion(classLists);
     } else {
-        trainContinuousVersion(priorDistribution, classLists);
+        trainContinuousVersion(classLists);
     }
 }
 

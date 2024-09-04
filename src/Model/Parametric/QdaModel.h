@@ -17,7 +17,6 @@ public:
     QdaModel() = default;
     explicit QdaModel(ifstream& inputFile);
     double calculateMetric(Instance* instance, const string& Ci) const override;
-    QdaModel(const DiscreteDistribution& priorDistribution, const map<string, Matrix>& W, const map<string, Vector>& w, const map<string, double>& w0);
     void train(InstanceList& trainSet, Parameter* parameters) override;
     void loadModel(const string& fileName) override;
 };

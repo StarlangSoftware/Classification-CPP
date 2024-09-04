@@ -11,7 +11,6 @@
 class DecisionStump : public DecisionTree{
 public:
     DecisionStump() = default;
-    explicit DecisionStump(const DecisionNode& root);
     void train(InstanceList& trainSet, Parameter* parameters) override;
     void loadModel(const string& fileName) override;
 };

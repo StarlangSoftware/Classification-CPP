@@ -48,12 +48,7 @@ MultiLayerPerceptronModel::MultiLayerPerceptronModel(ifstream& inputFile) : Line
  * @param parameters Parameters of the multilayer perceptron.
  */
 void MultiLayerPerceptronModel::train(InstanceList &train, Parameter *params) {
-    if (!discreteCheck(train.get(0))){
-        throw DiscreteFeaturesNotAllowed();
-    }
-    classLabels = train.getDistinctClassLabels();
-    K = classLabels.size();
-    d = train.get(0)->continuousAttributeSize();
+    initialize(train);
     Partition partition = Partition(train, ((MultiLayerPerceptronParameter*) params)->getCrossValidationRatio(), params->getSeed(), true);
     InstanceList trainSet = *(partition.get(1));
     InstanceList validationSet = *(partition.get(0));

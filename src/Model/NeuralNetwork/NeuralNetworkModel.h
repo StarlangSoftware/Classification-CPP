@@ -25,6 +25,7 @@ protected:
     string predictWithCompositeInstance(const vector<string>& possibleClassLabels) const;
     ActivationFunction getActivationFunction(ifstream& inputFile) const;
     void load(ifstream& inputFile);
+    void initialize(InstanceList &train);
 public:
     NeuralNetworkModel() = default;
     explicit NeuralNetworkModel(ifstream& inputFile);

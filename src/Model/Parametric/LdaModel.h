@@ -17,7 +17,6 @@ protected:
 public:
     LdaModel() = default;
     explicit LdaModel(ifstream& inputFile);
-    LdaModel(const DiscreteDistribution& priorDistribution, const map<string, Vector>& w, const map<string, double>& w0);
     void serialize(ostream &outputFile) override;
     void train(InstanceList& trainSet, Parameter* parameters) override;
     void loadModel(const string& fileName) override;

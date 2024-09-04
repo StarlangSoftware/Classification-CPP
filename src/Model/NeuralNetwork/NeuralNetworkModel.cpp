@@ -5,6 +5,7 @@
 #include <fstream>
 #include <cfloat>
 #include "../../Instance/CompositeInstance.h"
+#include "../DiscreteFeaturesNotAllowed.h"
 #include "NeuralNetworkModel.h"
 
 /**
@@ -16,6 +17,15 @@
  */
 Matrix NeuralNetworkModel::allocateLayerWeights(int row, int column, default_random_engine randomEngine) {
     return Matrix(row, column, -0.01, +0.01, randomEngine);
+}
+
+void NeuralNetworkModel::initialize(InstanceList &train){
+    if (!discreteCheck(train.get(0))){
+        throw DiscreteFeaturesNotAllowed();
+    }
+    classLabels = train.getDistinctClassLabels();
+    K = classLabels.size();
+    d = train.get(0)->continuousAttributeSize();
 }
 
 /**

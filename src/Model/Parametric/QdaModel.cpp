@@ -38,19 +38,6 @@ double QdaModel::calculateMetric(Instance *instance, const string& Ci) const{
 }
 
 /**
- * The constructor which sets the priorDistribution, w w1 and HashMap of String Matrix.
- *
- * @param priorDistribution DiscreteDistribution input.
- * @param W                 HashMap of String and Matrix.
- * @param w                 HashMap of String and Vectors.
- * @param w0                HashMap of String and Double.
- */
-QdaModel::QdaModel(const DiscreteDistribution& priorDistribution, const map<string, Matrix>& W, const map<string, Vector>& w,
-                   const map<string, double>& w0) : LdaModel(priorDistribution, w, w0) {
-    this->W = W;
-}
-
-/**
  * Loads a quadratic discriminant analysis model from an input model file.
  * @param inputFile Model file.
  */
@@ -70,11 +57,8 @@ void QdaModel::train(InstanceList& trainSet, Parameter *parameters) {
     }
     string Ci;
     double determinant, w0i;
-    map<string, double> w0;
-    map<string, Vector> w;
-    map<string, Matrix> W;
     Partition classLists = Partition(trainSet);
-    DiscreteDistribution priorDistribution = trainSet.classDistribution();
+    priorDistribution = trainSet.classDistribution();
     for (int i = 0; i < classLists.size(); i++) {
         Ci = ((InstanceListOfSameClass*)(classLists.get(i)))->getClassLabel();
         Vector averageVector = Vector(classLists.get(i)->continuousAttributeAverage());
@@ -97,10 +81,6 @@ void QdaModel::train(InstanceList& trainSet, Parameter *parameters) {
         } catch (VectorSizeMismatch& mismatch2) {
         }
     }
-    this->W = W;
-    this->w = w;
-    this->w0 = w0;
-    this->priorDistribution = priorDistribution;
 }
 
 /**

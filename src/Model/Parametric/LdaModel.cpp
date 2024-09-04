@@ -36,19 +36,6 @@ double LdaModel::calculateMetric(Instance *instance, const string& Ci) const{
 }
 
 /**
- * A constructor which sets the priorDistribution, w and w1 according to given inputs.
- *
- * @param priorDistribution DiscreteDistribution input.
- * @param w                 HashMap of String and Vectors.
- * @param w0                HashMap of String and Double.
- */
-LdaModel::LdaModel(const DiscreteDistribution& priorDistribution, const map<string, Vector>& w, const map<string, double>& w0) {
-    this->priorDistribution = priorDistribution;
-    this->w = w;
-    this->w0 = w0;
-}
-
-/**
  * Saves the Linear discriminant analysis model to an output file.
  * @param outputFile Output file.
  */
@@ -85,9 +72,7 @@ void LdaModel::train(InstanceList &trainSet, Parameter *parameters) {
     }
     string Ci;
     double w0i;
-    map<string, double> w0;
-    map<string, Vector> w;
-    DiscreteDistribution priorDistribution = trainSet.classDistribution();
+    priorDistribution = trainSet.classDistribution();
     Partition classLists = Partition(trainSet);
     Matrix covariance = Matrix(trainSet.get(0)->continuousAttributeSize(), trainSet.get(0)->continuousAttributeSize());
     for (int i = 0; i < classLists.size(); i++) {
@@ -117,9 +102,6 @@ void LdaModel::train(InstanceList &trainSet, Parameter *parameters) {
         } catch (VectorSizeMismatch& mismatch2){
         }
     }
-    this->priorDistribution = priorDistribution;
-    this->w = w;
-    this->w0 = w0;
 }
 
 /**

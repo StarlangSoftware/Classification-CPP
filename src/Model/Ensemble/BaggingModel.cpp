@@ -4,10 +4,6 @@
 
 #include "BaggingModel.h"
 #include <fstream>
-#include "../../InstanceList/Partition.h"
-#include "../../Parameter/BaggingParameter.h"
-#include "../../Model/DecisionTree/DecisionTree.h"
-#include "../../Model/Ensemble/TreeEnsembleModel.h"
 
 /**
  * Bagging bootstrap ensemble method that creates individuals for its ensemble by training each classifier on a random

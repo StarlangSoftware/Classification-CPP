@@ -82,9 +82,7 @@ void AutoEncoderModel::train(InstanceList &train, Parameter *params) {
     if (!discreteCheck(train.get(0))){
         throw DiscreteFeaturesNotAllowed();
     }
-    classLabels = train.getDistinctClassLabels();
-    K = classLabels.size();
-    d = train.get(0)->continuousAttributeSize();
+    initialize(train);
     MultiLayerPerceptronParameter* parameters = (MultiLayerPerceptronParameter*) params;
     Partition partition = Partition(train, 0.2, parameters->getSeed(), true);
     InstanceList trainSet = *(partition.get(1));

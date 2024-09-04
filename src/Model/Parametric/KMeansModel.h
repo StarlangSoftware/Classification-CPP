@@ -16,7 +16,6 @@ private:
 public:
     KMeansModel() = default;
     explicit KMeansModel(ifstream& inputFile);
-    KMeansModel(const DiscreteDistribution& priorDistribution, const InstanceList& classMeans, DistanceMetric* distanceMetric);
     void serialize(ostream &outputFile) override;
     void train(InstanceList& trainSet, Parameter* parameters) override;
     void loadModel(const string& fileName) override;

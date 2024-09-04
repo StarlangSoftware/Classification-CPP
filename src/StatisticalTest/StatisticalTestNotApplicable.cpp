@@ -10,6 +10,6 @@ const char *StatisticalTestNotApplicable::what() const noexcept {
 }
 
 StatisticalTestNotApplicable::StatisticalTestNotApplicable(string test, string reason) {
-    this->test = move(test);
-    this->reason = move(reason);
+    this->test = std::move(test);
+    this->reason = std::move(reason);
 }

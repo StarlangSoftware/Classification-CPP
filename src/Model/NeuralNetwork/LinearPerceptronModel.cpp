@@ -37,12 +37,7 @@ LinearPerceptronModel::LinearPerceptronModel(ifstream &inputFile) : NeuralNetwor
  * @param parameters Parameters of the linear perceptron.
  */
 void LinearPerceptronModel::train(InstanceList& train, Parameter *params) {
-    if (!discreteCheck(train.get(0))){
-        throw DiscreteFeaturesNotAllowed();
-    }
-    classLabels = train.getDistinctClassLabels();
-    K = classLabels.size();
-    d = train.get(0)->continuousAttributeSize();
+    initialize(train);
     Partition partition = Partition(train, ((LinearPerceptronParameter*) params)->getCrossValidationRatio(), params->getSeed(), true);
     InstanceList trainSet = *(partition.get(1));
     InstanceList validationSet = *(partition.get(0));
