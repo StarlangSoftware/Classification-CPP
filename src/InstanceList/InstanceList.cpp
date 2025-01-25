@@ -5,7 +5,7 @@
 #include <fstream>
 #include <random>
 #include "InstanceList.h"
-#include "Dictionary/Word.h"
+#include "StringUtils.h"
 #include "../Model/Model.h"
 #include "../Attribute/DiscreteAttribute.h"
 #include "../Attribute/DiscreteIndexedAttribute.h"
@@ -42,7 +42,7 @@ InstanceList::InstanceList(const DataDefinition& definition, const string& separ
     inputFile.open(fileName, ifstream :: in);
     getline(inputFile, line);
     while (inputFile.good()) {
-        vector<string> attributeList = Word::split(line, separator);
+        vector<string> attributeList = StringUtils::split(line, separator);
         if (attributeList.size() == definition.attributeCount() + 1) {
             current = new Instance(attributeList[attributeList.size() - 1]);
             for (int i = 0; i < attributeList.size() - 1; i++) {
@@ -596,13 +596,13 @@ InstanceList::InstanceList(ifstream &inputFile) {
     Instance* current;
     inputFile.ignore();
     getline(inputFile, line);
-    attributeTypes = Word::split(line);
+    attributeTypes = StringUtils::split(line);
     inputFile >> size;
     inputFile.ignore();
     for (int i = 0; i < size; i++){
         vector<Attribute*> attributeList;
         getline(inputFile, line);
-        attributeValues = Word::split(line, ",");
+        attributeValues = StringUtils::split(line, ",");
         for (int j = 0; j < attributeTypes.size(); j++) {
             if (attributeTypes[j] == "DISCRETE"){
                 attributeList.push_back(new DiscreteAttribute(attributeValues[j]));

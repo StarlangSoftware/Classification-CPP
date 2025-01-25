@@ -4,7 +4,7 @@
 
 #include <fstream>
 #include "DataSet.h"
-#include "Dictionary/Word.h"
+#include "StringUtils.h"
 #include "../Instance/CompositeInstance.h"
 #include "../Attribute/ContinuousAttribute.h"
 #include "../Attribute/DiscreteAttribute.h"
@@ -39,7 +39,7 @@ DataSet::DataSet(ifstream& file) {
     definition = DataDefinition();
     while (file.good()){
         getline(file, instanceText);
-        vector<string> attributes = Word::split(instanceText, ",");
+        vector<string> attributes = StringUtils::split(instanceText, ",");
         if (i == 0) {
             for (int j = 0; j < attributes.size() - 1; j++) {
                 try {
@@ -58,7 +58,7 @@ DataSet::DataSet(ifstream& file) {
         if (classLabel.find_first_of(';') == string::npos) {
             instance = new Instance(classLabel);
         } else {
-            vector<string> labels = Word::split(classLabel, ";");
+            vector<string> labels = StringUtils::split(classLabel, ";");
             instance = new CompositeInstance(labels);
         }
         for (int j = 0; j < attributes.size() - 1; j++) {
