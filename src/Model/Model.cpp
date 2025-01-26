@@ -13,7 +13,7 @@
  * @param classLabels An array of class labels.
  * @return The class label that occurs most in the array of class labels (mod of class label list).
  */
-string Model::getMaximum(const vector<string>& classLabels) {
+string Model::getMaximum(const vector<string> &classLabels) {
     CounterHashMap<string> frequencies;
     for (const string &label : classLabels) {
         frequencies.put(label);

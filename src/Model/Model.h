@@ -23,7 +23,7 @@ public:
     virtual string predict(Instance* instance) {return "";};
     virtual map<string, double> predictProbability(Instance* instance) {return map<string, double>();};
     virtual void serialize(ostream &outputFile) {};
-    static string getMaximum(const vector<string>& classLabels);
+    static string getMaximum(const vector<string> &classLabels);
     virtual void train(InstanceList& trainSet, Parameter* parameters) = 0;
     virtual void loadModel(const string& fileName) = 0;
     bool discreteCheck(Instance* instance) const;
