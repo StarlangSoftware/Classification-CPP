@@ -2,6 +2,7 @@
 // Created by Olcay Taner Yıldız on 27.01.2019.
 //
 #include <random>
+#include "algorithm"
 #include "Partition.h"
 #include "CounterHashMap.h"
 #include "DiscreteDistribution.h"

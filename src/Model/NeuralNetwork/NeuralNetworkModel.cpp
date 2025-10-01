@@ -4,6 +4,7 @@
 #include <cmath>
 #include <fstream>
 #include <cfloat>
+#include "algorithm"
 #include "../../Instance/CompositeInstance.h"
 #include "../DiscreteFeaturesNotAllowed.h"
 #include "NeuralNetworkModel.h"

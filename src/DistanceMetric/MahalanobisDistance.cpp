@@ -5,6 +5,7 @@
 //
 
 #include "MahalanobisDistance.h"
+#include <climits>
 #include "MatrixRowMismatch.h"
 #include "VectorSizeMismatch.h"
 

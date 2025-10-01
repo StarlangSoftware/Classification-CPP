@@ -4,6 +4,7 @@
 
 #include <cmath>
 #include <fstream>
+#include "algorithm"
 #include "KnnModel.h"
 #include "../../DistanceMetric/EuclidianDistance.h"
 #include "../../Parameter/KnnParameter.h"

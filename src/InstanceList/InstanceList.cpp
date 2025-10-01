@@ -5,6 +5,9 @@
 #include <fstream>
 #include <random>
 #include "InstanceList.h"
+
+#include <algorithm>
+
 #include "StringUtils.h"
 #include "../Model/Model.h"
 #include "../Attribute/DiscreteAttribute.h"

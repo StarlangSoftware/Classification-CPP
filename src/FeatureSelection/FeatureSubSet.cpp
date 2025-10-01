@@ -3,7 +3,7 @@
 //
 
 #include "FeatureSubSet.h"
-
+#include <algorithm>
 /**
  * A constructor that sets the indexList vector.
  *
