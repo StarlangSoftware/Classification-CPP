@@ -13,7 +13,7 @@
  * @param parameters -
  */
 void DecisionStump::train(InstanceList &trainSet, Parameter *parameters) {
-    root = DecisionNode(trainSet, DecisionCondition(), nullptr, true);
+    root = new DecisionNode(trainSet, DecisionCondition(), nullptr, true);
 }
 
 /**
@@ -23,6 +23,6 @@ void DecisionStump::train(InstanceList &trainSet, Parameter *parameters) {
 void DecisionStump::loadModel(const string &fileName) {
     ifstream inputFile;
     inputFile.open(fileName, ifstream :: in);
-    root = DecisionNode(inputFile);
+    root = new DecisionNode(inputFile);
     inputFile.close();
 }

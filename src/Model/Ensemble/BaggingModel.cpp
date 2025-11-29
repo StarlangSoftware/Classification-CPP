@@ -19,7 +19,7 @@ void BaggingModel::train(InstanceList &trainSet, Parameter *parameters) {
     int forestSize = ((BaggingParameter*) parameters)->getEnsembleSize();
     for (int i = 0; i < forestSize; i++){
         Bootstrap<Instance*> bootstrap = trainSet.bootstrap(i);
-        forest.emplace_back(new DecisionTree(DecisionNode(InstanceList(bootstrap.getSample()), DecisionCondition(), nullptr, false)));
+        forest.emplace_back(new DecisionTree(new DecisionNode(InstanceList(bootstrap.getSample()), DecisionCondition(), nullptr, false)));
     }
 }
 

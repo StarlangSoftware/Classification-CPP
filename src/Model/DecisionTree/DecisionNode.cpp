@@ -44,8 +44,8 @@ DecisionNode::createChildrenForDiscreteIndexed(const InstanceList& data, int att
                                                bool isStump) {
     Partition childrenData;
     childrenData = Partition(data, attributeIndex, attributeValue);
-    children.emplace_back(DecisionNode(*(childrenData.get(0)), DecisionCondition(attributeIndex, new DiscreteIndexedAttribute("", attributeValue, ((DiscreteIndexedAttribute*) data.get(0)->getAttribute(attributeIndex))->getMaxIndex())), parameter, isStump));
-    children.emplace_back(DecisionNode(*(childrenData.get(1)), DecisionCondition(attributeIndex, new DiscreteIndexedAttribute("", -1, ((DiscreteIndexedAttribute*) data.get(0)->getAttribute(attributeIndex))->getMaxIndex())), parameter, isStump));
+    children.emplace_back(new DecisionNode(*(childrenData.get(0)), DecisionCondition(attributeIndex, new DiscreteIndexedAttribute("", attributeValue, ((DiscreteIndexedAttribute*) data.get(0)->getAttribute(attributeIndex))->getMaxIndex())), parameter, isStump));
+    children.emplace_back(new DecisionNode(*(childrenData.get(1)), DecisionCondition(attributeIndex, new DiscreteIndexedAttribute("", -1, ((DiscreteIndexedAttribute*) data.get(0)->getAttribute(attributeIndex))->getMaxIndex())), parameter, isStump));
 }
 
 /**
@@ -63,7 +63,7 @@ void DecisionNode::createChildrenForDiscrete(const InstanceList& data, int attri
     valueList = data.getAttributeValueList(attributeIndex);
     childrenData = Partition(data, attributeIndex);
     for (int i = 0; i < valueList.size(); i++) {
-        children.emplace_back(DecisionNode(*(childrenData.get(i)), DecisionCondition(attributeIndex, new DiscreteAttribute(valueList.at(i))), parameter, isStump));
+        children.emplace_back(new DecisionNode(*(childrenData.get(i)), DecisionCondition(attributeIndex, new DiscreteAttribute(valueList.at(i))), parameter, isStump));
     }
 }
 
@@ -81,8 +81,8 @@ void DecisionNode::createChildrenForContinuous(const InstanceList& data, int att
                                                bool isStump) {
     Partition childrenData;
     childrenData = Partition(data, attributeIndex, splitValue);
-    children.emplace_back(DecisionNode(*(childrenData.get(0)), DecisionCondition(attributeIndex, '<', new ContinuousAttribute(splitValue)), parameter, isStump));
-    children.emplace_back(DecisionNode(*(childrenData.get(1)), DecisionCondition(attributeIndex, '>', new ContinuousAttribute(splitValue)), parameter, isStump));
+    children.emplace_back(new DecisionNode(*(childrenData.get(0)), DecisionCondition(attributeIndex, '<', new ContinuousAttribute(splitValue)), parameter, isStump));
+    children.emplace_back(new DecisionNode(*(childrenData.get(1)), DecisionCondition(attributeIndex, '>', new ContinuousAttribute(splitValue)), parameter, isStump));
 }
 
 /**
@@ -227,9 +227,9 @@ string DecisionNode::predict(Instance *instance) const{
         if (leaf) {
             return predictedClass;
         } else {
-            for (const DecisionNode& node : children) {
-                if (node.condition.satisfy(instance)) {
-                    string childPrediction = node.predict(instance);
+            for (DecisionNode* node : children) {
+                if (node->condition.satisfy(instance)) {
+                    string childPrediction = node->predict(instance);
                     if (!childPrediction.empty()) {
                         return childPrediction;
                     } else {
@@ -243,9 +243,9 @@ string DecisionNode::predict(Instance *instance) const{
         if (leaf) {
             return classLabel;
         } else {
-            for (const DecisionNode& node : children) {
-                if (node.condition.satisfy(instance)) {
-                    return node.predict(instance);
+            for (DecisionNode* node : children) {
+                if (node->condition.satisfy(instance)) {
+                    return node->predict(instance);
                 }
             }
             return classLabel;
@@ -278,7 +278,7 @@ void DecisionNode::setLeaf(bool _leaf) {
  * Accessor method for children attribute
  * @return Children of the decision node
  */
-vector<DecisionNode> DecisionNode::getChildren() const{
+vector<DecisionNode*> DecisionNode::getChildren() const{
     return children;
 }
 
@@ -290,8 +290,8 @@ void DecisionNode::serialize(ostream &outputFile) {
     condition.serialize(outputFile);
     outputFile << children.size() << endl;
     if (!children.empty()){
-        for (DecisionNode decisionNode : children){
-            decisionNode.serialize(outputFile);
+        for (DecisionNode* decisionNode : children){
+            decisionNode->serialize(outputFile);
         }
     } else {
         outputFile << classLabel << endl;
@@ -309,7 +309,7 @@ DecisionNode::DecisionNode(ifstream &inputFile) {
     if (size != 0){
         leaf = false;
         for (int i = 0; i < size; i++){
-            DecisionNode decisionNode = DecisionNode(inputFile);
+            auto* decisionNode = new DecisionNode(inputFile);
             children.push_back(decisionNode);
         }
     } else {
@@ -330,9 +330,9 @@ map<string, double> DecisionNode::predictProbabilityDistribution(Instance *insta
     if (leaf) {
         return classLabelsDistribution.getProbabilityDistribution();
     } else {
-        for (DecisionNode node : children) {
-            if (node.condition.satisfy(instance)) {
-                return node.predictProbabilityDistribution(instance);
+        for (DecisionNode* node : children) {
+            if (node->condition.satisfy(instance)) {
+                return node->predictProbabilityDistribution(instance);
             }
         }
         return classLabelsDistribution.getProbabilityDistribution();

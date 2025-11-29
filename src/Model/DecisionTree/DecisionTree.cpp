@@ -17,7 +17,7 @@
  * @return Possible class labels.
  */
 string DecisionTree::predict(Instance *instance){
-    string predictedClass = root.predict(instance);
+    string predictedClass = root->predict(instance);
     if (predictedClass.empty() && instance->isComposite()) {
         predictedClass = ((CompositeInstance*) instance)->getPossibleClassLabels().at(0);
     }
@@ -29,7 +29,7 @@ string DecisionTree::predict(Instance *instance){
  *
  * @param root DecisionNode type input.
  */
-DecisionTree::DecisionTree(const DecisionNode& root) {
+DecisionTree::DecisionTree(DecisionNode* root) {
     this->root = root;
 }
 
@@ -50,15 +50,15 @@ void DecisionTree::prune(const InstanceList& pruneSet) {
  * @param tree     DecisionTree that will be pruned if conditions hold.
  * @param pruneSet Small subset of tree that will be removed from tree.
  */
-void DecisionTree::pruneNode(DecisionNode decisionNode, const InstanceList& pruneSet) {
-    if (decisionNode.isLeaf())
+void DecisionTree::pruneNode(DecisionNode* decisionNode, const InstanceList& pruneSet) {
+    if (decisionNode->isLeaf())
         return;
     ClassificationPerformance* before = testClassifier(pruneSet);
-    decisionNode.setLeaf(true);
+    decisionNode->setLeaf(true);
     ClassificationPerformance* after = testClassifier(pruneSet);
     if (after->getAccuracy() < before->getAccuracy()) {
-        decisionNode.setLeaf(false);
-        for (const DecisionNode& node : decisionNode.getChildren()) {
+        decisionNode->setLeaf(false);
+        for (DecisionNode* node : decisionNode->getChildren()) {
             pruneNode(node, pruneSet);
         }
     }
@@ -69,7 +69,7 @@ void DecisionTree::pruneNode(DecisionNode decisionNode, const InstanceList& prun
  * @param outputFile Output file
  */
 void DecisionTree::serialize(ostream &outputFile) {
-    root.serialize(outputFile);
+    root->serialize(outputFile);
 }
 
 /**
@@ -77,7 +77,7 @@ void DecisionTree::serialize(ostream &outputFile) {
  * @param inputFile Input file
  */
 DecisionTree::DecisionTree(ifstream &inputFile) {
-    root = DecisionNode(inputFile);
+    root = new DecisionNode(inputFile);
 }
 
 /**
@@ -86,7 +86,7 @@ DecisionTree::DecisionTree(ifstream &inputFile) {
  * @return Posterior probability distribution for the given instance.
  */
 map<string, double> DecisionTree::predictProbability(Instance *instance) {
-    return root.predictProbabilityDistribution(instance);
+    return root->predictProbabilityDistribution(instance);
 }
 
 /**
@@ -100,10 +100,10 @@ void DecisionTree::train(InstanceList &trainSet, Parameter *parameters) {
     DecisionTree* tree;
     if (((C45Parameter*) parameters)->isPrune()) {
         Partition partition = Partition(trainSet, ((C45Parameter*) parameters)->getCrossValidationRatio(), parameters->getSeed(), true);
-        root = DecisionNode(*(partition.get(1)), DecisionCondition(), nullptr, false);
+        root = new DecisionNode(*(partition.get(1)), DecisionCondition(), nullptr, false);
         prune(*(partition.get(0)));
     } else {
-        root = DecisionNode(trainSet, DecisionCondition(), nullptr, false);
+        root = new DecisionNode(trainSet, DecisionCondition(), nullptr, false);
     }
 }
 
@@ -114,6 +114,6 @@ void DecisionTree::train(InstanceList &trainSet, Parameter *parameters) {
 void DecisionTree::loadModel(const string &fileName) {
     ifstream inputFile;
     inputFile.open(fileName, ifstream :: in);
-    root = DecisionNode(inputFile);
+    root = new DecisionNode(inputFile);
     inputFile.close();
 }

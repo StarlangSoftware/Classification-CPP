@@ -9,14 +9,14 @@
 
 class DecisionTree : public ValidatedModel{
 protected:
-    DecisionNode root;
-    void pruneNode(DecisionNode decisionNode, const InstanceList& pruneSet);
+    DecisionNode* root;
+    void pruneNode(DecisionNode* decisionNode, const InstanceList& pruneSet);
 public:
     DecisionTree() = default;
     string predict(Instance* instance) override;
     map<string, double> predictProbability(Instance* instance) override;
     explicit DecisionTree(ifstream& inputFile);
-    explicit DecisionTree(const DecisionNode& root);
+    explicit DecisionTree(DecisionNode* root);
     void prune(const InstanceList& pruneSet);
     void serialize(ostream &outputFile) override;
     void train(InstanceList& trainSet, Parameter* parameters) override;

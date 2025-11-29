@@ -12,7 +12,7 @@
 
 class DecisionNode {
 private:
-    vector<DecisionNode> children;
+    vector<DecisionNode*> children;
     string classLabel;
     bool leaf = false;
     DiscreteDistribution classLabelsDistribution;
@@ -29,7 +29,7 @@ public:
     map<string, double> predictProbabilityDistribution(Instance* instance);
     bool isLeaf() const;
     void setLeaf(bool leaf);
-    vector<DecisionNode> getChildren() const;
+    vector<DecisionNode*> getChildren() const;
     void serialize(ostream &outputFile);
 };
 

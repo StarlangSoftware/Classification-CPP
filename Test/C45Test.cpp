@@ -66,23 +66,23 @@ TEST_CASE("C45Test") {
         DecisionTree c45 = DecisionTree();
         InstanceList instanceList = iris.getInstanceList();
         c45.train(instanceList, c45Parameter);
-        REQUIRE_THAT(1.33, Catch::Matchers::WithinAbs(100 * c45.test(iris.getInstanceList())->getErrorRate(), 0.01));
+        REQUIRE_THAT(4.0, Catch::Matchers::WithinAbs(100 * c45.test(iris.getInstanceList())->getErrorRate(), 0.01));
         c45 = DecisionTree();
         instanceList = bupa.getInstanceList();
         c45.train(instanceList, c45Parameter);
-        REQUIRE_THAT(6.38, Catch::Matchers::WithinAbs(100 * c45.test(bupa.getInstanceList())->getErrorRate(), 0.01));
+        REQUIRE_THAT(22.60, Catch::Matchers::WithinAbs(100 * c45.test(bupa.getInstanceList())->getErrorRate(), 0.01));
         c45 = DecisionTree();
         instanceList = dermatology.getInstanceList();
         c45.train(instanceList, c45Parameter);
-        REQUIRE_THAT(1.09, Catch::Matchers::WithinAbs(100 * c45.test(dermatology.getInstanceList())->getErrorRate(), 0.01));
+        REQUIRE_THAT(5.19, Catch::Matchers::WithinAbs(100 * c45.test(dermatology.getInstanceList())->getErrorRate(), 0.01));
         c45 = DecisionTree();
         instanceList = car.getInstanceList();
         c45.train(instanceList, c45Parameter);
-        REQUIRE_THAT(1.27, Catch::Matchers::WithinAbs(100 * c45.test(car.getInstanceList())->getErrorRate(), 0.01));
+        REQUIRE_THAT(6.65, Catch::Matchers::WithinAbs(100 * c45.test(car.getInstanceList())->getErrorRate(), 0.01));
         c45 = DecisionTree();
         instanceList = tictactoe.getInstanceList();
         c45.train(instanceList, c45Parameter);
-        REQUIRE_THAT(3.24, Catch::Matchers::WithinAbs(100 * c45.test(tictactoe.getInstanceList())->getErrorRate(), 0.01));
+        REQUIRE_THAT(15.34, Catch::Matchers::WithinAbs(100 * c45.test(tictactoe.getInstanceList())->getErrorRate(), 0.01));
     }
     SECTION("load"){
         DecisionTree c45 = DecisionTree();
