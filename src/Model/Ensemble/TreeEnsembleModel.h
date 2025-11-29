@@ -13,6 +13,7 @@ protected:
     void load(ifstream& inputFile);
 public:
     TreeEnsembleModel() = default;
+    ~TreeEnsembleModel();
     string predict(Instance* instance) override;
     map<string, double> predictProbability(Instance* instance) override;
     explicit TreeEnsembleModel(ifstream& inputFile);

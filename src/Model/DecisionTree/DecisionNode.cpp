@@ -258,6 +258,12 @@ string DecisionNode::predict(Instance *instance) const{
  */
 DecisionNode::DecisionNode() = default;
 
+DecisionNode::~DecisionNode() {
+    for (DecisionNode* node : children) {
+        delete node;
+    }
+}
+
 /**
  * Accessor method for leaf attribute
  * @return Leaf

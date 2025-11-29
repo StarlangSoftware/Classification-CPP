@@ -9,6 +9,10 @@
 #include "../../Parameter/C45Parameter.h"
 #include "../../InstanceList/Partition.h"
 
+DecisionTree::~DecisionTree() {
+    delete root;
+}
+
 /**
  * The predict method  performs prediction on the root node of given instance, and if it is null, it returns the possible class labels.
  * Otherwise it returns the returned class labels.

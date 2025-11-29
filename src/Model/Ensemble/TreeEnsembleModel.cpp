@@ -5,6 +5,12 @@
 #include <fstream>
 #include "TreeEnsembleModel.h"
 
+TreeEnsembleModel::~TreeEnsembleModel() {
+    for (DecisionTree *tree : forest) {
+        delete tree;
+    }
+}
+
 /**
  * The predict method takes an Instance as an input and loops through the ArrayList of DecisionTrees.
  * Makes prediction for the items of that ArrayList and returns the maximum item of that ArrayList.

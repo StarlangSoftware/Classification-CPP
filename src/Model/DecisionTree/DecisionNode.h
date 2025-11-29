@@ -23,6 +23,7 @@ private:
     void createChildrenForContinuous(const InstanceList& data, int attributeIndex, double splitValue, RandomForestParameter* parameter, bool isStump);
 public:
     DecisionNode();
+    ~DecisionNode();
     explicit DecisionNode(ifstream& inputFile);
     DecisionNode(InstanceList data, const DecisionCondition& condition, RandomForestParameter* parameter, bool isStump);
     string predict(Instance* instance) const;

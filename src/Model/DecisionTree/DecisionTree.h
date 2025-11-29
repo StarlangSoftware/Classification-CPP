@@ -13,6 +13,7 @@ protected:
     void pruneNode(DecisionNode* decisionNode, const InstanceList& pruneSet);
 public:
     DecisionTree() = default;
+    ~DecisionTree();
     string predict(Instance* instance) override;
     map<string, double> predictProbability(Instance* instance) override;
     explicit DecisionTree(ifstream& inputFile);
