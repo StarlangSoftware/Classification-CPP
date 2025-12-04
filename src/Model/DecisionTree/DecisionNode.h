@@ -11,8 +11,9 @@
 #include "../../Parameter/RandomForestParameter.h"
 
 class DecisionNode {
-private:
+protected:
     vector<DecisionNode*> children;
+private:
     string classLabel;
     bool leaf = false;
     DiscreteDistribution classLabelsDistribution;
