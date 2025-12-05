@@ -24,7 +24,7 @@ private:
     void gradientDescentSoftDecisionTree(SoftDecisionNode *root, InstanceList *data, SoftDecisionTreeParameter *parameter, double eta, const unordered_map<string, int>& classLabelIndexMap);
     void copyTo(SoftDecisionNode* node);
     int errorOfSoftDecisionTree(SoftDecisionNode *node, const InstanceList &data, const unordered_map<string, int>& classLabelIndexMap);
-    double getRandomValue();
+    SoftDecisionNode* createNode(const InstanceList& data);
 public:
     std::vector<double> calculateOutput(SoftDecisionNode* node, const Instance& data);
     explicit SoftDecisionNode(SoftDecisionNode* parent, const InstanceList& trainData);

@@ -14,7 +14,7 @@ inline bool kroneckerDelta(const int& r, const int& k) {
     return r == k;
 }
 
-double SoftDecisionNode::getRandomValue() {
+inline double getRandomValue() {
     return (rand() + 0.0) / RAND_MAX;
 }
 
@@ -85,6 +85,14 @@ int SoftDecisionNode::errorOfSoftDecisionTree(SoftDecisionNode *node, const Inst
     return count;
 }
 
+SoftDecisionNode *SoftDecisionNode::createNode(const InstanceList& data) {
+    auto* node = new SoftDecisionNode();
+    node->children.push_back(new SoftDecisionNode(node, data));
+    node->children.push_back(new SoftDecisionNode(node, data));
+    return node;
+}
+
+
 bool SoftDecisionNode::findBestSoftDecisionTreeSplit(const InstanceList& cvData, InstanceList& data, SoftDecisionTreeParameter* parameter, const unordered_map<string, int>& classLabelIndexMap) {
     auto tmp = vector(w0s);
     auto root = this;
@@ -95,9 +103,9 @@ bool SoftDecisionNode::findBestSoftDecisionTreeSplit(const InstanceList& cvData,
     this->children = std::vector<DecisionNode*>();
     this->children.push_back(new SoftDecisionNode(this, data));
     this->children.push_back(new SoftDecisionNode(this, data));
-    auto* bestNode = new SoftDecisionNode();
-    bestNode->children.push_back(new SoftDecisionNode(bestNode, data));
-    bestNode->children.push_back(new SoftDecisionNode(bestNode, data));
+    auto* bestNode = createNode(data);
+    auto* tmpNode = createNode(data);
+    this->copyTo(tmpNode);
     int performanceBest = INT_MAX;
     bool result = true;
     int denominator = 1;
@@ -109,6 +117,7 @@ bool SoftDecisionNode::findBestSoftDecisionTreeSplit(const InstanceList& cvData,
             performanceBest = performanceNow;
             this->copyTo(bestNode);
         }
+        tmpNode->copyTo(this);
         denominator *= 2;
     }
     if (performanceBefore <= performanceBest) {
