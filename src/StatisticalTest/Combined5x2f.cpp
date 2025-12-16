@@ -32,7 +32,7 @@ double Combined5x2f::testStatistic(const ExperimentPerformance& classifier1, con
         double variance = (difference[2 * i] - mean) * (difference[2 * i] - mean) + (difference[2 * i + 1] - mean) * (difference[2 * i + 1] - mean);
         denominator += variance;
     }
-    delete difference;
+    delete[] difference;
     denominator *= 2;
     if (denominator == 0){
         throw StatisticalTestNotApplicable("Combined 5x2 F test", "Variance is 0.");

@@ -32,7 +32,7 @@ double Combined5x2t::testStatistic(const ExperimentPerformance& classifier1, con
         double variance = (difference[2 * i] - mean) * (difference[2 * i] - mean) + (difference[2 * i + 1] - mean) * (difference[2 * i + 1] - mean);
         denominator += variance;
     }
-    delete difference;
+    delete[] difference;
     numerator = sqrt(10) * numerator / 5;
     denominator = sqrt(denominator / 5);
     if (denominator == 0){

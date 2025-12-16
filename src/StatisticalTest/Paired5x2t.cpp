@@ -35,7 +35,7 @@ double Paired5x2t::testStatistic(const ExperimentPerformance& classifier1, const
         throw StatisticalTestNotApplicable("5x2 t test", "Variance is 0.");
     }
     double result = difference[0] / denominator;
-    delete difference;
+    delete[] difference;
     return result;
 }
 

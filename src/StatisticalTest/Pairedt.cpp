@@ -28,7 +28,7 @@ double Pairedt::testStatistic(const ExperimentPerformance& classifier1, const Ex
     for (int i = 0; i < classifier1.numberOfExperiments(); i++){
         sum += (difference[i] - mean) * (difference[i] - mean);
     }
-    delete difference;
+    delete[] difference;
     double standardDeviation = sqrt(sum / (classifier1.numberOfExperiments() - 1));
     if (standardDeviation == 0){
         throw StatisticalTestNotApplicable("Paired t test", "Variance is 0.");
