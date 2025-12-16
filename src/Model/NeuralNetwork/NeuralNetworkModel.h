@@ -16,13 +16,13 @@ protected:
     Vector x = Vector(0, 0.0), y = Vector(0, 0.0), r = Vector(0, 0.0);
     virtual void calculateOutput() = 0;
     Matrix allocateLayerWeights(int row, int column, default_random_engine randomEngine);
-    Vector normalizeOutput(const Vector& o) const;
+    [[nodiscard]] Vector normalizeOutput(const Vector& o) const;
     void createInputVector(Instance* instance);
-    Vector calculateHidden(const Vector& input, const Matrix& weights, ActivationFunction activationFunction) const;
-    Vector calculateOneMinusHidden(const Vector& hidden) const;
+    [[nodiscard]] Vector calculateHidden(const Vector& input, const Matrix& weights, ActivationFunction activationFunction) const;
+    [[nodiscard]] Vector calculateOneMinusHidden(const Vector& hidden) const;
     void calculateForwardSingleHiddenLayer(const Matrix& W, const Matrix& V, ActivationFunction activationFunction);
     Vector calculateRMinusY(Instance* instance, const Vector& input, const Matrix& weights);
-    string predictWithCompositeInstance(const vector<string>& possibleClassLabels) const;
+    [[nodiscard]] string predictWithCompositeInstance(const vector<string>& possibleClassLabels) const;
     ActivationFunction getActivationFunction(ifstream& inputFile) const;
     void load(ifstream& inputFile);
     void initialize(InstanceList &train);

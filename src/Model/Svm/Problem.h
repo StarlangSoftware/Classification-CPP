@@ -18,9 +18,9 @@ private:
 public:
     Problem(const vector<NodeList>& x, const vector<double>& y);
     explicit Problem(const InstanceList& instanceList);
-    int getL() const;
-    vector<NodeList> getX() const;
-    vector<double> getY() const;
+    [[nodiscard]] int getL() const;
+    [[nodiscard]] vector<NodeList> getX() const;
+    [[nodiscard]] vector<double> getY() const;
 };
 
 

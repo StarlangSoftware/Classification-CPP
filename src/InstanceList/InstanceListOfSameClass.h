@@ -13,7 +13,7 @@ private:
     string classLabel;
 public:
     explicit InstanceListOfSameClass(const string& classLabel);
-    string getClassLabel() const override;
+    [[nodiscard]] string getClassLabel() const override;
 };
 
 

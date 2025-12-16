@@ -26,14 +26,14 @@ private:
     bool unshrinked = false;
     SvmParameter* parameter;
     void updateAlphaStatus(int i);
-    bool isUpperBound(int i) const;
-    bool isLowerBound(int i) const;
-    bool isFree(int i) const;
-    vector<double> getQ(int i, int length) const;
+    [[nodiscard]] bool isUpperBound(int i) const;
+    [[nodiscard]] bool isLowerBound(int i) const;
+    [[nodiscard]] bool isFree(int i) const;
+    [[nodiscard]] vector<double> getQ(int i, int length) const;
     void swapIndex(int i, int j);
     void reconstructGradient();
     bool selectWorkingSet(int out[]);
-    double calculateRho() const;
+    [[nodiscard]] double calculateRho() const;
     void doShrinking();
 public:
     Solver(int l, const vector<double>& b, const vector<double>& y, SvmParameter* parameter, const Problem& problem);

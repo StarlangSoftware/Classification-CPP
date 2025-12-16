@@ -14,9 +14,9 @@ private:
     bool onlyTwoTailed;
 public:
     StatisticalTestResult(double pValue, bool onlyTwoTailed);
-    StatisticalTestResultType oneTailed(double alpha) const;
-    StatisticalTestResultType twoTailed(double alpha) const;
-    double getPValue() const;
+    [[nodiscard]] StatisticalTestResultType oneTailed(double alpha) const;
+    [[nodiscard]] StatisticalTestResultType twoTailed(double alpha) const;
+    [[nodiscard]] double getPValue() const;
 };
 
 

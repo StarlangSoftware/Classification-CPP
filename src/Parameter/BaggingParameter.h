@@ -11,7 +11,7 @@ protected:
     int ensembleSize;
 public:
     BaggingParameter(int seed, int ensembleSize);
-    int getEnsembleSize() const;
+    [[nodiscard]] int getEnsembleSize() const;
 };
 
 

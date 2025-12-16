@@ -12,7 +12,7 @@ class BootstrapRun : public MultipleRun {
 private:
     int numberOfBootstraps;
 public:
-    BootstrapRun(int numberOfBootstraps);
+    explicit BootstrapRun(int numberOfBootstraps);
     ExperimentPerformance* execute(const Experiment& experiment) override;
 };
 

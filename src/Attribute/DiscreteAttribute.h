@@ -15,14 +15,14 @@ private:
 public:
     explicit DiscreteAttribute(const string& value);
     explicit DiscreteAttribute(bool value);
-    int continuousAttributeSize() const override;
-    vector<double> continuousAttributes() const override;
-    bool isDiscrete() const override {return true;}
-    bool isContinuous() const override {return false;};
-    bool isDiscreteIndexed() const override {return false;};
-    bool isBinary() const override {return false;};
-    string getValue() const;
-    string to_string() const override;
+    [[nodiscard]] int continuousAttributeSize() const override;
+    [[nodiscard]] vector<double> continuousAttributes() const override;
+    [[nodiscard]] bool isDiscrete() const override {return true;}
+    [[nodiscard]] bool isContinuous() const override {return false;};
+    [[nodiscard]] bool isDiscreteIndexed() const override {return false;};
+    [[nodiscard]] bool isBinary() const override {return false;};
+    [[nodiscard]] string getValue() const;
+    [[nodiscard]] string to_string() const override;
 };
 
 

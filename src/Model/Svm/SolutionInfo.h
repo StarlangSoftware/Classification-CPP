@@ -14,8 +14,8 @@ private:
     vector<double> alpha;
 public:
     SolutionInfo(double rho, const vector<double>& alpha);
-    double getRho() const;
-    double getAlpha(int index) const;
+    [[nodiscard]] double getRho() const;
+    [[nodiscard]] double getAlpha(int index) const;
     void setAlpha(int index, double value);
 };
 

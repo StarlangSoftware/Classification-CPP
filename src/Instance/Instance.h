@@ -27,18 +27,18 @@ public:
     void addVectorAttribute(const Vector& vector);
     void removeAttribute(int index);
     void removeAllAttributes();
-    Attribute* getAttribute(int index) const;
-    int attributeSize() const;
-    int continuousAttributeSize() const;
-    vector<double> continuousAttributes() const;
-    string getClassLabel() const;
-    virtual vector<string> getPossibleClassLabels() const;
-    virtual string to_string() const;
-    Vector toVector() const;
-    NodeList toNodeList() const;
-    Instance* getSubSetOfFeatures(const FeatureSubSet& featureSubSet) const;
+    [[nodiscard]] Attribute* getAttribute(int index) const;
+    [[nodiscard]] int attributeSize() const;
+    [[nodiscard]] int continuousAttributeSize() const;
+    [[nodiscard]] vector<double> continuousAttributes() const;
+    [[nodiscard]] string getClassLabel() const;
+    [[nodiscard]] virtual vector<string> getPossibleClassLabels() const;
+    [[nodiscard]] virtual string to_string() const;
+    [[nodiscard]] Vector toVector() const;
+    [[nodiscard]] NodeList toNodeList() const;
+    [[nodiscard]] Instance* getSubSetOfFeatures(const FeatureSubSet& featureSubSet) const;
     void serialize(ostream &outputFile);
-    virtual bool isComposite() const{return false;};
+    [[nodiscard]] virtual bool isComposite() const{return false;};
     bool operator<(const Instance &anotherInstance) const{
         return (classLabel < anotherInstance.classLabel);
     }

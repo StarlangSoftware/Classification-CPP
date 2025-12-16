@@ -17,9 +17,9 @@ public:
     Partition(const InstanceList& list, int attributeIndex, int attributeValue);
     Partition(const InstanceList& list, int attributeIndex, double splitValue);
     void add(InstanceList* list);
-    int size() const;
-    InstanceList* get(int index) const;
-    vector<Instance*>* getLists() const;
+    [[nodiscard]] int size() const;
+    [[nodiscard]] InstanceList* get(int index) const;
+    [[nodiscard]] vector<Instance*>* getLists() const;
 };
 
 

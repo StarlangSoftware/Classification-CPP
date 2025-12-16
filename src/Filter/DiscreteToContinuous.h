@@ -12,8 +12,8 @@ class DiscreteToContinuous : LaryFilter {
 public:
     DiscreteToContinuous(const DataSet& dataSet);
 protected:
-    virtual void convertInstance(Instance* instance) override;
-    virtual void convertDataDefinition() override;
+    void convertInstance(Instance* instance) override;
+    void convertDataDefinition() override;
 };
 
 

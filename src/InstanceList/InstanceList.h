@@ -13,10 +13,10 @@
 
 class InstanceList {
 private:
-    Attribute* attributeAverage(int index) const;
-    Attribute* attributeStandardDeviation(int index) const;
-    vector<double> continuousAttributeAverage(int index) const;
-    vector<double> continuousAttributeStandardDeviation(int index) const;
+    [[nodiscard]] Attribute* attributeAverage(int index) const;
+    [[nodiscard]] Attribute* attributeStandardDeviation(int index) const;
+    [[nodiscard]] vector<double> continuousAttributeAverage(int index) const;
+    [[nodiscard]] vector<double> continuousAttributeStandardDeviation(int index) const;
 protected:
     vector<Instance*> list;
 public:
@@ -26,29 +26,29 @@ public:
     explicit InstanceList(const vector<Instance*>& list);
     void add(Instance* instance);
     void addAll(const vector<Instance*>& instanceList);
-    int size() const;
+    [[nodiscard]] int size() const;
     void clear();
-    Instance* get(int index) const;
+    [[nodiscard]] Instance* get(int index) const;
     void sort(int attributeIndex);
     void sort();
     void shuffle(int seed);
-    Bootstrap<Instance*> bootstrap(int seed) const;
-    vector<string> getClassLabels() const;
-    virtual string getClassLabel() const {return "";};
-    vector<string> getDistinctClassLabels() const;
-    vector<string> getUnionOfPossibleClassLabels() const;
-    vector<string> getAttributeValueList(int attributeIndex) const;
-    DiscreteDistribution attributeDistribution(int index) const;
-    DiscreteDistribution discreteIndexedAttributeClassDistribution(int attributeIndex, int attributeValue) const;
-    DiscreteDistribution classDistribution() const;
-    vector<DiscreteDistribution> attributeClassDistribution(int attributeIndex) const;
-    vector<DiscreteDistribution> allAttributesDistribution() const;
-    Instance* average() const;
-    Instance* standardDeviation() const;
-    vector<double> continuousAttributeAverage() const;
-    vector<double> continuousAttributeStandardDeviation() const;
-    Matrix covariance(const Vector& average) const;
-    vector<Instance*> getInstances() const;
+    [[nodiscard]] Bootstrap<Instance*> bootstrap(int seed) const;
+    [[nodiscard]] vector<string> getClassLabels() const;
+    [[nodiscard]] virtual string getClassLabel() const {return "";};
+    [[nodiscard]] vector<string> getDistinctClassLabels() const;
+    [[nodiscard]] vector<string> getUnionOfPossibleClassLabels() const;
+    [[nodiscard]] vector<string> getAttributeValueList(int attributeIndex) const;
+    [[nodiscard]] DiscreteDistribution attributeDistribution(int index) const;
+    [[nodiscard]] DiscreteDistribution discreteIndexedAttributeClassDistribution(int attributeIndex, int attributeValue) const;
+    [[nodiscard]] DiscreteDistribution classDistribution() const;
+    [[nodiscard]] vector<DiscreteDistribution> attributeClassDistribution(int attributeIndex) const;
+    [[nodiscard]] vector<DiscreteDistribution> allAttributesDistribution() const;
+    [[nodiscard]] Instance* average() const;
+    [[nodiscard]] Instance* standardDeviation() const;
+    [[nodiscard]] vector<double> continuousAttributeAverage() const;
+    [[nodiscard]] vector<double> continuousAttributeStandardDeviation() const;
+    [[nodiscard]] Matrix covariance(const Vector& average) const;
+    [[nodiscard]] vector<Instance*> getInstances() const;
     void serialize(ostream &outputFile);
 };
 

@@ -18,7 +18,7 @@ private:
     vector<vector<double>> supportVectorCoefficients;
     SvmParameter* parameter;
     int numberOfClasses, numberOfProblems;
-    vector<int> groupClasses() const;
+    [[nodiscard]] vector<int> groupClasses() const;
     SolutionInfo solveSingle(const Problem& problem);
     vector<double> predictValues(const NodeList& x);
 public:

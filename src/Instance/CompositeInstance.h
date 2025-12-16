@@ -16,10 +16,10 @@ public:
     CompositeInstance(const string& classLabel, const vector<Attribute*>& attributes);
     explicit CompositeInstance(const vector<string>& possibleLabels);
     CompositeInstance(const string& classLabel, const vector<Attribute*>& attributes, const vector<string>& possibleClassLabels);
-    vector<string> getPossibleClassLabels() const override;
+    [[nodiscard]] vector<string> getPossibleClassLabels() const override;
     void setPossibleClassLabels(const vector<string>& _possibleClassLabels);
-    bool isComposite() const override{return true;};
-    string to_string() const override;
+    [[nodiscard]] bool isComposite() const override{return true;};
+    [[nodiscard]] string to_string() const override;
 };
 
 

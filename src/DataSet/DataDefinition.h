@@ -21,15 +21,15 @@ public:
     DataDefinition(const vector<AttributeType>& attributeTypes, const vector<vector<string>>& attributeValueList);
     explicit DataDefinition(const vector<AttributeType>& attributeTypes);
     DataDefinition getSubSetOfFeatures(const FeatureSubSet& featureSubSet);
-    int attributeCount() const;
-    int discreteAttributeCount() const;
-    int continuousAttributeCount() const;
-    AttributeType getAttributeType(int index) const;
+    [[nodiscard]] int attributeCount() const;
+    [[nodiscard]] int discreteAttributeCount() const;
+    [[nodiscard]] int continuousAttributeCount() const;
+    [[nodiscard]] AttributeType getAttributeType(int index) const;
     void addAttribute(AttributeType attributeType);
     void removeAttribute(int index);
     void removeAllAttributes();
-    int numberOfValues(int attributeIndex) const;
-    int featureValueIndex(int attributeIndex, const string& value) const;
+    [[nodiscard]] int numberOfValues(int attributeIndex) const;
+    [[nodiscard]] int featureValueIndex(int attributeIndex, const string& value) const;
 };
 
 

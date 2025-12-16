@@ -13,7 +13,7 @@ private:
     string test;
     string reason;
 public:
-    const char* what() const noexcept override;
+    [[nodiscard]] const char* what() const noexcept override;
     StatisticalTestNotApplicable(string test, string reason);
 };
 

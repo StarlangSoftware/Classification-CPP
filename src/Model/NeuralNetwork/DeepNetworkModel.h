@@ -15,7 +15,7 @@ private:
     int hiddenLayerSize;
     ActivationFunction activationFunction;
     void allocateWeights(DeepNetworkParameter* parameters);
-    vector<Matrix> setBestWeights() const;
+    [[nodiscard]] vector<Matrix> setBestWeights() const;
 public:
     DeepNetworkModel() = default;
     explicit DeepNetworkModel(ifstream& inputFile);

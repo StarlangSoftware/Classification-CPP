@@ -17,12 +17,12 @@ private:
     bool shrinking = true;
 public:
     SvmParameter(int seed, KernelType kernelType, int degree, double gamma, double coefficient0, double C);
-    KernelType getKernelType() const;
-    int getDegree() const;
-    double getGamma() const;
-    double getCoefficient0() const;
-    double getC() const;
-    bool isShrinking() const;
+    [[nodiscard]] KernelType getKernelType() const;
+    [[nodiscard]] int getDegree() const;
+    [[nodiscard]] double getGamma() const;
+    [[nodiscard]] double getCoefficient0() const;
+    [[nodiscard]] double getC() const;
+    [[nodiscard]] bool isShrinking() const;
 };
 
 

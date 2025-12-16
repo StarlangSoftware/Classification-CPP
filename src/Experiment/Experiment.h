@@ -18,9 +18,9 @@ private:
     DataSet dataSet;
 public:
     Experiment(Model* model, Parameter* parameter, const DataSet& dataSet);
-    Model* getModel() const;
-    Parameter* getParameter() const;
-    DataSet getDataSet() const;
+    [[nodiscard]] Model* getModel() const;
+    [[nodiscard]] Parameter* getParameter() const;
+    [[nodiscard]] DataSet getDataSet() const;
     Experiment featureSelectedExperiment(const FeatureSubSet& featureSubSet);
 };
 

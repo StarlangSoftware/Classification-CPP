@@ -10,9 +10,9 @@
 
 class Sign : public PairedTest{
 private:
-    int factorial(int n) const;
-    int binomial(int m, int n) const;
-    StatisticalTestResult compare(const ExperimentPerformance& classifier1, const ExperimentPerformance& classifier2) const override;
+    [[nodiscard]] int factorial(int n) const;
+    [[nodiscard]] int binomial(int m, int n) const;
+    [[nodiscard]] StatisticalTestResult compare(const ExperimentPerformance& classifier1, const ExperimentPerformance& classifier2) const override;
 };
 
 

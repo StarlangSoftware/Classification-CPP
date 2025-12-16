@@ -14,7 +14,7 @@ protected:
     virtual void convertInstance(Instance* instance) = 0;
     virtual void convertDataDefinition() = 0;
 public:
-    FeatureFilter(const DataSet& dataSet);
+    explicit FeatureFilter(const DataSet& dataSet);
     void convert();
 };
 

@@ -9,7 +9,7 @@ using namespace std;
 
 class ClassificationAlgorithmExpectedException : public exception {
 public:
-    const char* what() const noexcept override;
+    [[nodiscard]] const char* what() const noexcept override;
 };
 
 

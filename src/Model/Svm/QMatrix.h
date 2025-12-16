@@ -15,7 +15,7 @@ private:
 public:
     QMatrix(const Problem& problem, SvmParameter* parameter, const vector<double>& y);
     QMatrix();
-    vector<double> getQ(int i, int length) const;
+    [[nodiscard]] vector<double> getQ(int i, int length) const;
     void swapIndex(int i, int j);
 };
 

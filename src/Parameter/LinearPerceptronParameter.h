@@ -15,10 +15,10 @@ private:
     int epoch;
 public:
     LinearPerceptronParameter(int seed, double learningRate, double etaDecrease, double crossValidationRatio, int epoch);
-    double getLearningRate() const;
-    double getEtaDecrease() const;
-    double getCrossValidationRatio() const;
-    int getEpoch() const;
+    [[nodiscard]] double getLearningRate() const;
+    [[nodiscard]] double getEtaDecrease() const;
+    [[nodiscard]] double getCrossValidationRatio() const;
+    [[nodiscard]] int getEpoch() const;
 };
 
 

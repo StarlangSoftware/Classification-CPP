@@ -13,19 +13,19 @@ class ConfusionMatrix {
 private:
     map<string, CounterHashMap<string>> matrix;
     vector<string> classLabels;
-    double sumOfElements() const;
-    double trace() const;
-    double columnSum(const string& predictedClass) const;
+    [[nodiscard]] double sumOfElements() const;
+    [[nodiscard]] double trace() const;
+    [[nodiscard]] double columnSum(const string& predictedClass) const;
 public:
     ConfusionMatrix();
     explicit ConfusionMatrix(const vector<string>& classLabels);
     void classify(const string& actualClass, const string& predictedClass);
     void addConfusionMatrix(const ConfusionMatrix& confusionMatrix);
-    double getAccuracy() const;
-    double* precision() const;
-    double* recall() const;
-    double* fMeasure() const;
-    double weightedFMeasure() const;
+    [[nodiscard]] double getAccuracy() const;
+    [[nodiscard]] double* precision() const;
+    [[nodiscard]] double* recall() const;
+    [[nodiscard]] double* fMeasure() const;
+    [[nodiscard]] double weightedFMeasure() const;
 };
 
 

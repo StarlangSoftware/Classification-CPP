@@ -21,14 +21,14 @@ public:
     ExperimentPerformance();
     explicit ExperimentPerformance(const string& fileName);
     void add(Performance* performance);
-    int numberOfExperiments() const;
-    double getErrorRate(int index) const;
-    double getAccuracy(int index) const;
-    Performance* meanPerformance() const;
-    ClassificationPerformance* meanClassificationPerformance() const;
-    DetailedClassificationPerformance* meanDetailedPerformance() const;
-    Performance* standardDeviationPerformance() const;
-    ClassificationPerformance* standardDeviationClassificationPerformance() const;
+    [[nodiscard]] int numberOfExperiments() const;
+    [[nodiscard]] double getErrorRate(int index) const;
+    [[nodiscard]] double getAccuracy(int index) const;
+    [[nodiscard]] Performance* meanPerformance() const;
+    [[nodiscard]] ClassificationPerformance* meanClassificationPerformance() const;
+    [[nodiscard]] DetailedClassificationPerformance* meanDetailedPerformance() const;
+    [[nodiscard]] Performance* standardDeviationPerformance() const;
+    [[nodiscard]] ClassificationPerformance* standardDeviationClassificationPerformance() const;
     bool isBetter(ExperimentPerformance* experimentPerformance) const;
 };
 

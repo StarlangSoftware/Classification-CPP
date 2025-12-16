@@ -12,7 +12,7 @@ private:
 public:
     explicit Parameter(int seed);
     virtual ~Parameter() = default;
-    int getSeed() const;
+    [[nodiscard]] int getSeed() const;
 };
 
 

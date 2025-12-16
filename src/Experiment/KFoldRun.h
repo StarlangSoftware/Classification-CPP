@@ -13,7 +13,7 @@ protected:
     int K;
     void runExperiment(Model* model, Parameter* parameter, ExperimentPerformance* experimentPerformance, CrossValidation<Instance*>* crossValidation);
 public:
-    KFoldRun(int K);
+    explicit KFoldRun(int K);
     ExperimentPerformance* execute(const Experiment& experiment);
 };
 

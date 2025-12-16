@@ -10,10 +10,10 @@ class BinaryAttribute : public DiscreteAttribute{
 public:
     explicit BinaryAttribute(bool value);
     explicit BinaryAttribute(const string& value);
-    bool isDiscrete() const override {return false;}
-    bool isContinuous() const override {return false;};
-    bool isDiscreteIndexed() const override {return false;};
-    bool isBinary() const override {return true;};
+    [[nodiscard]] bool isDiscrete() const override {return false;}
+    [[nodiscard]] bool isContinuous() const override {return false;};
+    [[nodiscard]] bool isDiscreteIndexed() const override {return false;};
+    [[nodiscard]] bool isBinary() const override {return true;};
 };
 
 

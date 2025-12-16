@@ -15,13 +15,13 @@ public:
     explicit FeatureSubSet(const vector<int>& indexList);
     explicit FeatureSubSet(int numberOfFeatures);
     FeatureSubSet();
-    FeatureSubSet clone() const;
-    int size() const;
-    int get(int index) const;
-    bool contains(int featureNo) const;
+    [[nodiscard]] FeatureSubSet clone() const;
+    [[nodiscard]] int size() const;
+    [[nodiscard]] int get(int index) const;
+    [[nodiscard]] bool contains(int featureNo) const;
     void add(int featureNo);
     void remove(int index);
-    bool operator==(const FeatureSubSet &anotherFeatureSubSet){
+    bool operator==(const FeatureSubSet &anotherFeatureSubSet) const {
         return indexList == anotherFeatureSubSet.indexList;
     }
 };

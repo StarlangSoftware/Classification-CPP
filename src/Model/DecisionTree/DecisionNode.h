@@ -17,7 +17,7 @@ private:
     bool leaf = false;
     DiscreteDistribution classLabelsDistribution;
     DecisionCondition condition = DecisionCondition(-1, nullptr);
-    double entropyForDiscreteAttribute(const InstanceList& data, int attributeIndex) const;
+    [[nodiscard]] double entropyForDiscreteAttribute(const InstanceList& data, int attributeIndex) const;
     void createChildrenForDiscreteIndexed(const InstanceList& data, int attributeIndex, int attributeValue, RandomForestParameter* parameter, bool isStump);
     void createChildrenForDiscrete(const InstanceList& data, int attributeIndex, RandomForestParameter* parameter, bool isStump);
     void createChildrenForContinuous(const InstanceList& data, int attributeIndex, double splitValue, RandomForestParameter* parameter, bool isStump);
@@ -28,9 +28,9 @@ public:
     DecisionNode(InstanceList data, const DecisionCondition& condition, RandomForestParameter* parameter, bool isStump);
     string predict(Instance* instance) const;
     map<string, double> predictProbabilityDistribution(Instance* instance);
-    bool isLeaf() const;
+    [[nodiscard]] bool isLeaf() const;
     void setLeaf(bool leaf);
-    vector<DecisionNode*> getChildren() const;
+    [[nodiscard]] vector<DecisionNode*> getChildren() const;
     void serialize(ostream &outputFile);
 };
 

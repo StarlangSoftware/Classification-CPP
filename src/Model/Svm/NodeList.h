@@ -16,10 +16,10 @@ public:
     explicit NodeList(ifstream& inputFile);
     explicit NodeList(const vector<double>& values);
     NodeList();
-    NodeList clone() const;
-    double dot(const NodeList& nodeList) const;
-    Node get(int index) const;
-    int size() const;
+    [[nodiscard]] NodeList clone() const;
+    [[nodiscard]] double dot(const NodeList& nodeList) const;
+    [[nodiscard]] Node get(int index) const;
+    [[nodiscard]] int size() const;
     void serialize(ostream &outputFile);
 };
 

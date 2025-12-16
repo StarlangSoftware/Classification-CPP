@@ -13,7 +13,7 @@ protected:
 public:
     explicit KMeansParameter(int seed);
     KMeansParameter(int seed, DistanceMetric* distanceMetric);
-    DistanceMetric* getDistanceMetric() const;
+    [[nodiscard]] DistanceMetric* getDistanceMetric() const;
 };
 
 

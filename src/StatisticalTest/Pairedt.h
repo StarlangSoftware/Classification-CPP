@@ -8,9 +8,9 @@
 
 class Pairedt : public PairedTest {
 private:
-    double testStatistic(const ExperimentPerformance& classifier1, const ExperimentPerformance& classifier2) const;
+    [[nodiscard]] double testStatistic(const ExperimentPerformance& classifier1, const ExperimentPerformance& classifier2) const;
 public:
-    StatisticalTestResult compare(const ExperimentPerformance& classifier1, const ExperimentPerformance& classifier2) const override;
+    [[nodiscard]] StatisticalTestResult compare(const ExperimentPerformance& classifier1, const ExperimentPerformance& classifier2) const override;
 };
 
 

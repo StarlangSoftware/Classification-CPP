@@ -18,7 +18,7 @@ public:
     DecisionCondition(int attributeIndex, Attribute* value);
     DecisionCondition(int attributeIndex, char comparison, Attribute* value);
     bool satisfy(Instance* instance) const;
-    int getAttributeIndex() const;
+    [[nodiscard]] int getAttributeIndex() const;
     void serialize(ostream &outputFile);
 };
 

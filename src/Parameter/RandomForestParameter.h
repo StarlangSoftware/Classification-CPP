@@ -12,7 +12,7 @@ private:
     int attributeSubsetSize;
 public:
     RandomForestParameter(int seed, int ensembleSize, int attributeSubsetSize);
-    int getAttributeSubsetSize() const;
+    [[nodiscard]] int getAttributeSubsetSize() const;
 };
 
 
